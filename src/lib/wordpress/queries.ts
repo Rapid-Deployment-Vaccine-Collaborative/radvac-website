@@ -3,6 +3,25 @@ import type { WpPage, WpMenuItem } from "./types";
 
 // ===== Page Queries =====
 
+// SEO fields require BOTH `Yoast SEO` AND `Add WPGraphQL SEO` to be installed
+// + activated on the WP instance. When the integration plugin isn't active, the
+// `seo` field doesn't exist on the schema and the entire query fails. Re-enable
+// by setting WP_GRAPHQL_SEO_ENABLED=true in the env.
+const SEO_FRAGMENT = process.env.WP_GRAPHQL_SEO_ENABLED === "true"
+  ? `
+    seo {
+      title
+      metaDesc
+      canonical
+      opengraphTitle
+      opengraphDescription
+      opengraphImage { sourceUrl }
+      twitterTitle
+      twitterDescription
+    }
+  `
+  : "";
+
 const PAGE_FIELDS = `
   id
   databaseId
@@ -21,18 +40,7 @@ const PAGE_FIELDS = `
       }
     }
   }
-  seo {
-    title
-    metaDesc
-    canonical
-    opengraphTitle
-    opengraphDescription
-    opengraphImage {
-      sourceUrl
-    }
-    twitterTitle
-    twitterDescription
-  }
+  ${SEO_FRAGMENT}
 `;
 
 export async function getPageBySlug(

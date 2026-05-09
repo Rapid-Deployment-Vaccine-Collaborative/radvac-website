@@ -10,11 +10,6 @@ export function ContactStrip() {
           &ldquo;Open science requires open conversation. Reach out — we read
           everything.&rdquo;
         </h2>
-        <p className={styles.p}>
-          If your question isn&apos;t answered here, get in touch. Tell us how
-          you&apos;d like to help, what skills you bring, and where
-          you&apos;re based.
-        </p>
       </div>
       <Link className={styles.btn} href="/contact">
         Contact RaDVaC →

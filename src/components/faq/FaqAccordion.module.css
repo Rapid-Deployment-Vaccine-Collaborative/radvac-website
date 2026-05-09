@@ -1,5 +1,5 @@
 .qa {
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 3px solid var(--rule);
   padding: 0;
 }
 .qa[open] {

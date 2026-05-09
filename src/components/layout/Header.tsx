@@ -4,7 +4,9 @@ import styles from "./Header.module.css";
 const navItems = [
   { label: "Mission", href: "/#mission" },
   { label: "Projects", href: "/#projects" },
+  { label: "Vaccine", href: "/vaccine/" },
   { label: "White Papers", href: "/#papers" },
+  { label: "Updates", href: "/press-release/" },
   { label: "FAQ", href: "/faq" },
   { label: "Researchers Map", href: "/researchers-map" },
   { label: "Contact", href: "/contact" },
