@@ -1,0 +1,91 @@
+services:
+  wordpress:
+    image: wordpress:6.7-php8.3-apache
+    container_name: radvac-headless-wp
+    restart: unless-stopped
+    ports:
+      - "8890:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-radvac_headless}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-radvac}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-radvac_headless_2026}
+      WORDPRESS_DEBUG: "true"
+    volumes:
+      - wp_data:/var/www/html
+      - ./uploads:/var/www/html/wp-content/uploads
+      - ./import:/var/www/html/import
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - radvac-headless
+
+  db:
+    image: mysql:8.0
+    container_name: radvac-headless-db
+    restart: unless-stopped
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME:-radvac_headless}
+      MYSQL_USER: ${WORDPRESS_DB_USER:-radvac}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD:-radvac_headless_2026}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_headless_2026}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - radvac-headless
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: radvac-headless-pma
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${WORDPRESS_DB_USER:-radvac}
+      PMA_PASSWORD: ${WORDPRESS_DB_PASSWORD:-radvac_headless_2026}
+      UPLOAD_LIMIT: 256M
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - radvac-headless
+
+  wpcli:
+    image: wordpress:cli-php8.3
+    container_name: radvac-headless-wpcli
+    user: "33:33"
+    volumes:
+      - wp_data:/var/www/html
+      - ./uploads:/var/www/html/wp-content/uploads
+      - ./import:/var/www/html/import
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-radvac_headless}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-radvac}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-radvac_headless_2026}
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: wp
+    command: "--info"
+    networks:
+      - radvac-headless
+    profiles:
+      - cli
+
+volumes:
+  wp_data:
+  db_data:
+
+networks:
+  radvac-headless:
+    driver: bridge

@@ -1,0 +1,2779 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>RaDVaC Researchers</name>
+    <description>Drop a pin, and add contact information so that others in your area can get in touch to pool resources and work together.</description>
+    <Style id="icon-1899-0288D1-normal">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-highlight">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>Researchers Map</name>
+      <Placemark>
+        <name>KC</name>
+        <address>Flagstaff AZ USA</address>
+        <description><![CDATA[Contact email: kc@lawrencebiologics.com<br>City: Flagstaff<br>State or Province: AZ<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>kc@lawrencebiologics.com</value>
+          </Data>
+          <Data name="City">
+            <value>Flagstaff</value>
+          </Data>
+          <Data name="State or Province">
+            <value>AZ</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Phoenix</name>
+        <address>Victoria BC Canada</address>
+        <description><![CDATA[Contact email: phoenixalight@protonmail.com<br>City: Victoria<br>State or Province: BC<br>Country: Canada<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I have 8 years experience in mushroom genomics, DNA barcoding and qPCR, and all the equipment to go along with that.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>phoenixalight@protonmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Victoria</value>
+          </Data>
+          <Data name="State or Province">
+            <value>BC</value>
+          </Data>
+          <Data name="Country">
+            <value>Canada</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>I have 8 years experience in mushroom genomics, DNA barcoding and qPCR, and all the equipment to go along with that.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Dr. Peter Oeschger</name>
+        <address>CH-3852 Ringgenberg Bern Schweiz</address>
+        <description><![CDATA[Contact email: peter.oeschger@privatklinik-meiringen.ch<br>City: CH-3852 Ringgenberg<br>State or Province: Bern<br>Country: Schweiz<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>peter.oeschger@privatklinik-meiringen.ch</value>
+          </Data>
+          <Data name="City">
+            <value>CH-3852 Ringgenberg</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Bern</value>
+          </Data>
+          <Data name="Country">
+            <value>Schweiz</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>plodding</name>
+        <address>Davis CA USA</address>
+        <description><![CDATA[Contact email: johnfhess@comcast.net<br>City: Davis<br>State or Province: CA<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: retired research scientist]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>johnfhess@comcast.net</value>
+          </Data>
+          <Data name="City">
+            <value>Davis</value>
+          </Data>
+          <Data name="State or Province">
+            <value>CA</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>retired research scientist</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Dgoodwin</name>
+        <address>Los Angeles CA USA</address>
+        <description><![CDATA[Contact email: dgoodwin@scrippscollege.edu<br>City: Los Angeles<br>State or Province: CA<br>Country: USA<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I am a strong advocate for open source and encourage my students to critical engagement. I am interested for personal reasons but I would also like to write about the experience.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>dgoodwin@scrippscollege.edu</value>
+          </Data>
+          <Data name="City">
+            <value>Los Angeles</value>
+          </Data>
+          <Data name="State or Province">
+            <value>CA</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>I am a strong advocate for open source and encourage my students to critical engagement. I am interested for personal reasons but I would also like to write about the experience.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>veryfriendly</name>
+        <address>Palo Alto CA United States</address>
+        <description><![CDATA[Contact email: spoonstee@gmail.com<br>City: Palo Alto<br>State or Province: CA<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: I don't have lab skills or materials but will be happy to fund this]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>spoonstee@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Palo Alto</value>
+          </Data>
+          <Data name="State or Province">
+            <value>CA</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value><![CDATA[I don't have lab skills or materials but will be happy to fund this]]></value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>zephyrred</name>
+        <address>Pasadena CA United States</address>
+        <description><![CDATA[Contact email: dawangy@yahoo.com<br>City: Pasadena<br>State or Province: CA<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>dawangy@yahoo.com</value>
+          </Data>
+          <Data name="City">
+            <value>Pasadena</value>
+          </Data>
+          <Data name="State or Province">
+            <value>CA</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Ramparte</name>
+        <address>Portola Valley CA USA</address>
+        <description><![CDATA[Contact email: ramparte@gmail.com<br>City: Portola Valley<br>State or Province: CA<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>ramparte@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Portola Valley</value>
+          </Data>
+          <Data name="State or Province">
+            <value>CA</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>0071911</name>
+        <address>San Francisco CA USA</address>
+        <description><![CDATA[Contact email: 0071911@protonmail.com<br>City: San Francisco<br>State or Province: CA<br>Country: USA<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>0071911@protonmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>San Francisco</value>
+          </Data>
+          <Data name="State or Province">
+            <value>CA</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>David Duval</name>
+        <address>Santa Clara California US</address>
+        <description><![CDATA[Contact email: davidgduval@gmail.com<br>City: Santa Clara<br>State or Province: California<br>Country: US<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>davidgduval@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Santa Clara</value>
+          </Data>
+          <Data name="State or Province">
+            <value>California</value>
+          </Data>
+          <Data name="Country">
+            <value>US</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Hector Haces</name>
+        <address>Mexico Ciudad de Mexico Mexico</address>
+        <description><![CDATA[Contact email: hectorhaces@gmail.com<br>City: Mexico<br>State or Province: Ciudad de Mexico<br>Country: Mexico<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>hectorhaces@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Mexico</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Ciudad de Mexico</value>
+          </Data>
+          <Data name="Country">
+            <value>Mexico</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Luke</name>
+        <address>Boulder Colorado United States</address>
+        <description><![CDATA[Contact email: lucas.hayas@gmail.com<br>City: Boulder<br>State or Province: Colorado<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>lucas.hayas@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Boulder</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Colorado</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>RaDVaCSouthFlorida</name>
+        <address>Boca Raton FL USA</address>
+        <description><![CDATA[Contact email: radvac@infinitefaculty.org<br>City: Boca Raton<br>State or Province: FL<br>Country: USA<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I am able to travel with all of the lab equipment needed to make the vaccine (aside from an electrical outlet and running water).]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>radvac@infinitefaculty.org</value>
+          </Data>
+          <Data name="City">
+            <value>Boca Raton</value>
+          </Data>
+          <Data name="State or Province">
+            <value>FL</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>I am able to travel with all of the lab equipment needed to make the vaccine (aside from an electrical outlet and running water).</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Kenneth Scott</name>
+        <address>Dunedin FL USA</address>
+        <description><![CDATA[Contact email: ken1942@gmail.com<br>City: Dunedin<br>State or Province: FL<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: Yes<br>Other info: I have had an intitial dose and three boosters]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>ken1942@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Dunedin</value>
+          </Data>
+          <Data name="State or Province">
+            <value>FL</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>I have had an intitial dose and three boosters</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Kili1</name>
+        <address>Johannesburg Gauteng South Africa</address>
+        <description><![CDATA[Contact email: medicoresa@gmail.com<br>City: Johannesburg<br>State or Province: Gauteng<br>Country: South Africa<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: A small project to open source vaccine for everyone]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>medicoresa@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Johannesburg</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Gauteng</value>
+          </Data>
+          <Data name="Country">
+            <value>South Africa</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>A small project to open source vaccine for everyone</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>eramoscas</name>
+        <address>Amherst MA United States</address>
+        <description><![CDATA[Contact email: eddyrc@gmail.com<br>City: Amherst<br>State or Province: MA<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>eddyrc@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Amherst</value>
+          </Data>
+          <Data name="State or Province">
+            <value>MA</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>RaDVaC HQ</name>
+        <address>Boston MA USA</address>
+        <description><![CDATA[Contact email: info@radvac.org<br>City: Boston<br>State or Province: MA<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>info@radvac.org</value>
+          </Data>
+          <Data name="City">
+            <value>Boston</value>
+          </Data>
+          <Data name="State or Province">
+            <value>MA</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Alex Hoekstra</name>
+        <address>Cambridge MA United States</address>
+        <description><![CDATA[Contact email: alexh@radvac.org<br>City: Cambridge<br>State or Province: MA<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: RaDVaC co-founder]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>alexh@radvac.org</value>
+          </Data>
+          <Data name="City">
+            <value>Cambridge</value>
+          </Data>
+          <Data name="State or Province">
+            <value>MA</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>RaDVaC co-founder</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Preston</name>
+        <address>Waltham MA USA</address>
+        <description><![CDATA[Contact email: pwestep@radvac.org<br>City: Waltham<br>State or Province: MA<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: RaDVaC Chief Scientist]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>pwestep@radvac.org</value>
+          </Data>
+          <Data name="City">
+            <value>Waltham</value>
+          </Data>
+          <Data name="State or Province">
+            <value>MA</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>RaDVaC Chief Scientist</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>AN</name>
+        <address>Watertown MA United States</address>
+        <description><![CDATA[Contact email: anikiforov317@juno.com<br>City: Watertown<br>State or Province: MA<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: This has spiked my interest...]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>anikiforov317@juno.com</value>
+          </Data>
+          <Data name="City">
+            <value>Watertown</value>
+          </Data>
+          <Data name="State or Province">
+            <value>MA</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>This has spiked my interest...</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>DrPMS</name>
+        <address>Kolhapur Maharashtra India</address>
+        <description><![CDATA[Contact email: pritam.sakhare@gmail.com<br>City: Kolhapur<br>State or Province: Maharashtra<br>Country: India<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I could of help for pharmacovigilance/ADR reporting of the vaccine.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>pritam.sakhare@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Kolhapur</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Maharashtra</value>
+          </Data>
+          <Data name="Country">
+            <value>India</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>I could of help for pharmacovigilance/ADR reporting of the vaccine.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Edward RICHARDS</name>
+        <address>Durham NC United States</address>
+        <description><![CDATA[Contact email: Edward.Hqes@gmail.com<br>City: Durham<br>State or Province: NC<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: rapid deployment is going to be key for a rapidly mutating virus like this]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>Edward.Hqes@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Durham</value>
+          </Data>
+          <Data name="State or Province">
+            <value>NC</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>rapid deployment is going to be key for a rapidly mutating virus like this</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Bowsprite</name>
+        <address>East Marion NY United States</address>
+        <description><![CDATA[Contact email: christina@bowsprite.com<br>City: East Marion<br>State or Province: NY<br>Country: United States<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>christina@bowsprite.com</value>
+          </Data>
+          <Data name="City">
+            <value>East Marion</value>
+          </Data>
+          <Data name="State or Province">
+            <value>NY</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Woo Garcia</name>
+        <address>New York NY USA</address>
+        <description><![CDATA[Contact email: eileenrockefeller@gmail.com<br>City: New York<br>State or Province: NY<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>eileenrockefeller@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>New York</value>
+          </Data>
+          <Data name="State or Province">
+            <value>NY</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>cire831</name>
+        <address>Bend OR USA</address>
+        <description><![CDATA[Contact email: cire831@gmail.com<br>City: Bend<br>State or Province: OR<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: engineer]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>cire831@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Bend</value>
+          </Data>
+          <Data name="State or Province">
+            <value>OR</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>engineer</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Dentin</name>
+        <address>Pittsburgh PA USA</address>
+        <description><![CDATA[Contact email: soda@xirr.com<br>City: Pittsburgh<br>State or Province: PA<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>soda@xirr.com</value>
+          </Data>
+          <Data name="City">
+            <value>Pittsburgh</value>
+          </Data>
+          <Data name="State or Province">
+            <value>PA</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>rosbif</name>
+        <address>Montreal Quebec Canada</address>
+        <description><![CDATA[Contact email: garethfr@gmail.com<br>City: Montreal<br>State or Province: Quebec<br>Country: Canada<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>garethfr@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Montreal</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Quebec</value>
+          </Data>
+          <Data name="Country">
+            <value>Canada</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Angel Diaz</name>
+        <address>Laredo Tamaulipas México</address>
+        <description><![CDATA[Contact email: mexico_stal@hotmail.com<br>City: Laredo<br>State or Province: Tamaulipas<br>Country: México<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>mexico_stal@hotmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Laredo</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Tamaulipas</value>
+          </Data>
+          <Data name="Country">
+            <value>México</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>woodbridgelabguy</name>
+        <address>Woodbridge VA United States</address>
+        <description><![CDATA[Contact email: phillip.nichols@gmail.com<br>City: Woodbridge<br>State or Province: VA<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I have lab equipment and have done some transformations with the ODIN.  Would like to find some other local scientists to work with on various projects.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>phillip.nichols@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Woodbridge</value>
+          </Data>
+          <Data name="State or Province">
+            <value>VA</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>I have lab equipment and have done some transformations with the ODIN.  Would like to find some other local scientists to work with on various projects.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>umbra</name>
+        <address>Seattle WA USA</address>
+        <description><![CDATA[Contact email: ssslyr@riseup.net<br>City: Seattle<br>State or Province: WA<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: Long time biohacker and DIYer.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>ssslyr@riseup.net</value>
+          </Data>
+          <Data name="City">
+            <value>Seattle</value>
+          </Data>
+          <Data name="State or Province">
+            <value>WA</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>Long time biohacker and DIYer.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Derny</name>
+        <address>Rotterdam Zuid-Holland Netherlands</address>
+        <description><![CDATA[Contact email: eowyn.bridget@gmail.com<br>City: Rotterdam<br>State or Province: Zuid-Holland<br>Country: Netherlands<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: Marked no lab skills....I did lab stuff in college but barely remember]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>eowyn.bridget@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Rotterdam</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Zuid-Holland</value>
+          </Data>
+          <Data name="Country">
+            <value>Netherlands</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>Marked no lab skills....I did lab stuff in college but barely remember</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>UHbpUNNhu</name>
+        <address>Berlin Germany</address>
+        <description><![CDATA[Contact email: somebody@alienexplosive.com<br>City: Berlin<br>State or Province: <br>Country: Germany<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I'm a guest researcher at a well-known research institute.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>somebody@alienexplosive.com</value>
+          </Data>
+          <Data name="City">
+            <value>Berlin</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Germany</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value><![CDATA[I'm a guest researcher at a well-known research institute.]]></value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Paul003</name>
+        <address>Covent Garden United Kingdom</address>
+        <description><![CDATA[Contact email: Paul@vaccinase.co.uk<br>City: Covent Garden<br>State or Province: <br>Country: United Kingdom<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>Paul@vaccinase.co.uk</value>
+          </Data>
+          <Data name="City">
+            <value>Covent Garden</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>United Kingdom</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Daniel</name>
+        <address>Enschede Netherlands</address>
+        <description><![CDATA[Contact email: daniel251198@gmail.com<br>City: Enschede<br>State or Province: <br>Country: Netherlands<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I'm a life science student who wants to try this out. I'm into DIY biology and looking to connect with likeminded people in the area. I have ordered 1-4mg of the Gen 9 peptides(no optional ones) which will arrive in the beginning of february. This is more than enough for me so contact me if you'd like to acquire a part of these peptides from me.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>daniel251198@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Enschede</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Netherlands</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value><![CDATA[I'm a life science student who wants to try this out. I'm into DIY biology and looking to connect with likeminded people in the area. I have ordered 1-4mg of the Gen 9 peptides(no optional ones) which will arrive in the beginning of february. This is more than enough for me so contact me if you'd like to acquire a part of these peptides from me.]]></value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Chris Eaglen</name>
+        <address>Heston United Kingdom</address>
+        <description><![CDATA[Contact email: chris.eaglen@btinternet.com<br>City: Heston<br>State or Province: <br>Country: United Kingdom<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>chris.eaglen@btinternet.com</value>
+          </Data>
+          <Data name="City">
+            <value>Heston</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>United Kingdom</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Denis</name>
+        <address>Kyiv Ukraine</address>
+        <description><![CDATA[Contact email: denis.radvac.anon@gmail.com<br>City: Kyiv<br>State or Province: <br>Country: Ukraine<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: Yes<br>Other info: We are waiting for the peptides delivery and are currently figuring out the lab equipment and skills. Collaboration is welcomed]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>denis.radvac.anon@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Kyiv</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Ukraine</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>We are waiting for the peptides delivery and are currently figuring out the lab equipment and skills. Collaboration is welcomed</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Bernhard</name>
+        <address>Leipzig Germany</address>
+        <description><![CDATA[Contact email: typhoon99@gmx-topmail.de<br>City: Leipzig<br>State or Province: <br>Country: Germany<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I am currently developing a SARS-CoV-2 vaccine based on recombinant RBD (receptor binding domain). I already own the plasmid with the corresponding DNA sequence but do not have the necessary S1 approval without which no genetic engineering experiments may be carried out in Germany. If someone with BSL1 licence is interested in a cooperation I would be very happy. The vaccine is actually designed for injection but could also be used as a nasal vaccine. I am a bioscientist and have a lot of experience in the expression and purification of recombinant proteins.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>typhoon99@gmx-topmail.de</value>
+          </Data>
+          <Data name="City">
+            <value>Leipzig</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Germany</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>I am currently developing a SARS-CoV-2 vaccine based on recombinant RBD (receptor binding domain). I already own the plasmid with the corresponding DNA sequence but do not have the necessary S1 approval without which no genetic engineering experiments may be carried out in Germany. If someone with BSL1 licence is interested in a cooperation I would be very happy. The vaccine is actually designed for injection but could also be used as a nasal vaccine. I am a bioscientist and have a lot of experience in the expression and purification of recombinant proteins.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Bruce</name>
+        <address>Lijiang China</address>
+        <description><![CDATA[Contact email: bbryanmd@me.com<br>City: Lijiang<br>State or Province: <br>Country: China<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>bbryanmd@me.com</value>
+          </Data>
+          <Data name="City">
+            <value>Lijiang</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>China</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Saulo dos Santos Conde</name>
+        <address>Rio de Janeiro Brazil</address>
+        <description><![CDATA[Contact email: saulo_conde@hotmail.com<br>City: Rio de Janeiro<br>State or Province: <br>Country: Brazil<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>saulo_conde@hotmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Rio de Janeiro</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Brazil</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Carozo</name>
+        <address>Salta Argentina</address>
+        <description><![CDATA[Contact email: soycarozo@gmail.com<br>City: Salta<br>State or Province: <br>Country: Argentina<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>soycarozo@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Salta</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Argentina</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Matthias Siegert</name>
+        <address>Tennenbronn Deutschland</address>
+        <description><![CDATA[Contact email: matthias.siegert@gmail.com<br>City: Tennenbronn<br>State or Province: <br>Country: Deutschland<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: My wife has lab skills - she worked several years in a pharmacy]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>matthias.siegert@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Tennenbronn</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Deutschland</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>My wife has lab skills - she worked several years in a pharmacy</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Mostofi</name>
+        <address>Toronto Canada</address>
+        <description><![CDATA[Contact email: mostofi@hotmail.ca<br>City: Toronto<br>State or Province: <br>Country: Canada<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>mostofi@hotmail.ca</value>
+          </Data>
+          <Data name="City">
+            <value>Toronto</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Canada</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>bvdlingen</name>
+        <address>Utrecht Netherlands</address>
+        <description><![CDATA[Contact email: bvdl@me.com<br>City: Utrecht<br>State or Province: <br>Country: Netherlands<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: Would like to contribute for public health reasons.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>bvdl@me.com</value>
+          </Data>
+          <Data name="City">
+            <value>Utrecht</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Netherlands</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>Would like to contribute for public health reasons.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Udo Dingeldein</name>
+        <address>Karlsruhe Baden-Württemberg Germany</address>
+        <description><![CDATA[Contact email: dingeldein-ettlingen@gmx.net<br>City: Karlsruhe<br>State or Province: Baden-Württemberg<br>Country: Germany<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>dingeldein-ettlingen@gmx.net</value>
+          </Data>
+          <Data name="City">
+            <value>Karlsruhe</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Baden-Württemberg</value>
+          </Data>
+          <Data name="Country">
+            <value>Germany</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>hajma</name>
+        <address>Trebic Czech Republic</address>
+        <description><![CDATA[Contact email: tropikhajma@gmail.com<br>City: Trebic<br>State or Province: <br>Country: Czech Republic<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: I'd like someone to join me getting the ingredients.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>tropikhajma@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Trebic</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Czech Republic</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value><![CDATA[I'd like someone to join me getting the ingredients.]]></value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>atropine</name>
+        <address>Memphis TN USA</address>
+        <description><![CDATA[Contact email: atropine444@protonmail.com<br>City: Memphis<br>State or Province: TN<br>Country: USA<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>atropine444@protonmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Memphis</value>
+          </Data>
+          <Data name="State or Province">
+            <value>TN</value>
+          </Data>
+          <Data name="Country">
+            <value>USA</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>siddharthlatest</name>
+        <address>Bhavnagar Gujarat India</address>
+        <description><![CDATA[Contact email: siddharthlatest@gmail.com<br>City: Bhavnagar<br>State or Province: Gujarat<br>Country: India<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: I'm currently going through the RaDVaC whitepaper to understand the value of this exercise v/s commercial options. Also interested in contributing capital/time if someone were interested in designing this.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>siddharthlatest@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Bhavnagar</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Gujarat</value>
+          </Data>
+          <Data name="Country">
+            <value>India</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value><![CDATA[I'm currently going through the RaDVaC whitepaper to understand the value of this exercise v/s commercial options. Also interested in contributing capital/time if someone were interested in designing this.]]></value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>RadVac Bogota</name>
+        <address>Bogota DC Colombia</address>
+        <description><![CDATA[Contact email: radvacbogota@protonmail.com<br>City: Bogota<br>State or Province: DC<br>Country: Colombia<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>radvacbogota@protonmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Bogota</value>
+          </Data>
+          <Data name="State or Province">
+            <value>DC</value>
+          </Data>
+          <Data name="Country">
+            <value>Colombia</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Baenz</name>
+        <address>Rapperswil Bern Switzerland</address>
+        <description><![CDATA[Contact email: hrreusser@gmail.com<br>City: Rapperswil<br>State or Province: Bern<br>Country: Switzerland<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>hrreusser@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Rapperswil</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Bern</value>
+          </Data>
+          <Data name="Country">
+            <value>Switzerland</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>JWinOttawa</name>
+        <address>Ottawa Ontario Canada</address>
+        <description><![CDATA[Contact email: jwright197@gmail.com<br>City: Ottawa<br>State or Province: Ontario<br>Country: Canada<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: We need to expedite this potential solution worldwide to stop this virus. The current country vaccine hoarding is not working at this time.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>jwright197@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Ottawa</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Ontario</value>
+          </Data>
+          <Data name="Country">
+            <value>Canada</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>We need to expedite this potential solution worldwide to stop this virus. The current country vaccine hoarding is not working at this time.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Najma Memon</name>
+        <address>Jamshoro Sindh Pakistan</address>
+        <description><![CDATA[Contact email: najma.memon@usindh.edu.pk<br>City: Jamshoro<br>State or Province: Sindh<br>Country: Pakistan<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: Together we can make difference]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>najma.memon@usindh.edu.pk</value>
+          </Data>
+          <Data name="City">
+            <value>Jamshoro</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Sindh</value>
+          </Data>
+          <Data name="Country">
+            <value>Pakistan</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>Together we can make difference</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>cnmdjd</name>
+        <address>Salt Lake City Utah United States</address>
+        <description><![CDATA[Contact email: cnmdjd@gmail.com<br>City: Salt Lake City<br>State or Province: Utah<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: i am a retired physician. i would like to learn to prepare this vaccine because I live part time in the Dominican Republic where vaccine availability is very limited]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>cnmdjd@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Salt Lake City</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Utah</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>i am a retired physician. i would like to learn to prepare this vaccine because I live part time in the Dominican Republic where vaccine availability is very limited</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>jatesan</name>
+        <address>Denville New Jersey United States</address>
+        <description><![CDATA[Contact email: jatesan@hotmail.com<br>City: Denville<br>State or Province: New Jersey<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>jatesan@hotmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Denville</value>
+          </Data>
+          <Data name="State or Province">
+            <value>New Jersey</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>scognamd</name>
+        <address>Blaricum North Holland Netherlands</address>
+        <description><![CDATA[Contact email: daniele.scognamiglio@yahoo.com<br>City: Blaricum<br>State or Province: North Holland<br>Country: Netherlands<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>daniele.scognamiglio@yahoo.com</value>
+          </Data>
+          <Data name="City">
+            <value>Blaricum</value>
+          </Data>
+          <Data name="State or Province">
+            <value>North Holland</value>
+          </Data>
+          <Data name="Country">
+            <value>Netherlands</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Alexi</name>
+        <address>Ottowa Ontario Canada</address>
+        <description><![CDATA[Contact email: alexi@hey.com<br>City: Ottowa<br>State or Province: Ontario<br>Country: Canada<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>alexi@hey.com</value>
+          </Data>
+          <Data name="City">
+            <value>Ottowa</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Ontario</value>
+          </Data>
+          <Data name="Country">
+            <value>Canada</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>nomad236</name>
+        <address>Vancouver British Columbia Canada</address>
+        <description><![CDATA[Contact email: empnavi@gmail.com<br>City: Vancouver<br>State or Province: British Columbia<br>Country: Canada<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>empnavi@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Vancouver</value>
+          </Data>
+          <Data name="State or Province">
+            <value>British Columbia</value>
+          </Data>
+          <Data name="Country">
+            <value>Canada</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Ferdinand Icatlo</name>
+        <address>Rome RM Italy</address>
+        <description><![CDATA[Contact email: idreffz25@gmail.com<br>City: Rome<br>State or Province: RM<br>Country: Italy<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: It's all because about my data for all the compiling I download and copy to have specific and relevant issue of all the books]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>idreffz25@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Rome</value>
+          </Data>
+          <Data name="State or Province">
+            <value>RM</value>
+          </Data>
+          <Data name="Country">
+            <value>Italy</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value><![CDATA[It's all because about my data for all the compiling I download and copy to have specific and relevant issue of all the books]]></value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Gschiro</name>
+        <address>Abertillery Blaenu Gwent United Kingdom</address>
+        <description><![CDATA[Contact email: gschiro99@gmail.com<br>City: Abertillery<br>State or Province: Blaenu Gwent<br>Country: United Kingdom<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>gschiro99@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Abertillery</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Blaenu Gwent</value>
+          </Data>
+          <Data name="Country">
+            <value>United Kingdom</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Christopher Am</name>
+        <address>Dauin Negros Oriental Philippines</address>
+        <description><![CDATA[Contact email: gdlaughs@gmail.com<br>City: Dauin<br>State or Province: Negros Oriental<br>Country: Philippines<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: Willing to cooperate and support vaccine manufacture in Philippines]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>gdlaughs@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Dauin</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Negros Oriental</value>
+          </Data>
+          <Data name="Country">
+            <value>Philippines</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>Willing to cooperate and support vaccine manufacture in Philippines</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Alfonso</name>
+        <description><![CDATA[Contact email: aglezorduno@yahoo.com<br>City: La Paz<br>State or Province: Estado de Mexico<br>Country: Mexico<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>aglezorduno@yahoo.com</value>
+          </Data>
+          <Data name="City">
+            <value>La Paz</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Estado de Mexico</value>
+          </Data>
+          <Data name="Country">
+            <value>Mexico</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Huhu</name>
+        <address>Foshan Guangdong China</address>
+        <description><![CDATA[Contact email: hubert03h@gmail.com<br>City: Foshan<br>State or Province: Guangdong<br>Country: China<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: The recombinant expression has been used to produce the peptide, and the vaccine has been produced according to the procedure. I myself have been vaccinated with it.<br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>hubert03h@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Foshan</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Guangdong</value>
+          </Data>
+          <Data name="Country">
+            <value>China</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>The recombinant expression has been used to produce the peptide, and the vaccine has been produced according to the procedure. I myself have been vaccinated with it.
+</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Roger G.</name>
+        <address>Bedford Massachusetts United States</address>
+        <description><![CDATA[Contact email: e7m8@protonmail.com<br>City: Bedford<br>State or Province: Massachusetts<br>Country: United States<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: I can't really contribute to R&D, but I may be able to help advertise RaDVaC or make other contributions.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>e7m8@protonmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Bedford</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Massachusetts</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value><![CDATA[I can't really contribute to R&D, but I may be able to help advertise RaDVaC or make other contributions.]]></value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Steven Hayden</name>
+        <address>Wetumpka Alabama United States</address>
+        <description><![CDATA[Contact email: smhayden1@gmail.com<br>City: Wetumpka<br>State or Province: Alabama<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: Intestinal Inoculation of Live SARS-CoV-2 produces robust rapid alveolar humoral defense to prevent pulmonary complications and pulmonary alveolar transmission.<br>I approached Operation Warp Speed with inoculation in May 2020 .<br>The conventional approach using intramuscular vaccines was  preferred . Even Vaxart which favored an oral vaccine received little support or interest despite using a new approach that has minimal discomfort and is better tolerated. <br>I performed oral inoculation in June 2020 with enteric acid protected live SARS-CoV-2.<br>.I even applied for patent for oral inoculation SARS-CoV-2 using LIVE virus. I proved my own intestinal SARS-CoV-2 by using stool PCR at CLIA approved lab. I then tested efficacy by inhaling SARS-Cov-2  from   donors.<br>I even demostrated oral inoculation for influenza  using enteric coated capsules. I applied for a patent in USA.<br>I have other patent applications related to SARS-Cov-2 as well.<br>I hope to perform oral inoculation in INDIA or Asia with most virulent toxic mutants of SARS-CoV-2.<br>I would appreciate the opportunity to consume live oral inoculation of triple variants from India.<br>I would like to interview you or your staff on my podcast.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>smhayden1@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Wetumpka</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Alabama</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>Intestinal Inoculation of Live SARS-CoV-2 produces robust rapid alveolar humoral defense to prevent pulmonary complications and pulmonary alveolar transmission.
+I approached Operation Warp Speed with inoculation in May 2020 .
+The conventional approach using intramuscular vaccines was  preferred . Even Vaxart which favored an oral vaccine received little support or interest despite using a new approach that has minimal discomfort and is better tolerated. 
+I performed oral inoculation in June 2020 with enteric acid protected live SARS-CoV-2.
+.I even applied for patent for oral inoculation SARS-CoV-2 using LIVE virus. I proved my own intestinal SARS-CoV-2 by using stool PCR at CLIA approved lab. I then tested efficacy by inhaling SARS-Cov-2  from   donors.
+I even demostrated oral inoculation for influenza  using enteric coated capsules. I applied for a patent in USA.
+I have other patent applications related to SARS-Cov-2 as well.
+I hope to perform oral inoculation in INDIA or Asia with most virulent toxic mutants of SARS-CoV-2.
+I would appreciate the opportunity to consume live oral inoculation of triple variants from India.
+I would like to interview you or your staff on my podcast.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Brian Robelsky</name>
+        <address>Guadalajara Jalisco Mexico</address>
+        <description><![CDATA[Contact email: Brian.Robelsky@gmail.com<br>City: Guadalajara<br>State or Province: Jalisco<br>Country: Mexico<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I have production capabilities]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>Brian.Robelsky@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Guadalajara</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Jalisco</value>
+          </Data>
+          <Data name="Country">
+            <value>Mexico</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>I have production capabilities</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Adrian W. Pasieka Ikane</name>
+        <address>Warsaw Warsaw Poland</address>
+        <description><![CDATA[Contact email: adrian.pasieka@ai.pressiton.com<br>City: Warsaw<br>State or Province: Warsaw<br>Country: Poland<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>adrian.pasieka@ai.pressiton.com</value>
+          </Data>
+          <Data name="City">
+            <value>Warsaw</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Warsaw</value>
+          </Data>
+          <Data name="Country">
+            <value>Poland</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>tullnerbacher</name>
+        <address>Tullnerbach Austria</address>
+        <description><![CDATA[Contact email: rene@suess-stella.at<br>City: Tullnerbach<br>State or Province: <br>Country: Austria<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>rene@suess-stella.at</value>
+          </Data>
+          <Data name="City">
+            <value>Tullnerbach</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Austria</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Aftab Ahmad</name>
+        <address>Islamabad Pakistan</address>
+        <description><![CDATA[Contact email: aftabsbs@gmail.com<br>City: Islamabad<br>State or Province: <br>Country: Pakistan<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>aftabsbs@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Islamabad</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Pakistan</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ethan</name>
+        <address>Fremont California United States</address>
+        <description><![CDATA[Contact email: ethanmccoy@gmail.com<br>City: Fremont<br>State or Province: California<br>Country: United States<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: Bioengineering student]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>ethanmccoy@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Fremont</value>
+          </Data>
+          <Data name="State or Province">
+            <value>California</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>Bioengineering student</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Balqis</name>
+        <address>SERDANG Selangor Malaysia</address>
+        <description><![CDATA[Contact email: nbalqiszamri@gmail.com<br>City: SERDANG<br>State or Province: Selangor<br>Country: Malaysia<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>nbalqiszamri@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>SERDANG</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Selangor</value>
+          </Data>
+          <Data name="Country">
+            <value>Malaysia</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Daniel Mietchen</name>
+        <address>Jena Thuringia Germany</address>
+        <description><![CDATA[Contact email: daniel.mietchen@ibmt.fraunhofer.de<br>City: Jena<br>State or Province: Thuringia<br>Country: Germany<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: My background is in biophysics, with little overlap to vaccine development.<br><br>I have a strong interest and broad experience in data sharing in public health emergencies [1] as well as in open science more broadly [2] and in covering science and medicine-related topics via the Wikimedia ecosystem [3].<br><br>I would thus like to assist RaDVaC from those angles.<br><br>A good way to reach me is via https://twitter.com/EvoMRI .<br><br>Some pointers to relevant activities I was involved in:<br>[1]<br>- Open drug discovery for the Zika virus. https://doi.org/10.12688/f1000research.8013.1<br>- Progress in promoting data sharing in public health emergencies. https://dx.doi.org/10.2471/BLT.17.192096<br>- Fostering global data sharing. https://wellcomeopenresearch.org/articles/5-267/v1<br>[2]<br>- The transformative nature of transparency in research funding. https://doi.org/10.1371/journal.pbio.1002027<br>- Publishing the research process. https://doi.org/10.3897/rio.1.e7547<br>- Open science in practice. https://doi.org/10.3897/rio.7.e68595<br>[3]<br>- Wikipedia as a gateway to biomedical research. https://doi.org/10.1371/journal.pone.0190046<br>- Representing COVID-19 information in collaborative knowledge graphs: the case of Wikidata. http://doi.org/10.5281/zenodo.4549834<br>- Developing a scalable framework for partnerships between health agencies and the Wikimedia ecosystem.  https://doi.org/10.3897/arphapreprints.e68129]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>daniel.mietchen@ibmt.fraunhofer.de</value>
+          </Data>
+          <Data name="City">
+            <value>Jena</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Thuringia</value>
+          </Data>
+          <Data name="Country">
+            <value>Germany</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>My background is in biophysics, with little overlap to vaccine development.
+
+I have a strong interest and broad experience in data sharing in public health emergencies [1] as well as in open science more broadly [2] and in covering science and medicine-related topics via the Wikimedia ecosystem [3].
+
+I would thus like to assist RaDVaC from those angles.
+
+A good way to reach me is via https://twitter.com/EvoMRI .
+
+Some pointers to relevant activities I was involved in:
+[1]
+- Open drug discovery for the Zika virus. https://doi.org/10.12688/f1000research.8013.1
+- Progress in promoting data sharing in public health emergencies. https://dx.doi.org/10.2471/BLT.17.192096
+- Fostering global data sharing. https://wellcomeopenresearch.org/articles/5-267/v1
+[2]
+- The transformative nature of transparency in research funding. https://doi.org/10.1371/journal.pbio.1002027
+- Publishing the research process. https://doi.org/10.3897/rio.1.e7547
+- Open science in practice. https://doi.org/10.3897/rio.7.e68595
+[3]
+- Wikipedia as a gateway to biomedical research. https://doi.org/10.1371/journal.pone.0190046
+- Representing COVID-19 information in collaborative knowledge graphs: the case of Wikidata. http://doi.org/10.5281/zenodo.4549834
+- Developing a scalable framework for partnerships between health agencies and the Wikimedia ecosystem.  https://doi.org/10.3897/arphapreprints.e68129</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>MDE</name>
+        <address>Medellín Antioquia Colombia</address>
+        <description><![CDATA[Contact email: radvacmde@protonmail.com<br>City: Medellín<br>State or Province: Antioquia<br>Country: Colombia<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>radvacmde@protonmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Medellín</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Antioquia</value>
+          </Data>
+          <Data name="Country">
+            <value>Colombia</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Osyth</name>
+        <address>London United Kingdom</address>
+        <description><![CDATA[Contact email: ax@7rw.com<br>City: London<br>State or Province: <br>Country: United Kingdom<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I have a BSc in Molecular Biology. I would like to collaborate with others in UK.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>ax@7rw.com</value>
+          </Data>
+          <Data name="City">
+            <value>London</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>United Kingdom</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>I have a BSc in Molecular Biology. I would like to collaborate with others in UK.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Vikas</name>
+        <address>Lexington Massachusetts United States</address>
+        <description><![CDATA[Contact email: vikas.s.pydah@vanderbilt.edu<br>City: Lexington<br>State or Province: Massachusetts<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>vikas.s.pydah@vanderbilt.edu</value>
+          </Data>
+          <Data name="City">
+            <value>Lexington</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Massachusetts</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>rstortroen</name>
+        <address>San Francisco California United States</address>
+        <description><![CDATA[Contact email: randy@randystortroen.com<br>City: San Francisco<br>State or Province: California<br>Country: United States<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>randy@randystortroen.com</value>
+          </Data>
+          <Data name="City">
+            <value>San Francisco</value>
+          </Data>
+          <Data name="State or Province">
+            <value>California</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Badger Johnson</name>
+        <address>Millfield Ohio United States</address>
+        <description><![CDATA[Contact email: paradise.ecological.services@gmail.com<br>City: Millfield<br>State or Province: Ohio<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>paradise.ecological.services@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Millfield</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Ohio</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Mollcaplanov</name>
+        <address>Williamsburg Massachusetts United States</address>
+        <description><![CDATA[Contact email: mollyscaplan@gmail.com<br>City: Williamsburg<br>State or Province: Massachusetts<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>mollyscaplan@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Williamsburg</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Massachusetts</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Ramón Aguilar</name>
+        <address>Siles Jaén Spain</address>
+        <description><![CDATA[Contact email: rmonaguilar@gmail.com<br>City: Siles<br>State or Province: Jaén<br>Country: Spain<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: I would like to try the nasal vaccine.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>rmonaguilar@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Siles</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Jaén</value>
+          </Data>
+          <Data name="Country">
+            <value>Spain</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>I would like to try the nasal vaccine.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>NZVac</name>
+        <address>Auckland Auckland New Zealand</address>
+        <description><![CDATA[Contact email: nzekdahl@gmail.com<br>City: Auckland<br>State or Province: Auckland<br>Country: New Zealand<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: Given this pandemic is ongoing and we expect there will be new variations ongoing as well. We would like to bring this nasal vaccination technology to New Zealand. We believe we have the resources available within our existing contacts to produce and distribute this vaccination locally.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>nzekdahl@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Auckland</value>
+          </Data>
+          <Data name="State or Province">
+            <value>Auckland</value>
+          </Data>
+          <Data name="Country">
+            <value>New Zealand</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>Given this pandemic is ongoing and we expect there will be new variations ongoing as well. We would like to bring this nasal vaccination technology to New Zealand. We believe we have the resources available within our existing contacts to produce and distribute this vaccination locally.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Rusty</name>
+        <address>Hanford California United States</address>
+        <description><![CDATA[Contact email: spreemail@yahoo.com<br>City: Hanford<br>State or Province: California<br>Country: United States<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: Would like to find someone who has made this.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>spreemail@yahoo.com</value>
+          </Data>
+          <Data name="City">
+            <value>Hanford</value>
+          </Data>
+          <Data name="State or Province">
+            <value>California</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>Would like to find someone who has made this.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Maxwell</name>
+        <address>Minneapolis MN United States</address>
+        <description><![CDATA[Contact email: allswellthatsmaxwell9@gmail.com<br>City: Minneapolis<br>State or Province: MN<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>allswellthatsmaxwell9@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Minneapolis</value>
+          </Data>
+          <Data name="State or Province">
+            <value>MN</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>John Wenger</name>
+        <address>Carson California United States</address>
+        <description><![CDATA[Contact email: netskier@GMail.Com<br>City: Carson<br>State or Province: California<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: I participated in the trial of Gen 9., and am excited about the roadmap forward.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>netskier@GMail.Com</value>
+          </Data>
+          <Data name="City">
+            <value>Carson</value>
+          </Data>
+          <Data name="State or Province">
+            <value>California</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value>I participated in the trial of Gen 9., and am excited about the roadmap forward.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Jarkko</name>
+        <address>Helsinki Finland</address>
+        <description><![CDATA[Contact email: 2017malmi@gmail.com<br>City: Helsinki<br>State or Province: <br>Country: Finland<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: Contact me in Finnish or English. My mother tongue is Finnish. Facebook Messenger: https://www.facebook.com/yarkkoo<br>Telegram: +358400555689<br>Preferably NOT by email, as I don't read emails that often.<br><br>I would like to get vaccinated myself. I have already received commercial covid-19 vaccines injections and boosters in Finland in one other country. I would like to get vaccinated with the nasal vaccine, because:<br>* The latest version 12 is optimized for Omicron and Delta variants.<br>* Nasal vaccine might prevents mild covid-19 cases better than injections.<br><br>I know how to get tested for covid-19 antibodies in Finland after covid-19 injection vaccines (for example Synlab 11077 blood test), but I don't know yet which lab test would be best to test efficacy of nasal covid-19 vaccines.<br><br>Booster schedule, Gen12:<br>* The pre-Gen 10 vaccine has proven to be most effective if used at least 4 times. 6 people who have taken RaDVaC vaccines and subsequently became infected have taken 3 or fewer doses, while many more who have taken 4 or more doses haven’t reported an infection. Beginning with Gen 10, fewer doses might suffice.<br>* Ideally, doses are spaced by 1 week, or more. Given the seriousness of the pandemic, shorter intervals might be used. Dozens of RaDVaC testers have self-administered 4+ doses of progressive generations of vaccine, spaced by 1+ week each.<br>* Testing for immune response is ideal.<br>Some have reported e.g. pronounced Nasal Congestion, that increase with later booster doses. This is a positive qualitative sign of immune response.<br><br>...<br>One other thing. The indoor gyms are now closed in Helsinki, because of covid-19. If you know where could I do some weight training and treadmill running (juoksumatto in Finnish), let me know! I can wear my FFP2 or FFP3 mask so nobody will get infected.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>2017malmi@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Helsinki</value>
+          </Data>
+          <Data name="State or Province">
+            <value/>
+          </Data>
+          <Data name="Country">
+            <value>Finland</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value><![CDATA[Contact me in Finnish or English. My mother tongue is Finnish. Facebook Messenger: https://www.facebook.com/yarkkoo
+Telegram: +358400555689
+Preferably NOT by email, as I don't read emails that often.
+
+I would like to get vaccinated myself. I have already received commercial covid-19 vaccines injections and boosters in Finland in one other country. I would like to get vaccinated with the nasal vaccine, because:
+* The latest version 12 is optimized for Omicron and Delta variants.
+* Nasal vaccine might prevents mild covid-19 cases better than injections.
+
+I know how to get tested for covid-19 antibodies in Finland after covid-19 injection vaccines (for example Synlab 11077 blood test), but I don't know yet which lab test would be best to test efficacy of nasal covid-19 vaccines.
+
+Booster schedule, Gen12:
+* The pre-Gen 10 vaccine has proven to be most effective if used at least 4 times. 6 people who have taken RaDVaC vaccines and subsequently became infected have taken 3 or fewer doses, while many more who have taken 4 or more doses haven’t reported an infection. Beginning with Gen 10, fewer doses might suffice.
+* Ideally, doses are spaced by 1 week, or more. Given the seriousness of the pandemic, shorter intervals might be used. Dozens of RaDVaC testers have self-administered 4+ doses of progressive generations of vaccine, spaced by 1+ week each.
+* Testing for immune response is ideal.
+Some have reported e.g. pronounced Nasal Congestion, that increase with later booster doses. This is a positive qualitative sign of immune response.
+
+...
+One other thing. The indoor gyms are now closed in Helsinki, because of covid-19. If you know where could I do some weight training and treadmill running (juoksumatto in Finnish), let me know! I can wear my FFP2 or FFP3 mask so nobody will get infected.]]></value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>DietCoke</name>
+        <address>Baltimore MD United States</address>
+        <description><![CDATA[Contact email: dietcokehead01@gmail.com<br>City: Baltimore<br>State or Province: MD<br>Country: United States<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: Yes<br>Other info: I am a willing participant. I have time to help create it. I am a fast learner.]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>dietcokehead01@gmail.com</value>
+          </Data>
+          <Data name="City">
+            <value>Baltimore</value>
+          </Data>
+          <Data name="State or Province">
+            <value>MD</value>
+          </Data>
+          <Data name="Country">
+            <value>United States</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>No</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>No</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Other info">
+            <value>I am a willing participant. I have time to help create it. I am a fast learner.</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>fireice123</name>
+        <address><![CDATA[Xi'an Shaanxi China]]></address>
+        <description><![CDATA[Contact email: 735296584@qq.com<br>City: Xi'an<br>State or Province: Shaanxi<br>Country: China<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="Contact email">
+            <value>735296584@qq.com</value>
+          </Data>
+          <Data name="City">
+            <value><![CDATA[Xi'an]]></value>
+          </Data>
+          <Data name="State or Province">
+            <value>Shaanxi</value>
+          </Data>
+          <Data name="Country">
+            <value>China</value>
+          </Data>
+          <Data name="Science degree / education?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Basic lab skills?">
+            <value>Yes</value>
+          </Data>
+          <Data name="Lab space?">
+            <value>No</value>
+          </Data>
+          <Data name="Other info">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

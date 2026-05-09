@@ -1,0 +1,343 @@
+{
+  "Flagstaff AZ USA": {
+    "lat": 35.1987522,
+    "lng": -111.651822
+  },
+  "Victoria BC Canada": {
+    "lat": 48.4283182,
+    "lng": -123.364953
+  },
+  "CH-3852 Ringgenberg Bern Schweiz": {
+    "lat": 46.7041759,
+    "lng": 7.8973292
+  },
+  "Davis CA USA": {
+    "lat": 38.5434313,
+    "lng": -121.7381782
+  },
+  "Los Angeles CA USA": {
+    "lat": 34.0536909,
+    "lng": -118.242766
+  },
+  "Palo Alto CA United States": {
+    "lat": 37.4443293,
+    "lng": -122.1598465
+  },
+  "Pasadena CA United States": {
+    "lat": 34.1476507,
+    "lng": -118.144155
+  },
+  "Portola Valley CA USA": {
+    "lat": 37.3736298,
+    "lng": -122.219047
+  },
+  "San Francisco CA USA": {
+    "lat": 37.7879363,
+    "lng": -122.4075201
+  },
+  "Santa Clara California US": {
+    "lat": 37.2333253,
+    "lng": -121.6846349
+  },
+  "Mexico Ciudad de Mexico Mexico": {
+    "lat": 19.4326296,
+    "lng": -99.1331785
+  },
+  "Boulder Colorado United States": {
+    "lat": 40.0149856,
+    "lng": -105.270545
+  },
+  "Boca Raton FL USA": {
+    "lat": 26.367379,
+    "lng": -80.1737932
+  },
+  "Dunedin FL USA": {
+    "lat": 28.0116627,
+    "lng": -82.7893788
+  },
+  "Johannesburg Gauteng South Africa": {
+    "lat": -26.205,
+    "lng": 28.049722
+  },
+  "Amherst MA United States": {
+    "lat": 42.3731948,
+    "lng": -72.5198761
+  },
+  "Boston MA USA": {
+    "lat": 42.3588336,
+    "lng": -71.0578303
+  },
+  "Cambridge MA United States": {
+    "lat": 42.3656347,
+    "lng": -71.1040018
+  },
+  "Waltham MA USA": {
+    "lat": 42.3762385,
+    "lng": -71.2355644
+  },
+  "Watertown MA United States": {
+    "lat": 42.3652576,
+    "lng": -71.1843234
+  },
+  "Kolhapur Maharashtra India": {
+    "lat": 16.7028412,
+    "lng": 74.2405329
+  },
+  "Durham NC United States": {
+    "lat": 35.996653,
+    "lng": -78.9018053
+  },
+  "East Marion NY United States": {
+    "lat": 41.129247,
+    "lng": -72.3441368
+  },
+  "New York NY USA": {
+    "lat": 40.7127281,
+    "lng": -74.0060152
+  },
+  "Bend OR USA": {
+    "lat": 44.0581728,
+    "lng": -121.3153096
+  },
+  "Pittsburgh PA USA": {
+    "lat": 40.4406968,
+    "lng": -80.0025666
+  },
+  "Montreal Quebec Canada": {
+    "lat": 45.5031824,
+    "lng": -73.5698065
+  },
+  "Laredo Tamaulipas México": {
+    "lat": 25.5620811,
+    "lng": -97.9987443
+  },
+  "Woodbridge VA United States": {
+    "lat": 38.636447,
+    "lng": -77.2676335
+  },
+  "Seattle WA USA": {
+    "lat": 47.6038321,
+    "lng": -122.330062
+  },
+  "Rotterdam Zuid-Holland Netherlands": {
+    "lat": 51.9244424,
+    "lng": 4.47775
+  },
+  "Berlin Germany": {
+    "lat": 52.5173885,
+    "lng": 13.3951309
+  },
+  "Covent Garden United Kingdom": {
+    "lat": 51.5128732,
+    "lng": -0.1225639
+  },
+  "Enschede Netherlands": {
+    "lat": 52.2209855,
+    "lng": 6.8940537
+  },
+  "Heston United Kingdom": {
+    "lat": 51.4854573,
+    "lng": -0.3719561
+  },
+  "Kyiv Ukraine": {
+    "lat": 50.4500336,
+    "lng": 30.5241361
+  },
+  "Leipzig Germany": {
+    "lat": 51.3406321,
+    "lng": 12.3747329
+  },
+  "Lijiang China": {
+    "lat": 26.8595868,
+    "lng": 100.2249797
+  },
+  "Rio de Janeiro Brazil": {
+    "lat": -22.9110137,
+    "lng": -43.2093727
+  },
+  "Salta Argentina": {
+    "lat": -25.2269908,
+    "lng": -64.5911956
+  },
+  "Tennenbronn Deutschland": {
+    "lat": 48.1904993,
+    "lng": 8.3514397
+  },
+  "Toronto Canada": {
+    "lat": 43.6534817,
+    "lng": -79.3839347
+  },
+  "Utrecht Netherlands": {
+    "lat": 52.0907006,
+    "lng": 5.1215634
+  },
+  "Karlsruhe Baden-Württemberg Germany": {
+    "lat": 49.0068705,
+    "lng": 8.4034195
+  },
+  "Trebic Czech Republic": {
+    "lat": 49.2158752,
+    "lng": 15.8810841
+  },
+  "Memphis TN USA": {
+    "lat": 35.1460249,
+    "lng": -90.0517638
+  },
+  "Bhavnagar Gujarat India": {
+    "lat": 21.7718836,
+    "lng": 72.1416449
+  },
+  "Bogota DC Colombia": {
+    "lat": 4.6533817,
+    "lng": -74.0836331
+  },
+  "Rapperswil Bern Switzerland": {
+    "lat": 47.0628191,
+    "lng": 7.4103359
+  },
+  "Ottawa Ontario Canada": {
+    "lat": 45.4208777,
+    "lng": -75.6901106
+  },
+  "Jamshoro Sindh Pakistan": {
+    "lat": 25.433918,
+    "lng": 68.2816926
+  },
+  "Salt Lake City Utah United States": {
+    "lat": 40.7596198,
+    "lng": -111.886797
+  },
+  "Denville New Jersey United States": {
+    "lat": 40.8922694,
+    "lng": -74.4774255
+  },
+  "Blaricum North Holland Netherlands": {
+    "lat": 52.2725049,
+    "lng": 5.2441379
+  },
+  "Ottowa Ontario Canada": null,
+  "Ottowa, Ontario, Canada": null,
+  "Ottowa, Canada": null,
+  "Canada": {
+    "lat": 61.0666922,
+    "lng": -107.991707
+  },
+  "Vancouver British Columbia Canada": {
+    "lat": 49.2608724,
+    "lng": -123.113952
+  },
+  "Rome RM Italy": {
+    "lat": 41.8933203,
+    "lng": 12.4829321
+  },
+  "Abertillery Blaenu Gwent United Kingdom": null,
+  "Abertillery, Blaenu Gwent, United Kingdom": null,
+  "Abertillery, United Kingdom": {
+    "lat": 51.7299485,
+    "lng": -3.1359867
+  },
+  "Dauin Negros Oriental Philippines": {
+    "lat": 9.1897165,
+    "lng": 123.26577
+  },
+  "La Paz, Estado de Mexico, Mexico": {
+    "lat": 19.3637686,
+    "lng": -98.9463136
+  },
+  "Foshan Guangdong China": {
+    "lat": 23.0239788,
+    "lng": 113.1159558
+  },
+  "Bedford Massachusetts United States": {
+    "lat": 42.4917301,
+    "lng": -71.2817947
+  },
+  "Wetumpka Alabama United States": {
+    "lat": 32.5378668,
+    "lng": -86.2045442
+  },
+  "Guadalajara Jalisco Mexico": {
+    "lat": 20.6720375,
+    "lng": -103.338396
+  },
+  "Warsaw Warsaw Poland": {
+    "lat": 52.2138636,
+    "lng": 21.0037346
+  },
+  "Tullnerbach Austria": {
+    "lat": 48.2189083,
+    "lng": 16.0924826
+  },
+  "Islamabad Pakistan": {
+    "lat": 33.6938118,
+    "lng": 73.0651511
+  },
+  "Fremont California United States": {
+    "lat": 37.5482697,
+    "lng": -121.988571
+  },
+  "SERDANG Selangor Malaysia": {
+    "lat": 3.0340649,
+    "lng": 101.7055684
+  },
+  "Jena Thuringia Germany": {
+    "lat": 50.9281717,
+    "lng": 11.5879359
+  },
+  "Medellín Antioquia Colombia": {
+    "lat": 6.2697324,
+    "lng": -75.6025597
+  },
+  "London United Kingdom": {
+    "lat": 51.5074456,
+    "lng": -0.1277653
+  },
+  "Lexington Massachusetts United States": {
+    "lat": 42.4473175,
+    "lng": -71.2245003
+  },
+  "San Francisco California United States": {
+    "lat": 37.7879363,
+    "lng": -122.4075201
+  },
+  "Millfield Ohio United States": {
+    "lat": 39.4328491,
+    "lng": -82.0968114
+  },
+  "Williamsburg Massachusetts United States": {
+    "lat": 42.3926274,
+    "lng": -72.7302473
+  },
+  "Siles Jaén Spain": {
+    "lat": 38.3878613,
+    "lng": -2.5826373
+  },
+  "Auckland Auckland New Zealand": {
+    "lat": -36.852095,
+    "lng": 174.7631803
+  },
+  "Hanford California United States": {
+    "lat": 36.3277959,
+    "lng": -119.6461565
+  },
+  "Minneapolis MN United States": {
+    "lat": 44.9772995,
+    "lng": -93.2654692
+  },
+  "Carson California United States": {
+    "lat": 33.832562,
+    "lng": -118.181045
+  },
+  "Helsinki Finland": {
+    "lat": 60.1666204,
+    "lng": 24.9435408
+  },
+  "Baltimore MD United States": {
+    "lat": 39.2908816,
+    "lng": -76.610759
+  },
+  "Xi'an Shaanxi China": {
+    "lat": 34.261004,
+    "lng": 108.9423363
+  }
+}

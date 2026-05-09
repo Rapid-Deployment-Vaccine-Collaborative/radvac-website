@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* ===== Legacy Tailwind theme tokens (kept for [slug]/WordPress pages) ===== */
+@theme {
+  --color-primary: #1a4b8c;
+  --color-primary-dark: #0d2b5e;
+  --color-primary-light: #e8f0fe;
+  --color-accent: #2ecc71;
+  --color-accent-dark: #1a9c54;
+  --color-surface: #f8f9fa;
+  --color-border: #e2e8f0;
+  --color-text: #1a1a2e;
+  --color-text-secondary: #4a4a6a;
+
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+}
+
+/* ===== New editorial design tokens (homepage v2 / FAQ) ===== */
+:root {
+  --paper: #f4f6fb;
+  --ink: #0e1a30;
+  --ink-soft: #2a3550;
+  --rule: #c7d0e1;
+  --rule-soft: #dde3ee;
+  --blue: #1f4dab;
+  --blue-deep: #0d2b5e;
+  --blue-light: #e9eff9;
+  --serif: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --display: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --mono: var(--font-jetbrains), ui-monospace, monospace;
+  --sans: var(--font-inter), system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: linear-gradient(180deg, #b9d0ee 0%, #eaf1fb 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+
+.wrap { max-width: 1440px; margin: 0 auto; }
+
+/* ===== Shared section grid (200px label + content) ===== */
+.section {
+  padding: 72px 56px 0;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+}
+.sec-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+  padding-top: 14px;
+  line-height: 1.7;
+}
+.sec-num strong {
+  color: var(--ink);
+  font-weight: 600;
+  display: block;
+  font-size: 13px;
+  margin-top: 4px;
+  letter-spacing: 0.08em;
+}
+.section-lede {
+  font-size: 17px;
+  line-height: 1.65;
+  margin: 14px 0 28px;
+  color: var(--ink-soft);
+  max-width: 720px;
+}
+
+/* ===== Shared button styles ===== */
+.btn {
+  padding: 13px 22px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.12s, box-shadow 0.12s, background 0.12s, color 0.12s, border-color 0.12s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+}
+.btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn.primary:hover { background: var(--blue-deep); border-color: var(--blue-deep); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .section { padding: 48px 24px 0; grid-template-columns: 1fr; gap: 18px; }
+}
+
+/* ===== Legacy utilities kept for [slug]/WordPress pages ===== */
+.prose {
+  --tw-prose-body: var(--color-text);
+  --tw-prose-headings: var(--color-primary-dark);
+  --tw-prose-links: var(--color-primary);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-counters: var(--color-text-secondary);
+  --tw-prose-bullets: var(--color-primary);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-quotes: var(--color-primary-dark);
+  --tw-prose-quote-borders: var(--color-primary);
+  --tw-prose-captions: var(--color-text-secondary);
+  --tw-prose-th-borders: var(--color-border);
+  --tw-prose-td-borders: var(--color-border);
+  max-width: 800px;
+}
+@media print {
+  header, footer, nav { display: none !important; }
+  .no-print { display: none !important; }
+  body { font-size: 12pt; color: #000; background: #fff; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666; }
+}
