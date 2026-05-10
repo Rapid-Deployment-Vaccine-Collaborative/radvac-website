@@ -4,7 +4,7 @@
   background: var(--blue-deep);
   color: #fff;
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: 1fr 340px;
   gap: 56px;
   align-items: center;
   position: relative;
@@ -13,6 +13,7 @@
 }
 .contactStrip::after {
   content: "";
+  pointer-events: none;
   position: absolute;
   right: -120px;
   top: -120px;
@@ -53,15 +54,19 @@
   background: #fff;
   color: var(--blue-deep);
   border: 1.5px solid #fff;
-  padding: 22px 28px;
+  padding: 16px 28px;
   text-align: center;
-  display: block;
-  font-size: 13px;
-  border-radius: 999px;
+  display: inline-block;
+  justify-self: end;
+  margin-right: 24px;
+  position: relative;
+  z-index: 1;
   font-family: var(--mono);
+  font-size: 19px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 600;
+  border-radius: 10px;
   text-decoration: none;
 }
 .btn:hover {

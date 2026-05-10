@@ -21,7 +21,6 @@ export const faqData: FaqSectionData[] = [
         id: "q1",
         num: "01",
         question: "What is RaDVaC?",
-        open: true,
         answer: `<p>The Rapid Deployment Vaccine Collaborative is an IP-free and open-source vaccine R&amp;D project. We are a group of citizen scientists who are concerned about the staggering costs of the current pandemic (and from possible future pandemics). The death toll is large and growing, but many more who survive the initial infection will suffer serious enduring complications. Our experience in the biomedical sciences allowed us to realize in the early stages of the pandemic that a commercial vaccine would not be widely available through the end of 2020, and during that time the cost in human lives and health would be extremely high; therefore, we mobilized quickly to address this problem. We have used our knowledge and skills in biomedical research to develop SARS-CoV-2 vaccines, which we test on ourselves. We've published our approach in the white paper available for download on this website. We also connect with other professional and citizen scientists who wish to make and deploy the vaccine, to build on our approach, and to advance the sharing of ideas, data, and best practices.</p>`,
       },
       {

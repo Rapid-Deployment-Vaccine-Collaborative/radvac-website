@@ -1,0 +1,83 @@
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.portraitCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.portrait {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  background: #f3f3f1;
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+.portraitImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.silhouette {
+  display: flex;
+  width: 70%;
+  align-items: flex-end;
+  justify-content: center;
+}
+.silhouette svg {
+  width: 100%;
+  height: auto;
+  fill: #d8d6d1;
+}
+.socials {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.linkedin,
+.xLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  color: var(--ink-soft);
+  transition: color 0.15s;
+}
+.linkedin:hover {
+  color: #0a66c2;
+}
+.xLink:hover {
+  color: var(--ink);
+}
+.linkedin svg,
+.xLink svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+.bioCol {
+  max-width: 65ch;
+}
+.bio {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0;
+}
+
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .portraitCol {
+    max-width: 280px;
+  }
+}

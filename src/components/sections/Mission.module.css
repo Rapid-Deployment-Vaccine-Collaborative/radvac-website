@@ -4,6 +4,9 @@
   font-size: 17px;
   line-height: 1.65;
   color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--rule);
+  padding: 28px 32px;
 }
 .mission p {
   margin: 0 0 14px;

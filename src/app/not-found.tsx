@@ -11,7 +11,7 @@ export default function NotFound() {
           <p className="section-lede">
             The page you&apos;re looking for doesn&apos;t exist or has been moved.
           </p>
-          <Link className="btn primary" href="/">
+          <Link className="btn primary" href="/" style={{ borderRadius: "8px" }}>
             ← Back to home
           </Link>
         </div>

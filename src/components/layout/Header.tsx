@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
+import { RaDVaCLogo } from "./RaDVaCLogo";
 
 const navItems = [
-  { label: "Vaccine", href: "/vaccine/" },
-  { label: "White Papers", href: "/#papers" },
-  { label: "Updates", href: "/press-release/" },
   { label: "FAQ", href: "/faq" },
-  { label: "Researchers Map", href: "/researchers-map" },
+  { label: "Publications", href: "/#papers" },
+  { label: "Updates", href: "/press-release/" },
+  { label: "SARS-CoV-2 Vaccine", href: "/vaccine/" },
+  { label: "Network", href: "/researchers-map" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -18,12 +19,13 @@ export function Header() {
   const isHome = pathname === "/";
 
   return (
-    <header className={styles.mast}>
+    <>
+      <div className={styles.bg} aria-hidden="true" />
+      <header className={styles.mast}>
       <div>
         <h1 className={styles.logo}>
           <Link href="/" aria-label="RaDVaC home">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/radvac-logo.png" alt="RaDVaC" />
+            <RaDVaCLogo />
           </Link>
         </h1>
       </div>
@@ -34,15 +36,11 @@ export function Header() {
             {item.label}
           </Link>
         ))}
-        <a
-          href="https://www.paypal.com/donate?token=NK5-GEEdiIIUaQCrnYrpbxNvJyOnb0ppbCBQt-y0AT7JX0QkQ1W_GpbvJZe_Lz3MjVfYUo4TdAV019C1"
-          className={styles.cta}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Donate
-        </a>
+        <Link href="/support" className={styles.cta}>
+          Support
+        </Link>
       </nav>
-    </header>
+      </header>
+    </>
   );
 }

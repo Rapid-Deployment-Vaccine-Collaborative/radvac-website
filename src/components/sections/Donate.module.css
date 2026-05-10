@@ -13,6 +13,7 @@
 }
 .donate::after {
   content: "";
+  pointer-events: none;
   position: absolute;
   right: -120px;
   top: -120px;
@@ -40,6 +41,7 @@
   margin: 0;
   font-weight: 500;
   letter-spacing: -0.02em;
+  max-width: 34ch;
 }
 .attr {
   font-family: var(--mono);
@@ -49,14 +51,18 @@
   color: #9ec0ff;
 }
 .cta {
+  width: 95%;
+  margin-left: -4px;
+  position: relative;
+  z-index: 1;
   background: #fff !important;
   color: var(--blue-deep) !important;
   border-color: #fff !important;
-  padding: 22px 28px !important;
+  padding: 16px 28px !important;
   text-align: center;
   display: block !important;
-  font-size: 18px;
-  border-radius: 999px;
+  font-size: 22px;
+  border-radius: 10px;
 }
 .cta:hover {
   background: var(--blue-light) !important;

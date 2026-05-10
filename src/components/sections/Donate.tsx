@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Donate.module.css";
 
 export function Donate() {
@@ -5,19 +6,13 @@ export function Donate() {
     <section className={styles.donate} id="donate">
       <div>
         <p className={styles.pull}>
-          The next pandemic will not wait for clinical trials. RaDVaC is
-          building the open infrastructure to respond in&nbsp;weeks.
+          Radvac is building the open infrastructure required to respond to biological threats in hours or days, not months or years.
         </p>
       </div>
-      <a
-        className={`btn primary ${styles.cta}`}
-        href="https://www.paypal.com/donate?token=NK5-GEEdiIIUaQCrnYrpbxNvJyOnb0ppbCBQt-y0AT7JX0QkQ1W_GpbvJZe_Lz3MjVfYUo4TdAV019C1"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Donate
+      <Link className={`btn primary ${styles.cta}`} href="/support">
+        Support
         <small>501(c)(3) tax-deductible</small>
-      </a>
+      </Link>
     </section>
   );
 }

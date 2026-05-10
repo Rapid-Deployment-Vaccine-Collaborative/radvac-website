@@ -5,10 +5,8 @@ export function ContactStrip() {
   return (
     <section className={styles.contactStrip}>
       <div>
-        <div className={styles.eye}>§ Still have questions?</div>
         <h2 className={styles.h2}>
-          &ldquo;Open science requires open conversation. Reach out — we read
-          everything.&rdquo;
+          Open science requires open conversation. Please reach out if you have questions or comments.
         </h2>
       </div>
       <Link className={styles.btn} href="/contact">

@@ -13,7 +13,7 @@ export function rewriteWordPressUrls(html: string): string {
     `${wpUrl}/wp-content/uploads/`
   );
 
-  result = result.replace(/https?:\/\/radvac\.org\//g, "/");
+  result = result.replace(/https?:\/\/radvac\.org\/(?!wp-content\/uploads\/)/g, "/");
 
   return result;
 }

@@ -18,7 +18,7 @@ export function Projects() {
             >
               <h3>{project.title}</h3>
               <p>{project.description}</p>
-              <div className={styles.arrow}>Read project →</div>
+              <div className={styles.arrow}>Read more →</div>
             </Link>
           ))}
         </div>

@@ -2,7 +2,6 @@ import { Hero } from "@/components/sections/Hero";
 import { Mission } from "@/components/sections/Mission";
 import { Team } from "@/components/sections/Team";
 import { Projects } from "@/components/sections/Projects";
-import { Papers } from "@/components/sections/Papers";
 import { Donate } from "@/components/sections/Donate";
 
 export default function HomePage() {
@@ -13,7 +12,6 @@ export default function HomePage() {
         <Mission />
         <Team />
         <Projects />
-        <Papers />
         <Donate />
       </div>
     </>
