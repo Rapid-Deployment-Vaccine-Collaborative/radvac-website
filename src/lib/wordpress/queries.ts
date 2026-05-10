@@ -1,5 +1,5 @@
 import { fetchGraphQL } from "./client";
-import type { WpPage, WpMenuItem } from "./types";
+import type { WpPage, WpMenuItem, WpFaqPage, WpFaqSection } from "./types";
 
 // ===== Page Queries =====
 
@@ -110,6 +110,38 @@ export async function getAllPageSlugs(): Promise<string[]> {
     return data.pages.nodes.map((p) => p.slug);
   } catch {
     console.error("Failed to fetch page slugs");
+    return [];
+  }
+}
+
+// ===== FAQ Queries =====
+
+export async function getFaqPageContent(): Promise<WpFaqSection[]> {
+  const query = `
+    query GetFaqPage {
+      page(id: "faq", idType: URI) {
+        id
+        faqPageContent {
+          faqSections {
+            label
+            items {
+              question
+              answer
+              defaultOpen
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await fetchGraphQL<{ page: WpFaqPage | null }>(query, undefined, {
+      revalidate: 3600,
+    });
+    return data.page?.faqPageContent?.faqSections ?? [];
+  } catch {
+    console.error("Failed to fetch FAQ page content");
     return [];
   }
 }

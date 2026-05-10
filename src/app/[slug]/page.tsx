@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPageBySlug, getAllPageSlugs } from "@/lib/wordpress/queries";
 import { rewriteWordPressUrls } from "@/lib/utils";
+import { PageHeader } from "@/components/layout/PageHeader";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -55,21 +56,12 @@ export default async function DynamicPage({ params }: PageProps) {
     notFound();
   }
 
-  // Rewrite WordPress URLs in the rendered content
   const content = rewriteWordPressUrls(page.content);
 
   return (
     <>
-      {/* Page Header */}
-      <section className="bg-gradient-to-b from-primary-dark to-primary pt-32 pb-16 px-6">
-        <div className="max-w-[800px] mx-auto">
-          <h1 className="text-3xl md:text-5xl font-heading font-bold text-white">
-            {page.title}
-          </h1>
-        </div>
-      </section>
+      <PageHeader title={page.title} />
 
-      {/* Page Content */}
       <section className="py-16 px-6">
         <div className="max-w-[800px] mx-auto">
           <div

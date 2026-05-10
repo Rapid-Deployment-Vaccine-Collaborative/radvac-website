@@ -73,6 +73,28 @@ export interface WpMenuItem {
   };
 }
 
+// FAQ types (ACF-backed; field group `faq_page_content` on the /faq page)
+
+export interface WpFaqItem {
+  question: string;
+  answer: string;
+  defaultOpen?: boolean | null;
+}
+
+export interface WpFaqSection {
+  label: string;
+  items: WpFaqItem[] | null;
+}
+
+export interface WpFaqPageContent {
+  faqSections: WpFaqSection[] | null;
+}
+
+export interface WpFaqPage {
+  id: string;
+  faqPageContent: WpFaqPageContent | null;
+}
+
 // Block types from WPGraphQL Content Blocks
 export interface WpBlock {
   name: string;

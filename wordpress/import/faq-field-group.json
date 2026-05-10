@@ -1,0 +1,151 @@
+[
+  {
+    "key": "group_faq_content",
+    "title": "FAQ Page Content",
+    "fields": [
+      {
+        "key": "field_faq_sections",
+        "label": "Sections",
+        "name": "faq_sections",
+        "aria-label": "",
+        "type": "repeater",
+        "instructions": "Top-level FAQ sections. Each section has a label and a list of Q&A items. Order is preserved as displayed.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": { "width": "", "class": "", "id": "" },
+        "show_in_graphql": 1,
+        "graphql_field_name": "faqSections",
+        "layout": "block",
+        "pagination": 0,
+        "min": 0,
+        "max": 0,
+        "collapsed": "field_faq_section_label",
+        "button_label": "Add section",
+        "rows_per_page": 20,
+        "sub_fields": [
+          {
+            "key": "field_faq_section_label",
+            "label": "Label",
+            "name": "label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Section heading shown in the sidebar (e.g. \"About RaDVaC\").",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "show_in_graphql": 1,
+            "graphql_field_name": "label",
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "parent_repeater": "field_faq_sections"
+          },
+          {
+            "key": "field_faq_section_items",
+            "label": "Items",
+            "name": "items",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Q&A items in this section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "show_in_graphql": 1,
+            "graphql_field_name": "items",
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "field_faq_item_question",
+            "button_label": "Add item",
+            "rows_per_page": 20,
+            "parent_repeater": "field_faq_sections",
+            "sub_fields": [
+              {
+                "key": "field_faq_item_question",
+                "label": "Question",
+                "name": "question",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "show_in_graphql": 1,
+                "graphql_field_name": "question",
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "parent_repeater": "field_faq_section_items"
+              },
+              {
+                "key": "field_faq_item_answer",
+                "label": "Answer",
+                "name": "answer",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "Rich-text answer. Inline links, italics, paragraphs, and bullet lists are supported.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "show_in_graphql": 1,
+                "graphql_field_name": "answer",
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0,
+                "parent_repeater": "field_faq_section_items"
+              },
+              {
+                "key": "field_faq_item_default_open",
+                "label": "Default open?",
+                "name": "default_open",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "When the page first loads, render this item's accordion in the open state. Typically only the first item.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "show_in_graphql": 1,
+                "graphql_field_name": "defaultOpen",
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": "",
+                "parent_repeater": "field_faq_section_items"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "page"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "FAQ sections + Q&A items rendered at /faq on the Next.js frontend.",
+    "show_in_rest": 0,
+    "show_in_graphql": 1,
+    "graphql_field_name": "faqPageContent",
+    "graphql_types": ["Page"],
+    "map_graphql_types_from_location_rules": 0
+  }
+]

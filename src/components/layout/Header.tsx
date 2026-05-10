@@ -1,9 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
 
 const navItems = [
-  { label: "Mission", href: "/#mission" },
-  { label: "Projects", href: "/#projects" },
   { label: "Vaccine", href: "/vaccine/" },
   { label: "White Papers", href: "/#papers" },
   { label: "Updates", href: "/press-release/" },
@@ -13,6 +14,9 @@ const navItems = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   return (
     <header className={styles.mast}>
       <div>
@@ -24,14 +28,20 @@ export function Header() {
         </h1>
       </div>
       <nav className={styles.primary} aria-label="primary">
+        {!isHome && <Link href="/">Home</Link>}
         {navItems.map((item) => (
           <Link key={item.href} href={item.href}>
             {item.label}
           </Link>
         ))}
-        <Link href="/#donate" className={styles.cta}>
+        <a
+          href="https://www.paypal.com/donate?token=NK5-GEEdiIIUaQCrnYrpbxNvJyOnb0ppbCBQt-y0AT7JX0QkQ1W_GpbvJZe_Lz3MjVfYUo4TdAV019C1"
+          className={styles.cta}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Donate
-        </Link>
+        </a>
       </nav>
     </header>
   );

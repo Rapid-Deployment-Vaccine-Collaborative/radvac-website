@@ -1,10 +1,10 @@
 .mast {
   padding: 38px 56px 24px;
-  border-bottom: 3px double var(--ink);
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 40px;
+  position: relative;
 }
 .logo { margin: 0; display: block; line-height: 0; }
 .logo a { display: block; line-height: 0; }
@@ -13,20 +13,21 @@
 .primary {
   display: flex;
   flex-wrap: wrap;
-  gap: 26px;
+  gap: 10px;
   font-family: var(--serif);
-  font-size: 15px;
+  font-size: 17px;
 }
 .primary a {
   color: var(--ink);
   text-decoration: none;
-  padding-bottom: 2px;
+  padding: 4px 8px;
   transition: border-color 0.15s;
-  border-bottom: 2px solid transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
 }
-.primary a:hover { border-bottom-color: var(--rule); }
-.primary a.cta { font-weight: 600; color: var(--blue); border-bottom-color: var(--blue); }
-.primary a.active { font-weight: 600; color: var(--blue); border-bottom-color: var(--blue); }
+.primary a:hover { border-color: var(--blue); }
+.primary a.cta { font-weight: 600; color: var(--blue); border-color: var(--blue); }
+.primary a.active { font-weight: 600; color: var(--blue); border-color: var(--blue); }
 
 @media (max-width: 980px) {
   .mast { padding: 28px 24px 18px; flex-direction: column; align-items: flex-start; }

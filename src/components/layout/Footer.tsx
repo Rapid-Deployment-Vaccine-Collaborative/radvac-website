@@ -1,11 +1,101 @@
+import Image from "next/image";
+import Link from "next/link";
 import styles from "./Footer.module.css";
+
+const socialLinks = [
+  {
+    href: "https://www.facebook.com/radvacproject",
+    label: "Facebook",
+    path: "M17.525 9H14.25V7.16c0-.69.46-.85.78-.85h2.45V2.5L14.07 2.49c-3.74 0-4.59 2.8-4.59 4.59V9H7v3.92h2.48V22h4.78v-9.08h3.18l.18-3.92z",
+  },
+  {
+    href: "https://x.com/radvacproject",
+    label: "X",
+    path: "M18.244 2H21l-6.52 7.452L22 22h-6.844l-4.86-6.354L4.6 22H2l6.97-7.97L2 2h6.844l4.4 5.81L18.244 2zm-1.2 18h1.93L7.06 4H5.04l12.004 16z",
+  },
+  {
+    href: "https://www.instagram.com/radvacproject",
+    label: "Instagram",
+    path: "M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.39C1.34 2.69.92 3.36.62 4.14.32 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.39 2.13.67.67 1.34 1.09 2.13 1.39.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.39.67-.67 1.09-1.34 1.39-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.72-1.46-1.39-2.13C21.31 1.34 20.64.92 19.86.62 19.1.32 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 12 8a4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z",
+  },
+  {
+    href: "https://bsky.app/profile/radvacproject.bsky.social",
+    label: "Bluesky",
+    path: "M5.367 3.394C7.91 5.31 10.647 9.196 11.65 11.28c1.003-2.085 3.74-5.97 6.283-7.886C19.768 2.012 22.5 1.105 22.5 4.27c0 .632-.36 5.305-.572 6.063-.737 2.638-3.41 3.31-5.79 2.9 4.158.71 5.218 3.06 2.933 5.41-4.34 4.467-6.235-1.122-6.72-2.555l-.001-.003-.1-.293-.1.293c-.485 1.433-2.38 7.022-6.72 2.555-2.285-2.35-1.225-4.7 2.933-5.41-2.38.41-5.053-.262-5.79-2.9C2.36 9.575 2 4.902 2 4.27c0-3.165 2.732-2.258 3.367-.876z",
+  },
+  {
+    href: "https://www.youtube.com/channel/UCYZeqhoSbe5cD1aJgtfX3-Q",
+    label: "YouTube",
+    path: "M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z",
+  },
+  {
+    href: "mailto:info@radvac.org",
+    label: "Email",
+    path: "M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z",
+  },
+];
 
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <span>© 2026 RaDVaC · 501(c)(3) · Cambridge, MA</span>
-      <span>CC BY 4.0 · Open COVID Pledge</span>
-      <span>Contact · Subscribe · Twitter · YouTube</span>
+      <nav className={styles.social} aria-label="Social media">
+        {socialLinks.map((s) => (
+          <a
+            key={s.label}
+            href={s.href}
+            aria-label={s.label}
+            target={s.href.startsWith("mailto:") ? undefined : "_blank"}
+            rel={s.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d={s.path} />
+            </svg>
+          </a>
+        ))}
+      </nav>
+      <a
+        className={styles.cc}
+        href="https://creativecommons.org/licenses/by/4.0/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Creative Commons Attribution 4.0 International License"
+      >
+        <svg viewBox="0 0 64 22" width="64" height="22" aria-hidden="true">
+          <g fill="currentColor">
+            <path d="M11 0C4.925 0 0 4.925 0 11s4.925 11 11 11 11-4.925 11-11S17.075 0 11 0zm0 2c4.971 0 9 4.029 9 9s-4.029 9-9 9-9-4.029-9-9 4.029-9 9-9z" />
+            <path d="M11.5 8.2c-.7-.7-1.6-1-2.5-1-2 0-3.6 1.6-3.6 3.8s1.6 3.8 3.6 3.8c.9 0 1.8-.3 2.5-1l-1-1c-.4.4-.9.6-1.5.6-1.2 0-2.1-.9-2.1-2.4s.9-2.4 2.1-2.4c.6 0 1.1.2 1.5.6l1-1zm5.6 0c-.7-.7-1.6-1-2.5-1-2 0-3.6 1.6-3.6 3.8s1.6 3.8 3.6 3.8c.9 0 1.8-.3 2.5-1l-1-1c-.4.4-.9.6-1.5.6-1.2 0-2.1-.9-2.1-2.4s.9-2.4 2.1-2.4c.6 0 1.1.2 1.5.6l1-1z" />
+            <path d="M33 0c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.925 11-11S39.075 0 33 0zm0 2c4.971 0 9 4.029 9 9s-4.029 9-9 9-9-4.029-9-9 4.029-9 9-9z" />
+            <circle cx="33" cy="6" r="1.6" />
+            <path d="M30.5 10c-.55 0-1 .45-1 1v4h1.3v3.5h2.4V15h1.3v-4c0-.55-.45-1-1-1h-3z" />
+          </g>
+        </svg>
+        <span className={styles.ccLabel}>CC BY 4.0</span>
+      </a>
+      <a
+        className={styles.pledge}
+        href="https://opencovidpledge.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open COVID Pledge"
+      >
+        <Image
+          src="/images/open-covid-pledge-logo.png"
+          alt="Open COVID Pledge"
+          width={84}
+          height={56}
+        />
+      </a>
+      <span>
+        <Link href="/privacy-policy">Privacy Policy</Link>
+        {" · "}
+        <Link href="/terms-of-use">Terms of Use</Link>
+      </span>
     </footer>
   );
 }
