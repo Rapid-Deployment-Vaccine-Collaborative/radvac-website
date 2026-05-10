@@ -9,10 +9,6 @@ export function Projects() {
         <strong>Projects</strong>
       </div>
       <div>
-        <p className="section-lede">
-          Active and historical proof-of-principle programs. Each links to a
-          project page with current revision, methods, and the labs running it.
-        </p>
         <div className={styles.projects}>
           {projects.map((project) => (
             <Link

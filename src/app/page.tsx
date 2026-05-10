@@ -9,11 +9,13 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <Mission />
-      <Team />
-      <Projects />
-      <Papers />
-      <Donate />
+      <div className="post-hero">
+        <Mission />
+        <Team />
+        <Projects />
+        <Papers />
+        <Donate />
+      </div>
     </>
   );
 }

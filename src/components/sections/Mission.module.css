@@ -15,6 +15,7 @@
   text-underline-offset: 3px;
 }
 
+.mission > p:first-of-type::first-letter,
 .dropcap::first-letter {
   font-family: var(--display);
   font-weight: 800;

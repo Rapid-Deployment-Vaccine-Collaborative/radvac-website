@@ -4,7 +4,25 @@
   justify-content: space-between;
   align-items: flex-end;
   gap: 40px;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(180deg, #b9d0ee 0%, #c7d8ee 100%);
+}
+
+@supports (animation-timeline: scroll()) {
+  .mast {
+    animation: header-retract linear both;
+    animation-timeline: scroll(root);
+    animation-range: calc(min(1440px, 100vw) * 9 / 21 + 40px)
+      calc(min(1440px, 100vw) * 9 / 21 + 120px);
+  }
+}
+
+@keyframes header-retract {
+  to {
+    transform: translateY(-100%);
+  }
 }
 .logo { margin: 0; display: block; line-height: 0; }
 .logo a { display: block; line-height: 0; }

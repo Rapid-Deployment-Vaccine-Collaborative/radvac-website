@@ -79,7 +79,7 @@ export function Footer() {
       </a>
       <a
         className={styles.pledge}
-        href="https://opencovidpledge.org/"
+        href="https://web.archive.org/web/20250524061056/https://opencovidpledge.org/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Open COVID Pledge"

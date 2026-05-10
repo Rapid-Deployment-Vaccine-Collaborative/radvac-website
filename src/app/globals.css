@@ -48,6 +48,14 @@ a { color: inherit; }
 
 .wrap { max-width: 1440px; margin: 0 auto; }
 
+.post-hero {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, #b9d0ee 0%, #eaf1fb 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
 /* ===== Shared section grid (200px label + content) ===== */
 .section {
   padding: 72px 56px 0;
