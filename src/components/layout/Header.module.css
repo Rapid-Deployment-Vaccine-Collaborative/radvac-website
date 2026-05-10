@@ -79,33 +79,34 @@
   appearance: none;
   background: transparent;
   border: 1px solid var(--ink);
-  border-radius: 4px;
-  width: 44px;
-  height: 44px;
+  border-radius: 6px;
+  width: 56px;
+  height: 56px;
   padding: 0;
   cursor: pointer;
   position: relative;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
+  margin-top: 18px;
 }
 .bar {
   display: block;
-  width: 22px;
-  height: 2px;
+  width: 28px;
+  height: 2.5px;
   background: var(--ink);
   transition: transform 0.2s, opacity 0.2s;
 }
-.bar1Open { transform: translateY(7px) rotate(45deg); }
+.bar1Open { transform: translateY(8.5px) rotate(45deg); }
 .bar2Open { opacity: 0; }
-.bar3Open { transform: translateY(-7px) rotate(-45deg); }
+.bar3Open { transform: translateY(-8.5px) rotate(-45deg); }
 
 @media (max-width: 980px) {
   .mast { padding: 28px 24px 18px; flex-direction: row; align-items: center; justify-content: space-between; }
   .logo img,
   .logo svg { height: 116px; margin-bottom: -18px; }
-  .bg { height: 280px; }
+  .bg { height: 180px; }
   .hamburger { display: inline-flex; }
   .primary {
     display: none;
@@ -125,6 +126,6 @@
   .primaryOpen { display: flex; }
   .primary a { padding: 10px 12px; }
   @keyframes header-bg-retract {
-    to { top: -280px; }
+    to { top: -180px; }
   }
 }
