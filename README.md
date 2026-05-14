@@ -1,6 +1,6 @@
 # RaDVaC website
 
-Public site for [radvac.org](https://radvac.org). Next.js frontend with WordPress as a headless CMS.
+Public site for [radvac.org](https://radvac.org). Next.js frontend with WordPress for headless content mangement on backend.
 
 ## Stack
 
