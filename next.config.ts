@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  distDir: "/home/dan/.cache/radvac-next",
+  // Locally, build into ~/.cache so Dropbox doesn't sync the .next directory.
+  // On Vercel (and any other CI/host), use the default `.next` so the
+  // platform can find routes-manifest.json etc. in the expected location.
+  ...(process.env.VERCEL
+    ? {}
+    : { distDir: "/home/dan/.cache/radvac-next" }),
   images: {
     remotePatterns: [
       {
