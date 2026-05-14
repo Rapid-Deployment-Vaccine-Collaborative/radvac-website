@@ -5,21 +5,20 @@ import { rewriteWordPressUrls } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }
 
-// Pre-generate all page slugs at build time
 export async function generateStaticParams() {
-  const slugs = await getAllPageSlugs();
-  return slugs
-    .filter((slug) => slug !== "home") // Home page handled by /app/page.tsx
-    .map((slug) => ({ slug }));
+  const paths = await getAllPageSlugs();
+  return paths
+    .filter((path) => path !== "home" && path !== "press-release")
+    .map((path) => ({ slug: path.split("/") }));
 }
 
-// Dynamic metadata from WordPress SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const page = await getPageBySlug(slug);
+  const path = slug.join("/");
+  const page = await getPageBySlug(path);
 
   if (!page) {
     return { title: "Page Not Found" };
@@ -34,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: page.seo?.opengraphTitle || page.title,
       description: page.seo?.opengraphDescription || page.seo?.metaDesc || "",
-      url: `/${slug}`,
+      url: `/${path}`,
       type: "website",
       images: ogImage ? [ogImage] : undefined,
     },
@@ -50,7 +49,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function DynamicPage({ params }: PageProps) {
   const { slug } = await params;
-  const page = await getPageBySlug(slug);
+  const path = slug.join("/");
+  const page = await getPageBySlug(path);
 
   if (!page) {
     notFound();

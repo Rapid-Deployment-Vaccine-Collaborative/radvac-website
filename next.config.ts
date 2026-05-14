@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  distDir: "/home/dan/.cache/radvac-next",
   images: {
     remotePatterns: [
       {

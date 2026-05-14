@@ -8,9 +8,8 @@ import { RaDVaCLogo } from "./RaDVaCLogo";
 
 const navItems = [
   { label: "FAQ", href: "/faq" },
-  { label: "Publications", href: "/#papers" },
+  { label: "Publications", href: "/publications" },
   { label: "Updates", href: "/press-release/" },
-  { label: "SARS-CoV-2 Vaccine", href: "/vaccine/" },
   { label: "Network", href: "/researchers-map" },
   { label: "Contact", href: "/contact" },
 ];
@@ -19,15 +18,34 @@ export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
+  const [compact, setCompact] = useState(false);
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const onScroll = () => {
+      setCompact(window.scrollY > 10);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
     <>
-      <div className={styles.bg} aria-hidden="true" />
-      <header className={styles.mast}>
+      <div
+        className={`${styles.bg} ${compact ? styles.bgCompact : ""}`}
+        aria-hidden="true"
+      />
+      <header
+        className={`${styles.mast} ${compact ? styles.mastCompact : ""}`}
+      >
         <div>
           <h1 className={styles.logo}>
             <Link href="/" aria-label="RaDVaC home">

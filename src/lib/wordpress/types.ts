@@ -32,6 +32,11 @@ export interface WpPost {
   categories?: {
     nodes: WpCategory[];
   };
+  author?: {
+    node?: {
+      name?: string;
+    };
+  };
 }
 
 export interface WpMediaItem {
@@ -60,6 +65,14 @@ export interface WpCategory {
   id: string;
   name: string;
   slug: string;
+}
+
+export interface WpComment {
+  id: string;
+  databaseId: number;
+  date: string;
+  content: string;
+  author?: { node?: { name?: string } };
 }
 
 export interface WpMenuItem {

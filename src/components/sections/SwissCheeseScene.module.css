@@ -1,0 +1,25 @@
+.canvasHost {
+  position: relative;
+  width: 100%;
+  height: min(85vh, 780px);
+  min-height: 560px;
+  background: transparent;
+  overflow: hidden;
+}
+
+.canvasHost canvas {
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+
+.canvasHost canvas:active {
+  cursor: grabbing;
+}
+
+@media (max-width: 820px) {
+  .canvasHost {
+    height: 60vh;
+    min-height: 360px;
+  }
+}

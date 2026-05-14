@@ -8,22 +8,9 @@
   pointer-events: none;
   background: linear-gradient(180deg, #a8c4e7 0%, #f4f8fd 100%);
   background-attachment: fixed;
+  transition: top 0.3s ease, height 0.3s ease;
 }
-
-@supports (animation-timeline: scroll()) {
-  .bg {
-    animation: header-bg-retract linear both;
-    animation-timeline: scroll(root);
-    animation-range: calc(min(1440px, 100vw) * 9 / 21 + 40px)
-      calc(min(1440px, 100vw) * 9 / 21 + 120px);
-  }
-}
-
-@keyframes header-bg-retract {
-  to {
-    top: -220px;
-  }
-}
+.bgCompact { height: 120px; }
 
 .mast {
   padding: 38px 56px 24px;
@@ -34,26 +21,15 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  transition: transform 0.3s ease, padding 0.3s ease;
 }
-
-@supports (animation-timeline: scroll()) {
-  .mast {
-    animation: header-retract linear both;
-    animation-timeline: scroll(root);
-    animation-range: calc(min(1440px, 100vw) * 9 / 21 + 40px)
-      calc(min(1440px, 100vw) * 9 / 21 + 120px);
-  }
-}
-
-@keyframes header-retract {
-  to {
-    transform: translateY(-100%);
-  }
-}
+.mastCompact { padding: 14px 56px 8px; }
 .logo { margin: 0; display: block; line-height: 0; }
 .logo a { display: block; line-height: 0; }
 .logo img,
-.logo svg { display: block; height: 168px; width: auto; margin-bottom: -28px; margin-left: -45px; }
+.logo svg { display: block; height: 168px; width: auto; margin-bottom: -28px; margin-left: -45px; transition: height 0.3s ease, margin 0.3s ease; }
+.mastCompact .logo img,
+.mastCompact .logo svg { height: 88px; margin-bottom: -14px; margin-left: -22px; }
 
 .primary {
   display: flex;
@@ -104,9 +80,13 @@
 
 @media (max-width: 980px) {
   .mast { padding: 28px 24px 18px; flex-direction: row; align-items: center; justify-content: space-between; }
+  .mastCompact { padding: 10px 24px 6px; }
   .logo img,
   .logo svg { height: 116px; margin-bottom: -18px; }
+  .mastCompact .logo img,
+  .mastCompact .logo svg { height: 64px; margin-bottom: -10px; }
   .bg { height: 180px; }
+  .bgCompact { height: 90px; }
   .hamburger { display: inline-flex; }
   .primary {
     display: none;
@@ -125,7 +105,4 @@
   }
   .primaryOpen { display: flex; }
   .primary a { padding: 10px 12px; }
-  @keyframes header-bg-retract {
-    to { top: -180px; }
-  }
 }

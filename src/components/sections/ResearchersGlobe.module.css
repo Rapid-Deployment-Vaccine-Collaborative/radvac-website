@@ -1,0 +1,182 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  min-height: 520px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #0b2238 0%,
+      #04101f 55%,
+      #02080f 100%
+    );
+  cursor: grab;
+}
+
+.wrap:active {
+  cursor: grabbing;
+}
+
+.wrap :global(canvas) {
+  display: block;
+}
+
+.pin {
+  /* Default hidden — globe.gl's visibility modifier reveals the front-facing
+     ones on every camera change. Starting hidden eliminates the brief window
+     during initial mount where back-side pins would otherwise be visible. */
+  display: none;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: #ffd166;
+  border: 1px solid rgba(4, 16, 31, 0.55);
+  box-shadow: 0 0 4px rgba(255, 209, 102, 0.5);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 120ms ease, box-shadow 120ms ease,
+    width 120ms ease, height 120ms ease, margin 120ms ease;
+}
+
+.pin:hover {
+  width: 13px;
+  height: 13px;
+  margin: -6.5px 0 0 -6.5px;
+  background: #ffe089;
+  box-shadow: 0 0 10px rgba(255, 209, 102, 0.9);
+  z-index: 2;
+}
+
+.hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(200, 220, 255, 0.55);
+  background: rgba(4, 16, 31, 0.6);
+  padding: 6px 12px;
+  border-radius: 999px;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+  animation: fadeOut 6s ease forwards;
+}
+
+@keyframes fadeOut {
+  0%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.panel {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 280px;
+  max-width: calc(100% - 32px);
+  padding: 16px 18px 14px;
+  background: rgba(4, 16, 31, 0.82);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(126, 197, 255, 0.25);
+  border-left: 3px solid #7ec5ff;
+  border-radius: 6px;
+  color: #eaf2ff;
+  font-family: var(--sans);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: transparent;
+  border: 0;
+  color: rgba(234, 242, 255, 0.7);
+  font-size: 20px;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.closeBtn:hover {
+  color: #fff;
+  background: rgba(126, 197, 255, 0.12);
+}
+
+.name {
+  margin: 0 0 4px;
+  font-family: var(--display);
+  font-size: 17px;
+  color: #fff;
+}
+
+.loc {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: rgba(200, 220, 255, 0.7);
+}
+
+.email {
+  margin: 0 0 8px;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+.email a {
+  color: #7ec5ff;
+  text-decoration: none;
+}
+
+.email a:hover {
+  text-decoration: underline;
+}
+
+.flags {
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  color: rgba(234, 242, 255, 0.9);
+}
+
+.flags li::before {
+  content: "✓ ";
+  color: #7ec5ff;
+}
+
+.notes {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: rgba(234, 242, 255, 0.85);
+  white-space: pre-wrap;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+  .panel {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    border-radius: 6px 6px 0 0;
+    border-left: 1px solid rgba(126, 197, 255, 0.25);
+    border-top: 3px solid #7ec5ff;
+  }
+}

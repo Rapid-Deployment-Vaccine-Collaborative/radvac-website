@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ResearchersMap from "@/components/sections/ResearchersMap";
+import ResearchersGlobe from "@/components/sections/ResearchersGlobe";
 import ResearcherSignupForm from "@/components/sections/ResearcherSignupForm";
 import { PageHeader } from "@/components/layout/PageHeader";
 
@@ -11,13 +11,17 @@ export default function ResearchersPage() {
   return (
     <>
       <PageHeader title="Researchers Map" />
-      <section className="section">
+      <section className="section" style={{ paddingTop: 32 }}>
+        <div style={{ gridColumn: "1 / -1" }}>
+          <ResearchersGlobe />
+        </div>
         <div />
         <div>
-          <p className="section-lede">
-            Use the map below to find others near you who are interested in
-            collaborating on vaccine-related work. Click on a pin to see more
-            information about each entry, including contact information.
+          <p className="section-lede" style={{ marginTop: 0 }}>
+            Spin the globe and zoom in to find others near you who are
+            interested in collaborating on vaccine-related work. Click on a pin
+            to see more information about each entry, including contact
+            information.
           </p>
           <p>
             By filling out the form below, you can add your own information to
@@ -29,9 +33,6 @@ export default function ResearchersPage() {
             <em>All information is displayed publicly</em>, so you may use a
             non-personal identifier and a non-personal email address.
           </p>
-
-          <h3 style={{ marginTop: 32 }}>Browse the map</h3>
-          <ResearchersMap />
 
           <h3 style={{ marginTop: 32 }}>Add yourself to the map</h3>
           <ResearcherSignupForm />

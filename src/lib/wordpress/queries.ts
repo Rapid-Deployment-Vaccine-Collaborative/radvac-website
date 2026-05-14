@@ -1,5 +1,12 @@
 import { fetchGraphQL } from "./client";
-import type { WpPage, WpMenuItem, WpFaqPage, WpFaqSection } from "./types";
+import type {
+  WpPage,
+  WpPost,
+  WpComment,
+  WpMenuItem,
+  WpFaqPage,
+  WpFaqSection,
+} from "./types";
 
 // ===== Page Queries =====
 
@@ -95,6 +102,115 @@ export async function getAllPageSlugs(): Promise<string[]> {
     query GetAllPageSlugs {
       pages(first: 100, where: { status: PUBLISH }) {
         nodes {
+          uri
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await fetchGraphQL<{ pages: { nodes: { uri: string }[] } }>(
+      query,
+      undefined,
+      { revalidate: 3600 }
+    );
+    return data.pages.nodes.map((p) => p.uri.replace(/^\/|\/$/g, ""));
+  } catch {
+    console.error("Failed to fetch page slugs");
+    return [];
+  }
+}
+
+// ===== Post Queries =====
+
+const POST_FIELDS = `
+  id
+  databaseId
+  title
+  slug
+  date
+  modified
+  content(format: RENDERED)
+  excerpt(format: RENDERED)
+  featuredImage {
+    node {
+      sourceUrl
+      altText
+      mediaDetails {
+        width
+        height
+      }
+    }
+  }
+  categories {
+    nodes {
+      id
+      name
+      slug
+    }
+  }
+  author {
+    node {
+      name
+    }
+  }
+  ${SEO_FRAGMENT}
+`;
+
+export async function getAllPosts(first = 20): Promise<WpPost[]> {
+  const query = `
+    query GetAllPosts($first: Int!) {
+      posts(first: $first, where: { status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
+        nodes {
+          ${POST_FIELDS}
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await fetchGraphQL<{ posts: { nodes: WpPost[] } }>(
+      query,
+      { first },
+      { revalidate: 3600 }
+    );
+    return data.posts.nodes;
+  } catch {
+    console.error("Failed to fetch posts");
+    return [];
+  }
+}
+
+export async function getPostBySlug(
+  slug: string,
+  isDraft = false
+): Promise<WpPost | null> {
+  const query = `
+    query GetPostBySlug($slug: ID!) {
+      post(id: $slug, idType: SLUG) {
+        ${POST_FIELDS}
+      }
+    }
+  `;
+
+  try {
+    const data = await fetchGraphQL<{ post: WpPost | null }>(
+      query,
+      { slug },
+      { isDraft, revalidate: 3600 }
+    );
+    return data.post;
+  } catch {
+    console.error(`Failed to fetch post: ${slug}`);
+    return null;
+  }
+}
+
+export async function getAllPostSlugs(): Promise<string[]> {
+  const query = `
+    query GetAllPostSlugs {
+      posts(first: 200, where: { status: PUBLISH }) {
+        nodes {
           slug
         }
       }
@@ -102,14 +218,51 @@ export async function getAllPageSlugs(): Promise<string[]> {
   `;
 
   try {
-    const data = await fetchGraphQL<{ pages: { nodes: { slug: string }[] } }>(
+    const data = await fetchGraphQL<{ posts: { nodes: { slug: string }[] } }>(
       query,
       undefined,
       { revalidate: 3600 }
     );
-    return data.pages.nodes.map((p) => p.slug);
+    return data.posts.nodes.map((p) => p.slug);
   } catch {
-    console.error("Failed to fetch page slugs");
+    console.error("Failed to fetch post slugs");
+    return [];
+  }
+}
+
+export async function getCommentsForPost(
+  postDatabaseId: number
+): Promise<WpComment[]> {
+  const query = `
+    query GetCommentsForPost($id: ID!) {
+      comments(
+        where: { contentId: $id, parent: 0, order: ASC, orderby: COMMENT_DATE }
+        first: 100
+      ) {
+        nodes {
+          id
+          databaseId
+          date
+          content
+          author {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await fetchGraphQL<{ comments: { nodes: WpComment[] } }>(
+      query,
+      { id: String(postDatabaseId) },
+      { revalidate: 60 }
+    );
+    return data.comments.nodes;
+  } catch {
+    console.error(`Failed to fetch comments for post ${postDatabaseId}`);
     return [];
   }
 }

@@ -86,3 +86,15 @@ WP admin at http://localhost:8080/wp-admin (initial setup runs once). Import [ra
 - **CMS** changes are made directly in the EasyWP WP admin. The `radvac-revalidate` plugin notifies Vercel on save so pages update without waiting for the 1-hour ISR window.
 
 See [wordpress/SETUP.md](wordpress/SETUP.md) for the WordPress-side configuration.
+
+
+## Gradient
+
+body {
+  background: linear-gradient(180deg, #a8c4e7 0%, #f4f8fd 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+}
