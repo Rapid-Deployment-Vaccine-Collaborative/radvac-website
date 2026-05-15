@@ -5,11 +5,11 @@ import * as THREE from "three";
 import styles from "./SwissCheeseScene.module.css";
 
 const SLICES = [
-  { layer: 1, title: "N95/UV" },
-  { layer: 2, title: "NASAL SPRAY" },
-  { layer: 3, title: "AI/ANTIVIRAL" },
-  { layer: 4, title: "UV/DELIVERY" },
-  { layer: 5, title: "YEAST/T-CELLS" },
+  { layer: 1, title: ["N95 / UV-C"] },
+  { layer: 2, title: ["NASAL SPRAY(S)"] },
+  { layer: 3, title: ["ANTIVIRALS"] },
+  { layer: 4, title: ["MODERNIZED", "VARIOLATION"] },
+  { layer: 5, title: ["VACCINE FACTORIES", "IN A TUBE"] },
 ] as const;
 
 // Slice dimensions (world units) — wide & tall, distributed holes
@@ -104,7 +104,7 @@ function buildSliceShape(holes: { x: number; y: number; r: number }[]): THREE.Sh
 
 function makeLabelSprite(
   layer: number,
-  title: string,
+  titleLines: readonly string[],
 ): { sprite: THREE.Sprite; dispose: () => void } {
   const W = 512;
   const H = 192;
@@ -122,8 +122,24 @@ function makeLabelSprite(
   ctx.fillText(`LAYER ${layer}`, W / 2, 56);
 
   ctx.fillStyle = "#0e1a30";
-  ctx.font = "700 44px ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif";
-  ctx.fillText(title, W / 2, 132);
+  // Shrink title font until the widest line fits within the canvas width.
+  const titleFontStack =
+    "ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif";
+  const MAX_TITLE_WIDTH = W - 24;
+  let titleSize = 44;
+  ctx.font = `700 ${titleSize}px ${titleFontStack}`;
+  const widestLine = () =>
+    Math.max(...titleLines.map((line) => ctx.measureText(line).width));
+  while (widestLine() > MAX_TITLE_WIDTH && titleSize > 22) {
+    titleSize -= 2;
+    ctx.font = `700 ${titleSize}px ${titleFontStack}`;
+  }
+  const lineHeight = titleSize * 1.1;
+  const titleCenterY = 138;
+  const startY = titleCenterY - ((titleLines.length - 1) / 2) * lineHeight;
+  titleLines.forEach((line, i) => {
+    ctx.fillText(line, W / 2, startY + i * lineHeight);
+  });
 
   const tex = new THREE.CanvasTexture(canvas);
   tex.colorSpace = THREE.SRGBColorSpace;
@@ -147,12 +163,56 @@ export default function SwissCheeseSceneInner() {
     const el = containerRef.current;
     if (!el) return;
 
+    // Fallback when WebGL is unavailable (hardware acceleration off, headless
+    // browsers, ancient devices). Keeps the rest of the page rendering instead
+    // of throwing out of useEffect and tripping the global error boundary.
+    const showFallback = () => {
+      const note = document.createElement("div");
+      note.textContent =
+        "Your browser/setup doesn't support WebGL — try enabling hardware acceleration or use a different browser to view the Swiss cheese graphic.";
+      note.style.cssText = [
+        "position:absolute",
+        "inset:0",
+        "display:grid",
+        "place-items:center",
+        "padding:24px",
+        "text-align:center",
+        "color:var(--ink-soft,#475569)",
+        "font-family:var(--sans,system-ui,sans-serif)",
+        "font-size:14px",
+        "line-height:1.5",
+        "max-width:520px",
+        "margin:0 auto",
+      ].join(";");
+      el.appendChild(note);
+      return () => {
+        if (note.parentNode === el) el.removeChild(note);
+      };
+    };
+
+    // Pre-flight WebGL availability — try to get a context on a throwaway
+    // canvas. Cheaper than catching a thrown WebGLRenderer constructor and
+    // keeps us from having to clean up a half-built renderer.
+    const probe = document.createElement("canvas");
+    const probeCtx =
+      probe.getContext("webgl2") ||
+      probe.getContext("webgl") ||
+      probe.getContext("experimental-webgl");
+    if (!probeCtx) {
+      return showFallback();
+    }
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
     camera.position.set(4.4, 0.4, 21);
     camera.lookAt(4.4, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    } catch {
+      return showFallback();
+    }
     renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -358,6 +418,22 @@ export default function SwissCheeseSceneInner() {
       () => sprayMat.dispose(),
     );
 
+    // Invisible hit proxy so the raycaster can pick up the bottle (line
+    // wireframes raycast poorly; a slightly oversized cylinder is forgiving).
+    const bottleHitGeom = new THREE.CylinderGeometry(0.32, 0.32, 1.7, 12);
+    const bottleHitMat = new THREE.MeshBasicMaterial({
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+    });
+    const bottleHitProxy = new THREE.Mesh(bottleHitGeom, bottleHitMat);
+    bottleHitProxy.position.y = 0.7;
+    sprayBottleGroup.add(bottleHitProxy);
+    sprayBottleDisposers.push(
+      () => bottleHitGeom.dispose(),
+      () => bottleHitMat.dispose(),
+    );
+
     // ---- Animated arrow: probabilistic threading through slice holes ----
     // Each "shot" picks a random hole on each layer with a layer-specific pass
     // probability. If it passes, the arrow goes through and continues on a
@@ -401,14 +477,15 @@ export default function SwissCheeseSceneInner() {
         if (passes) {
           const holes = SCATTER_HOLES[i];
           const hole = holes[Math.floor(Math.random() * holes.length)];
-          // Two waypoints per hole — entry just before the front face,
-          // exit just after the back face — to force the curve through
+          // Two waypoints per hole — entry just outside the front face
+          // (virus-facing, local +Z side after the slice's Y tilt) and exit
+          // just outside the back face — to force the curve straight through
           // the hole along the slice's local Z axis.
           const entry = sc.localToWorld(
-            new THREE.Vector3(hole.x, hole.y, -SD / 2 - 0.08),
+            new THREE.Vector3(hole.x, hole.y, SD / 2 + 0.08),
           );
           const exit = sc.localToWorld(
-            new THREE.Vector3(hole.x, hole.y, SD / 2 + 0.08),
+            new THREE.Vector3(hole.x, hole.y, -SD / 2 - 0.08),
           );
           waypoints.push(entry, exit);
         } else {
@@ -742,17 +819,21 @@ export default function SwissCheeseSceneInner() {
     const ro = new ResizeObserver(setSize);
     ro.observe(el);
 
-    // ---- Pointer drag: virus spin OR slice tilt, decided by raycast hit ----
+    // ---- Pointer drag: virus spin, bottle spin, or slice tilt ----
     let userInteracted = false;
-    let dragMode: "none" | "virus" | "slice" = "none";
+    let dragMode: "none" | "virus" | "bottle" | "slice" = "none";
     let lastX = 0;
     let lastY = 0;
-    // Angular velocity (rad/frame) carried after release; decays via FRICTION.
+    // Virus angular velocity (rad/frame) carried after release; decays via FRICTION.
     let velY = 0;
     let velX = 0;
+    // Bottle has its own independent velocity so it can coast separately.
+    let bottleVelY = 0;
+    let bottleVelX = 0;
     const FRICTION = 0.97;
     const VEL_STOP_EPSILON = 1e-5;
     const VIRUS_ROT_PER_PX = 0.005;
+    const BOTTLE_ROT_PER_PX = 0.006;
     const SLICE_ROT_PER_PX = 0.004;
     // Clamp slice user-tilt so cheese stays at least mostly edge-on / vertical
     const SLICE_Y_MIN = SLICE_TILT_Y - 0.6;
@@ -763,22 +844,31 @@ export default function SwissCheeseSceneInner() {
     const raycaster = new THREE.Raycaster();
     const ndc = new THREE.Vector2();
 
-    const hitSlice = (e: PointerEvent): boolean => {
+    const pickTarget = (e: PointerEvent): "bottle" | "slice" | "virus" => {
       const rect = canvasEl.getBoundingClientRect();
       ndc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       ndc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(ndc, camera);
-      return raycaster.intersectObjects(sliceFillMeshes, false).length > 0;
+      // Bottle first so it wins if it's on top of slice 2
+      const hits = raycaster.intersectObjects(
+        [bottleHitProxy, ...sliceFillMeshes],
+        false,
+      );
+      if (hits.length === 0) return "virus";
+      return hits[0].object === bottleHitProxy ? "bottle" : "slice";
     };
 
     const onPointerDown = (e: PointerEvent) => {
-      dragMode = hitSlice(e) ? "slice" : "virus";
+      dragMode = pickTarget(e);
       if (dragMode === "virus") {
         userInteracted = true;
         // Catching the virus mid-spin cancels in-progress momentum so the
         // drag starts from a known-still state.
         velY = 0;
         velX = 0;
+      } else if (dragMode === "bottle") {
+        bottleVelY = 0;
+        bottleVelX = 0;
       }
       lastX = e.clientX;
       lastY = e.clientY;
@@ -799,6 +889,13 @@ export default function SwissCheeseSceneInner() {
         // feels reactive without being whipped around by a single fast event.
         velY = velY * 0.5 + stepY * 0.5;
         velX = velX * 0.5 + stepX * 0.5;
+      } else if (dragMode === "bottle") {
+        const stepY = dx * BOTTLE_ROT_PER_PX;
+        const stepX = dy * BOTTLE_ROT_PER_PX;
+        sprayBottleGroup.rotation.y += stepY;
+        sprayBottleGroup.rotation.x += stepX;
+        bottleVelY = bottleVelY * 0.5 + stepY * 0.5;
+        bottleVelX = bottleVelX * 0.5 + stepX * 0.5;
       } else {
         // Apply the same delta to every slice container, then clamp so the
         // arrangement can't be tilted past a sensible range.
@@ -840,6 +937,15 @@ export default function SwissCheeseSceneInner() {
         velX *= FRICTION;
         if (Math.abs(velY) < VEL_STOP_EPSILON) velY = 0;
         if (Math.abs(velX) < VEL_STOP_EPSILON) velX = 0;
+      }
+      // Bottle momentum coast (independent of virus)
+      if (dragMode !== "bottle") {
+        sprayBottleGroup.rotation.y += bottleVelY;
+        sprayBottleGroup.rotation.x += bottleVelX;
+        bottleVelY *= FRICTION;
+        bottleVelX *= FRICTION;
+        if (Math.abs(bottleVelY) < VEL_STOP_EPSILON) bottleVelY = 0;
+        if (Math.abs(bottleVelX) < VEL_STOP_EPSILON) bottleVelX = 0;
       }
       // Advance the current arrow shot
       if (shotMesh && shotGeom && shotCurve && shotGeom.index) {
