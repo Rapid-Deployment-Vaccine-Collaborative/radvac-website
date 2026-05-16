@@ -12,10 +12,15 @@ const GRAPHIC_BY_HREF: Record<string, ProjectGraphicKind> = {
   "/ai-for-antivirals": "pills",
 };
 
-export function Projects() {
+export function Projects({ withLabel = false }: { withLabel?: boolean } = {}) {
   return (
     <section className="section" id="projects">
-      <div style={{ gridColumn: "1 / -1" }}>
+      {withLabel && (
+        <div className="sec-num">
+          <strong>Projects</strong>
+        </div>
+      )}
+      <div style={withLabel ? undefined : { gridColumn: "1 / -1" }}>
         <div className={styles.projects}>
           {projects.map((project) => {
             const hasPage =

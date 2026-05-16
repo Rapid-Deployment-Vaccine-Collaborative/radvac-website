@@ -11,7 +11,7 @@ export default function HomePage() {
       <div className="post-hero">
         <Mission />
         <Team />
-        <Projects />
+        <Projects withLabel />
         <Donate />
       </div>
     </>

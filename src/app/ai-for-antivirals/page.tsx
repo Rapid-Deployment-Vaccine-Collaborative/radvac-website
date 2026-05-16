@@ -20,6 +20,18 @@ export default function AiForAntiviralsPage() {
             several weak antivirals into powerful combinations.
           </p>
           <p>
+            Read our white paper:{" "}
+            <a
+              href="https://arxiv.org/abs/2605.04265"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              &ldquo;Benchmarking open-source tools for in silico antiviral
+              drug discovery&rdquo;
+            </a>
+            . Daniel C. Elton and Preston W. Estep, arXiv pre-print, May 2026.
+          </p>
+          <p>
             <em>More details coming soon.</em>
           </p>
         </div>

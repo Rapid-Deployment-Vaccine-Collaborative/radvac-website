@@ -40,7 +40,7 @@ export function Hero() {
           playsInline
           preload="auto"
         >
-          <source src="/videos/biosecurity-faster.mp4" type="video/mp4" />
+          <source src="/videos/biosecurity-faster.webm" type="video/webm" />
         </video>
       </figure>
     </section>
