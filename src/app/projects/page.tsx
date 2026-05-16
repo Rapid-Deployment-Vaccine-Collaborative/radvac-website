@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Projects } from "@/components/sections/Projects";
+import SwissCheeseScene from "@/components/sections/SwissCheeseSceneInner";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -13,6 +14,21 @@ export default function ProjectsPage() {
     <>
       <PageHeader title="Projects" />
       <Projects />
+      <section className="section">
+        <div style={{ gridColumn: "1 / -1" }}>
+          <h2
+            style={{
+              textAlign: "left",
+              marginBottom: 16,
+              marginLeft: 0,
+              fontSize: "2.25rem",
+            }}
+          >
+            The swiss cheese model for effective biodefense
+          </h2>
+          <SwissCheeseScene />
+        </div>
+      </section>
     </>
   );
 }

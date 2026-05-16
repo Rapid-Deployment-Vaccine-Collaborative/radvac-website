@@ -3,6 +3,11 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import styles from "./SwissCheeseScene.module.css";
+import {
+  buildH2O2Bottle,
+  buildPills,
+  buildTestTube,
+} from "./swissCheese/objects";
 
 const SLICES = [
   { layer: 1, title: ["N95 / UV-C"] },
@@ -16,10 +21,10 @@ const SLICES = [
 const SW = 4.0;
 const SH = 7.0;
 const SD = 0.22;
-const SLICE_GAP = 3.7;
+const SLICE_GAP = 3.5;
 const SLICE_TILT_Y = -1.0; // radians (~57°), more edge-on view
 const SLICE_TILT_X = Math.PI / 7; // mirror the mask box's downward tilt
-const VIRUS_X = -6.0;
+const VIRUS_X = -5.2;
 
 // Per-slice scatter holes distributed across the full slice area
 // (x in [-SW/2, SW/2] = [-1.05, 1.05], y in [-SH/2, SH/2] = [-3.5, 3.5])
@@ -204,9 +209,9 @@ export default function SwissCheeseSceneInner() {
     }
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-    camera.position.set(4.4, 1.8, 21);
-    camera.lookAt(4.4, 1.8, 0);
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+    camera.position.set(4.4, 0.2, 21);
+    camera.lookAt(4.4, 0.2, 0);
 
     let renderer: THREE.WebGLRenderer;
     try {
@@ -252,7 +257,7 @@ export default function SwissCheeseSceneInner() {
     const sliceContainers: THREE.Group[] = [];
     const sliceFillMeshes: THREE.Mesh[] = [];
 
-    const firstSliceX = 0;
+    const firstSliceX = -0.6;
     SLICES.forEach((s, i) => {
       const holes = SCATTER_HOLES[i];
       const shape = buildSliceShape(holes);
@@ -287,7 +292,7 @@ export default function SwissCheeseSceneInner() {
       sprite.scale.set(3.0, 0.85, 1);
       sprite.position.set(
         firstSliceX + i * SLICE_GAP,
-        -SH / 2 - 1.6,
+        -SH / 2 - 2.2,
         0.05,
       );
       slicesGroup.add(sprite);
@@ -751,206 +756,43 @@ export default function SwissCheeseSceneInner() {
     );
 
     // ---- Layer-3 antivirals: a couple of wireframe pills (capsules) ----
-    const pillsGroup = new THREE.Group();
     const layer3X = firstSliceX + 2 * SLICE_GAP;
+    const pills = buildPills();
+    const pillsGroup = pills.group;
     pillsGroup.position.set(layer3X, SH / 2 + 0.95, 0);
     pillsGroup.scale.setScalar(1.4);
     scene.add(pillsGroup);
+    const pillsHitProxy = pills.hitProxy;
+    const pillDisposers: Array<() => void> = [() => pills.dispose()];
 
-    const pillLineMat = new THREE.LineBasicMaterial({
-      color: 0x3a8ad8,
-      transparent: true,
-      opacity: 0.95,
-    });
-    const pillDisposers: Array<() => void> = [() => pillLineMat.dispose()];
-
-    type PillState = {
-      mesh: THREE.LineSegments;
-      baseX: number;
-      baseY: number;
-      baseRotZ: number;
-      phase: number;
-    };
-    const pills: PillState[] = [];
-
-    const pillSpecs = [
-      { baseX: -0.45, baseY: 0.05, baseRotZ: 0.35, phase: 0, fill: 0xf2a93a },
-      { baseX: 0.45, baseY: -0.05, baseRotZ: -0.5, phase: 1.7, fill: 0xe04545 },
-      { baseX: 0.0, baseY: 0.7, baseRotZ: -0.15, phase: 3.1, fill: 0x4ac572 },
-    ];
-
-    for (const spec of pillSpecs) {
-      const capGeom = new THREE.CapsuleGeometry(0.16, 0.42, 6, 14);
-      const capWire = new THREE.WireframeGeometry(capGeom);
-      const pill = new THREE.LineSegments(capWire, pillLineMat);
-      pill.position.set(spec.baseX, spec.baseY, 0);
-      pill.rotation.z = spec.baseRotZ;
-      // Semi-transparent solid fill sitting just inside the wireframe so each
-      // pill reads as a colored capsule. Parented to the wireframe so it
-      // inherits the per-pill shake/rotation.
-      const fillGeom = new THREE.CapsuleGeometry(0.155, 0.41, 6, 14);
-      const fillMat = new THREE.MeshBasicMaterial({
-        color: spec.fill,
-        transparent: true,
-        opacity: 0.55,
-        depthWrite: false,
-      });
-      pill.add(new THREE.Mesh(fillGeom, fillMat));
-      pillsGroup.add(pill);
-      pills.push({
-        mesh: pill,
-        baseX: spec.baseX,
-        baseY: spec.baseY,
-        baseRotZ: spec.baseRotZ,
-        phase: spec.phase,
-      });
-      pillDisposers.push(
-        () => capGeom.dispose(),
-        () => capWire.dispose(),
-        () => fillGeom.dispose(),
-        () => fillMat.dispose(),
-      );
-    }
-
-    // Invisible hit proxy so the raycaster can pick the pills as a group
-    const pillsHitGeom = new THREE.BoxGeometry(1.6, 1.0, 0.6);
-    const pillsHitMat = new THREE.MeshBasicMaterial({
-      transparent: true,
-      opacity: 0,
-      depthWrite: false,
-    });
-    const pillsHitProxy = new THREE.Mesh(pillsHitGeom, pillsHitMat);
-    pillsGroup.add(pillsHitProxy);
-    pillDisposers.push(
-      () => pillsHitGeom.dispose(),
-      () => pillsHitMat.dispose(),
+    // ---- Layer-4 H2O2 bottle (wireframe, draggable to spin/tilt) ----
+    const layer4X = firstSliceX + 3 * SLICE_GAP;
+    const h2o2 = buildH2O2Bottle();
+    const h2o2Group = h2o2.group;
+    h2o2Group.position.set(layer4X, SH / 2 + 0.55, 0);
+    h2o2Group.scale.setScalar(1.5);
+    // Rotate the bottle around Y so its local +Z (the face holding the
+    // "H2O2" label) points at the camera, giving a head-on read of the label
+    // before the user starts spinning it.
+    h2o2Group.rotation.y = Math.atan2(
+      camera.position.x - h2o2Group.position.x,
+      camera.position.z - h2o2Group.position.z,
     );
+    scene.add(h2o2Group);
+    const h2o2HitProxy = h2o2.hitProxy;
+    const h2o2Disposers: Array<() => void> = [() => h2o2.dispose()];
 
     // ---- Layer-5 test tube (wireframe + semi-transparent liquid) ----
-    const tubeGroup = new THREE.Group();
     const layer5X = firstSliceX + 4 * SLICE_GAP;
+    const tube = buildTestTube();
+    const tubeGroup = tube.group;
     tubeGroup.position.set(layer5X, SH / 2 + 0.45, 0);
     tubeGroup.scale.setScalar(1.3);
     scene.add(tubeGroup);
-
-    const tubeLineMat = new THREE.LineBasicMaterial({
-      color: 0x3a8ad8,
-      transparent: true,
-      opacity: 0.95,
-    });
-    const tubeDisposers: Array<() => void> = [() => tubeLineMat.dispose()];
-
-    // Tube body — lathe with rounded closed bottom, straight cylindrical body,
-    // and a small lip at the open top.
-    const tubeProfile = [
-      new THREE.Vector2(0.0, 0.0),
-      new THREE.Vector2(0.08, 0.02),
-      new THREE.Vector2(0.14, 0.08),
-      new THREE.Vector2(0.17, 0.18),
-      new THREE.Vector2(0.18, 0.28),
-      new THREE.Vector2(0.18, 1.15),
-      new THREE.Vector2(0.2, 1.2),
-      new THREE.Vector2(0.2, 1.25),
-    ];
-    const tubeBodyGeom = new THREE.LatheGeometry(tubeProfile, 20);
-    const tubeBodyWire = new THREE.WireframeGeometry(tubeBodyGeom);
-    tubeGroup.add(new THREE.LineSegments(tubeBodyWire, tubeLineMat));
-    tubeDisposers.push(
-      () => tubeBodyGeom.dispose(),
-      () => tubeBodyWire.dispose(),
-    );
-
-    // Liquid — a tall amber column that tilts together with the tube, then
-    // clipped by a world-horizontal plane at the intended fill height so the
-    // top surface always reads as flat & level no matter how the tube tilts.
-    // The lathe is intentionally taller than the visible fill line (extends
-    // well past it) so the clip cleanly trims it on every side under tilt.
-    const LIQUID_FILL_LOCAL_Y = 0.3;
-    const LIQUID_EXTENDED_TOP = 1.05; // safely past the tube lip under any tilt
-    const liquidProfile = [
-      new THREE.Vector2(0.0, 0.0),
-      new THREE.Vector2(0.07, 0.02),
-      new THREE.Vector2(0.13, 0.08),
-      new THREE.Vector2(0.16, 0.17),
-      new THREE.Vector2(0.172, 0.26),
-      new THREE.Vector2(0.172, LIQUID_EXTENDED_TOP),
-      new THREE.Vector2(0.0, LIQUID_EXTENDED_TOP),
-    ];
-    const liquidGeom = new THREE.LatheGeometry(liquidProfile, 20);
-    const liquidMat = new THREE.MeshBasicMaterial({
-      color: 0xf0bf6e,
-      transparent: true,
-      opacity: 0.45,
-      side: THREE.DoubleSide,
-      depthWrite: false,
-    });
-    // World-horizontal clip plane at the tube's intended fill height. Normal
-    // points down so geometry *above* the plane is removed (kept: y < height).
-    const liquidFillWorldY =
-      tubeGroup.position.y + LIQUID_FILL_LOCAL_Y * tubeGroup.scale.y;
-    const liquidClipPlane = new THREE.Plane(
-      new THREE.Vector3(0, -1, 0),
-      liquidFillWorldY,
-    );
-    liquidMat.clippingPlanes = [liquidClipPlane];
-    liquidMat.clipShadows = false;
-    tubeGroup.add(new THREE.Mesh(liquidGeom, liquidMat));
-    const liquidWire = new THREE.WireframeGeometry(liquidGeom);
-    const liquidWireMat = new THREE.LineBasicMaterial({
-      color: 0xc78a35,
-      transparent: true,
-      opacity: 0.65,
-    });
-    liquidWireMat.clippingPlanes = [liquidClipPlane];
-    liquidWireMat.clipShadows = false;
-    tubeGroup.add(new THREE.LineSegments(liquidWire, liquidWireMat));
-
-    // Flat horizontal disc that caps the clipped column — this is the visible
-    // liquid surface. Parented to the scene (not the tube) and pinned to the
-    // tube's world position at fill height so it stays world-level regardless
-    // of how the tube is tilted.
-    const liquidSurfaceGeom = new THREE.CircleGeometry(
-      0.172 * tubeGroup.scale.x,
-      24,
-    );
-    const liquidSurfaceMat = new THREE.MeshBasicMaterial({
-      color: 0xf0bf6e,
-      transparent: true,
-      opacity: 0.7,
-      side: THREE.DoubleSide,
-      depthWrite: false,
-    });
-    const liquidSurface = new THREE.Mesh(liquidSurfaceGeom, liquidSurfaceMat);
-    liquidSurface.rotation.x = -Math.PI / 2;
-    liquidSurface.position.set(
-      tubeGroup.position.x,
-      liquidFillWorldY,
-      tubeGroup.position.z,
-    );
-    scene.add(liquidSurface);
-    tubeDisposers.push(
-      () => liquidGeom.dispose(),
-      () => liquidMat.dispose(),
-      () => liquidWire.dispose(),
-      () => liquidWireMat.dispose(),
-      () => liquidSurfaceGeom.dispose(),
-      () => liquidSurfaceMat.dispose(),
-      () => scene.remove(liquidSurface),
-    );
-
-    // Invisible hit proxy so the raycaster can pick the tube reliably.
-    const tubeHitGeom = new THREE.CylinderGeometry(0.26, 0.26, 1.3, 12);
-    const tubeHitMat = new THREE.MeshBasicMaterial({
-      visible: false,
-      depthWrite: false,
-    });
-    const tubeHitProxy = new THREE.Mesh(tubeHitGeom, tubeHitMat);
-    tubeHitProxy.position.y = 0.6;
-    tubeGroup.add(tubeHitProxy);
-    tubeDisposers.push(
-      () => tubeHitGeom.dispose(),
-      () => tubeHitMat.dispose(),
-    );
+    // Pin the flat liquid surface to world space so it stays level under tilt.
+    tube.placeSurfaceInWorld(scene);
+    const tubeHitProxy = tube.hitProxy;
+    const tubeDisposers: Array<() => void> = [() => tube.dispose()];
 
     // ---- Animated arrow: probabilistic threading through slice holes ----
     // Each "shot" picks a random hole on each layer with a layer-specific pass
@@ -1329,7 +1171,7 @@ export default function SwissCheeseSceneInner() {
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       // Pull camera back on narrow viewports so everything stays in frame
-      const target = Math.max(19, 21 + Math.max(0, (1.8 - w / h) * 7));
+      const target = Math.max(22, 22 + Math.max(0, (1.8 - w / h) * 12));
       camera.position.z = target;
       camera.updateProjectionMatrix();
     };
@@ -1343,6 +1185,7 @@ export default function SwissCheeseSceneInner() {
       | "none"
       | "virus"
       | "bottle"
+      | "h2o2"
       | "tube"
       | "maskBox"
       | "pills"
@@ -1355,6 +1198,9 @@ export default function SwissCheeseSceneInner() {
     // Bottle has its own independent velocity so it can coast separately.
     let bottleVelY = 0;
     let bottleVelX = 0;
+    // H2O2 bottle uses the same spin+tilt pattern as the spray bottle.
+    let h2o2VelY = 0;
+    let h2o2VelX = 0;
     // Test tube only tilts, no Y spin — single-axis coast velocity.
     let tubeVelX = 0;
     let maskBoxVelY = 0;
@@ -1367,6 +1213,7 @@ export default function SwissCheeseSceneInner() {
     const VEL_STOP_EPSILON = 1e-5;
     const VIRUS_ROT_PER_PX = 0.005;
     const BOTTLE_ROT_PER_PX = 0.006;
+    const H2O2_ROT_PER_PX = 0.006;
     const TUBE_ROT_PER_PX = 0.006;
     // Bottle is clamped to ±15°; the tube swings further (±45°) so the user
     // can really tip it over and see the liquid stay level.
@@ -1385,7 +1232,14 @@ export default function SwissCheeseSceneInner() {
 
     const pickTarget = (
       e: PointerEvent,
-    ): "bottle" | "tube" | "maskBox" | "pills" | "slice" | "virus" => {
+    ):
+      | "bottle"
+      | "h2o2"
+      | "tube"
+      | "maskBox"
+      | "pills"
+      | "slice"
+      | "virus" => {
       const rect = canvasEl.getBoundingClientRect();
       ndc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       ndc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -1394,6 +1248,7 @@ export default function SwissCheeseSceneInner() {
       const hits = raycaster.intersectObjects(
         [
           bottleHitProxy,
+          h2o2HitProxy,
           tubeHitProxy,
           maskHitProxy,
           pillsHitProxy,
@@ -1404,6 +1259,7 @@ export default function SwissCheeseSceneInner() {
       if (hits.length === 0) return "virus";
       const obj = hits[0].object;
       if (obj === bottleHitProxy) return "bottle";
+      if (obj === h2o2HitProxy) return "h2o2";
       if (obj === tubeHitProxy) return "tube";
       if (obj === maskHitProxy) return "maskBox";
       if (obj === pillsHitProxy) return "pills";
@@ -1421,6 +1277,9 @@ export default function SwissCheeseSceneInner() {
       } else if (dragMode === "bottle") {
         bottleVelY = 0;
         bottleVelX = 0;
+      } else if (dragMode === "h2o2") {
+        h2o2VelY = 0;
+        h2o2VelX = 0;
       } else if (dragMode === "tube") {
         tubeVelX = 0;
       } else if (dragMode === "maskBox") {
@@ -1461,6 +1320,20 @@ export default function SwissCheeseSceneInner() {
         if (clampedX !== nextX) bottleVelX = 0;
         else bottleVelX = bottleVelX * 0.5 + stepX * 0.5;
         sprayBottleGroup.rotation.x = clampedX;
+      } else if (dragMode === "h2o2") {
+        // Same spin + clamped tilt model as the nasal spray bottle.
+        const stepY = dx * H2O2_ROT_PER_PX;
+        h2o2Group.rotation.y += stepY;
+        h2o2VelY = h2o2VelY * 0.5 + stepY * 0.5;
+        const stepX = dy * H2O2_ROT_PER_PX;
+        const nextX = h2o2Group.rotation.x + stepX;
+        const clampedX = Math.max(
+          -BOTTLE_TILT_LIMIT,
+          Math.min(BOTTLE_TILT_LIMIT, nextX),
+        );
+        if (clampedX !== nextX) h2o2VelX = 0;
+        else h2o2VelX = h2o2VelX * 0.5 + stepX * 0.5;
+        h2o2Group.rotation.x = clampedX;
       } else if (dragMode === "tube") {
         // Tube only tilts — no Y spin.
         const stepX = dy * TUBE_ROT_PER_PX;
@@ -1540,6 +1413,21 @@ export default function SwissCheeseSceneInner() {
         bottleVelX *= FRICTION;
         if (Math.abs(bottleVelX) < VEL_STOP_EPSILON) bottleVelX = 0;
       }
+      // H2O2 bottle momentum coast (mirrors spray bottle)
+      if (dragMode !== "h2o2") {
+        h2o2Group.rotation.y += h2o2VelY;
+        h2o2VelY *= FRICTION;
+        if (Math.abs(h2o2VelY) < VEL_STOP_EPSILON) h2o2VelY = 0;
+        const nextX = h2o2Group.rotation.x + h2o2VelX;
+        const clampedX = Math.max(
+          -BOTTLE_TILT_LIMIT,
+          Math.min(BOTTLE_TILT_LIMIT, nextX),
+        );
+        if (clampedX !== nextX) h2o2VelX = 0;
+        h2o2Group.rotation.x = clampedX;
+        h2o2VelX *= FRICTION;
+        if (Math.abs(h2o2VelX) < VEL_STOP_EPSILON) h2o2VelX = 0;
+      }
       // Test tube tilt-only momentum coast (no Y spin)
       if (dragMode !== "tube") {
         const nextX = tubeGroup.rotation.x + tubeVelX;
@@ -1552,27 +1440,9 @@ export default function SwissCheeseSceneInner() {
         tubeVelX *= FRICTION;
         if (Math.abs(tubeVelX) < VEL_STOP_EPSILON) tubeVelX = 0;
       }
-      // Pills wiggle: per-pill sin/cos around stored base pose, distinct phases.
-      // While the user is dragging the pills, `pillsShake` adds amplitude and
-      // a touch of random jitter; it decays back to 0 so the motion eases into
-      // the baseline idle wiggle.
-      const pillT = performance.now() / 1000;
-      const shakeAmp = 1 + pillsShake;
-      const jitter = pillsShake * 0.08;
-      for (const p of pills) {
-        p.mesh.rotation.z =
-          p.baseRotZ +
-          Math.sin(pillT * 1.0 + p.phase) * 0.22 * shakeAmp +
-          (Math.random() - 0.5) * jitter * 2;
-        p.mesh.position.y =
-          p.baseY +
-          Math.sin(pillT * 1.3 + p.phase) * 0.07 * shakeAmp +
-          (Math.random() - 0.5) * jitter;
-        p.mesh.position.x =
-          p.baseX +
-          Math.cos(pillT * 0.8 + p.phase) * 0.03 * shakeAmp +
-          (Math.random() - 0.5) * jitter;
-      }
+      // Pills wiggle: factory handles per-pill sin/cos around stored base pose;
+      // `pillsShake` (raised by drag) adds amplitude + jitter and decays back.
+      pills.update(performance.now() / 1000, { shake: pillsShake });
       pillsShake *= PILLS_SHAKE_DECAY;
       if (pillsShake < 1e-3) pillsShake = 0;
       if (dragMode !== "maskBox") {
@@ -1630,6 +1500,7 @@ export default function SwissCheeseSceneInner() {
       sprayBottleDisposers.forEach((fn) => fn());
       maskDisposers.forEach((fn) => fn());
       pillDisposers.forEach((fn) => fn());
+      h2o2Disposers.forEach((fn) => fn());
       tubeDisposers.forEach((fn) => fn());
       disposeCurrentShot();
       arrowHeadGeom.dispose();
