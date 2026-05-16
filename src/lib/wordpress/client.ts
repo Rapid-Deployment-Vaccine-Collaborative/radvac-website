@@ -5,9 +5,10 @@ interface GraphQLResponse<T> {
   errors?: Array<{ message: string }>;
 }
 
-const MAX_RETRIES = 4;
-const BASE_DELAY_MS = 500;
-const MAX_CONCURRENCY = 3;
+const MAX_RETRIES = 6;
+const BASE_DELAY_MS = 1500;
+const MAX_CONCURRENCY = 1;
+const INTER_REQUEST_GAP_MS = 250;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -68,6 +69,9 @@ export async function fetchGraphQL<T>(
       break;
     }
   } finally {
+    // Small spacer before releasing so consecutive serialized requests
+    // don't immediately hammer the upstream after a successful response.
+    await sleep(INTER_REQUEST_GAP_MS);
     releaseSlot();
   }
 
