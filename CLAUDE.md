@@ -1,6 +1,6 @@
 # Notes for AI agents working on this repo
 
-Public site for radvac.org. **Next.js 15 (App Router) + React 19 + TS + Tailwind 4** frontend, **WordPress (WPGraphQL) on Namecheap EasyWP** as the headless CMS. Frontend on Vercel; CMS at `old.radvac.org`. See [README.md](README.md) for the human-facing overview and [wordpress/SETUP.md](wordpress/SETUP.md) for the WP-side setup.
+Public site for radvac.org. **Next.js 15 (App Router) + React 19 + TS + Tailwind 4** frontend, **WordPress (WPGraphQL) on Namecheap EasyWP** as the headless CMS. Frontend on Vercel; CMS at `radvac-297e5f.ingress-alpha.ewp.live` (EasyWP-provided hostname). See [README.md](README.md) for the human-facing overview and [wordpress/SETUP.md](wordpress/SETUP.md) for the WP-side setup.
 
 ## How content flows
 

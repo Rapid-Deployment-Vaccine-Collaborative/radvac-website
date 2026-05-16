@@ -11,12 +11,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cms.radvac.org",
-        pathname: "/wp-content/uploads/**",
-      },
-      {
-        protocol: "https",
-        hostname: "old.radvac.org",
+        hostname: "radvac-297e5f.ingress-alpha.ewp.live",
         pathname: "/wp-content/uploads/**",
       },
       {
@@ -34,19 +29,19 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     // Preserve inbound links to legacy WP upload URLs (e.g. the cited white paper PDF)
-    // by transparently proxying them to the WordPress install at cms.radvac.org.
+    // by transparently proxying them to the WordPress install on EasyWP.
     return [
       {
         source: "/wp-content/uploads/:path*",
-        destination: "https://cms.radvac.org/wp-content/uploads/:path*",
+        destination: "https://radvac-297e5f.ingress-alpha.ewp.live/wp-content/uploads/:path*",
       },
     ];
   },
   async redirects() {
     return [
-      { source: "/wp-admin", destination: "https://cms.radvac.org/wp-admin", permanent: true },
-      { source: "/wp-admin/:path*", destination: "https://cms.radvac.org/wp-admin/:path*", permanent: true },
-      { source: "/wp-login.php", destination: "https://cms.radvac.org/wp-login.php", permanent: true },
+      { source: "/wp-admin", destination: "https://radvac-297e5f.ingress-alpha.ewp.live/wp-admin", permanent: true },
+      { source: "/wp-admin/:path*", destination: "https://radvac-297e5f.ingress-alpha.ewp.live/wp-admin/:path*", permanent: true },
+      { source: "/wp-login.php", destination: "https://radvac-297e5f.ingress-alpha.ewp.live/wp-login.php", permanent: true },
     ];
   },
   webpack: (config, { dev }) => {

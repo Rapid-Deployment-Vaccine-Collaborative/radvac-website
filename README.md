@@ -7,7 +7,7 @@ Public site for [radvac.org](https://radvac.org). Next.js frontend with WordPres
 - **Next.js 15** (App Router) + **React 19** + **TypeScript**
 - **Tailwind CSS 4**
 - **WordPress** (headless) via **WPGraphQL**
-  - Production: live WP on Namecheap EasyWP at `old.radvac.org`
+  - Production: live WP on Namecheap EasyWP at `radvac-297e5f.ingress-alpha.ewp.live`
   - Local dev: dockerized WP at `wordpress/docker-compose.yml`
 - **Framer Motion** for animation, **html-react-parser** + **sanitize-html** for rendering WP block HTML safely
 - Hosting: **Vercel** (frontend), **EasyWP** (CMS)
@@ -43,8 +43,8 @@ cp .env.example .env.local
 Either point at the production CMS (read-only is safe):
 
 ```
-WP_GRAPHQL_URL=https://old.radvac.org/graphql
-NEXT_PUBLIC_WP_URL=https://old.radvac.org
+WP_GRAPHQL_URL=https://radvac-297e5f.ingress-alpha.ewp.live/graphql
+NEXT_PUBLIC_WP_URL=https://radvac-297e5f.ingress-alpha.ewp.live
 ```
 
 …or boot the local WordPress stack (see below) and use:

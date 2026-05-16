@@ -21,7 +21,7 @@ No JWT auth plugin needed — we use WP core's Application Passwords (step 4).
 ## 2. WP settings
 
 - **Settings → Permalinks** → `Post name` (`/%postname%/`).
-- **Settings → General → Site Address (URL)** → `https://old.radvac.org`
+- **Settings → General → Site Address (URL)** → `https://radvac-297e5f.ingress-alpha.ewp.live`
   (keep WordPress Address the same; only the public Site Address moves).
 - **Appearance → Menus** → ensure the primary menu is assigned to the
   `Primary` location. The frontend queries this via `MenuLocationEnum`
@@ -74,7 +74,7 @@ sends this as `Authorization: Basic <token>` on draft requests.
 ## 5. EasyWP-specific configuration
 
 - **Custom domain:** EasyWP dashboard → your site → Domains → add
-  `old.radvac.org`. EasyWP gives you a CNAME target; create that record
+  `radvac-297e5f.ingress-alpha.ewp.live`. EasyWP gives you a CNAME target; create that record
   at the DNS registrar.
 - **CDN / `/graphql` caching:** EasyWP runs a managed CDN. WPGraphQL
   Smart Cache handles GraphQL invalidation, but verify with the smoke
@@ -89,7 +89,7 @@ sends this as `Authorization: Basic <token>` on draft requests.
 From any machine:
 
 ```sh
-curl -X POST https://old.radvac.org/graphql \
+curl -X POST https://radvac-297e5f.ingress-alpha.ewp.live/graphql \
   -H 'content-type: application/json' \
   -d '{"query":"{ pages(first:5){ nodes{ slug title }}}"}'
 ```
@@ -101,8 +101,8 @@ Should return JSON listing page slugs (look for `press-release` and `archived-up
 In Vercel Project Settings → Environment Variables (Production + Preview):
 
 ```
-WP_GRAPHQL_URL=https://old.radvac.org/graphql
-NEXT_PUBLIC_WP_URL=https://old.radvac.org
+WP_GRAPHQL_URL=https://radvac-297e5f.ingress-alpha.ewp.live/graphql
+NEXT_PUBLIC_WP_URL=https://radvac-297e5f.ingress-alpha.ewp.live
 NEXT_PUBLIC_SITE_URL=https://radvac.org
 REVALIDATE_SECRET=<same string used in radvac-revalidate.php>
 PREVIEW_SECRET=<random, used by /api/draft>
@@ -111,7 +111,7 @@ WP_AUTH_TOKEN=<base64 from step 4, only if using drafts>
 
 ## 8. DNS summary
 
-- `old.radvac.org` → CNAME to the host EasyWP gave you in step 5
+- `radvac-297e5f.ingress-alpha.ewp.live` → CNAME to the host EasyWP gave you in step 5
 - `radvac.org` and `www.radvac.org` → records provided by Vercel
   (Project → Domains)
 
