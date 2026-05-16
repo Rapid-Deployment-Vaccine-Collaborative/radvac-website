@@ -5,10 +5,10 @@ interface GraphQLResponse<T> {
   errors?: Array<{ message: string }>;
 }
 
-const MAX_RETRIES = 3;
-const BASE_DELAY_MS = 800;
+const MAX_RETRIES = 4;
+const BASE_DELAY_MS = 750;
 const MAX_CONCURRENCY = 2;
-const INTER_REQUEST_GAP_MS = 75;
+const INTER_REQUEST_GAP_MS = 100;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 

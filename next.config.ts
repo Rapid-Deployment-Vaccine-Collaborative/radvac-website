@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
   ...(process.env.VERCEL
     ? {}
     : { distDir: "/home/dan/.cache/radvac-next" }),
+  // Serialize static page generation to a single worker so EasyWP's /graphql
+  // rate limit isn't tripped by parallel build-time fetches.
+  experimental: {
+    workerThreads: false,
+    cpus: 1,
+  },
   images: {
     remotePatterns: [
       {
