@@ -7,8 +7,27 @@ interface GraphQLResponse<T> {
 
 const MAX_RETRIES = 4;
 const BASE_DELAY_MS = 500;
+const MAX_CONCURRENCY = 3;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// EasyWP rate-limits /graphql (429) when builds fire many parallel queries.
+// Serialize requests through a small semaphore to stay under the threshold.
+let inFlight = 0;
+const queue: Array<() => void> = [];
+async function acquireSlot(): Promise<void> {
+  if (inFlight < MAX_CONCURRENCY) {
+    inFlight++;
+    return;
+  }
+  await new Promise<void>((resolve) => queue.push(resolve));
+  inFlight++;
+}
+function releaseSlot(): void {
+  inFlight--;
+  const next = queue.shift();
+  if (next) next();
+}
 
 export async function fetchGraphQL<T>(
   query: string,
@@ -28,25 +47,28 @@ export async function fetchGraphQL<T>(
     headers["Authorization"] = `Basic ${process.env.WP_AUTH_TOKEN}`;
   }
 
+  await acquireSlot();
   let res: Response | null = null;
-  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
-    res = await fetch(WP_GRAPHQL_URL, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ query, variables }),
-      next: {
-        revalidate: options?.isDraft ? 0 : (options?.revalidate ?? 3600),
-      },
-    });
+  try {
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      res = await fetch(WP_GRAPHQL_URL, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({ query, variables }),
+        next: {
+          revalidate: options?.isDraft ? 0 : (options?.revalidate ?? 3600),
+        },
+      });
 
-    // Retry on rate-limit / transient upstream errors. EasyWP throttles
-    // /graphql during builds when many static pages fetch in parallel.
-    if ((res.status === 429 || res.status === 503) && attempt < MAX_RETRIES) {
-      const delay = BASE_DELAY_MS * 2 ** attempt + Math.random() * 250;
-      await sleep(delay);
-      continue;
+      if ((res.status === 429 || res.status === 503) && attempt < MAX_RETRIES) {
+        const delay = BASE_DELAY_MS * 2 ** attempt + Math.random() * 250;
+        await sleep(delay);
+        continue;
+      }
+      break;
     }
-    break;
+  } finally {
+    releaseSlot();
   }
 
   if (!res || !res.ok) {
