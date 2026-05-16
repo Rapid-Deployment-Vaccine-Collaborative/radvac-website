@@ -5,6 +5,11 @@ interface GraphQLResponse<T> {
   errors?: Array<{ message: string }>;
 }
 
+const MAX_RETRIES = 4;
+const BASE_DELAY_MS = 500;
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 export async function fetchGraphQL<T>(
   query: string,
   variables?: Record<string, unknown>,
@@ -23,17 +28,31 @@ export async function fetchGraphQL<T>(
     headers["Authorization"] = `Basic ${process.env.WP_AUTH_TOKEN}`;
   }
 
-  const res = await fetch(WP_GRAPHQL_URL, {
-    method: "POST",
-    headers,
-    body: JSON.stringify({ query, variables }),
-    next: {
-      revalidate: options?.isDraft ? 0 : (options?.revalidate ?? 3600),
-    },
-  });
+  let res: Response | null = null;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    res = await fetch(WP_GRAPHQL_URL, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ query, variables }),
+      next: {
+        revalidate: options?.isDraft ? 0 : (options?.revalidate ?? 3600),
+      },
+    });
 
-  if (!res.ok) {
-    throw new Error(`GraphQL request failed: ${res.status} ${res.statusText}`);
+    // Retry on rate-limit / transient upstream errors. EasyWP throttles
+    // /graphql during builds when many static pages fetch in parallel.
+    if ((res.status === 429 || res.status === 503) && attempt < MAX_RETRIES) {
+      const delay = BASE_DELAY_MS * 2 ** attempt + Math.random() * 250;
+      await sleep(delay);
+      continue;
+    }
+    break;
+  }
+
+  if (!res || !res.ok) {
+    throw new Error(
+      `GraphQL request failed: ${res?.status ?? "no response"} ${res?.statusText ?? ""}`.trim()
+    );
   }
 
   const text = await res.text();

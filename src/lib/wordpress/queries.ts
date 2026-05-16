@@ -175,8 +175,8 @@ export async function getAllPosts(first = 20): Promise<WpPost[]> {
       { revalidate: 3600 }
     );
     return data.posts.nodes;
-  } catch {
-    console.error("Failed to fetch posts");
+  } catch (err) {
+    console.error("Failed to fetch posts", err);
     return [];
   }
 }
@@ -200,8 +200,8 @@ export async function getPostBySlug(
       { isDraft, revalidate: 3600 }
     );
     return data.post;
-  } catch {
-    console.error(`Failed to fetch post: ${slug}`);
+  } catch (err) {
+    console.error(`Failed to fetch post: ${slug}`, err);
     return null;
   }
 }
@@ -224,8 +224,8 @@ export async function getAllPostSlugs(): Promise<string[]> {
       { revalidate: 3600 }
     );
     return data.posts.nodes.map((p) => p.slug);
-  } catch {
-    console.error("Failed to fetch post slugs");
+  } catch (err) {
+    console.error("Failed to fetch post slugs", err);
     return [];
   }
 }
@@ -261,8 +261,8 @@ export async function getCommentsForPost(
       { revalidate: 60 }
     );
     return data.comments.nodes;
-  } catch {
-    console.error(`Failed to fetch comments for post ${postDatabaseId}`);
+  } catch (err) {
+    console.error(`Failed to fetch comments for post ${postDatabaseId}`, err);
     return [];
   }
 }
@@ -293,8 +293,8 @@ export async function getFaqPageContent(): Promise<WpFaqSection[]> {
       revalidate: 3600,
     });
     return data.page?.faqPageContent?.faqSections ?? [];
-  } catch {
-    console.error("Failed to fetch FAQ page content");
+  } catch (err) {
+    console.error("Failed to fetch FAQ page content", err);
     return [];
   }
 }
@@ -331,8 +331,8 @@ export async function getMenuItems(
       menuItems: { nodes: WpMenuItem[] };
     }>(query, { location }, { revalidate: 3600 });
     return data.menuItems.nodes;
-  } catch {
-    console.error("Failed to fetch menu items");
+  } catch (err) {
+    console.error("Failed to fetch menu items", err);
     return [];
   }
 }
