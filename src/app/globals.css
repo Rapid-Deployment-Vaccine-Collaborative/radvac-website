@@ -63,6 +63,9 @@ a { color: inherit; }
   grid-template-columns: 200px 1fr;
   gap: 48px;
 }
+.post-hero > .section:first-child {
+  padding-top: 0;
+}
 .sec-num {
   font-family: var(--mono);
   font-size: 11px;
