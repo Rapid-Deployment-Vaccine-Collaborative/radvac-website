@@ -91,8 +91,8 @@ export async function getAllPages(): Promise<WpPage[]> {
       revalidate: 3600,
     });
     return data.pages.nodes;
-  } catch {
-    console.error("Failed to fetch all pages");
+  } catch (err) {
+    console.error("Failed to fetch all pages", err);
     return [];
   }
 }
@@ -115,8 +115,8 @@ export async function getAllPageSlugs(): Promise<string[]> {
       { revalidate: 3600 }
     );
     return data.pages.nodes.map((p) => p.uri.replace(/^\/|\/$/g, ""));
-  } catch {
-    console.error("Failed to fetch page slugs");
+  } catch (err) {
+    console.error("Failed to fetch page slugs", err);
     return [];
   }
 }
