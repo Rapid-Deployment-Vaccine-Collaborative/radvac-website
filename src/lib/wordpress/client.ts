@@ -36,7 +36,16 @@ export async function fetchGraphQL<T>(
     throw new Error(`GraphQL request failed: ${res.status} ${res.statusText}`);
   }
 
-  const json: GraphQLResponse<T> = await res.json();
+  const text = await res.text();
+  if (!text) {
+    throw new Error("GraphQL request returned an empty body");
+  }
+  let json: GraphQLResponse<T>;
+  try {
+    json = JSON.parse(text);
+  } catch {
+    throw new Error(`GraphQL request returned non-JSON body: ${text.slice(0, 200)}`);
+  }
 
   if (json.errors) {
     console.error("GraphQL errors:", json.errors);

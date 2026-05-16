@@ -74,9 +74,10 @@ export default async function PostPage({ params }: PageProps) {
     <>
       <PageHeader title={post.title} />
 
-      <section className="py-16 px-6">
-        <div className="max-w-[800px] mx-auto">
-          <p className="text-sm text-gray-500 mb-6">
+      <section className="py-16 px-6 md:px-14">
+        <div className="bg-white rounded-2xl shadow-sm py-12 px-6 sm:px-12 md:px-20">
+          <div className="max-w-[760px] mx-auto">
+          <p className="text-base text-gray-500 mb-6">
             <Link
               href="/press-release"
               className="text-blue-700 hover:underline"
@@ -140,6 +141,7 @@ export default async function PostPage({ params }: PageProps) {
             <h3 className="text-xl font-semibold mb-4">Leave a comment</h3>
             <CommentForm postId={post.databaseId} />
           </section>
+        </div>
         </div>
       </section>
     </>

@@ -8,6 +8,8 @@ import {
   SilhouetteIcon,
   XIcon,
 } from "@/components/icons/SocialIcons";
+import { getPageBySlug } from "@/lib/wordpress/queries";
+import { rewriteWordPressUrls } from "@/lib/utils";
 import { getMemberBySlug, team } from "@/lib/team";
 import styles from "./page.module.css";
 
@@ -36,6 +38,9 @@ export default async function TeamMemberPage({ params }: PageProps) {
   const member = getMemberBySlug(slug);
   if (!member) notFound();
 
+  const wpPage = member.wpUri ? await getPageBySlug(member.wpUri) : null;
+  const wpHtml = wpPage ? rewriteWordPressUrls(wpPage.content) : null;
+
   return (
     <>
       <ScrollToTop />
@@ -44,10 +49,10 @@ export default async function TeamMemberPage({ params }: PageProps) {
         <div />
         <div className={styles.layout}>
           <div className={styles.portraitCol}>
-            {member.image ? (
+            {member.pageImage || member.image ? (
               <div className={styles.portrait}>
                 <Image
-                  src={member.image}
+                  src={(member.pageImage || member.image) as string}
                   alt={member.name}
                   width={400}
                   height={534}
@@ -88,7 +93,14 @@ export default async function TeamMemberPage({ params }: PageProps) {
             </div>
           </div>
           <div className={styles.bioCol}>
-            <p className={styles.bio}>{member.bio}</p>
+            {wpHtml ? (
+              <div
+                className={styles.bio}
+                dangerouslySetInnerHTML={{ __html: wpHtml }}
+              />
+            ) : (
+              <p className={styles.bio}>{member.bio}</p>
+            )}
           </div>
         </div>
       </section>

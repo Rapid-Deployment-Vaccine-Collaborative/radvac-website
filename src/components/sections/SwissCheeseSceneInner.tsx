@@ -13,11 +13,12 @@ const SLICES = [
 ] as const;
 
 // Slice dimensions (world units) — wide & tall, distributed holes
-const SW = 3.2;
+const SW = 4.0;
 const SH = 7.0;
 const SD = 0.22;
 const SLICE_GAP = 3.7;
 const SLICE_TILT_Y = -1.0; // radians (~57°), more edge-on view
+const SLICE_TILT_X = Math.PI / 7; // mirror the mask box's downward tilt
 const VIRUS_X = -6.0;
 
 // Per-slice scatter holes distributed across the full slice area
@@ -204,8 +205,8 @@ export default function SwissCheeseSceneInner() {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-    camera.position.set(4.4, 0.4, 21);
-    camera.lookAt(4.4, 0, 0);
+    camera.position.set(4.4, 1.8, 21);
+    camera.lookAt(4.4, 1.8, 0);
 
     let renderer: THREE.WebGLRenderer;
     try {
@@ -286,7 +287,7 @@ export default function SwissCheeseSceneInner() {
       sprite.scale.set(3.0, 0.85, 1);
       sprite.position.set(
         firstSliceX + i * SLICE_GAP,
-        -SH / 2 - 0.8,
+        -SH / 2 - 1.6,
         0.05,
       );
       slicesGroup.add(sprite);
@@ -296,6 +297,7 @@ export default function SwissCheeseSceneInner() {
         () => edgeGeom.dispose(),
       );
     });
+    slicesGroup.rotation.x = SLICE_TILT_X;
     scene.add(slicesGroup);
 
     // ---- Layer-2 nasal spray bottle (wireframe, rotating) ----
@@ -303,6 +305,9 @@ export default function SwissCheeseSceneInner() {
     const layer2X = firstSliceX + 1 * SLICE_GAP;
     sprayBottleGroup.position.set(layer2X, SH / 2 + 0.55, 0);
     sprayBottleGroup.scale.setScalar(1.5);
+    // Initial pose: tilt the bottle's top slightly toward the camera so the
+    // viewer is looking a bit down onto it. Stays inside the ±15° clamp.
+    sprayBottleGroup.rotation.x = Math.PI / 18;
     scene.add(sprayBottleGroup);
 
     const sprayLineMat = new THREE.LineBasicMaterial({
@@ -326,13 +331,81 @@ export default function SwissCheeseSceneInner() {
       new THREE.Vector2(0.14, 0.8),
       new THREE.Vector2(0.1, 0.86),
     ];
-    const bodyGeom = new THREE.LatheGeometry(bottleProfile, 20);
+    const bodyGeom = new THREE.LatheGeometry(bottleProfile, 12);
     const bodyWire = new THREE.WireframeGeometry(bodyGeom);
     sprayBottleGroup.add(new THREE.LineSegments(bodyWire, sprayLineMat));
+    // Translucent white fill so the polygon sides read as frosted glass.
+    const bodyFillMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.22,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+    sprayBottleGroup.add(new THREE.Mesh(bodyGeom, bodyFillMat));
     sprayBottleDisposers.push(
       () => bodyGeom.dispose(),
       () => bodyWire.dispose(),
+      () => bodyFillMat.dispose(),
     );
+
+    // "FRIL" label on the front of the bottle — same canvas-texture treatment
+    // as the N95 box: blue outline, white fill, mounted just outside the body.
+    {
+      const TW = 256;
+      const TH = 128;
+      const canvas = document.createElement("canvas");
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = TW * dpr;
+      canvas.height = TH * dpr;
+      const ctx = canvas.getContext("2d")!;
+      ctx.scale(dpr, dpr);
+      ctx.font =
+        "900 88px ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.lineWidth = 9;
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = "#3a8ad8";
+      ctx.strokeText("FRIL", TW / 2, TH / 2);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText("FRIL", TW / 2, TH / 2);
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.needsUpdate = true;
+      const labelMat = new THREE.MeshBasicMaterial({
+        map: tex,
+        transparent: true,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+      });
+      // Curved label: an open cylinder section flush against the bottle wall,
+      // so the lettering wraps like an actual bottle wrapper. Body radius is
+      // ~0.24 in the cylindrical section (y ~0.16–0.62); sit the label a hair
+      // outside it. theta=0 on CylinderGeometry points to +Z, so centering the
+      // arc on -arc/2..+arc/2 puts the label on the front face.
+      const LABEL_R = 0.242;
+      const LABEL_H = 0.19;
+      const LABEL_ARC = 0.38 / LABEL_R; // arc length matches prior flat width
+      const labelGeom = new THREE.CylinderGeometry(
+        LABEL_R,
+        LABEL_R,
+        LABEL_H,
+        24,
+        1,
+        true,
+        -LABEL_ARC / 2,
+        LABEL_ARC,
+      );
+      const labelMesh = new THREE.Mesh(labelGeom, labelMat);
+      labelMesh.position.set(0, 0.4, 0);
+      sprayBottleGroup.add(labelMesh);
+      sprayBottleDisposers.push(
+        () => labelGeom.dispose(),
+        () => labelMat.dispose(),
+        () => tex.dispose(),
+      );
+    }
 
     // Pump cap — short cylinder sitting on the bottle neck
     const capGeom = new THREE.CylinderGeometry(0.14, 0.14, 0.16, 16, 1, false);
@@ -432,6 +505,451 @@ export default function SwissCheeseSceneInner() {
     sprayBottleDisposers.push(
       () => bottleHitGeom.dispose(),
       () => bottleHitMat.dispose(),
+    );
+
+    // ---- Layer-1 N95 mask box (wireframe, draggable to spin) ----
+    const maskGroup = new THREE.Group();
+    const layer1X = firstSliceX + 0 * SLICE_GAP;
+    maskGroup.position.set(layer1X, SH / 2 + 0.95, 0);
+    maskGroup.scale.setScalar(1.4);
+    // Initial pose: corner view from above-right, N95 face turned to the left.
+    maskGroup.rotation.y = -Math.PI / 4;
+    maskGroup.rotation.x = Math.PI / 7;
+    scene.add(maskGroup);
+
+    const maskLineMat = new THREE.LineBasicMaterial({
+      color: 0x3a8ad8,
+      transparent: true,
+      opacity: 0.95,
+    });
+    const maskDisposers: Array<() => void> = [() => maskLineMat.dispose()];
+
+    // Box dimensions
+    const BOX_W = 1.4;
+    const BOX_H = 0.8;
+    const BOX_D = 0.7;
+
+    // Open-top body: full box wireframe minus the top face. We build it by
+    // hand so the lid can flap above without overlapping the body lines.
+    const hx = BOX_W / 2;
+    const hy = BOX_H / 2;
+    const hz = BOX_D / 2;
+    const boxLinePts: number[] = [];
+    const addSeg = (a: [number, number, number], b: [number, number, number]) => {
+      boxLinePts.push(...a, ...b);
+    };
+    // bottom rectangle
+    addSeg([-hx, -hy, -hz], [hx, -hy, -hz]);
+    addSeg([hx, -hy, -hz], [hx, -hy, hz]);
+    addSeg([hx, -hy, hz], [-hx, -hy, hz]);
+    addSeg([-hx, -hy, hz], [-hx, -hy, -hz]);
+    // top opening rectangle
+    addSeg([-hx, hy, -hz], [hx, hy, -hz]);
+    addSeg([hx, hy, hz], [-hx, hy, hz]);
+    addSeg([-hx, hy, hz], [-hx, hy, -hz]);
+    addSeg([hx, hy, -hz], [hx, hy, hz]);
+    // vertical edges
+    addSeg([-hx, -hy, -hz], [-hx, hy, -hz]);
+    addSeg([hx, -hy, -hz], [hx, hy, -hz]);
+    addSeg([hx, -hy, hz], [hx, hy, hz]);
+    addSeg([-hx, -hy, hz], [-hx, hy, hz]);
+    const boxGeom = new THREE.BufferGeometry();
+    boxGeom.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(boxLinePts, 3),
+    );
+    maskGroup.add(new THREE.LineSegments(boxGeom, maskLineMat));
+    maskDisposers.push(() => boxGeom.dispose());
+
+    // Opaque very-light-white walls (front, back, left, right, bottom). The
+    // lid is its own opaque panel added later inside the hinge group. Walls
+    // sit just inside the wireframe so the blue edges render crisply on top.
+    const WALL_INSET = 0.003;
+    const wallMat = new THREE.MeshBasicMaterial({
+      color: 0xdfeaf7,
+      side: THREE.DoubleSide,
+    });
+    maskDisposers.push(() => wallMat.dispose());
+    const addWall = (
+      geom: THREE.PlaneGeometry,
+      pos: [number, number, number],
+      rot: [number, number, number],
+    ) => {
+      const mesh = new THREE.Mesh(geom, wallMat);
+      mesh.position.set(pos[0], pos[1], pos[2]);
+      mesh.rotation.set(rot[0], rot[1], rot[2]);
+      maskGroup.add(mesh);
+      maskDisposers.push(() => geom.dispose());
+    };
+    addWall(
+      new THREE.PlaneGeometry(BOX_W, BOX_H),
+      [0, 0, hz - WALL_INSET],
+      [0, 0, 0],
+    );
+    addWall(
+      new THREE.PlaneGeometry(BOX_W, BOX_H),
+      [0, 0, -hz + WALL_INSET],
+      [0, 0, 0],
+    );
+    addWall(
+      new THREE.PlaneGeometry(BOX_D, BOX_H),
+      [-hx + WALL_INSET, 0, 0],
+      [0, Math.PI / 2, 0],
+    );
+    addWall(
+      new THREE.PlaneGeometry(BOX_D, BOX_H),
+      [hx - WALL_INSET, 0, 0],
+      [0, Math.PI / 2, 0],
+    );
+    addWall(
+      new THREE.PlaneGeometry(BOX_W, BOX_D),
+      [0, -hy + WALL_INSET, 0],
+      [Math.PI / 2, 0, 0],
+    );
+
+    // "N95" text on the front face — canvas texture with a blue outline and
+    // white interior, mounted just in front of the front wall.
+    {
+      const TW = 256;
+      const TH = 128;
+      const canvas = document.createElement("canvas");
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = TW * dpr;
+      canvas.height = TH * dpr;
+      const ctx = canvas.getContext("2d")!;
+      ctx.scale(dpr, dpr);
+      ctx.font =
+        "900 96px ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.lineWidth = 9;
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = "#3a8ad8";
+      ctx.strokeText("N95", TW / 2, TH / 2);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText("N95", TW / 2, TH / 2);
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.needsUpdate = true;
+      const textMat = new THREE.MeshBasicMaterial({
+        map: tex,
+        transparent: true,
+      });
+      const textGeom = new THREE.PlaneGeometry(0.96, 0.48);
+      const textMesh = new THREE.Mesh(textGeom, textMat);
+      textMesh.position.set(0, 0, hz + 0.004);
+      maskGroup.add(textMesh);
+      maskDisposers.push(
+        () => textGeom.dispose(),
+        () => textMat.dispose(),
+        () => tex.dispose(),
+      );
+    }
+
+    // A few stylized masks peeking out of the open top — each a small curved
+    // line segment (arc) inside the box.
+    for (let i = 0; i < 5; i++) {
+      const pts: THREE.Vector3[] = [];
+      const baseY = hy - 0.04 - i * 0.06;
+      const xc = (Math.random() - 0.5) * 0.4;
+      const zc = (Math.random() - 0.5) * 0.3;
+      const tilt = (Math.random() - 0.5) * 0.3;
+      const halfW = 0.28;
+      for (let k = 0; k <= 8; k++) {
+        const u = k / 8;
+        const x = xc + (u - 0.5) * 2 * halfW;
+        const y = baseY + Math.sin(u * Math.PI) * 0.07 + tilt * (u - 0.5);
+        const z = zc + Math.cos(u * Math.PI) * 0.04;
+        pts.push(new THREE.Vector3(x, y, z));
+      }
+      const g = new THREE.BufferGeometry().setFromPoints(pts);
+      maskGroup.add(new THREE.Line(g, maskLineMat));
+      maskDisposers.push(() => g.dispose());
+    }
+
+    // Lid — a hinged flap at the back top edge that flaps slightly.
+    const lidHinge = new THREE.Group();
+    lidHinge.position.set(0, hy, -hz);
+    maskGroup.add(lidHinge);
+    const lidPts: number[] = [];
+    const addLid = (
+      a: [number, number, number],
+      b: [number, number, number],
+    ) => {
+      lidPts.push(...a, ...b);
+    };
+    // Rectangle in the lid's local frame: hinge along z=0, extending toward +Z
+    // (forward when closed). Slight thickness omitted for visual lightness.
+    addLid([-hx, 0, 0], [hx, 0, 0]);
+    addLid([hx, 0, 0], [hx, 0, BOX_D]);
+    addLid([hx, 0, BOX_D], [-hx, 0, BOX_D]);
+    addLid([-hx, 0, BOX_D], [-hx, 0, 0]);
+    const lidGeom = new THREE.BufferGeometry();
+    lidGeom.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(lidPts, 3),
+    );
+    lidHinge.add(new THREE.LineSegments(lidGeom, maskLineMat));
+    maskDisposers.push(() => lidGeom.dispose());
+
+    // Opaque lid panel — sits just below the wireframe rectangle so blue edges
+    // render on top. Plane is in the lid's local XZ plane (rotated -90° on X).
+    const lidPanelGeom = new THREE.PlaneGeometry(BOX_W, BOX_D);
+    const lidPanel = new THREE.Mesh(lidPanelGeom, wallMat);
+    lidPanel.rotation.x = -Math.PI / 2;
+    lidPanel.position.set(0, 0.003, BOX_D / 2);
+    lidHinge.add(lidPanel);
+    maskDisposers.push(() => lidPanelGeom.dispose());
+
+    // Front tuck flap — perpendicular flap hinged off the lid's front (long)
+    // edge, like a cardboard box's closing flap. Wireframe rectangle + opaque
+    // panel. Lives in a subgroup so it follows the lid as it opens.
+    const FLAP_H = 0.22;
+    const flapHinge = new THREE.Group();
+    flapHinge.position.set(0, 0, BOX_D);
+    lidHinge.add(flapHinge);
+    // Wireframe edges of the flap rectangle (in the flap's local XY plane,
+    // hanging from y=0 down to y=-FLAP_H).
+    const flapEdgePts: number[] = [];
+    const addFlapSeg = (
+      a: [number, number, number],
+      b: [number, number, number],
+    ) => {
+      flapEdgePts.push(...a, ...b);
+    };
+    addFlapSeg([-hx, 0, 0], [hx, 0, 0]);
+    addFlapSeg([hx, 0, 0], [hx, -FLAP_H, 0]);
+    addFlapSeg([hx, -FLAP_H, 0], [-hx, -FLAP_H, 0]);
+    addFlapSeg([-hx, -FLAP_H, 0], [-hx, 0, 0]);
+    const flapEdgeGeom = new THREE.BufferGeometry();
+    flapEdgeGeom.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(flapEdgePts, 3),
+    );
+    flapHinge.add(new THREE.LineSegments(flapEdgeGeom, maskLineMat));
+    maskDisposers.push(() => flapEdgeGeom.dispose());
+    // Opaque flap panel, centered between y=0 and y=-FLAP_H.
+    const flapPanelGeom = new THREE.PlaneGeometry(BOX_W, FLAP_H);
+    const flapPanel = new THREE.Mesh(flapPanelGeom, wallMat);
+    flapPanel.position.set(0, -FLAP_H / 2, 0.001);
+    flapHinge.add(flapPanel);
+    maskDisposers.push(() => flapPanelGeom.dispose());
+
+    // Invisible hit proxy so the raycaster picks the box reliably.
+    const maskHitGeom = new THREE.BoxGeometry(BOX_W * 1.05, BOX_H * 1.4, BOX_D * 1.05);
+    const maskHitMat = new THREE.MeshBasicMaterial({
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+    });
+    const maskHitProxy = new THREE.Mesh(maskHitGeom, maskHitMat);
+    maskHitProxy.position.y = 0.1;
+    maskGroup.add(maskHitProxy);
+    maskDisposers.push(
+      () => maskHitGeom.dispose(),
+      () => maskHitMat.dispose(),
+    );
+
+    // ---- Layer-3 antivirals: a couple of wireframe pills (capsules) ----
+    const pillsGroup = new THREE.Group();
+    const layer3X = firstSliceX + 2 * SLICE_GAP;
+    pillsGroup.position.set(layer3X, SH / 2 + 0.95, 0);
+    pillsGroup.scale.setScalar(1.4);
+    scene.add(pillsGroup);
+
+    const pillLineMat = new THREE.LineBasicMaterial({
+      color: 0x3a8ad8,
+      transparent: true,
+      opacity: 0.95,
+    });
+    const pillDisposers: Array<() => void> = [() => pillLineMat.dispose()];
+
+    type PillState = {
+      mesh: THREE.LineSegments;
+      baseX: number;
+      baseY: number;
+      baseRotZ: number;
+      phase: number;
+    };
+    const pills: PillState[] = [];
+
+    const pillSpecs = [
+      { baseX: -0.45, baseY: 0.05, baseRotZ: 0.35, phase: 0, fill: 0xf2a93a },
+      { baseX: 0.45, baseY: -0.05, baseRotZ: -0.5, phase: 1.7, fill: 0xe04545 },
+      { baseX: 0.0, baseY: 0.7, baseRotZ: -0.15, phase: 3.1, fill: 0x4ac572 },
+    ];
+
+    for (const spec of pillSpecs) {
+      const capGeom = new THREE.CapsuleGeometry(0.16, 0.42, 6, 14);
+      const capWire = new THREE.WireframeGeometry(capGeom);
+      const pill = new THREE.LineSegments(capWire, pillLineMat);
+      pill.position.set(spec.baseX, spec.baseY, 0);
+      pill.rotation.z = spec.baseRotZ;
+      // Semi-transparent solid fill sitting just inside the wireframe so each
+      // pill reads as a colored capsule. Parented to the wireframe so it
+      // inherits the per-pill shake/rotation.
+      const fillGeom = new THREE.CapsuleGeometry(0.155, 0.41, 6, 14);
+      const fillMat = new THREE.MeshBasicMaterial({
+        color: spec.fill,
+        transparent: true,
+        opacity: 0.55,
+        depthWrite: false,
+      });
+      pill.add(new THREE.Mesh(fillGeom, fillMat));
+      pillsGroup.add(pill);
+      pills.push({
+        mesh: pill,
+        baseX: spec.baseX,
+        baseY: spec.baseY,
+        baseRotZ: spec.baseRotZ,
+        phase: spec.phase,
+      });
+      pillDisposers.push(
+        () => capGeom.dispose(),
+        () => capWire.dispose(),
+        () => fillGeom.dispose(),
+        () => fillMat.dispose(),
+      );
+    }
+
+    // Invisible hit proxy so the raycaster can pick the pills as a group
+    const pillsHitGeom = new THREE.BoxGeometry(1.6, 1.0, 0.6);
+    const pillsHitMat = new THREE.MeshBasicMaterial({
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+    });
+    const pillsHitProxy = new THREE.Mesh(pillsHitGeom, pillsHitMat);
+    pillsGroup.add(pillsHitProxy);
+    pillDisposers.push(
+      () => pillsHitGeom.dispose(),
+      () => pillsHitMat.dispose(),
+    );
+
+    // ---- Layer-5 test tube (wireframe + semi-transparent liquid) ----
+    const tubeGroup = new THREE.Group();
+    const layer5X = firstSliceX + 4 * SLICE_GAP;
+    tubeGroup.position.set(layer5X, SH / 2 + 0.45, 0);
+    tubeGroup.scale.setScalar(1.3);
+    scene.add(tubeGroup);
+
+    const tubeLineMat = new THREE.LineBasicMaterial({
+      color: 0x3a8ad8,
+      transparent: true,
+      opacity: 0.95,
+    });
+    const tubeDisposers: Array<() => void> = [() => tubeLineMat.dispose()];
+
+    // Tube body — lathe with rounded closed bottom, straight cylindrical body,
+    // and a small lip at the open top.
+    const tubeProfile = [
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(0.08, 0.02),
+      new THREE.Vector2(0.14, 0.08),
+      new THREE.Vector2(0.17, 0.18),
+      new THREE.Vector2(0.18, 0.28),
+      new THREE.Vector2(0.18, 1.15),
+      new THREE.Vector2(0.2, 1.2),
+      new THREE.Vector2(0.2, 1.25),
+    ];
+    const tubeBodyGeom = new THREE.LatheGeometry(tubeProfile, 20);
+    const tubeBodyWire = new THREE.WireframeGeometry(tubeBodyGeom);
+    tubeGroup.add(new THREE.LineSegments(tubeBodyWire, tubeLineMat));
+    tubeDisposers.push(
+      () => tubeBodyGeom.dispose(),
+      () => tubeBodyWire.dispose(),
+    );
+
+    // Liquid — a tall amber column that tilts together with the tube, then
+    // clipped by a world-horizontal plane at the intended fill height so the
+    // top surface always reads as flat & level no matter how the tube tilts.
+    // The lathe is intentionally taller than the visible fill line (extends
+    // well past it) so the clip cleanly trims it on every side under tilt.
+    const LIQUID_FILL_LOCAL_Y = 0.3;
+    const LIQUID_EXTENDED_TOP = 1.05; // safely past the tube lip under any tilt
+    const liquidProfile = [
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(0.07, 0.02),
+      new THREE.Vector2(0.13, 0.08),
+      new THREE.Vector2(0.16, 0.17),
+      new THREE.Vector2(0.172, 0.26),
+      new THREE.Vector2(0.172, LIQUID_EXTENDED_TOP),
+      new THREE.Vector2(0.0, LIQUID_EXTENDED_TOP),
+    ];
+    const liquidGeom = new THREE.LatheGeometry(liquidProfile, 20);
+    const liquidMat = new THREE.MeshBasicMaterial({
+      color: 0xf0bf6e,
+      transparent: true,
+      opacity: 0.45,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+    // World-horizontal clip plane at the tube's intended fill height. Normal
+    // points down so geometry *above* the plane is removed (kept: y < height).
+    const liquidFillWorldY =
+      tubeGroup.position.y + LIQUID_FILL_LOCAL_Y * tubeGroup.scale.y;
+    const liquidClipPlane = new THREE.Plane(
+      new THREE.Vector3(0, -1, 0),
+      liquidFillWorldY,
+    );
+    liquidMat.clippingPlanes = [liquidClipPlane];
+    liquidMat.clipShadows = false;
+    tubeGroup.add(new THREE.Mesh(liquidGeom, liquidMat));
+    const liquidWire = new THREE.WireframeGeometry(liquidGeom);
+    const liquidWireMat = new THREE.LineBasicMaterial({
+      color: 0xc78a35,
+      transparent: true,
+      opacity: 0.65,
+    });
+    liquidWireMat.clippingPlanes = [liquidClipPlane];
+    liquidWireMat.clipShadows = false;
+    tubeGroup.add(new THREE.LineSegments(liquidWire, liquidWireMat));
+
+    // Flat horizontal disc that caps the clipped column — this is the visible
+    // liquid surface. Parented to the scene (not the tube) and pinned to the
+    // tube's world position at fill height so it stays world-level regardless
+    // of how the tube is tilted.
+    const liquidSurfaceGeom = new THREE.CircleGeometry(
+      0.172 * tubeGroup.scale.x,
+      24,
+    );
+    const liquidSurfaceMat = new THREE.MeshBasicMaterial({
+      color: 0xf0bf6e,
+      transparent: true,
+      opacity: 0.7,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+    const liquidSurface = new THREE.Mesh(liquidSurfaceGeom, liquidSurfaceMat);
+    liquidSurface.rotation.x = -Math.PI / 2;
+    liquidSurface.position.set(
+      tubeGroup.position.x,
+      liquidFillWorldY,
+      tubeGroup.position.z,
+    );
+    scene.add(liquidSurface);
+    tubeDisposers.push(
+      () => liquidGeom.dispose(),
+      () => liquidMat.dispose(),
+      () => liquidWire.dispose(),
+      () => liquidWireMat.dispose(),
+      () => liquidSurfaceGeom.dispose(),
+      () => liquidSurfaceMat.dispose(),
+      () => scene.remove(liquidSurface),
+    );
+
+    // Invisible hit proxy so the raycaster can pick the tube reliably.
+    const tubeHitGeom = new THREE.CylinderGeometry(0.26, 0.26, 1.3, 12);
+    const tubeHitMat = new THREE.MeshBasicMaterial({
+      visible: false,
+      depthWrite: false,
+    });
+    const tubeHitProxy = new THREE.Mesh(tubeHitGeom, tubeHitMat);
+    tubeHitProxy.position.y = 0.6;
+    tubeGroup.add(tubeHitProxy);
+    tubeDisposers.push(
+      () => tubeHitGeom.dispose(),
+      () => tubeHitMat.dispose(),
     );
 
     // ---- Animated arrow: probabilistic threading through slice holes ----
@@ -821,7 +1339,14 @@ export default function SwissCheeseSceneInner() {
 
     // ---- Pointer drag: virus spin, bottle spin, or slice tilt ----
     let userInteracted = false;
-    let dragMode: "none" | "virus" | "bottle" | "slice" = "none";
+    let dragMode:
+      | "none"
+      | "virus"
+      | "bottle"
+      | "tube"
+      | "maskBox"
+      | "pills"
+      | "slice" = "none";
     let lastX = 0;
     let lastY = 0;
     // Virus angular velocity (rad/frame) carried after release; decays via FRICTION.
@@ -830,10 +1355,24 @@ export default function SwissCheeseSceneInner() {
     // Bottle has its own independent velocity so it can coast separately.
     let bottleVelY = 0;
     let bottleVelX = 0;
+    // Test tube only tilts, no Y spin — single-axis coast velocity.
+    let tubeVelX = 0;
+    let maskBoxVelY = 0;
+    // Extra shake added on top of the per-pill idle wiggle while the user is
+    // dragging the pills. Decays back to 0 so they ease into the idle motion.
+    let pillsShake = 0;
+    const PILLS_SHAKE_MAX = 2.5;
+    const PILLS_SHAKE_DECAY = 0.96;
     const FRICTION = 0.97;
     const VEL_STOP_EPSILON = 1e-5;
     const VIRUS_ROT_PER_PX = 0.005;
     const BOTTLE_ROT_PER_PX = 0.006;
+    const TUBE_ROT_PER_PX = 0.006;
+    // Bottle is clamped to ±15°; the tube swings further (±45°) so the user
+    // can really tip it over and see the liquid stay level.
+    const BOTTLE_TILT_LIMIT = Math.PI / 12;
+    const TUBE_TILT_LIMIT = Math.PI / 4;
+    const MASKBOX_ROT_PER_PX = 0.006;
     const SLICE_ROT_PER_PX = 0.004;
     // Clamp slice user-tilt so cheese stays at least mostly edge-on / vertical
     const SLICE_Y_MIN = SLICE_TILT_Y - 0.6;
@@ -844,18 +1383,31 @@ export default function SwissCheeseSceneInner() {
     const raycaster = new THREE.Raycaster();
     const ndc = new THREE.Vector2();
 
-    const pickTarget = (e: PointerEvent): "bottle" | "slice" | "virus" => {
+    const pickTarget = (
+      e: PointerEvent,
+    ): "bottle" | "tube" | "maskBox" | "pills" | "slice" | "virus" => {
       const rect = canvasEl.getBoundingClientRect();
       ndc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       ndc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(ndc, camera);
-      // Bottle first so it wins if it's on top of slice 2
+      // Props first so they win against the slices behind them
       const hits = raycaster.intersectObjects(
-        [bottleHitProxy, ...sliceFillMeshes],
+        [
+          bottleHitProxy,
+          tubeHitProxy,
+          maskHitProxy,
+          pillsHitProxy,
+          ...sliceFillMeshes,
+        ],
         false,
       );
       if (hits.length === 0) return "virus";
-      return hits[0].object === bottleHitProxy ? "bottle" : "slice";
+      const obj = hits[0].object;
+      if (obj === bottleHitProxy) return "bottle";
+      if (obj === tubeHitProxy) return "tube";
+      if (obj === maskHitProxy) return "maskBox";
+      if (obj === pillsHitProxy) return "pills";
+      return "slice";
     };
 
     const onPointerDown = (e: PointerEvent) => {
@@ -869,6 +1421,10 @@ export default function SwissCheeseSceneInner() {
       } else if (dragMode === "bottle") {
         bottleVelY = 0;
         bottleVelX = 0;
+      } else if (dragMode === "tube") {
+        tubeVelX = 0;
+      } else if (dragMode === "maskBox") {
+        maskBoxVelY = 0;
       }
       lastX = e.clientX;
       lastY = e.clientY;
@@ -891,11 +1447,41 @@ export default function SwissCheeseSceneInner() {
         velX = velX * 0.5 + stepX * 0.5;
       } else if (dragMode === "bottle") {
         const stepY = dx * BOTTLE_ROT_PER_PX;
-        const stepX = dy * BOTTLE_ROT_PER_PX;
         sprayBottleGroup.rotation.y += stepY;
-        sprayBottleGroup.rotation.x += stepX;
         bottleVelY = bottleVelY * 0.5 + stepY * 0.5;
-        bottleVelX = bottleVelX * 0.5 + stepX * 0.5;
+        // Vertical drag tilts the bottle around X, clamped to ±15° so the
+        // bottle stays clearly bottle-shaped.
+        const stepX = dy * BOTTLE_ROT_PER_PX;
+        const nextX = sprayBottleGroup.rotation.x + stepX;
+        const clampedX = Math.max(
+          -BOTTLE_TILT_LIMIT,
+          Math.min(BOTTLE_TILT_LIMIT, nextX),
+        );
+        // Kill velocity if we hit the rail so momentum doesn't keep pushing.
+        if (clampedX !== nextX) bottleVelX = 0;
+        else bottleVelX = bottleVelX * 0.5 + stepX * 0.5;
+        sprayBottleGroup.rotation.x = clampedX;
+      } else if (dragMode === "tube") {
+        // Tube only tilts — no Y spin.
+        const stepX = dy * TUBE_ROT_PER_PX;
+        const nextX = tubeGroup.rotation.x + stepX;
+        const clampedX = Math.max(
+          -TUBE_TILT_LIMIT,
+          Math.min(TUBE_TILT_LIMIT, nextX),
+        );
+        if (clampedX !== nextX) tubeVelX = 0;
+        else tubeVelX = tubeVelX * 0.5 + stepX * 0.5;
+        tubeGroup.rotation.x = clampedX;
+      } else if (dragMode === "maskBox") {
+        const stepY = dx * MASKBOX_ROT_PER_PX;
+        maskGroup.rotation.y += stepY;
+        maskBoxVelY = maskBoxVelY * 0.5 + stepY * 0.5;
+      } else if (dragMode === "pills") {
+        // Pills don't spin — drag energy only feeds the shake/jitter.
+        pillsShake = Math.min(
+          PILLS_SHAKE_MAX,
+          pillsShake + (Math.abs(dx) + Math.abs(dy)) * 0.04,
+        );
       } else {
         // Apply the same delta to every slice container, then clamp so the
         // arrangement can't be tilted past a sensible range.
@@ -941,12 +1527,61 @@ export default function SwissCheeseSceneInner() {
       // Bottle momentum coast (independent of virus)
       if (dragMode !== "bottle") {
         sprayBottleGroup.rotation.y += bottleVelY;
-        sprayBottleGroup.rotation.x += bottleVelX;
         bottleVelY *= FRICTION;
-        bottleVelX *= FRICTION;
         if (Math.abs(bottleVelY) < VEL_STOP_EPSILON) bottleVelY = 0;
+        // Tilt coast with the same ±15° clamp; zero velocity if it bottoms out.
+        const nextX = sprayBottleGroup.rotation.x + bottleVelX;
+        const clampedX = Math.max(
+          -BOTTLE_TILT_LIMIT,
+          Math.min(BOTTLE_TILT_LIMIT, nextX),
+        );
+        if (clampedX !== nextX) bottleVelX = 0;
+        sprayBottleGroup.rotation.x = clampedX;
+        bottleVelX *= FRICTION;
         if (Math.abs(bottleVelX) < VEL_STOP_EPSILON) bottleVelX = 0;
       }
+      // Test tube tilt-only momentum coast (no Y spin)
+      if (dragMode !== "tube") {
+        const nextX = tubeGroup.rotation.x + tubeVelX;
+        const clampedX = Math.max(
+          -TUBE_TILT_LIMIT,
+          Math.min(TUBE_TILT_LIMIT, nextX),
+        );
+        if (clampedX !== nextX) tubeVelX = 0;
+        tubeGroup.rotation.x = clampedX;
+        tubeVelX *= FRICTION;
+        if (Math.abs(tubeVelX) < VEL_STOP_EPSILON) tubeVelX = 0;
+      }
+      // Pills wiggle: per-pill sin/cos around stored base pose, distinct phases.
+      // While the user is dragging the pills, `pillsShake` adds amplitude and
+      // a touch of random jitter; it decays back to 0 so the motion eases into
+      // the baseline idle wiggle.
+      const pillT = performance.now() / 1000;
+      const shakeAmp = 1 + pillsShake;
+      const jitter = pillsShake * 0.08;
+      for (const p of pills) {
+        p.mesh.rotation.z =
+          p.baseRotZ +
+          Math.sin(pillT * 1.0 + p.phase) * 0.22 * shakeAmp +
+          (Math.random() - 0.5) * jitter * 2;
+        p.mesh.position.y =
+          p.baseY +
+          Math.sin(pillT * 1.3 + p.phase) * 0.07 * shakeAmp +
+          (Math.random() - 0.5) * jitter;
+        p.mesh.position.x =
+          p.baseX +
+          Math.cos(pillT * 0.8 + p.phase) * 0.03 * shakeAmp +
+          (Math.random() - 0.5) * jitter;
+      }
+      pillsShake *= PILLS_SHAKE_DECAY;
+      if (pillsShake < 1e-3) pillsShake = 0;
+      if (dragMode !== "maskBox") {
+        maskGroup.rotation.y += maskBoxVelY;
+        maskBoxVelY *= FRICTION;
+        if (Math.abs(maskBoxVelY) < VEL_STOP_EPSILON) maskBoxVelY = 0;
+      }
+      // Lid flap — small sinusoidal hinge rotation
+      lidHinge.rotation.x = -0.7 + Math.sin(performance.now() / 380) * 0.12;
       // Advance the current arrow shot
       if (shotMesh && shotGeom && shotCurve && shotGeom.index) {
         const elapsed = performance.now() / 1000 - shotStartTime;
@@ -993,6 +1628,9 @@ export default function SwissCheeseSceneInner() {
       canvasEl.removeEventListener("pointercancel", onPointerUp);
       sliceDisposers.forEach((fn) => fn());
       sprayBottleDisposers.forEach((fn) => fn());
+      maskDisposers.forEach((fn) => fn());
+      pillDisposers.forEach((fn) => fn());
+      tubeDisposers.forEach((fn) => fn());
       disposeCurrentShot();
       arrowHeadGeom.dispose();
       arrowMat.dispose();

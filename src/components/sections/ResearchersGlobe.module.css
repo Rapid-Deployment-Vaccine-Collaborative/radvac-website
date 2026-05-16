@@ -25,10 +25,12 @@
 }
 
 .pin {
-  /* Default hidden — globe.gl's visibility modifier reveals the front-facing
-     ones on every camera change. Starting hidden eliminates the brief window
-     during initial mount where back-side pins would otherwise be visible. */
-  display: none;
+  /* Default hidden via `visibility` (not `display`) — CSS2DRenderer rewrites
+     `style.display` every frame for its own frustum culling, so a `display:
+     none` default would be overwritten back to "" and fall through to "block"
+     before our visibility modifier runs. `visibility` is untouched by
+     CSS2DRenderer, so the modifier's setting persists. */
+  visibility: hidden;
   width: 9px;
   height: 9px;
   margin: -4.5px 0 0 -4.5px;

@@ -6,6 +6,13 @@ export type TeamMember = {
   linkedin: string;
   x?: string;
   image?: string;
+  /** Larger portrait used on the person page; falls back to `image`. */
+  pageImage?: string;
+  /**
+   * If set, the bio for this member is pulled from WordPress at this URI
+   * (e.g. "team/preston-estep") instead of using the static `bio` field.
+   */
+  wpUri?: string;
 };
 
 export const team: TeamMember[] = [
@@ -17,6 +24,8 @@ export const team: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/preston-estep-76556b6",
     x: "https://x.com/PrestonWEstep",
     image: "/images/preston-narrow.png",
+    pageImage: "/images/preston-page.jpg",
+    wpUri: "team/preston-estep",
   },
   {
     slug: "alex-hoekstra",
@@ -25,6 +34,9 @@ export const team: TeamMember[] = [
     bio: "Alex Hoekstra is Director of Community and co-founder of the RaDVaC project. He has previously served as both a staff member and participatory research pioneer at the Harvard Personal Genome Project, and worked to advance accessibility and rationality across multiple fields of life sciences.",
     linkedin: "https://www.linkedin.com/in/alexhoekstra",
     x: "https://x.com/HoekstraTweets",
+    image: "/images/alex-narrow.png",
+    pageImage: "/images/alex-page.jpg",
+    wpUri: "team/alex-hoekstra",
   },
   {
     slug: "ranjan-ahuja",
@@ -50,6 +62,7 @@ export const team: TeamMember[] = [
     bio: "Dan Elton, PhD is a scientist and content writer at RaDVaC working on AI projects.",
     linkedin: "https://www.linkedin.com/in/danielelton",
     x: "https://x.com/moreisdifferent",
+    image: "/images/dan-narrow.png",
   },
 ];
 

@@ -8,6 +8,7 @@ import { RaDVaCLogo } from "./RaDVaCLogo";
 
 const navItems = [
   { label: "FAQ", href: "/faq" },
+  { label: "Projects", href: "/projects" },
   { label: "Publications", href: "/publications" },
   { label: "Updates", href: "/press-release/" },
   { label: "Network", href: "/researchers-map" },

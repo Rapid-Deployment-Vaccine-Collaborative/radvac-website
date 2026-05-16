@@ -137,13 +137,16 @@ export default function ResearchersGlobeInner() {
     return el;
   }, []);
 
-  // Hide pins on the back hemisphere — HTML elements don't depth-test against
-  // the WebGL globe, so we toggle display when the library reports them
-  // occluded. CSS defaults .pin to `display: none`, so back-side pins stay
-  // hidden until the modifier explicitly reveals them.
+  // Hide pins on the back hemisphere. HTML elements don't depth-test against
+  // the WebGL globe, so we toggle visibility when the library reports them
+  // occluded. We use `visibility` (not `display`) because three.js's
+  // CSS2DRenderer overwrites `style.display` on every frame for its own
+  // frustum culling — any display value we set would be clobbered. CSS
+  // defaults `.pin` to `visibility: hidden`, so pins stay hidden until this
+  // modifier explicitly reveals them.
   const htmlVisibility = useCallback(
     (el: HTMLElement, isVisible: boolean) => {
-      el.style.display = isVisible ? "block" : "none";
+      el.style.visibility = isVisible ? "visible" : "hidden";
     },
     [],
   );
