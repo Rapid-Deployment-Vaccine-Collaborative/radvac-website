@@ -5,6 +5,8 @@ import { rewriteWordPressUrls } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ConsentPopup } from "@/components/ConsentPopup";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug("white-papers");
   const ogImage = page?.seo?.opengraphImage?.sourceUrl;

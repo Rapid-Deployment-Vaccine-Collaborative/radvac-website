@@ -3,20 +3,16 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   getPostBySlug,
-  getAllPostSlugs,
   getCommentsForPost,
 } from "@/lib/wordpress/queries";
 import { rewriteWordPressUrls } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { CommentForm } from "./CommentForm";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const slugs = await getAllPostSlugs();
-  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

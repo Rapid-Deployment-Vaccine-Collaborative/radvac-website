@@ -10,15 +10,13 @@ import {
 } from "@/components/icons/SocialIcons";
 import { getPageBySlug } from "@/lib/wordpress/queries";
 import { rewriteWordPressUrls } from "@/lib/utils";
-import { getMemberBySlug, team } from "@/lib/team";
+import { getMemberBySlug } from "@/lib/team";
 import styles from "./page.module.css";
+
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  return team.map((m) => ({ slug: m.slug }));
 }
 
 export async function generateMetadata({

@@ -4,6 +4,8 @@ import { getPageBySlug } from "@/lib/wordpress/queries";
 import { rewriteWordPressUrls } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug("contact");
 

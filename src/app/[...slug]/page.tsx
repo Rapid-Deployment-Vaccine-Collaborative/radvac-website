@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPageBySlug, getAllPageSlugs } from "@/lib/wordpress/queries";
+import { getPageBySlug } from "@/lib/wordpress/queries";
 import { rewriteWordPressUrls } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ slug: string[] }>;
-}
-
-export async function generateStaticParams() {
-  const paths = await getAllPageSlugs();
-  return paths
-    .filter((path) => path !== "home" && path !== "press-release")
-    .map((path) => ({ slug: path.split("/") }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

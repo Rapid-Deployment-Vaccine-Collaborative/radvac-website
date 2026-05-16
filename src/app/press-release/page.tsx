@@ -5,6 +5,8 @@ import { getAllPosts } from "@/lib/wordpress/queries";
 import { rewriteWordPressUrls } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Updates — RaDVaC",
   description: "News, press releases, and updates from RaDVaC.",
