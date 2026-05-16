@@ -69,8 +69,8 @@ export async function getPageBySlug(
       { isDraft, revalidate: 3600 }
     );
     return data.page;
-  } catch {
-    console.error(`Failed to fetch page: ${slug}`);
+  } catch (err) {
+    console.error(`Failed to fetch page: ${slug}`, err);
     return null;
   }
 }
