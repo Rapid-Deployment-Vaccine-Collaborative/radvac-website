@@ -45,6 +45,7 @@ export const team: TeamMember[] = [
     bio: "Ranjan Ahuja is Director of Communications at RaDVaC. He is also a staff member (currently on leave) at the Harvard Personal Genome Project. He is committed to accelerating benefits to society through open source and open access science.",
     linkedin: "https://www.linkedin.com/in/rxahuja/",
     image: "/images/Ranjan-narrow.png",
+    wpUri: "team/ranjan-ahuja",
   },
   {
     slug: "brian-delaney",
@@ -54,6 +55,7 @@ export const team: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/brian-manning-delaney/",
     x: "https://x.com/BrianMDelaney",
     image: "/images/brian-narrow.png",
+    wpUri: "team/brian-delaney",
   },
   {
     slug: "dan-elton",
@@ -63,6 +65,7 @@ export const team: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/danielelton",
     x: "https://x.com/moreisdifferent",
     image: "/images/dan-narrow.png",
+    wpUri: "team/dan-elton",
   },
 ];
 
