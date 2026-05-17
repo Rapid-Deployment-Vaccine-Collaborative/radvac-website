@@ -1,6 +1,6 @@
 import NextImage from "next/image";
 import type { CoreImageAttributes } from "@/lib/wordpress/types";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { rewriteWordPressUrls, sanitizeWpHtml } from "@/lib/utils";
 
 interface Props {
   attributes?: Record<string, unknown>;
@@ -25,7 +25,7 @@ export function ImageBlock({ attributes }: Props) {
       {attrs.caption && (
         <figcaption
           className="mt-2 text-sm text-text-secondary text-center"
-          dangerouslySetInnerHTML={{ __html: attrs.caption }}
+          dangerouslySetInnerHTML={{ __html: sanitizeWpHtml(attrs.caption) }}
         />
       )}
     </figure>

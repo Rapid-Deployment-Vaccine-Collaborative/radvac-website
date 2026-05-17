@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPageBySlug } from "@/lib/wordpress/queries";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ConsentPopup } from "@/components/ConsentPopup";
 
@@ -40,8 +40,8 @@ export default async function WhitePapersPage() {
     notFound();
   }
 
-  const content = rewriteWordPressUrls(page.content);
-  const consentHtml = consent ? rewriteWordPressUrls(consent.content) : "";
+  const content = sanitizeWpHtml(page.content);
+  const consentHtml = consent ? sanitizeWpHtml(consent.content) : "";
   const consentTitle = consent?.title ?? "Terms of Use and Consent";
 
   return (

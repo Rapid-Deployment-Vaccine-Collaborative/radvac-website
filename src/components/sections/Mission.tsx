@@ -1,5 +1,5 @@
 import { getPageBySlug } from "@/lib/wordpress/queries";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 import styles from "./Mission.module.css";
 
 const MISSION_PAGE_SLUG = "mission";
@@ -37,7 +37,7 @@ function FallbackContent() {
 export async function Mission() {
   const page = await getPageBySlug(MISSION_PAGE_SLUG);
   const html = page?.content?.trim()
-    ? rewriteWordPressUrls(page.content)
+    ? sanitizeWpHtml(page.content)
     : null;
 
   return (

@@ -16,6 +16,12 @@ export async function GET(request: NextRequest) {
     return new Response("Missing slug parameter", { status: 400 });
   }
 
+  // Restrict to WP-style paths: segments of [a-z0-9_-] joined by /.
+  // Rejects schemes, hosts, protocol-relative (//host), backslashes, etc.
+  if (!/^[a-z0-9_-]+(?:\/[a-z0-9_-]+)*$/i.test(slug)) {
+    return new Response("Invalid slug", { status: 400 });
+  }
+
   // Enable draft mode
   const draft = await draftMode();
   draft.enable();

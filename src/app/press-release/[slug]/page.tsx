@@ -5,11 +5,9 @@ import {
   getPostBySlug,
   getCommentsForPost,
 } from "@/lib/wordpress/queries";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { CommentForm } from "./CommentForm";
-
-export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -64,7 +62,7 @@ export default async function PostPage({ params }: PageProps) {
   }
 
   const comments = await getCommentsForPost(post.databaseId);
-  const content = rewriteWordPressUrls(post.content);
+  const content = sanitizeWpHtml(post.content);
 
   return (
     <>
@@ -126,7 +124,7 @@ export default async function PostPage({ params }: PageProps) {
                     <div
                       className="prose prose-sm max-w-none"
                       dangerouslySetInnerHTML={{
-                        __html: rewriteWordPressUrls(c.content),
+                        __html: sanitizeWpHtml(c.content),
                       }}
                     />
                   </li>

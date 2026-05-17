@@ -18,6 +18,12 @@ Public site for radvac.org. **Next.js 15 (App Router) + React 19 + TS + Tailwind
 - **Local WP** stack at [wordpress/docker-compose.yml](wordpress/docker-compose.yml) runs on **port 8080** (note: image config in [next.config.ts](next.config.ts) historically references 8890 — check before running).
 - **Don't commit:** `.env.local`, `*.xml` (the 189 MB WP export), `wordpress/plugins/*.zip` (built bundles). All in `.gitignore`.
 
+## Dev environment gotchas
+
+- The repo lives under `~/Dropbox/`. **Do not** set `distDir` to an absolute path in `next.config.ts` — Next.js silently strips the leading `/` and creates the directory **inside the project** (e.g. `home/dan/.cache/radvac-next/`), which breaks chunk URLs and triggers infinite Fast Refresh churn. Keep the default `.next` directory.
+- `.next` and `node_modules` are marked Dropbox-ignored via the `user.com.dropbox.ignored` extended attribute. If either gets recreated (e.g. fresh clone), reapply with: `attr -s com.dropbox.ignored -V 1 .next && attr -s com.dropbox.ignored -V 1 node_modules`.
+- Do not disable webpack's dev cache (`config.cache = false`) — it makes every keystroke trigger a full module rebuild.
+
 ## Common tasks
 
 - **Add a query for a new WP content type:** mirror the `getPageBySlug` shape in [src/lib/wordpress/queries.ts](src/lib/wordpress/queries.ts) (try/catch → null/empty fallback, `revalidate: 3600`), add types to [src/lib/wordpress/types.ts](src/lib/wordpress/types.ts), call from a server component.

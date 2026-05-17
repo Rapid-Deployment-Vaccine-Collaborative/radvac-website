@@ -9,7 +9,7 @@ import {
   XIcon,
 } from "@/components/icons/SocialIcons";
 import { getPageBySlug } from "@/lib/wordpress/queries";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 import { getMemberBySlug } from "@/lib/team";
 import styles from "./page.module.css";
 
@@ -37,7 +37,7 @@ export default async function TeamMemberPage({ params }: PageProps) {
   if (!member) notFound();
 
   const wpPage = member.wpUri ? await getPageBySlug(member.wpUri) : null;
-  const wpHtml = wpPage ? rewriteWordPressUrls(wpPage.content) : null;
+  const wpHtml = wpPage ? sanitizeWpHtml(wpPage.content) : null;
 
   return (
     <>

@@ -1,5 +1,5 @@
 import type { CoreListAttributes } from "@/lib/wordpress/types";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 
 interface Props {
   attributes?: Record<string, unknown>;
@@ -9,7 +9,7 @@ export function ListBlock({ attributes }: Props) {
   const attrs = attributes as unknown as CoreListAttributes | undefined;
   if (!attrs?.values) return null;
 
-  const html = rewriteWordPressUrls(attrs.values);
+  const html = sanitizeWpHtml(attrs.values);
   const Tag = attrs.ordered ? "ol" : "ul";
 
   return (

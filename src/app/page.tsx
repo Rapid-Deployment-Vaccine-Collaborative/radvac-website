@@ -4,8 +4,6 @@ import { Team } from "@/components/sections/Team";
 import { Projects } from "@/components/sections/Projects";
 import { Donate } from "@/components/sections/Donate";
 
-export const dynamic = "force-dynamic";
-
 export default function HomePage() {
   return (
     <>

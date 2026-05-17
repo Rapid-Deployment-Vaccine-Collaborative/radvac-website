@@ -4,10 +4,8 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { FaqSection } from "@/components/faq/FaqSection";
 import { ContactStrip } from "@/components/faq/ContactStrip";
 import { getPageBySlug } from "@/lib/wordpress/queries";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 import { parseWpsmAccordion } from "@/lib/wordpress/parseWpsmAccordion";
-
-export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageBySlug("faq");
@@ -25,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function FaqPage() {
   const page = await getPageBySlug("faq");
-  const html = page?.content ? rewriteWordPressUrls(page.content) : "";
+  const html = page?.content ? sanitizeWpHtml(page.content) : "";
   const items = parseWpsmAccordion(html);
 
   const sections: FaqSectionData[] =

@@ -36,11 +36,10 @@ export function Hero() {
           ref={videoRef}
           autoPlay
           muted
-          loop
           playsInline
           preload="auto"
         >
-          <source src="/videos/biosecurity-faster.webm" type="video/webm" />
+          <source src="/wp-content/uploads/2026/05/biosecurity-faster.webm" type="video/webm" />
         </video>
       </figure>
     </section>

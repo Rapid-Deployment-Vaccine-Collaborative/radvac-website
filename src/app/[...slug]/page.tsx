@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPageBySlug } from "@/lib/wordpress/queries";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 
 export const dynamic = "force-dynamic";
@@ -51,7 +51,7 @@ export default async function DynamicPage({ params }: PageProps) {
     notFound();
   }
 
-  const content = rewriteWordPressUrls(page.content);
+  const content = sanitizeWpHtml(page.content);
 
   return (
     <>

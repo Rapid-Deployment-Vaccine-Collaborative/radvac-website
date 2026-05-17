@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/wordpress/queries";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Updates — RaDVaC",
@@ -77,16 +75,14 @@ export default async function UpdatesListPage() {
                       </p>
                       <h2
                         className="text-2xl font-semibold mb-3 group-hover:underline"
-                        dangerouslySetInnerHTML={{ __html: post.title }}
+                        dangerouslySetInnerHTML={{ __html: sanitizeWpHtml(post.title) }}
                       />
                       {post.excerpt && (
                         <div
                           className="prose max-w-none text-gray-700 line-clamp-4"
                           dangerouslySetInnerHTML={{
-                            __html: flattenExcerpt(
-                              stripContinueReading(
-                                rewriteWordPressUrls(post.excerpt)
-                              )
+                            __html: sanitizeWpHtml(
+                              flattenExcerpt(stripContinueReading(post.excerpt))
                             ),
                           }}
                         />

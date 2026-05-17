@@ -1,5 +1,5 @@
 import type { WpBlock } from "@/lib/wordpress/types";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 
 interface Props {
   block: WpBlock;
@@ -8,7 +8,7 @@ interface Props {
 export function FallbackBlock({ block }: Props) {
   // If there's rendered HTML from WordPress, use it as fallback
   if (block.renderedHtml) {
-    const html = rewriteWordPressUrls(block.renderedHtml);
+    const html = sanitizeWpHtml(block.renderedHtml);
     return (
       <div
         className="prose max-w-none my-4"

@@ -1,5 +1,5 @@
 import type { CoreHeadingAttributes } from "@/lib/wordpress/types";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 
 interface Props {
   attributes?: Record<string, unknown>;
@@ -19,7 +19,7 @@ export function Heading({ attributes }: Props) {
   if (!attrs?.content) return null;
 
   const level = attrs.level || 2;
-  const html = rewriteWordPressUrls(attrs.content);
+  const html = sanitizeWpHtml(attrs.content);
   const style = levelStyles[level] || levelStyles[2];
   const alignClass = attrs.textAlign ? `text-${attrs.textAlign}` : "";
   const className = `font-heading text-primary-dark ${style} ${alignClass} ${attrs.className || ""}`.trim();

@@ -173,26 +173,42 @@ export default function SwissCheeseSceneInner() {
     // browsers, ancient devices). Keeps the rest of the page rendering instead
     // of throwing out of useEffect and tripping the global error boundary.
     const showFallback = () => {
+      const wrap = document.createElement("div");
+      wrap.style.cssText = [
+        "position:absolute",
+        "inset:0",
+        "display:flex",
+        "flex-direction:column",
+        "align-items:center",
+        "justify-content:center",
+        "gap:16px",
+        "padding:24px",
+        "text-align:center",
+      ].join(";");
+      const img = document.createElement("img");
+      img.src = "/images/swiss-cheese-backup.png";
+      img.alt = "Swiss cheese model illustration";
+      img.style.cssText = [
+        "max-width:100%",
+        "max-height:calc(100% - 80px)",
+        "height:auto",
+        "object-fit:contain",
+      ].join(";");
       const note = document.createElement("div");
       note.textContent =
         "Your browser/setup doesn't support WebGL — try enabling hardware acceleration or use a different browser to view the Swiss cheese graphic.";
       note.style.cssText = [
-        "position:absolute",
-        "inset:0",
-        "display:grid",
-        "place-items:center",
-        "padding:24px",
-        "text-align:center",
         "color:var(--ink-soft,#475569)",
         "font-family:var(--sans,system-ui,sans-serif)",
         "font-size:14px",
         "line-height:1.5",
         "max-width:520px",
-        "margin:0 auto",
       ].join(";");
-      el.appendChild(note);
+      wrap.appendChild(img);
+      wrap.appendChild(note);
+      el.appendChild(wrap);
       return () => {
-        if (note.parentNode === el) el.removeChild(note);
+        if (wrap.parentNode === el) el.removeChild(wrap);
       };
     };
 

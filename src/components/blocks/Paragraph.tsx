@@ -1,5 +1,5 @@
 import type { CoreParagraphAttributes } from "@/lib/wordpress/types";
-import { rewriteWordPressUrls } from "@/lib/utils";
+import { sanitizeWpHtml } from "@/lib/utils";
 
 interface Props {
   attributes?: Record<string, unknown>;
@@ -9,7 +9,7 @@ export function Paragraph({ attributes }: Props) {
   const attrs = attributes as unknown as CoreParagraphAttributes | undefined;
   if (!attrs?.content) return null;
 
-  const html = rewriteWordPressUrls(attrs.content);
+  const html = sanitizeWpHtml(attrs.content);
   const alignClass = attrs.align ? `text-${attrs.align}` : "";
 
   return (
