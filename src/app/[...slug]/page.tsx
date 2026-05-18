@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { getPageBySlug } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { CmsErrorBanner } from "@/components/CmsErrorBanner";
+import type { WpPage } from "@/lib/wordpress/types";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +15,12 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const path = slug.join("/");
-  const page = await getPageBySlug(path);
+  let page: WpPage | null = null;
+  try {
+    page = await getPageBySlug(path);
+  } catch {
+    return { title: "RaDVaC" };
+  }
 
   if (!page) {
     return { title: "Page Not Found" };
@@ -45,7 +52,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function DynamicPage({ params }: PageProps) {
   const { slug } = await params;
   const path = slug.join("/");
-  const page = await getPageBySlug(path);
+  let page: WpPage | null = null;
+  let fetchFailed = false;
+  try {
+    page = await getPageBySlug(path);
+  } catch (err) {
+    console.error(`[...slug] ${path}: failed to fetch WP content`, err);
+    fetchFailed = true;
+  }
+
+  if (fetchFailed) {
+    return (
+      <>
+        <PageHeader title="RaDVaC" />
+        <CmsErrorBanner />
+      </>
+    );
+  }
 
   if (!page) {
     notFound();

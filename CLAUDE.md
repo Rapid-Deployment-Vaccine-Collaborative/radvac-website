@@ -21,7 +21,7 @@ Public site for radvac.org. **Next.js 15 (App Router) + React 19 + TS + Tailwind
 ## Dev environment gotchas
 
 - The repo lives under `~/Dropbox/`. **Do not** set `distDir` to an absolute path in `next.config.ts` — Next.js silently strips the leading `/` and creates the directory **inside the project** (e.g. `home/dan/.cache/radvac-next/`), which breaks chunk URLs and triggers infinite Fast Refresh churn. Keep the default `.next` directory.
-- `.next` and `node_modules` are marked Dropbox-ignored via the `user.com.dropbox.ignored` extended attribute. If either gets recreated (e.g. fresh clone), reapply with: `attr -s com.dropbox.ignored -V 1 .next && attr -s com.dropbox.ignored -V 1 node_modules`.
+- `.next` and `node_modules` are marked Dropbox-ignored via the `com.dropbox.ignored` extended attribute. If either gets recreated (e.g. fresh clone, or after an `npm install` that recreates `node_modules`), reapply on macOS with: `xattr -w com.dropbox.ignored 1 .next && xattr -w com.dropbox.ignored 1 node_modules`. Verify with `xattr -p com.dropbox.ignored .next`. Symptoms of a missing marker: `.next (Selective Sync Conflict N)` directories appearing on every dev rebuild, and/or `node_modules` getting silently emptied by Dropbox.
 - Do not disable webpack's dev cache (`config.cache = false`) — it makes every keystroke trigger a full module rebuild.
 
 ## Common tasks

@@ -4,10 +4,9 @@ import { getPageBySlug } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ContactForm } from "@/components/features/ContactForm";
+import { CmsErrorBanner } from "@/components/CmsErrorBanner";
+import type { WpPage } from "@/lib/wordpress/types";
 
-// Strip the CF7 plugin's form markup (and its preceding heading) out of WP
-// content. The React ContactForm below replaces it. Once the CF7 shortcode is
-// removed from the WP page, this becomes a no-op and can be deleted.
 function stripCf7(html: string): string {
   return html
     .replace(
@@ -20,7 +19,12 @@ function stripCf7(html: string): string {
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getPageBySlug("contact");
+  let page: WpPage | null = null;
+  try {
+    page = await getPageBySlug("contact");
+  } catch {
+    // CMS unreachable; fall through to defaults
+  }
 
   if (!page) {
     return { title: "Contact" };
@@ -50,24 +54,35 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  const page = await getPageBySlug("contact");
+  let page: WpPage | null = null;
+  let fetchFailed = false;
+  try {
+    page = await getPageBySlug("contact");
+  } catch (err) {
+    console.error("contact: failed to fetch WP content", err);
+    fetchFailed = true;
+  }
 
-  if (!page) {
+  if (!fetchFailed && !page) {
     notFound();
   }
 
-  const content = sanitizeWpHtml(stripCf7(page.content));
-
   return (
     <>
-      <PageHeader title={page.title} />
+      <PageHeader title={page?.title ?? "Contact"} />
 
       <section className="py-16 px-6">
         <div className="max-w-[800px] mx-auto">
-          <div
-            className="prose prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+          {fetchFailed ? (
+            <CmsErrorBanner />
+          ) : (
+            <div
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{
+                __html: sanitizeWpHtml(stripCf7(page!.content)),
+              }}
+            />
+          )}
 
           <h2 className="mt-12 mb-6 text-2xl font-bold text-primary-dark">
             Contact us via form

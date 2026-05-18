@@ -11,6 +11,7 @@ import {
 import { getPageBySlug } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
 import { getMemberBySlug } from "@/lib/team";
+import { CmsErrorBanner } from "@/components/CmsErrorBanner";
 import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
@@ -36,8 +37,17 @@ export default async function TeamMemberPage({ params }: PageProps) {
   const member = getMemberBySlug(slug);
   if (!member) notFound();
 
-  const wpPage = member.wpUri ? await getPageBySlug(member.wpUri) : null;
-  const wpHtml = wpPage ? sanitizeWpHtml(wpPage.content) : null;
+  let wpHtml: string | null = null;
+  let wpFetchFailed = false;
+  if (member.wpUri) {
+    try {
+      const wpPage = await getPageBySlug(member.wpUri);
+      wpHtml = wpPage ? sanitizeWpHtml(wpPage.content) : null;
+    } catch (err) {
+      console.error(`team/${slug}: failed to fetch WP bio`, err);
+      wpFetchFailed = true;
+    }
+  }
 
   return (
     <>
@@ -91,7 +101,9 @@ export default async function TeamMemberPage({ params }: PageProps) {
             </div>
           </div>
           <div className={styles.bioCol}>
-            {wpHtml ? (
+            {wpFetchFailed ? (
+              <CmsErrorBanner />
+            ) : wpHtml ? (
               <div
                 className={styles.bio}
                 dangerouslySetInnerHTML={{ __html: wpHtml }}

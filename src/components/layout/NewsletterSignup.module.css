@@ -1,0 +1,98 @@
+.wrap {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.row {
+  display: flex;
+  gap: 6px;
+  align-items: stretch;
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.input {
+  font: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  padding: 5px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: #fff;
+  color: var(--ink);
+  width: 200px;
+}
+.input:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: -1px;
+  border-color: var(--blue);
+}
+
+.button {
+  font: inherit;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  background: var(--ink);
+  color: #fff;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.button:hover:not(:disabled) {
+  background: var(--blue);
+}
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.status {
+  min-height: 0;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 11px;
+  line-height: 1.2;
+}
+.status:empty {
+  display: none;
+}
+.error {
+  color: #b00020;
+}
+.success {
+  color: var(--blue);
+}
+
+@media (max-width: 560px) {
+  .input {
+    width: auto;
+    flex: 1;
+    min-width: 0;
+  }
+}

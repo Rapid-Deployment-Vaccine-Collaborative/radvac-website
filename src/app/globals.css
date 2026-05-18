@@ -36,6 +36,7 @@
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+html, body { overflow-anchor: none; }
 body {
   background: linear-gradient(180deg, #a8c4e7 0%, #f4f8fd 100%);
   background-attachment: fixed;

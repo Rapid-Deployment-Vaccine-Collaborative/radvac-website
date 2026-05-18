@@ -50,6 +50,12 @@ const PAGE_FIELDS = `
   ${SEO_FRAGMENT}
 `;
 
+// Query functions intentionally do not catch errors from `fetchGraphQL`.
+// A thrown error means "the CMS is unreachable"; a returned `null` / `[]`
+// means "the CMS responded but the content doesn't exist." Callers
+// distinguish the two so users see a clear "CMS unavailable" message
+// instead of a misleading 404 or silent static fallback.
+
 export async function getPageBySlug(
   slug: string,
   isDraft = false
@@ -62,17 +68,12 @@ export async function getPageBySlug(
     }
   `;
 
-  try {
-    const data = await fetchGraphQL<{ page: WpPage | null }>(
-      query,
-      { slug },
-      { isDraft, revalidate: 3600 }
-    );
-    return data.page;
-  } catch (err) {
-    console.error(`Failed to fetch page: ${slug}`, err);
-    return null;
-  }
+  const data = await fetchGraphQL<{ page: WpPage | null }>(
+    query,
+    { slug },
+    { isDraft, revalidate: 3600 }
+  );
+  return data.page;
 }
 
 export async function getAllPages(): Promise<WpPage[]> {
@@ -86,15 +87,10 @@ export async function getAllPages(): Promise<WpPage[]> {
     }
   `;
 
-  try {
-    const data = await fetchGraphQL<{ pages: { nodes: WpPage[] } }>(query, undefined, {
-      revalidate: 3600,
-    });
-    return data.pages.nodes;
-  } catch (err) {
-    console.error("Failed to fetch all pages", err);
-    return [];
-  }
+  const data = await fetchGraphQL<{ pages: { nodes: WpPage[] } }>(query, undefined, {
+    revalidate: 3600,
+  });
+  return data.pages.nodes;
 }
 
 export async function getAllPageSlugs(): Promise<string[]> {
@@ -108,17 +104,12 @@ export async function getAllPageSlugs(): Promise<string[]> {
     }
   `;
 
-  try {
-    const data = await fetchGraphQL<{ pages: { nodes: { uri: string }[] } }>(
-      query,
-      undefined,
-      { revalidate: 3600 }
-    );
-    return data.pages.nodes.map((p) => p.uri.replace(/^\/|\/$/g, ""));
-  } catch (err) {
-    console.error("Failed to fetch page slugs", err);
-    return [];
-  }
+  const data = await fetchGraphQL<{ pages: { nodes: { uri: string }[] } }>(
+    query,
+    undefined,
+    { revalidate: 3600 }
+  );
+  return data.pages.nodes.map((p) => p.uri.replace(/^\/|\/$/g, ""));
 }
 
 // ===== Post Queries =====
@@ -168,17 +159,12 @@ export async function getAllPosts(first = 20): Promise<WpPost[]> {
     }
   `;
 
-  try {
-    const data = await fetchGraphQL<{ posts: { nodes: WpPost[] } }>(
-      query,
-      { first },
-      { revalidate: 3600 }
-    );
-    return data.posts.nodes;
-  } catch (err) {
-    console.error("Failed to fetch posts", err);
-    return [];
-  }
+  const data = await fetchGraphQL<{ posts: { nodes: WpPost[] } }>(
+    query,
+    { first },
+    { revalidate: 3600 }
+  );
+  return data.posts.nodes;
 }
 
 export async function getPostBySlug(
@@ -193,17 +179,12 @@ export async function getPostBySlug(
     }
   `;
 
-  try {
-    const data = await fetchGraphQL<{ post: WpPost | null }>(
-      query,
-      { slug },
-      { isDraft, revalidate: 3600 }
-    );
-    return data.post;
-  } catch (err) {
-    console.error(`Failed to fetch post: ${slug}`, err);
-    return null;
-  }
+  const data = await fetchGraphQL<{ post: WpPost | null }>(
+    query,
+    { slug },
+    { isDraft, revalidate: 3600 }
+  );
+  return data.post;
 }
 
 export async function getAllPostSlugs(): Promise<string[]> {
@@ -217,17 +198,12 @@ export async function getAllPostSlugs(): Promise<string[]> {
     }
   `;
 
-  try {
-    const data = await fetchGraphQL<{ posts: { nodes: { slug: string }[] } }>(
-      query,
-      undefined,
-      { revalidate: 3600 }
-    );
-    return data.posts.nodes.map((p) => p.slug);
-  } catch (err) {
-    console.error("Failed to fetch post slugs", err);
-    return [];
-  }
+  const data = await fetchGraphQL<{ posts: { nodes: { slug: string }[] } }>(
+    query,
+    undefined,
+    { revalidate: 3600 }
+  );
+  return data.posts.nodes.map((p) => p.slug);
 }
 
 export async function getCommentsForPost(
@@ -254,17 +230,12 @@ export async function getCommentsForPost(
     }
   `;
 
-  try {
-    const data = await fetchGraphQL<{ comments: { nodes: WpComment[] } }>(
-      query,
-      { id: String(postDatabaseId) },
-      { revalidate: 60 }
-    );
-    return data.comments.nodes;
-  } catch (err) {
-    console.error(`Failed to fetch comments for post ${postDatabaseId}`, err);
-    return [];
-  }
+  const data = await fetchGraphQL<{ comments: { nodes: WpComment[] } }>(
+    query,
+    { id: String(postDatabaseId) },
+    { revalidate: 60 }
+  );
+  return data.comments.nodes;
 }
 
 // ===== FAQ Queries =====
@@ -288,15 +259,10 @@ export async function getFaqPageContent(): Promise<WpFaqSection[]> {
     }
   `;
 
-  try {
-    const data = await fetchGraphQL<{ page: WpFaqPage | null }>(query, undefined, {
-      revalidate: 3600,
-    });
-    return data.page?.faqPageContent?.faqSections ?? [];
-  } catch (err) {
-    console.error("Failed to fetch FAQ page content", err);
-    return [];
-  }
+  const data = await fetchGraphQL<{ page: WpFaqPage | null }>(query, undefined, {
+    revalidate: 3600,
+  });
+  return data.page?.faqPageContent?.faqSections ?? [];
 }
 
 // ===== Menu Queries =====
@@ -326,13 +292,8 @@ export async function getMenuItems(
     }
   `;
 
-  try {
-    const data = await fetchGraphQL<{
-      menuItems: { nodes: WpMenuItem[] };
-    }>(query, { location }, { revalidate: 3600 });
-    return data.menuItems.nodes;
-  } catch (err) {
-    console.error("Failed to fetch menu items", err);
-    return [];
-  }
+  const data = await fetchGraphQL<{
+    menuItems: { nodes: WpMenuItem[] };
+  }>(query, { location }, { revalidate: 3600 });
+  return data.menuItems.nodes;
 }

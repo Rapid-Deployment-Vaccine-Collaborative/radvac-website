@@ -7,7 +7,9 @@ import {
 } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { CmsErrorBanner } from "@/components/CmsErrorBanner";
 import { CommentForm } from "./CommentForm";
+import type { WpPost, WpComment } from "@/lib/wordpress/types";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -15,7 +17,12 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  let post: WpPost | null = null;
+  try {
+    post = await getPostBySlug(slug);
+  } catch {
+    return { title: "Update — RaDVaC" };
+  }
 
   if (!post) {
     return { title: "Post Not Found" };
@@ -55,13 +62,37 @@ function formatDate(iso: string): string {
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  let post: WpPost | null = null;
+  let fetchFailed = false;
+  try {
+    post = await getPostBySlug(slug);
+  } catch (err) {
+    console.error(`press-release/${slug}: failed to fetch WP post`, err);
+    fetchFailed = true;
+  }
+
+  if (fetchFailed) {
+    return (
+      <>
+        <PageHeader title="Update" />
+        <CmsErrorBanner />
+      </>
+    );
+  }
 
   if (!post) {
     notFound();
   }
 
-  const comments = await getCommentsForPost(post.databaseId);
+  let comments: WpComment[] = [];
+  let commentsFailed = false;
+  try {
+    comments = await getCommentsForPost(post.databaseId);
+  } catch (err) {
+    console.error(`press-release/${slug}: failed to fetch comments`, err);
+    commentsFailed = true;
+  }
+
   const content = sanitizeWpHtml(post.content);
 
   return (
@@ -103,7 +134,9 @@ export default async function PostPage({ params }: PageProps) {
               Comments ({comments.length})
             </h2>
 
-            {comments.length === 0 ? (
+            {commentsFailed ? (
+              <CmsErrorBanner />
+            ) : comments.length === 0 ? (
               <p className="text-gray-600 mb-8">
                 No comments yet. Be the first to leave one.
               </p>

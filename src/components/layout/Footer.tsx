@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Footer.module.css";
+import { NewsletterSignup } from "./NewsletterSignup";
 
 const socialLinks = [
   {
@@ -91,6 +92,7 @@ export function Footer() {
           height={56}
         />
       </a>
+      <NewsletterSignup />
       <span>
         <Link href="/privacy-policy">Privacy Policy</Link>
         {" · "}

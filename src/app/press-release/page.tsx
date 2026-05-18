@@ -4,6 +4,8 @@ import Link from "next/link";
 import { getAllPosts } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { CmsErrorBanner } from "@/components/CmsErrorBanner";
+import type { WpPost } from "@/lib/wordpress/types";
 
 export const metadata: Metadata = {
   title: "Updates — RaDVaC",
@@ -39,7 +41,14 @@ function flattenExcerpt(html: string): string {
 }
 
 export default async function UpdatesListPage() {
-  const posts = await getAllPosts();
+  let posts: WpPost[] = [];
+  let fetchFailed = false;
+  try {
+    posts = await getAllPosts();
+  } catch (err) {
+    console.error("press-release: failed to fetch posts", err);
+    fetchFailed = true;
+  }
 
   return (
     <>
@@ -47,8 +56,10 @@ export default async function UpdatesListPage() {
 
       <section className="py-16 px-6">
         <div className="max-w-[900px] mx-auto">
-          {posts.length === 0 ? (
-            <p className="text-center text-gray-600">No updates yet.</p>
+          {fetchFailed ? (
+            <CmsErrorBanner />
+          ) : posts.length === 0 ? (
+            <p className="text-center text-gray-600 py-8">No updates yet.</p>
           ) : (
             <ul className="flex flex-col gap-10">
               {posts.map((post) => {

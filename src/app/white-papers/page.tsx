@@ -4,11 +4,18 @@ import { getPageBySlug } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ConsentPopup } from "@/components/ConsentPopup";
+import { CmsErrorBanner } from "@/components/CmsErrorBanner";
+import type { WpPage } from "@/lib/wordpress/types";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getPageBySlug("white-papers");
+  let page: WpPage | null = null;
+  try {
+    page = await getPageBySlug("white-papers");
+  } catch {
+    // CMS unreachable; fall through to defaults
+  }
   const ogImage = page?.seo?.opengraphImage?.sourceUrl;
 
   return {
@@ -31,10 +38,27 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function WhitePapersPage() {
-  const [page, consent] = await Promise.all([
-    getPageBySlug("white-papers"),
-    getPageBySlug("use-and-consent-popup"),
-  ]);
+  let page: WpPage | null = null;
+  let consent: WpPage | null = null;
+  let fetchFailed = false;
+  try {
+    [page, consent] = await Promise.all([
+      getPageBySlug("white-papers"),
+      getPageBySlug("use-and-consent-popup"),
+    ]);
+  } catch (err) {
+    console.error("white-papers: failed to fetch WP content", err);
+    fetchFailed = true;
+  }
+
+  if (fetchFailed) {
+    return (
+      <>
+        <PageHeader title="White Papers" />
+        <CmsErrorBanner />
+      </>
+    );
+  }
 
   if (!page) {
     notFound();
