@@ -4,6 +4,7 @@ import { getPageBySlug } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ContactForm } from "@/components/features/ContactForm";
+import { ContactNewsletterSignup } from "@/components/features/ContactNewsletterSignup";
 import { CmsErrorBanner } from "@/components/CmsErrorBanner";
 import type { WpPage } from "@/lib/wordpress/types";
 
@@ -83,6 +84,11 @@ export default async function ContactPage() {
               }}
             />
           )}
+
+          <h2 className="mt-12 mb-6 text-2xl font-bold text-primary-dark">
+            Subscribe for occasional updates
+          </h2>
+          <ContactNewsletterSignup />
 
           <h2 className="mt-12 mb-6 text-2xl font-bold text-primary-dark">
             Contact us via form

@@ -3,6 +3,7 @@ import { createHash } from "crypto";
 
 interface SubscribeBody {
   email?: string;
+  firstName?: string;
   company?: string; // honeypot
 }
 
@@ -69,17 +70,24 @@ export async function POST(request: Request) {
     const url = `https://${server}.api.mailchimp.com/3.0/lists/${audienceId}/members/${subscriberHash}`;
     const auth = Buffer.from(`anystring:${apiKey}`).toString("base64");
 
+    const firstName = (data.firstName ?? "").trim().slice(0, 80);
+
+    const mcBody: Record<string, unknown> = {
+      email_address: email,
+      status_if_new: "subscribed",
+      status: "subscribed",
+    };
+    if (firstName) {
+      mcBody.merge_fields = { FNAME: firstName };
+    }
+
     const mcRes = await fetch(url, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Basic ${auth}`,
       },
-      body: JSON.stringify({
-        email_address: email,
-        status_if_new: "subscribed",
-        status: "subscribed",
-      }),
+      body: JSON.stringify(mcBody),
     });
 
     if (!mcRes.ok) {
