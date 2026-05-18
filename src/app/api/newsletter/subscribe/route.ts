@@ -74,8 +74,8 @@ export async function POST(request: Request) {
 
     const mcBody: Record<string, unknown> = {
       email_address: email,
-      status_if_new: "subscribed",
-      status: "subscribed",
+      status_if_new: "pending",
+      status: "pending",
     };
     if (firstName) {
       mcBody.merge_fields = { FNAME: firstName };

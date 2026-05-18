@@ -42,34 +42,15 @@ export function ContactNewsletterSignup() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 text-center">
-        <svg
-          width="48"
-          height="48"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="mx-auto mb-4 text-accent"
-        >
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-          <polyline points="22 4 12 14.01 9 11.01" />
-        </svg>
-        <h3 className="text-xl font-semibold text-primary-dark mb-2">
-          You&apos;re subscribed
-        </h3>
-        <p className="text-text-secondary">
-          Thanks — we&apos;ll be in touch with occasional updates.
-        </p>
+      <p className="text-text">
+        Thank you — please check your email to confirm your subscription.{" "}
         <button
           onClick={() => setStatus("idle")}
-          className="mt-4 text-sm text-primary hover:text-primary-dark underline"
+          className="text-sm text-primary hover:text-primary-dark underline"
         >
           Subscribe another email
         </button>
-      </div>
+      </p>
     );
   }
 
