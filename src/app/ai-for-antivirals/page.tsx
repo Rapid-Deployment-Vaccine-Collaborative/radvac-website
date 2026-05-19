@@ -32,6 +32,17 @@ export default function AiForAntiviralsPage() {
             . Daniel C. Elton and Preston W. Estep, arXiv pre-print, May 2026.
           </p>
           <p>
+            Check out our{" "}
+            <a
+              href="https://antivirals-database.radvac.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              approved and investigational antivirals data explorer
+            </a>
+            .
+          </p>
+          <p>
             <em>More details coming soon.</em>
           </p>
         </div>
