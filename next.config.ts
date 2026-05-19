@@ -37,6 +37,13 @@ const nextConfig: NextConfig = {
       { source: "/wp-admin", destination: "https://radvac-297e5f.ingress-alpha.ewp.live/wp-admin", permanent: true },
       { source: "/wp-admin/:path*", destination: "https://radvac-297e5f.ingress-alpha.ewp.live/wp-admin/:path*", permanent: true },
       { source: "/wp-login.php", destination: "https://radvac-297e5f.ingress-alpha.ewp.live/wp-login.php", permanent: true },
+
+      // Canonicalize team bios to /team/{slug}. Keep this list in sync with src/lib/team.ts.
+      { source: "/preston-estep", destination: "/team/preston-estep", permanent: true },
+      { source: "/alex-hoekstra", destination: "/team/alex-hoekstra", permanent: true },
+      { source: "/ranjan-ahuja", destination: "/team/ranjan-ahuja", permanent: true },
+      { source: "/brian-delaney", destination: "/team/brian-delaney", permanent: true },
+      { source: "/dan-elton", destination: "/team/dan-elton", permanent: true },
     ];
   },
 };
