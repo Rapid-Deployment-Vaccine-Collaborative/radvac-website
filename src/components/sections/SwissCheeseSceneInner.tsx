@@ -1200,6 +1200,14 @@ export default function SwissCheeseSceneInner() {
       virusGroup.add(rna);
     }
 
+    // Slice tilt clamp — read/written by both applyLayout below and the
+    // pointer-drag clamp further down. Declared up here so applyLayout
+    // (which may fire from the first setSize() on a narrow viewport)
+    // doesn't hit a temporal-dead-zone error before the pointer section
+    // initializes them.
+    let SLICE_Y_MIN = layout.sliceTiltY - 0.6;
+    let SLICE_Y_MAX = layout.sliceTiltY + 0.6;
+
     // ---- Mobile-aware layout switcher ----
     // Re-positions every slice, prop, and the virus when the canvas crosses
     // the mobile breakpoint. Slices end up closer together, the virus moves
@@ -1308,9 +1316,7 @@ export default function SwissCheeseSceneInner() {
     const TUBE_TILT_LIMIT = Math.PI / 4;
     const MASKBOX_ROT_PER_PX = 0.006;
     const SLICE_ROT_PER_PX = 0.004;
-    // Clamp slice user-tilt so cheese stays at least mostly edge-on / vertical
-    let SLICE_Y_MIN = layout.sliceTiltY - 0.6;
-    let SLICE_Y_MAX = layout.sliceTiltY + 0.6;
+    // Slice clamp (SLICE_Y_MIN/MAX declared earlier, before applyLayout).
     const SLICE_X_MIN = -0.45;
     const SLICE_X_MAX = 0.45;
     const canvasEl = renderer.domElement;
