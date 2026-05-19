@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Hero.module.css";
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -29,6 +30,8 @@ export function Hero() {
     tryPlay();
   }, []);
 
+  if (failed) return null;
+
   return (
     <section className={styles.hero}>
       <figure className={styles.figure} aria-label="RaDVaC overview video">
@@ -38,8 +41,13 @@ export function Hero() {
           muted
           playsInline
           preload="auto"
+          onError={() => setFailed(true)}
         >
-          <source src="/wp-content/uploads/2026/05/biosecurity-faster.webm" type="video/webm" />
+          <source
+            src="/wp-content/uploads/2026/05/science-faster.webm"
+            type="video/webm"
+            onError={() => setFailed(true)}
+          />
         </video>
       </figure>
     </section>
