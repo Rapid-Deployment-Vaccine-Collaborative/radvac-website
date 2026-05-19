@@ -287,7 +287,9 @@ export default function SwissCheeseSceneInner() {
     const MOBILE_LAYOUT = {
       sliceGap: 2.5,
       virusX: -3.2,
-      sliceTiltY: -0.55,
+      // More edge-on than desktop (−1.0 rad), so the row of slices takes
+      // up much less horizontal width on a narrow viewport.
+      sliceTiltY: -1.3,
     };
     const layout = { ...DESKTOP_LAYOUT };
     let isMobileLayout = false;
@@ -839,9 +841,14 @@ export default function SwissCheeseSceneInner() {
     // splats), a brief pause, then a new shot is planned.
     const ARROW_TUBE_RADIUS = 0.06;
     const ARROW_TUBE_SEGMENTS = 240;
-    const SHOT_DURATION = 3.5; // seconds for the arrow's traversal animation
+    // Constant arrow speed in world units / second. Per-shot duration is
+    // computed from the curve length so short shots play out in proportionally
+    // less time and long shots take longer (constant linear velocity).
+    const ARROW_SPEED = 7;
     const SHOT_HOLD = 1.2; // seconds the finished arrow stays before next shot
-    const SLICE_PASS_PROB = [0.8, 0.5, 0.5, 0.5, 0.5];
+    // Last slice can never be passed — vaccine-derived immunity is the
+    // final, decisive barrier in the model.
+    const SLICE_PASS_PROB = [0.8, 0.5, 0.5, 0.5, 0];
 
     const arrowMat = new THREE.MeshBasicMaterial({
       color: 0x3ddc7a,
@@ -858,6 +865,7 @@ export default function SwissCheeseSceneInner() {
     let shotGeom: THREE.TubeGeometry | null = null;
     let shotCurve: THREE.CatmullRomCurve3 | null = null;
     let shotStartTime = 0;
+    let shotDuration = 1; // recomputed per shot from curve length / ARROW_SPEED
 
     const planShot = () => {
       // Slice container world matrices must reflect any user tilt
@@ -905,6 +913,8 @@ export default function SwissCheeseSceneInner() {
       }
 
       shotCurve = new THREE.CatmullRomCurve3(waypoints);
+      // Constant linear velocity: longer curves take proportionally longer.
+      shotDuration = Math.max(0.6, shotCurve.getLength() / ARROW_SPEED);
       shotGeom = new THREE.TubeGeometry(
         shotCurve,
         ARROW_TUBE_SEGMENTS,
@@ -1548,7 +1558,7 @@ export default function SwissCheeseSceneInner() {
       // Advance the current arrow shot
       if (shotMesh && shotGeom && shotCurve && shotGeom.index) {
         const elapsed = performance.now() / 1000 - shotStartTime;
-        const t = Math.min(1, elapsed / SHOT_DURATION);
+        const t = Math.min(1, elapsed / shotDuration);
         const indexCount = shotGeom.index.count;
         shotGeom.setDrawRange(0, Math.floor(indexCount * t));
         if (t < 1) {
@@ -1558,9 +1568,9 @@ export default function SwissCheeseSceneInner() {
           arrowHead.quaternion.setFromUnitVectors(arrowUp, tipTan);
           arrowHead.visible = true;
         } else {
-          arrowHead.visible = elapsed < SHOT_DURATION + SHOT_HOLD;
+          arrowHead.visible = elapsed < shotDuration + SHOT_HOLD;
         }
-        if (elapsed > SHOT_DURATION + SHOT_HOLD) {
+        if (elapsed > shotDuration + SHOT_HOLD) {
           disposeCurrentShot();
           planShot();
           shotStartTime = performance.now() / 1000;
