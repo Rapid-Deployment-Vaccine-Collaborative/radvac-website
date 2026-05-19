@@ -274,6 +274,26 @@ export default function SwissCheeseSceneInner() {
     const sliceFillMeshes: THREE.Mesh[] = [];
 
     const firstSliceX = -0.6;
+
+    // ---- Mobile-aware layout ----
+    // Layout starts at desktop defaults; on narrow canvases, the resize
+    // handler swaps in tighter values and re-positions every prop and slice.
+    const MOBILE_BREAKPOINT_PX = 820;
+    const DESKTOP_LAYOUT = {
+      sliceGap: SLICE_GAP,
+      virusX: VIRUS_X,
+      sliceTiltY: SLICE_TILT_Y,
+    };
+    const MOBILE_LAYOUT = {
+      sliceGap: 2.5,
+      virusX: -3.2,
+      sliceTiltY: -0.55,
+    };
+    const layout = { ...DESKTOP_LAYOUT };
+    let isMobileLayout = false;
+    // Captured below for repositioning on layout change.
+    const sliceLabelSprites: THREE.Sprite[] = [];
+
     SLICES.forEach((s, i) => {
       const holes = SCATTER_HOLES[i];
       const shape = buildSliceShape(holes);
@@ -297,8 +317,8 @@ export default function SwissCheeseSceneInner() {
       const sliceContainer = new THREE.Group();
       sliceContainer.add(fillMesh);
       sliceContainer.add(wireMesh);
-      sliceContainer.position.set(firstSliceX + i * SLICE_GAP, 0, 0);
-      sliceContainer.rotation.y = SLICE_TILT_Y;
+      sliceContainer.position.set(firstSliceX + i * layout.sliceGap, 0, 0);
+      sliceContainer.rotation.y = layout.sliceTiltY;
       slicesGroup.add(sliceContainer);
       sliceContainers.push(sliceContainer);
       sliceFillMeshes.push(fillMesh);
@@ -307,10 +327,11 @@ export default function SwissCheeseSceneInner() {
       const { sprite, dispose } = makeLabelSprite(s.layer, s.title);
       sprite.scale.set(3.0, 0.85, 1);
       sprite.position.set(
-        firstSliceX + i * SLICE_GAP,
+        firstSliceX + i * layout.sliceGap,
         -SH / 2 - 2.2,
         0.05,
       );
+      sliceLabelSprites.push(sprite);
       slicesGroup.add(sprite);
       sliceDisposers.push(
         dispose,
@@ -323,7 +344,7 @@ export default function SwissCheeseSceneInner() {
 
     // ---- Layer-2 nasal spray bottle (wireframe, rotating) ----
     const sprayBottleGroup = new THREE.Group();
-    const layer2X = firstSliceX + 1 * SLICE_GAP;
+    const layer2X = firstSliceX + 1 * layout.sliceGap;
     sprayBottleGroup.position.set(layer2X, SH / 2 + 0.55, 0);
     sprayBottleGroup.scale.setScalar(1.5);
     // Initial pose: tilt the bottle's top slightly toward the camera so the
@@ -530,7 +551,7 @@ export default function SwissCheeseSceneInner() {
 
     // ---- Layer-1 N95 mask box (wireframe, draggable to spin) ----
     const maskGroup = new THREE.Group();
-    const layer1X = firstSliceX + 0 * SLICE_GAP;
+    const layer1X = firstSliceX + 0 * layout.sliceGap;
     maskGroup.position.set(layer1X, SH / 2 + 0.95, 0);
     maskGroup.scale.setScalar(1.4);
     // Initial pose: corner view from above-right, N95 face turned to the left.
@@ -772,7 +793,7 @@ export default function SwissCheeseSceneInner() {
     );
 
     // ---- Layer-3 antivirals: a couple of wireframe pills (capsules) ----
-    const layer3X = firstSliceX + 2 * SLICE_GAP;
+    const layer3X = firstSliceX + 2 * layout.sliceGap;
     const pills = buildPills();
     const pillsGroup = pills.group;
     pillsGroup.position.set(layer3X, SH / 2 + 0.95, 0);
@@ -782,7 +803,7 @@ export default function SwissCheeseSceneInner() {
     const pillDisposers: Array<() => void> = [() => pills.dispose()];
 
     // ---- Layer-4 H2O2 bottle (wireframe, draggable to spin/tilt) ----
-    const layer4X = firstSliceX + 3 * SLICE_GAP;
+    const layer4X = firstSliceX + 3 * layout.sliceGap;
     const h2o2 = buildH2O2Bottle();
     const h2o2Group = h2o2.group;
     h2o2Group.position.set(layer4X, SH / 2 + 0.55, 0);
@@ -799,7 +820,7 @@ export default function SwissCheeseSceneInner() {
     const h2o2Disposers: Array<() => void> = [() => h2o2.dispose()];
 
     // ---- Layer-5 test tube (wireframe + semi-transparent liquid) ----
-    const layer5X = firstSliceX + 4 * SLICE_GAP;
+    const layer5X = firstSliceX + 4 * layout.sliceGap;
     const tube = buildTestTube();
     const tubeGroup = tube.group;
     tubeGroup.position.set(layer5X, SH / 2 + 0.45, 0);
@@ -844,7 +865,7 @@ export default function SwissCheeseSceneInner() {
 
       const waypoints: THREE.Vector3[] = [];
       // Start point: just in front of the virus, on the central axis
-      waypoints.push(new THREE.Vector3(VIRUS_X + 1.1, 0, 0.0));
+      waypoints.push(new THREE.Vector3(layout.virusX + 1.1, 0, 0.0));
 
       let passedAll = true;
       for (let i = 0; i < 5; i++) {
@@ -879,7 +900,7 @@ export default function SwissCheeseSceneInner() {
 
       if (passedAll) {
         waypoints.push(
-          new THREE.Vector3(firstSliceX + 4 * SLICE_GAP + 1.8, 0, 0.0),
+          new THREE.Vector3(firstSliceX + 4 * layout.sliceGap + 1.8, 0, 0.0),
         );
       }
 
@@ -909,7 +930,7 @@ export default function SwissCheeseSceneInner() {
 
     // ---- Virus ----
     const virusGroup = new THREE.Group();
-    virusGroup.position.set(VIRUS_X, 0, 0);
+    virusGroup.position.set(layout.virusX, 0, 0);
     virusGroup.scale.setScalar(0.75);
     scene.add(virusGroup);
 
@@ -1179,6 +1200,54 @@ export default function SwissCheeseSceneInner() {
       virusGroup.add(rna);
     }
 
+    // ---- Mobile-aware layout switcher ----
+    // Re-positions every slice, prop, and the virus when the canvas crosses
+    // the mobile breakpoint. Slices end up closer together, the virus moves
+    // in toward them, and slices are less tilted (closer to head-on) so the
+    // whole composition takes up less horizontal space on narrow screens.
+    const applyLayout = (mobile: boolean) => {
+      if (mobile === isMobileLayout) return;
+      isMobileLayout = mobile;
+      const next = mobile ? MOBILE_LAYOUT : DESKTOP_LAYOUT;
+      layout.sliceGap = next.sliceGap;
+      layout.virusX = next.virusX;
+      layout.sliceTiltY = next.sliceTiltY;
+
+      // Slice containers: x position + baseline tilt
+      sliceContainers.forEach((sc, i) => {
+        sc.position.x = firstSliceX + i * layout.sliceGap;
+        sc.rotation.y = layout.sliceTiltY;
+      });
+      // Label sprites mirror the slice x's
+      sliceLabelSprites.forEach((sp, i) => {
+        sp.position.x = firstSliceX + i * layout.sliceGap;
+      });
+      // Slice tilt clamp follows the active baseline
+      SLICE_Y_MIN = layout.sliceTiltY - 0.6;
+      SLICE_Y_MAX = layout.sliceTiltY + 0.6;
+
+      // Virus
+      virusGroup.position.x = layout.virusX;
+
+      // Props above each slice
+      sprayBottleGroup.position.x = firstSliceX + 1 * layout.sliceGap;
+      maskGroup.position.x = firstSliceX + 0 * layout.sliceGap;
+      pillsGroup.position.x = firstSliceX + 2 * layout.sliceGap;
+      h2o2Group.position.x = firstSliceX + 3 * layout.sliceGap;
+      tubeGroup.position.x = firstSliceX + 4 * layout.sliceGap;
+
+      // Re-aim the H2O2 label at the camera (its target X just moved)
+      h2o2Group.rotation.y = Math.atan2(
+        camera.position.x - h2o2Group.position.x,
+        camera.position.z - h2o2Group.position.z,
+      );
+
+      // Recenter camera on the new scene midpoint
+      const midX = (layout.virusX + (firstSliceX + 4 * layout.sliceGap)) / 2;
+      camera.position.x = midX;
+      camera.lookAt(midX, 0, 0);
+    };
+
     // ---- Resize handling ----
     const setSize = () => {
       const w = el.clientWidth;
@@ -1190,6 +1259,8 @@ export default function SwissCheeseSceneInner() {
       const target = Math.max(22, 22 + Math.max(0, (1.8 - w / h) * 12));
       camera.position.z = target;
       camera.updateProjectionMatrix();
+      // Swap layout if we crossed the mobile breakpoint
+      applyLayout(w < MOBILE_BREAKPOINT_PX);
     };
     setSize();
     const ro = new ResizeObserver(setSize);
@@ -1238,8 +1309,8 @@ export default function SwissCheeseSceneInner() {
     const MASKBOX_ROT_PER_PX = 0.006;
     const SLICE_ROT_PER_PX = 0.004;
     // Clamp slice user-tilt so cheese stays at least mostly edge-on / vertical
-    const SLICE_Y_MIN = SLICE_TILT_Y - 0.6;
-    const SLICE_Y_MAX = SLICE_TILT_Y + 0.6;
+    let SLICE_Y_MIN = layout.sliceTiltY - 0.6;
+    let SLICE_Y_MAX = layout.sliceTiltY + 0.6;
     const SLICE_X_MIN = -0.45;
     const SLICE_X_MAX = 0.45;
     const canvasEl = renderer.domElement;
