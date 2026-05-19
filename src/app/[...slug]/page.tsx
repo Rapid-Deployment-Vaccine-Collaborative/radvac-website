@@ -76,6 +76,29 @@ export default async function DynamicPage({ params }: PageProps) {
 
   const content = sanitizeWpHtml(page.content);
 
+  // Slugs that should render inside the rounded white card used by press releases.
+  const WHITE_CARD_SLUGS = new Set(["vaccine"]);
+  const useWhiteCard = WHITE_CARD_SLUGS.has(path);
+
+  if (useWhiteCard) {
+    return (
+      <>
+        <PageHeader title={page.title} />
+
+        <section className="py-16 px-6 md:px-14">
+          <div className="bg-white rounded-2xl shadow-sm py-12 px-6 sm:px-12 md:px-20">
+            <div className="max-w-[760px] mx-auto">
+              <div
+                className="prose prose-lg max-w-none"
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
+            </div>
+          </div>
+        </section>
+      </>
+    );
+  }
+
   return (
     <>
       <PageHeader title={page.title} />

@@ -33,6 +33,18 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "RaDVaC",
+    images: [
+      {
+        url: "/images/radvac-logo-darkblue-for-social-media-preview.png",
+        width: 1200,
+        height: 1200,
+        alt: "RaDVaC — Rapid Deployment Vaccine Collaborative",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    images: ["/images/radvac-logo-darkblue-for-social-media-preview.png"],
   },
 };
 

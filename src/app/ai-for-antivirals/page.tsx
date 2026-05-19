@@ -12,8 +12,9 @@ export default function AiForAntiviralsPage() {
     <>
       <PageHeader title="AI for Antivirals" />
 
-      <section className="py-16 px-6">
-        <div className="max-w-[800px] mx-auto prose prose-lg">
+      <section className="py-16 px-6 md:px-14">
+        <div className="bg-white rounded-2xl shadow-sm py-12 px-6 sm:px-12 md:px-20">
+          <div className="max-w-[760px] mx-auto prose prose-lg">
           <p>
             We are leveraging advances in open-source data and AI to repurpose
             existing drugs and GRAS compounds as antivirals, and to combine
@@ -45,6 +46,7 @@ export default function AiForAntiviralsPage() {
           <p>
             <em>More details coming soon.</em>
           </p>
+          </div>
         </div>
       </section>
     </>
