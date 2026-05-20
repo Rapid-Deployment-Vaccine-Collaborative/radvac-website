@@ -102,8 +102,10 @@ export function Footer() {
           height={56}
         />
       </a>
-      <NewsletterSignup />
-      <span>
+      <div className={styles.newsletter}>
+        <NewsletterSignup />
+      </div>
+      <span className={styles.legal}>
         <Link href="/privacy-policy">Privacy Policy</Link>
         {" · "}
         <Link href="/terms-of-use">Terms of Use</Link>

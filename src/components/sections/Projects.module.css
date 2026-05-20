@@ -57,8 +57,10 @@
 }
 
 @media (max-width: 640px) {
+  .project {
+    padding: 18px 16px;
+  }
   .projectWithGraphic {
-    flex-direction: column;
-    align-items: stretch;
+    gap: 12px;
   }
 }

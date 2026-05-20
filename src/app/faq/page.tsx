@@ -28,24 +28,33 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function FaqPage() {
   let sections: FaqSectionData[] = [];
-  let fetchFailed = false;
+  let fetchError: string | undefined;
   try {
     const page = await getPageBySlug("faq");
-    const html = page?.content ? sanitizeWpHtml(page.content) : "";
-    const items = parseWpsmAccordion(html);
+    // Parse the raw WP content: parseWpsmAccordion's panel boundaries are
+    // HTML comments (`<!-- Inner panel Start -->`) that sanitize-html would
+    // strip. Sanitize the extracted answer bodies afterward.
+    const rawItems = page?.content ? parseWpsmAccordion(page.content) : [];
+    const items = rawItems.map((it) => ({
+      ...it,
+      answer: sanitizeWpHtml(it.answer),
+    }));
     if (items.length > 0) {
       sections = [{ numeral: "I", label: "Frequently Asked Questions", items }];
     }
   } catch (err) {
     console.error("FAQ: failed to fetch WP content", err);
-    fetchFailed = true;
+    fetchError = err instanceof Error ? err.message : String(err);
   }
 
   return (
     <>
       <PageHeader title="Frequently asked questions" />
-      {fetchFailed || sections.length === 0 ? (
-        <CmsErrorBanner />
+      {fetchError || sections.length === 0 ? (
+        <CmsErrorBanner
+          error={fetchError}
+          endpoint={process.env.WP_GRAPHQL_URL}
+        />
       ) : (
         sections.map((section) => (
           <FaqSection key={section.numeral} section={section} />

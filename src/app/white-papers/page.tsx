@@ -40,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function WhitePapersPage() {
   let page: WpPage | null = null;
   let consent: WpPage | null = null;
-  let fetchFailed = false;
+  let fetchError: string | undefined;
   try {
     [page, consent] = await Promise.all([
       getPageBySlug("white-papers"),
@@ -48,14 +48,17 @@ export default async function WhitePapersPage() {
     ]);
   } catch (err) {
     console.error("white-papers: failed to fetch WP content", err);
-    fetchFailed = true;
+    fetchError = err instanceof Error ? err.message : String(err);
   }
 
-  if (fetchFailed) {
+  if (fetchError) {
     return (
       <>
         <PageHeader title="White Papers" />
-        <CmsErrorBanner />
+        <CmsErrorBanner
+          error={fetchError}
+          endpoint={process.env.WP_GRAPHQL_URL}
+        />
       </>
     );
   }
@@ -74,7 +77,7 @@ export default async function WhitePapersPage() {
 
       <PageHeader title={page.title} />
 
-      <section className="py-16 px-6">
+      <section className="pt-16 px-6">
         <div className="max-w-[800px] mx-auto">
           <div
             className="prose prose-lg max-w-none"

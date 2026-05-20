@@ -10,7 +10,7 @@
   background-attachment: fixed;
   transition: top 0.3s ease, height 0.3s ease;
 }
-.bgCompact { height: 120px; }
+.bgCompact { height: 105px; }
 
 .mast {
   padding: 38px 56px 24px;
@@ -85,8 +85,15 @@
   .logo svg { height: 116px; margin-bottom: -18px; }
   .mastCompact .logo img,
   .mastCompact .logo svg { height: 64px; margin-bottom: -10px; }
-  .bg { height: 180px; }
-  .bgCompact { height: 90px; }
+  .bg {
+    height: 180px;
+    background: linear-gradient(
+      180deg,
+      var(--hdr-grad-top, #a8c4e7) 0%,
+      var(--hdr-grad-bot, #f4f8fd) 100%
+    );
+  }
+  .bgCompact { height: 78px; }
   .hamburger { display: inline-flex; }
   .primary {
     display: none;

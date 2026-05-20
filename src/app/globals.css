@@ -57,6 +57,10 @@ a { color: inherit; }
   min-height: 100vh;
 }
 
+@media (max-width: 980px) {
+  .post-hero { background: transparent; }
+}
+
 /* ===== Shared section grid (200px label + content) ===== */
 .section {
   padding: 72px 56px 0;

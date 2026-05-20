@@ -38,14 +38,14 @@ export default async function TeamMemberPage({ params }: PageProps) {
   if (!member) notFound();
 
   let wpHtml: string | null = null;
-  let wpFetchFailed = false;
+  let wpFetchError: string | undefined;
   if (member.wpUri) {
     try {
       const wpPage = await getPageBySlug(member.wpUri);
       wpHtml = wpPage ? sanitizeWpHtml(wpPage.content) : null;
     } catch (err) {
       console.error(`team/${slug}: failed to fetch WP bio`, err);
-      wpFetchFailed = true;
+      wpFetchError = err instanceof Error ? err.message : String(err);
     }
   }
 
@@ -101,8 +101,11 @@ export default async function TeamMemberPage({ params }: PageProps) {
             </div>
           </div>
           <div className={styles.bioCol}>
-            {wpFetchFailed ? (
-              <CmsErrorBanner />
+            {wpFetchError ? (
+              <CmsErrorBanner
+                error={wpFetchError}
+                endpoint={process.env.WP_GRAPHQL_URL}
+              />
             ) : wpHtml ? (
               <div
                 className={styles.bio}

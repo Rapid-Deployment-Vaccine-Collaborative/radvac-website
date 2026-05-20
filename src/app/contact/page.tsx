@@ -56,15 +56,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ContactPage() {
   let page: WpPage | null = null;
-  let fetchFailed = false;
+  let fetchError: string | undefined;
   try {
     page = await getPageBySlug("contact");
   } catch (err) {
     console.error("contact: failed to fetch WP content", err);
-    fetchFailed = true;
+    fetchError = err instanceof Error ? err.message : String(err);
   }
 
-  if (!fetchFailed && !page) {
+  if (!fetchError && !page) {
     notFound();
   }
 
@@ -72,10 +72,13 @@ export default async function ContactPage() {
     <>
       <PageHeader title={page?.title ?? "Contact"} />
 
-      <section className="py-16 px-6">
+      <section className="pt-16 px-6">
         <div className="max-w-[800px] mx-auto">
-          {fetchFailed ? (
-            <CmsErrorBanner />
+          {fetchError ? (
+            <CmsErrorBanner
+              error={fetchError}
+              endpoint={process.env.WP_GRAPHQL_URL}
+            />
           ) : (
             <div
               className="prose prose-lg max-w-none"

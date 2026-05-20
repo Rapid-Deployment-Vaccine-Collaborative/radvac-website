@@ -1,5 +1,5 @@
 .contactStrip {
-  margin: 80px 56px 0;
+  margin: 64px 56px 0;
   padding: 56px;
   background: var(--blue-deep);
   color: #fff;
@@ -75,7 +75,7 @@
 
 @media (max-width: 980px) {
   .contactStrip {
-    margin: 56px 24px 0;
+    margin: 64px 24px 0;
     padding: 36px 24px;
     grid-template-columns: 1fr;
     gap: 28px;

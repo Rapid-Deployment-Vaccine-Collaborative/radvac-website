@@ -12,7 +12,7 @@ export default function AiForAntiviralsPage() {
     <>
       <PageHeader title="AI for Antivirals" />
 
-      <section className="py-16 px-6 md:px-14">
+      <section className="pt-16 px-6 md:px-14">
         <div className="bg-white rounded-2xl shadow-sm py-12 px-6 sm:px-12 md:px-20">
           <div className="max-w-[760px] mx-auto prose prose-lg">
           <p>

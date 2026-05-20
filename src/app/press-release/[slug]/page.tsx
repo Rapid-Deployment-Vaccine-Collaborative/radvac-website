@@ -63,19 +63,22 @@ function formatDate(iso: string): string {
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
   let post: WpPost | null = null;
-  let fetchFailed = false;
+  let fetchError: string | undefined;
   try {
     post = await getPostBySlug(slug);
   } catch (err) {
     console.error(`press-release/${slug}: failed to fetch WP post`, err);
-    fetchFailed = true;
+    fetchError = err instanceof Error ? err.message : String(err);
   }
 
-  if (fetchFailed) {
+  if (fetchError) {
     return (
       <>
         <PageHeader title="Update" />
-        <CmsErrorBanner />
+        <CmsErrorBanner
+          error={fetchError}
+          endpoint={process.env.WP_GRAPHQL_URL}
+        />
       </>
     );
   }
@@ -85,12 +88,12 @@ export default async function PostPage({ params }: PageProps) {
   }
 
   let comments: WpComment[] = [];
-  let commentsFailed = false;
+  let commentsError: string | undefined;
   try {
     comments = await getCommentsForPost(post.databaseId);
   } catch (err) {
     console.error(`press-release/${slug}: failed to fetch comments`, err);
-    commentsFailed = true;
+    commentsError = err instanceof Error ? err.message : String(err);
   }
 
   const content = sanitizeWpHtml(post.content);
@@ -99,7 +102,7 @@ export default async function PostPage({ params }: PageProps) {
     <>
       <PageHeader title={post.title} />
 
-      <section className="py-16 px-6 md:px-14">
+      <section className="pt-16 px-6 md:px-14">
         <div className="bg-white rounded-2xl shadow-sm py-12 px-6 sm:px-12 md:px-20">
           <div className="max-w-[760px] mx-auto">
           <p className="text-base text-gray-500 mb-6">
@@ -134,8 +137,11 @@ export default async function PostPage({ params }: PageProps) {
               Comments ({comments.length})
             </h2>
 
-            {commentsFailed ? (
-              <CmsErrorBanner />
+            {commentsError ? (
+              <CmsErrorBanner
+                error={commentsError}
+                endpoint={process.env.WP_GRAPHQL_URL}
+              />
             ) : comments.length === 0 ? (
               <p className="text-gray-600 mb-8">
                 No comments yet. Be the first to leave one.

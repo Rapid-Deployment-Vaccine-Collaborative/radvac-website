@@ -73,3 +73,32 @@
     padding: 24px;
   }
 }
+
+@media (max-width: 640px) {
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .newsletter {
+    order: 1;
+    width: 100%;
+  }
+  .newsletter > * {
+    width: 100%;
+  }
+  .social {
+    order: 2;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cc {
+    order: 3;
+    justify-content: center;
+  }
+  .ccLabel,
+  .pledge,
+  .legal {
+    display: none;
+  }
+}

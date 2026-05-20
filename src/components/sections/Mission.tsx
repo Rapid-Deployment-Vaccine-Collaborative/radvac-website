@@ -7,13 +7,13 @@ const MISSION_PAGE_SLUG = "mission";
 
 export async function Mission() {
   let html: string | null = null;
-  let fetchFailed = false;
+  let fetchError: string | undefined;
   try {
     const page = await getPageBySlug(MISSION_PAGE_SLUG);
     html = page?.content?.trim() ? sanitizeWpHtml(page.content) : null;
   } catch (err) {
     console.error("Mission: failed to fetch WP content", err);
-    fetchFailed = true;
+    fetchError = err instanceof Error ? err.message : String(err);
   }
 
   return (
@@ -21,9 +21,12 @@ export async function Mission() {
       <div className="sec-num">
         <strong>The Mission</strong>
       </div>
-      {fetchFailed || !html ? (
+      {fetchError || !html ? (
         <div className={styles.mission}>
-          <CmsErrorBanner />
+          <CmsErrorBanner
+            error={fetchError}
+            endpoint={process.env.WP_GRAPHQL_URL}
+          />
         </div>
       ) : (
         <div

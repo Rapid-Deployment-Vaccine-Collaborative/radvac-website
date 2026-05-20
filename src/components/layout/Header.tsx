@@ -26,13 +26,31 @@ export function Header() {
   }, [pathname]);
 
   useEffect(() => {
+    const C1 = [168, 196, 231]; // #a8c4e7
+    const C2 = [244, 248, 253]; // #f4f8fd
+    const sample = (p: number) => {
+      const t = Math.max(0, Math.min(1, p));
+      const r = Math.round(C1[0] + (C2[0] - C1[0]) * t);
+      const g = Math.round(C1[1] + (C2[1] - C1[1]) * t);
+      const b = Math.round(C1[2] + (C2[2] - C1[2]) * t);
+      return `rgb(${r},${g},${b})`;
+    };
+
+    let compactNow = false;
     const onScroll = () => {
       const y = window.scrollY;
-      setCompact((prev) => {
-        if (!prev && y > 40) return true;
-        if (prev && y < 10) return false;
-        return prev;
-      });
+      if (!compactNow && y > 40) compactNow = true;
+      else if (compactNow && y < 10) compactNow = false;
+      setCompact(compactNow);
+
+      const isMobile = window.matchMedia("(max-width: 980px)").matches;
+      if (isMobile) {
+        const headerH = compactNow ? 78 : 180;
+        const bodyH = document.body.offsetHeight || 1;
+        const root = document.documentElement;
+        root.style.setProperty("--hdr-grad-top", sample(y / bodyH));
+        root.style.setProperty("--hdr-grad-bot", sample((y + headerH) / bodyH));
+      }
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });

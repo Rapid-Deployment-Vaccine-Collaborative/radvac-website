@@ -1,7 +1,9 @@
 .qa {
   border: 1px solid var(--rule);
   background: #fff;
+  border-radius: 12px;
   margin-bottom: 12px;
+  overflow: hidden;
 }
 .summary {
   display: grid;

@@ -10,8 +10,8 @@ export default function HomePage() {
       <Hero />
       <div className="post-hero">
         <Mission />
-        <Team />
         <Projects withLabel />
+        <Team />
         <Donate />
       </div>
     </>

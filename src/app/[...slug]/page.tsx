@@ -53,19 +53,22 @@ export default async function DynamicPage({ params }: PageProps) {
   const { slug } = await params;
   const path = slug.join("/");
   let page: WpPage | null = null;
-  let fetchFailed = false;
+  let fetchError: string | undefined;
   try {
     page = await getPageBySlug(path);
   } catch (err) {
     console.error(`[...slug] ${path}: failed to fetch WP content`, err);
-    fetchFailed = true;
+    fetchError = err instanceof Error ? err.message : String(err);
   }
 
-  if (fetchFailed) {
+  if (fetchError) {
     return (
       <>
         <PageHeader title="RaDVaC" />
-        <CmsErrorBanner />
+        <CmsErrorBanner
+          error={fetchError}
+          endpoint={process.env.WP_GRAPHQL_URL}
+        />
       </>
     );
   }
@@ -77,7 +80,7 @@ export default async function DynamicPage({ params }: PageProps) {
   const content = sanitizeWpHtml(page.content);
 
   // Slugs that should render inside the rounded white card used by press releases.
-  const WHITE_CARD_SLUGS = new Set(["vaccine"]);
+  const WHITE_CARD_SLUGS = new Set(["vaccine", "publications"]);
   const useWhiteCard = WHITE_CARD_SLUGS.has(path);
 
   if (useWhiteCard) {
@@ -85,7 +88,7 @@ export default async function DynamicPage({ params }: PageProps) {
       <>
         <PageHeader title={page.title} />
 
-        <section className="py-16 px-6 md:px-14">
+        <section className="pt-16 px-6 md:px-14">
           <div className="bg-white rounded-2xl shadow-sm py-12 px-6 sm:px-12 md:px-20">
             <div className="max-w-[760px] mx-auto">
               <div
@@ -103,7 +106,7 @@ export default async function DynamicPage({ params }: PageProps) {
     <>
       <PageHeader title={page.title} />
 
-      <section className="py-16 px-6">
+      <section className="pt-16 px-6">
         <div className="max-w-[800px] mx-auto">
           <div
             className="prose prose-lg max-w-none"
