@@ -45,7 +45,7 @@ export function Header() {
 
       const isMobile = window.matchMedia("(max-width: 980px)").matches;
       if (isMobile) {
-        const headerH = compactNow ? 78 : 180;
+        const headerH = compactNow ? 82 : 170;
         const bodyH = document.body.offsetHeight || 1;
         const root = document.documentElement;
         root.style.setProperty("--hdr-grad-top", sample(y / bodyH));

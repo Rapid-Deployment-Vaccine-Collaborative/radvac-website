@@ -61,6 +61,24 @@
     padding: 18px 16px;
   }
   .projectWithGraphic {
-    gap: 12px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 140px;
+    grid-template-areas:
+      "title title"
+      "desc  graphic"
+      "arrow arrow";
+    align-items: start;
+    gap: 10px 14px;
+  }
+  .projectWithGraphic .text {
+    display: contents;
+  }
+  .projectWithGraphic .text > h3 { grid-area: title; }
+  .projectWithGraphic .text > p { grid-area: desc; }
+  .projectWithGraphic .text > .arrow { grid-area: arrow; }
+  .projectWithGraphic > :not(.text) {
+    grid-area: graphic;
+    align-self: center;
+    justify-self: center;
   }
 }

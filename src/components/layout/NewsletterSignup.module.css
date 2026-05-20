@@ -44,7 +44,7 @@
   border-radius: 3px;
   background: #fff;
   color: var(--ink);
-  width: 200px;
+  width: 230px;
 }
 .input:focus {
   outline: 2px solid var(--blue);
@@ -89,7 +89,7 @@
   color: var(--blue);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 380px) {
   .input {
     width: auto;
     flex: 1;
