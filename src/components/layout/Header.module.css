@@ -80,21 +80,21 @@
 
 @media (max-width: 980px) {
   .mast { padding: 28px 24px 18px; flex-direction: row; align-items: center; justify-content: space-between; }
-  .mastCompact { padding: 5px 24px 9px; }
+  .mastCompact { padding: 4px 24px 4px; }
   .mastCompact .hamburger { margin-top: 0; }
   .logo img,
   .logo svg { height: 116px; margin-bottom: -18px; }
   .mastCompact .logo img,
   .mastCompact .logo svg { height: 64px; margin-bottom: -10px; }
   .bg {
-    height: 170px;
+    height: 144px;
     background: linear-gradient(
       180deg,
       var(--hdr-grad-top, #a8c4e7) 0%,
       var(--hdr-grad-bot, #f4f8fd) 100%
     );
   }
-  .bgCompact { height: 82px; }
+  .bgCompact { height: 64px; }
   .hamburger { display: inline-flex; }
   .primary {
     display: none;
