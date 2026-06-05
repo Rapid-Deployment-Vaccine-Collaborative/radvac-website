@@ -104,7 +104,28 @@ for (let i = 0; i < TREE.length; i++) {
 }
 const ORIGIN_RESPONSE = Math.max(...LAND_TIME) + RESPONSE_DELAY;
 
-export default function SpreadGlobeInner() {
+// Vigilance phase: after the main cascade has fully turned green and faded,
+// random outbreaks appear at random places, get converged on by green-shield
+// arcs from the nearest TREE nodes, and themselves turn green.
+const VIGILANCE_START_MIN = 10; // seconds after all-green
+const VIGILANCE_START_MAX = 15;
+const VIGILANCE_INTERVAL_MIN = 12; // between successive incidents
+const VIGILANCE_INTERVAL_MAX = 30;
+const VIGILANCE_ARC_DELAY = 0.8; // delay between red dot appearing and arcs starting
+const VIGILANCE_ARC_STAGGER = 0.08; // small stagger so arcs land near-simultaneously
+const VIGILANCE_SOURCES = 3; // number of nearest TREE nodes to converge from
+const VIGILANCE_TARGET_MIN = 5; // total incidents before stopping
+const VIGILANCE_TARGET_MAX = 6;
+
+type SpreadGlobeInnerProps = {
+  onFirstFrame?: () => void;
+  onTopoError?: () => void;
+};
+
+export default function SpreadGlobeInner({
+  onFirstFrame,
+  onTopoError,
+}: SpreadGlobeInnerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -173,7 +194,10 @@ export default function SpreadGlobeInner() {
     document.addEventListener("visibilitychange", onVisibility);
 
     fetch("/data/countries-110m.json")
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`topology fetch ${r.status}`);
+        return r.json();
+      })
       .then((t: Topology) => {
         if (!mounted) return;
         topo = t;
@@ -189,17 +213,71 @@ export default function SpreadGlobeInner() {
       })
       .catch((err) => {
         console.error("[SpreadGlobe] failed to load topology", err);
+        if (mounted) onTopoError?.();
       });
 
     let rotationLon = -30; // view center ~30°E; China at 114°E sits on the right side
     const ROT_SPEED = 4; // deg/sec — slow enough that China stays in view during cascade
     const ARC_LIFT = 0.18; // peak altitude of arcs as a fraction of globe radius
 
+    type Incident = {
+      pos: LonLat;
+      spawnTime: number;
+      sources: number[]; // indices into TREE
+      arcStarts: number[]; // matching sources
+    };
+    const incidents: Incident[] = [];
+    let nextSpawn = -1;
+    const vigilanceTarget = Math.floor(
+      VIGILANCE_TARGET_MIN +
+        Math.random() * (VIGILANCE_TARGET_MAX - VIGILANCE_TARGET_MIN + 1),
+    );
+
+    function maybeSpawnIncident(t: number) {
+      if (incidents.length >= vigilanceTarget) return;
+      if (nextSpawn < 0) {
+        nextSpawn =
+          ORIGIN_RESPONSE +
+          FADE_DURATION +
+          VIGILANCE_START_MIN +
+          Math.random() * (VIGILANCE_START_MAX - VIGILANCE_START_MIN);
+        return;
+      }
+      if (t < nextSpawn) return;
+      // Uniform sample on the sphere: uniform lon, asin-uniform lat.
+      const lon = Math.random() * 360 - 180;
+      const lat = (Math.asin(Math.random() * 2 - 1) * 180) / Math.PI;
+      const pos: LonLat = [lon, lat];
+      const distances: [number, number][] = TREE.map(
+        (n, i) => [i, geoDistance(n.pos, pos)] as [number, number],
+      );
+      distances.sort((a, b) => a[1] - b[1]);
+      const sources = distances
+        .slice(0, VIGILANCE_SOURCES)
+        .map((d) => d[0]);
+      const arcBase = t + VIGILANCE_ARC_DELAY;
+      const arcStarts = sources.map(
+        (_, k) => arcBase + k * VIGILANCE_ARC_STAGGER,
+      );
+      incidents.push({ pos, spawnTime: t, sources, arcStarts });
+      nextSpawn =
+        t +
+        VIGILANCE_INTERVAL_MIN +
+        Math.random() * (VIGILANCE_INTERVAL_MAX - VIGILANCE_INTERVAL_MIN);
+    }
+
+    let firstFrameSent = false;
     function loop(now: number) {
       const dt = (now - lastFrame) / 1000;
       lastFrame = now;
       rotationLon -= ROT_SPEED * dt;
-      drawAt((now - start) / 1000);
+      const t = (now - start) / 1000;
+      maybeSpawnIncident(t);
+      drawAt(t);
+      if (!firstFrameSent && landMesh) {
+        firstFrameSent = true;
+        onFirstFrame?.();
+      }
       raf = requestAnimationFrame(loop);
     }
 
@@ -338,6 +416,80 @@ export default function SpreadGlobeInner() {
           ctx.beginPath();
           ctx.arc(ox, oy, 4.5, 0, Math.PI * 2);
           ctx.fill();
+        }
+      }
+
+      // Vigilance incidents: random outbreaks engulfed by green arcs from the
+      // nearest TREE nodes, then turning green.
+      for (const inc of incidents) {
+        if (t < inc.spawnTime) continue;
+        const lastArcLand =
+          inc.arcStarts[inc.arcStarts.length - 1] + ARC_DURATION;
+        const isResponded = t > lastArcLand;
+        const respondedFor = t - lastArcLand;
+        const arcFade = isResponded
+          ? Math.max(0, 1 - respondedFor / FADE_DURATION)
+          : 1;
+
+        for (let k = 0; k < inc.sources.length; k++) {
+          const arcStart = inc.arcStarts[k];
+          if (t < arcStart) continue;
+          const from = TREE[inc.sources[k]].pos;
+          const to = inc.pos;
+          const arcProgress = Math.min(1, (t - arcStart) / ARC_DURATION);
+          const interp = geoInterpolate(from, to);
+          const steps = 32;
+          const visibleSteps = Math.max(2, Math.ceil(steps * arcProgress));
+          ctx.beginPath();
+          let started = false;
+          for (let kk = 0; kk <= visibleSteps; kk++) {
+            const s = kk / steps;
+            const pt = interp(s) as LonLat;
+            if (geoDistance(pt, center) >= Math.PI / 2) {
+              started = false;
+              continue;
+            }
+            const projected = projection(pt);
+            if (!projected) {
+              started = false;
+              continue;
+            }
+            const lift = 1 + ARC_LIFT * Math.sin(Math.PI * s);
+            const lx = cx + (projected[0] - cx) * lift;
+            const ly = cy + (projected[1] - cy) * lift;
+            if (!started) {
+              ctx.moveTo(lx, ly);
+              started = true;
+            } else {
+              ctx.lineTo(lx, ly);
+            }
+          }
+          ctx.strokeStyle = COLOR_SHIELD;
+          ctx.globalAlpha = 0.7 * arcFade;
+          ctx.lineWidth = 1.4;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+
+        if (geoDistance(inc.pos, center) < Math.PI / 2) {
+          const projected = projection(inc.pos);
+          if (projected) {
+            const [dx, dy] = projected;
+            ctx.fillStyle = isResponded ? COLOR_SHIELD : COLOR_VIRUS;
+            ctx.beginPath();
+            ctx.arc(dx, dy, 3.2, 0, Math.PI * 2);
+            ctx.fill();
+            if (isResponded) {
+              const ringT = respondedFor % 2.2;
+              ctx.strokeStyle = COLOR_SHIELD;
+              ctx.globalAlpha = Math.max(0, 1 - ringT / 2.2) * 0.7;
+              ctx.lineWidth = 1.2;
+              ctx.beginPath();
+              ctx.arc(dx, dy, 3 + ringT * 14, 0, Math.PI * 2);
+              ctx.stroke();
+              ctx.globalAlpha = 1;
+            }
+          }
         }
       }
     }

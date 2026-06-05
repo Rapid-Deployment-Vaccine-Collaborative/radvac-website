@@ -7,14 +7,8 @@
   width: 100%;
   aspect-ratio: 12 / 5;
   overflow: hidden;
-  background: #000;
-}
-.figure video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  background: transparent;
+  margin: 0;
 }
 
 @media (max-width: 980px) {
