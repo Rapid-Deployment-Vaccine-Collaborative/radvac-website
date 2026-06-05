@@ -7,8 +7,12 @@ import {
   geoGraticule10,
   geoInterpolate,
   geoDistance,
+  geoContains,
 } from "d3-geo";
-import { mesh as topoMesh } from "topojson-client";
+import {
+  mesh as topoMesh,
+  feature as topoFeature,
+} from "topojson-client";
 import type { Topology, GeometryCollection } from "topojson-specification";
 
 type LonLat = [number, number];
@@ -138,6 +142,7 @@ export default function SpreadGlobeInner({
 
     let topo: Topology | null = null;
     let landMesh: ReturnType<typeof topoMesh> | null = null;
+    let landFeatures: ReturnType<typeof topoFeature> | null = null;
     let raf = 0;
     let mounted = true;
     let start = 0;
@@ -205,6 +210,10 @@ export default function SpreadGlobeInner({
           topo,
           topo.objects.countries as GeometryCollection,
         );
+        landFeatures = topoFeature(
+          topo,
+          topo.objects.countries as GeometryCollection,
+        );
         start = performance.now();
         lastFrame = start;
         if (!raf) {
@@ -244,10 +253,20 @@ export default function SpreadGlobeInner({
         return;
       }
       if (t < nextSpawn) return;
-      // Uniform sample on the sphere: uniform lon, asin-uniform lat.
-      const lon = Math.random() * 360 - 180;
-      const lat = (Math.asin(Math.random() * 2 - 1) * 180) / Math.PI;
-      const pos: LonLat = [lon, lat];
+      if (!landFeatures) return; // topo not loaded yet; try again next frame
+      // Rejection sampling: pick uniform sphere points until one falls on land.
+      // (Uniform-on-sphere = uniform lon, asin-uniform lat.)
+      let pos: LonLat | null = null;
+      for (let attempt = 0; attempt < 60; attempt++) {
+        const lon = Math.random() * 360 - 180;
+        const lat = (Math.asin(Math.random() * 2 - 1) * 180) / Math.PI;
+        const candidate: LonLat = [lon, lat];
+        if (geoContains(landFeatures, candidate)) {
+          pos = candidate;
+          break;
+        }
+      }
+      if (!pos) return; // extremely unlikely; defer to next frame
       const distances: [number, number][] = TREE.map(
         (n, i) => [i, geoDistance(n.pos, pos)] as [number, number],
       );

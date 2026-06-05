@@ -121,7 +121,7 @@ export default function SpreadGlobe() {
         }}
         onTopoError={() => setFallback(true)}
       />
-      <div style={{ ...captionBase, top: "2%", left: "5%" }}>{top}</div>
+      <div style={{ ...captionBase, top: "2%", left: "7%" }}>{top}</div>
       <div
         style={{
           ...captionBase,

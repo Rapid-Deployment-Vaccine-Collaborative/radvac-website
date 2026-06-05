@@ -12,7 +12,7 @@ export function Team() {
   return (
     <section className="section" id="team">
       <div className="sec-num">
-        <strong>The Team</strong>
+        <strong>Team</strong>
       </div>
       <div>
         <div className={styles.team}>

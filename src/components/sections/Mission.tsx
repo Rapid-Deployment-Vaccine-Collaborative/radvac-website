@@ -19,7 +19,7 @@ export async function Mission() {
   return (
     <section className="section" id="mission">
       <div className="sec-num">
-        <strong>The Mission</strong>
+        <strong>Mission</strong>
       </div>
       {fetchError || !html ? (
         <div className={styles.mission}>

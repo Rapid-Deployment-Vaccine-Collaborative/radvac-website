@@ -1,5 +1,5 @@
 .hero {
-  padding: 36px 56px 96px;
+  padding: 36px 56px 48px;
 }
 
 .figure {
@@ -13,7 +13,7 @@
 
 @media (max-width: 980px) {
   .hero {
-    padding: 26px 24px 26px;
+    padding: 26px 24px 16px;
   }
   .figure {
     width: 100%;
