@@ -132,10 +132,6 @@ export default function SpreadGlobeInner() {
     const COLOR_VIRUS = "#d62828";
     const COLOR_SHIELD = cssVar("--color-accent", "#2ecc71");
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
     const projection = geoOrthographic().precision(0.5);
     const path = geoPath(projection, ctx);
     const graticule = geoGraticule10();
@@ -156,7 +152,7 @@ export default function SpreadGlobeInner() {
     const io = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
-        if (visible && !reduceMotion && !raf) {
+        if (visible && !raf) {
           lastFrame = performance.now();
           raf = requestAnimationFrame(loop);
         }
@@ -169,7 +165,7 @@ export default function SpreadGlobeInner() {
       if (document.hidden) {
         if (raf) cancelAnimationFrame(raf);
         raf = 0;
-      } else if (visible && !reduceMotion && !raf) {
+      } else if (visible && !raf) {
         lastFrame = performance.now();
         raf = requestAnimationFrame(loop);
       }
@@ -187,10 +183,7 @@ export default function SpreadGlobeInner() {
         );
         start = performance.now();
         lastFrame = start;
-        if (reduceMotion) {
-          // Render a single static frame deep into the response phase.
-          drawAt(12);
-        } else if (!raf) {
+        if (!raf) {
           raf = requestAnimationFrame(loop);
         }
       })

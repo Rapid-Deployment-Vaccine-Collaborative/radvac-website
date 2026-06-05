@@ -54,13 +54,15 @@ function useTypedText(target: string, startMs: number, intervalMs: number) {
 
 const captionBase: React.CSSProperties = {
   position: "absolute",
-  fontSize: "clamp(14px, 1.8vw, 22px)",
-  fontWeight: 600,
-  letterSpacing: "0.01em",
+  fontFamily:
+    "var(--font-jetbrains), ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace",
+  fontSize: "clamp(17px, 2.3vw, 28px)",
+  fontWeight: 500,
+  letterSpacing: "0.02em",
   color: "var(--ink, #1a1a1a)",
   pointerEvents: "none",
-  maxWidth: "45%",
-  lineHeight: 1.2,
+  maxWidth: "48%",
+  lineHeight: 1.25,
 };
 
 export default function SpreadGlobe() {
