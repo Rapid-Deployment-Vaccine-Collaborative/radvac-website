@@ -9,6 +9,7 @@ const GRAPHIC_BY_HREF: Record<string, ProjectGraphicKind> = {
   "/vaccine": "nasal",
   "/projects/influenza": "h2o2",
   "/projects/h5n1": "tube",
+  "/projects/fril-lectin": "nasal-green",
   "/ai-for-antivirals": "pills",
 };
 

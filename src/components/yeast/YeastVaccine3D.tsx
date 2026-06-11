@@ -1,92 +1,50 @@
 "use client";
 
+// A size-flexible variant of ProjectCardGraphic for the yeast-vaccine hero.
+// Reuses the same wireframe builders so the brand's 3D test tube ("vaccine
+// factories in a tube") can appear at hero scale.
+
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import {
-  buildH2O2Bottle,
   buildNasalSpray,
-  buildPills,
   buildTestTube,
   type Built,
-} from "./swissCheese/objects";
+} from "@/components/sections/swissCheese/objects";
 
-export type ProjectGraphicKind =
-  | "tube"
-  | "pills"
-  | "h2o2"
-  | "nasal"
-  | "nasal-green";
+export type Vaccine3DKind = "tube" | "nasal";
 
-type Built3D = Built & {
-  // Camera framing tuned per object so each one fills a similar visual
-  // footprint at 140px square.
+type Framed = Built & {
   cameraDistance: number;
   cameraY: number;
   lookY: number;
-  autoSpinY: number; // radians/sec (Y-axis auto-rotate, 0 = none)
+  autoSpinY: number;
 };
 
-function buildForKind(kind: ProjectGraphicKind, scene: THREE.Scene): Built3D {
-  if (kind === "tube") {
-    const t = buildTestTube();
-    t.placeSurfaceInGroup();
-    scene.add(t.group);
-    return {
-      ...t,
-      cameraDistance: 2.4,
-      cameraY: 0.6,
-      lookY: 0.55,
-      autoSpinY: 0.4,
-    };
-  }
-  if (kind === "h2o2") {
-    const h = buildH2O2Bottle();
-    scene.add(h.group);
-    return {
-      ...h,
-      cameraDistance: 2.2,
-      cameraY: 0.5,
-      lookY: 0.45,
-      autoSpinY: 0.4,
-    };
-  }
-  if (kind === "nasal" || kind === "nasal-green") {
-    // Vaccine bottle gets a light blue liquid; the FRIL lectin antiviral
-    // ("nasal-green") gets a light green liquid.
-    const liquidColor = kind === "nasal-green" ? 0xa7e8b0 : 0x9fd0f5;
-    const n = buildNasalSpray(liquidColor);
+function build(kind: Vaccine3DKind, scene: THREE.Scene): Framed {
+  if (kind === "nasal") {
+    const n = buildNasalSpray(0x9fd0f5);
     scene.add(n.group);
-    return {
-      ...n,
-      cameraDistance: 2.7,
-      cameraY: 0.7,
-      lookY: 0.65,
-      autoSpinY: 0.4,
-    };
+    return { ...n, cameraDistance: 2.7, cameraY: 0.7, lookY: 0.65, autoSpinY: 0.45 };
   }
-  const p = buildPills();
-  scene.add(p.group);
-  return {
-    ...p,
-    cameraDistance: 2.7,
-    cameraY: 0.35,
-    lookY: 0.35,
-    // Pills already animate via update(); a slow auto-spin would feel busy.
-    autoSpinY: 0,
-  };
+  const t = buildTestTube();
+  t.placeSurfaceInGroup();
+  scene.add(t.group);
+  return { ...t, cameraDistance: 2.4, cameraY: 0.6, lookY: 0.55, autoSpinY: 0.45 };
 }
 
-export default function ProjectCardGraphic({
-  kind,
+export default function YeastVaccine3D({
+  kind = "tube",
+  size = 220,
 }: {
-  kind: ProjectGraphicKind;
+  kind?: Vaccine3DKind;
+  size?: number;
 }) {
   const hostRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const el = hostRef.current;
-    if (!el) return;
-    if (typeof window === "undefined") return;
+    if (!el || typeof window === "undefined") return;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
@@ -114,7 +72,7 @@ export default function ProjectCardGraphic({
     fill.position.set(-5, -2, 3);
     scene.add(fill);
 
-    const built = buildForKind(kind, scene);
+    const built = build(kind, scene);
     camera.position.set(0, built.cameraY, built.cameraDistance);
     camera.lookAt(0, built.lookY, 0);
 
@@ -137,9 +95,7 @@ export default function ProjectCardGraphic({
       const elapsed = (now - start) / 1000;
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
-      if (built.autoSpinY) {
-        built.group.rotation.y += built.autoSpinY * dt;
-      }
+      built.group.rotation.y += built.autoSpinY * dt;
       built.update(elapsed);
       renderer.render(scene, camera);
       raf = requestAnimationFrame(tick);
@@ -161,7 +117,7 @@ export default function ProjectCardGraphic({
     <div
       ref={hostRef}
       aria-hidden
-      style={{ width: 140, height: 140, flex: "0 0 140px" }}
+      style={{ width: size, height: size, maxWidth: "100%" }}
     />
   );
 }

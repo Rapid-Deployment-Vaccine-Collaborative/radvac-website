@@ -238,7 +238,11 @@ export type NasalSprayBuilt = Built & {
   hitProxy: THREE.Mesh;
 };
 
-export function buildNasalSpray(): NasalSprayBuilt {
+export function buildNasalSpray(
+  // Tint of the liquid visible inside the bottle body. Defaults to a light
+  // blue; callers pass a light green for the FRIL lectin antiviral.
+  liquidColor: number = 0x9fd0f5,
+): NasalSprayBuilt {
   const group = new THREE.Group();
   const disposers: Array<() => void> = [];
 
@@ -264,9 +268,9 @@ export function buildNasalSpray(): NasalSprayBuilt {
   const bodyWire = new THREE.WireframeGeometry(bodyGeom);
   group.add(new THREE.LineSegments(bodyWire, lineMat));
   const bodyFillMat = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
+    color: liquidColor,
     transparent: true,
-    opacity: 0.22,
+    opacity: 0.34,
     side: THREE.DoubleSide,
     depthWrite: false,
   });

@@ -6,7 +6,7 @@ import SwissCheeseScene from "@/components/sections/SwissCheeseSceneInner";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "RaDVaC's open-source projects: nasal SARS-CoV-2 peptide vaccine, modernized variolation, vaccine factories in a tube, and AI for antivirals.",
+    "RaDVaC's open-source projects: nasal SARS-CoV-2 peptide vaccine, modernized variolation, vaccine factories in a tube, FRIL lectin broad-spectrum antiviral, and AI for antivirals.",
 };
 
 export default function ProjectsPage() {

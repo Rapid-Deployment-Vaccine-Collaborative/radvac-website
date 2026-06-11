@@ -24,6 +24,12 @@ export const projects: Project[] = [
       "Protocols for using genetically-modified yeast to generate vaccine factories in a tube. Vaccines can be delivered orally, nasally, or both.",
   },
   {
+    title: "FRIL lectin broad-spectrum antiviral",
+    href: "/projects/fril-lectin",
+    description:
+      "RaDVaC is pioneering a way to cheaply manufacture FRIL lectin from the lablab bean. FRIL is a potent broad-spectrum antiviral that can be delivered as a nasal spray or in a chewing gum formulation.",
+  },
+  {
     title: "AI for rapid drug repurposing and antiviral combinations design",
     href: "/ai-for-antivirals",
     description:

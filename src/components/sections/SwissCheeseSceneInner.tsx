@@ -378,11 +378,11 @@ export default function SwissCheeseSceneInner() {
     const bodyGeom = new THREE.LatheGeometry(bottleProfile, 12);
     const bodyWire = new THREE.WireframeGeometry(bodyGeom);
     sprayBottleGroup.add(new THREE.LineSegments(bodyWire, sprayLineMat));
-    // Translucent white fill so the polygon sides read as frosted glass.
+    // Light green liquid fill — this is the FRIL lectin antiviral bottle.
     const bodyFillMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
+      color: 0xa7e8b0,
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.34,
       side: THREE.DoubleSide,
       depthWrite: false,
     });
