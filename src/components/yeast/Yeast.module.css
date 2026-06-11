@@ -269,6 +269,13 @@
   border: 1px solid var(--rule);
   border-radius: 6px;
 }
+.figureImgPlaceholder {
+  width: 100%;
+  aspect-ratio: 680 / 472;
+  background: var(--rule, #e8e8e8);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
 .figcaption {
   margin-top: 10px;
   font-size: 14px;
@@ -802,6 +809,10 @@
   flex-direction: column;
   gap: 12px;
   min-width: 220px;
+  margin-right: 20px;
+}
+.ctaActions .btnPrimary {
+  margin-top: 0;
 }
 @media (max-width: 760px) {
   .ctaCard {
@@ -810,6 +821,7 @@
   }
   .ctaActions {
     min-width: 0;
+    margin-right: 0;
   }
 }
 

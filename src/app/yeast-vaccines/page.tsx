@@ -1,11 +1,11 @@
 import { Fragment } from "react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import styles from "@/components/yeast/Yeast.module.css";
 import { WireIcon } from "@/components/yeast/WireframeIcons";
 import YeastVaccine3D from "@/components/yeast/YeastVaccine3D";
 import { StudiesTable } from "@/components/yeast/StudiesTable";
 import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
+import { HumanDataFigure } from "@/components/yeast/HumanDataFigure";
 import {
   BENEFITS,
   DISCORD_URL,
@@ -75,27 +75,7 @@ export default function YeastVaccinesPage() {
       {/* ---------- First Human Data ---------- */}
       <section className={styles.block}>
         <h2 className={styles.h2}>First Human Data</h2>
-        <figure className={styles.figure}>
-          <Image
-            src="/images/bkv-human-data.png"
-            alt="Chart showing BKV-neutralizing serum antibody responses before and after drinking yeast expressing BKV-IV VLPs"
-            width={800}
-            height={500}
-            className={styles.figureImg}
-          />
-          <figcaption className={styles.figcaption}>
-            BKV-neutralizing serum antibody responses before and after drinking
-            yeast expressing BKV-IV VLPs.{" "}
-            <a
-              href="https://zenodo.org/records/17969224"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.citeLink}
-            >
-              Soleymani et al., 2025
-            </a>
-          </figcaption>
-        </figure>
+        <HumanDataFigure />
       </section>
 
       {/* ---------- Why yeast ---------- */}
@@ -121,8 +101,10 @@ export default function YeastVaccinesPage() {
           <div>
             <h2>Be part of the first human trials</h2>
             <p>
-              Radvac is running a Phase I trial on the BK & JC Polyomavirus yeast vaccine. Sign up to express interest in the trial and be informed about future trials.
+              Radvac is running a Phase I trial on the BK & JC Polyomavirus yeast vaccine developed in Chris Buck's lab at NIH. Sign up to express interest in the trial and be informed about future trials.
             </p>
+          </div>
+          <div className={styles.ctaActions}>
             <a
               className={styles.btnPrimary}
               href="https://docs.google.com/forms/d/e/1FAIpQLSek_cJ835TiuuZWwGzjiV7TckLF_6pXj4aMmN5Bt8GR9DTggg/viewform?usp=header"
