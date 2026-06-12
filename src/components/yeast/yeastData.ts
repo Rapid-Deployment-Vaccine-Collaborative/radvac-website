@@ -31,7 +31,7 @@ export const FLOW_STEPS: FlowStep[] = [
     icon: "culture",
     num: "03",
     title: "Culture the yeast",
-    body: "Grow the engineered yeast. At this stage it is a vaccine factory in a tube, not a vaccine.",
+    body: "Grow the engineered yeast. At this stage the yeast is a vaccine factory, not a vaccine.",
   },
   {
     icon: "factory",
@@ -111,7 +111,6 @@ export type Study = {
 export const STUDIES: Study[] = [
   { virus: "SARS-CoV-2", model: "mice", yeast: "P. pastoris", format: "killed · surface display", response: "IgG2a · IgA · nAb", cite: "de Macêdo 2025", url: "https://doi.org/10.3390/idr17050104" },
   { virus: "SARS-CoV-2", model: "mice", yeast: "S. cerevisiae", format: "live · surface display", response: "IgG · IgA", cite: "Zhang 2022", url: "https://doi.org/10.3389/fmicb.2022.792532" },
-  { virus: "SARS-CoV-2", model: "mice", yeast: "P. pastoris", format: "subunit · injected", response: "IgG · nAb", cite: "Xu 2022", url: "https://doi.org/10.3389/fmicb.2022.1093080" },
   { virus: "SARS-CoV-2", model: "mice", yeast: "S. cerevisiae", format: "killed · surface display", response: "IgG · IgA · IFN-γ · IL-4", cite: "Gao 2021", url: "https://doi.org/10.1186/s12934-021-01584-5" },
   { virus: "Influenza H7N9", model: "mice", yeast: "S. cerevisiae", format: "killed · surface display", response: "IgG · IFN-γ / IL-4 T cells", cite: "Lei 2020", url: "https://doi.org/10.1186/s12934-020-01316-1" },
   { virus: "Dengue", model: "mice", yeast: "S. cerevisiae", format: "live · surface display", response: "IgG · sIgA", cite: "Bal 2018a", url: "https://doi.org/10.1186/s12934-018-0994-8" },

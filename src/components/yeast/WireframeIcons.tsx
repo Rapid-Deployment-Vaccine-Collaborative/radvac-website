@@ -107,12 +107,20 @@ export function PlasmidIcon(props: IconProps) {
 export function CultureIcon(props: IconProps) {
   return (
     <Svg {...props}>
-      <circle cx="46" cy="72" r="30" fill={AMBER} fillOpacity={0.16} />
-      <circle cx="80" cy="44" r="18" fill={AMBER} fillOpacity={0.16} />
-      <circle cx="90" cy="84" r="12" fill={AMBER} fillOpacity={0.16} />
-      {/* nuclei */}
-      <circle cx="46" cy="72" r="6" />
-      <circle cx="80" cy="44" r="4" />
+      {/* Cell A – large mother, tilted, with bud sprouting upper-left */}
+      <ellipse cx="46" cy="76" rx="26" ry="19" transform="rotate(-15 46 76)" fill={AMBER} fillOpacity={0.16} />
+      <ellipse cx="32" cy="50" rx="14" ry="11" transform="rotate(-10 32 50)" fill={AMBER} fillOpacity={0.16} />
+      {/* nucleus A */}
+      <circle cx="47" cy="77" r="5" />
+
+      {/* Cell B – medium mother tilted right, bud at upper-right */}
+      <ellipse cx="83" cy="40" rx="19" ry="14" transform="rotate(18 83 40)" fill={AMBER} fillOpacity={0.16} />
+      <ellipse cx="97" cy="26" rx="10" ry="8" transform="rotate(12 97 26)" fill={AMBER} fillOpacity={0.16} />
+      {/* nucleus B */}
+      <circle cx="83" cy="41" r="4" />
+
+      {/* Cell C – small solo cell, lower-right */}
+      <ellipse cx="91" cy="89" rx="13" ry="10" transform="rotate(22 91 89)" fill={AMBER} fillOpacity={0.16} />
     </Svg>
   );
 }

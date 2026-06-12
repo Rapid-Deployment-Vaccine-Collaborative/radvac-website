@@ -13,6 +13,16 @@ const GRAPHIC_BY_HREF: Record<string, ProjectGraphicKind> = {
   "/ai-for-antivirals": "pills",
 };
 
+// Project cards whose card link should point somewhere other than the
+// project's own href, with the arrow label to use.
+const LINK_OVERRIDE: Record<string, { href: string; label: string }> = {
+  "/projects/h5n1": { href: "/yeast-vaccines", label: "Read more →" },
+  "/projects/influenza": {
+    href: "https://prestonestep.substack.com/p/modernizing-variolation",
+    label: "Learn more →",
+  },
+};
+
 export function Projects({ withLabel = false }: { withLabel?: boolean } = {}) {
   return (
     <section className="section" id="projects">
@@ -24,15 +34,23 @@ export function Projects({ withLabel = false }: { withLabel?: boolean } = {}) {
       <div style={withLabel ? undefined : { gridColumn: "1 / -1" }}>
         <div className={styles.projects}>
           {projects.map((project) => {
+            const override = LINK_OVERRIDE[project.href];
+            const linkTo = override?.href ?? project.href;
             const hasPage =
               project.href === "/vaccine" ||
-              project.href === "/ai-for-antivirals";
+              project.href === "/ai-for-antivirals" ||
+              override !== undefined;
+            const isExternal = linkTo.startsWith("http");
             const graphicKind = GRAPHIC_BY_HREF[project.href];
             const textColumn = (
               <div className={styles.text}>
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
-                {hasPage && <div className={styles.arrow}>Read more →</div>}
+                {hasPage && (
+                  <div className={styles.arrow}>
+                    {override?.label ?? "Read more →"}
+                  </div>
+                )}
               </div>
             );
             const inner = graphicKind ? (
@@ -46,18 +64,27 @@ export function Projects({ withLabel = false }: { withLabel?: boolean } = {}) {
             const cardClass = graphicKind
               ? `${styles.project} ${styles.projectWithGraphic}`
               : styles.project;
-            return hasPage ? (
-              <Link
+            if (!hasPage) {
+              return (
+                <div key={project.href} className={cardClass}>
+                  {inner}
+                </div>
+              );
+            }
+            return isExternal ? (
+              <a
                 key={project.href}
                 className={cardClass}
-                href={project.href}
+                href={linkTo}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {inner}
-              </Link>
+              </a>
             ) : (
-              <div key={project.href} className={cardClass}>
+              <Link key={project.href} className={cardClass} href={linkTo}>
                 {inner}
-              </div>
+              </Link>
             );
           })}
         </div>

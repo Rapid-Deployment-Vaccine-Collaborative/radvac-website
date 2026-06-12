@@ -95,6 +95,33 @@ export default function YeastVaccinesPage() {
         </div>
       </section>
 
+      {/* ---------- Read more ---------- */}
+      <section className={styles.block}>
+        <h2 className={styles.h2}>Read more</h2>
+        <ul style={{ marginTop: "18px", paddingLeft: "1.4em", lineHeight: 1.9, fontSize: "16px", color: "var(--ink-soft)", listStyleType: "disc" }}>
+          <li>
+            <a href="https://zenodo.org/records/17968622" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
+              <strong>"Vaccine Beer: A Personal Healthcare Report"</strong>
+            </a>{" "}— Christopher Buck and Andrew Buck
+          </li>
+          <li>
+            <a href="https://zenodo.org/records/17969224" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
+              <strong>"An Edible Polyomavirus Vaccine"</strong>
+            </a>{" "}— Buck et al.
+          </li>
+          <li>
+            <a href="https://moreisdifferent.blog/p/yeast-based-vaccines-are-a-big-deal" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
+              <strong>"Why yeast-based vaccines could be huge for biosecurity"</strong>
+            </a>{" "}— Dan Elton
+          </li>
+          <li>
+            <a href="https://cbuck.substack.com/p/vac-beer-is-a-lawful-consumer-product?utm_campaign=post-expanded-share&utm_medium=web&triedRedirect=true" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
+              <strong>"Vac-Yeast Is a Food"</strong>
+            </a>{" "}— Chris Buck
+          </li>
+        </ul>
+      </section>
+
       {/* ---------- CTA ---------- */}
       <section className={styles.block}>
         <div className={styles.ctaCard}>
