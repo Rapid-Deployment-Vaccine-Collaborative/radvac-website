@@ -13,7 +13,7 @@ export function HumanDataFigure() {
       ) : (
         <Image
           src="/images/bkv-human-data.png"
-          alt="Chart showing BKV-neutralizing serum antibody responses before and after drinking yeast expressing BKV-IV VLPs"
+          alt="Chart showing BK Polyomavirus (BKV) serum antibody levels before and after drinking yeast expressing BKV-IV VLPs"
           width={680}
           height={472}
           className={styles.figureImg}
@@ -21,7 +21,7 @@ export function HumanDataFigure() {
         />
       )}
       <figcaption className={styles.figcaption}>
-        BKV-neutralizing serum antibody responses before and after drinking
+        BK-Polyomavirus (BKV) serum antibody levels before and after drinking
         yeast expressing BKV-IV VLPs.{" "}
         <a
           href="https://zenodo.org/records/17969224"

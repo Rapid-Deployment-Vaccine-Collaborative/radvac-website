@@ -65,9 +65,9 @@ export default function YeastVaccinesPage() {
       <section className={styles.block}>
         <h2 className={styles.h2}>Proven in animals</h2>
         <p className={`${styles.lede} ${styles.ledeFull}`}>
-          Across more than 30 published studies, oral yeast vaccines have
+          Across more than 20 published studies, oral yeast vaccines have
           raised both systemic (IgG) and mucosal (secretory IgA) antibody
-          responses against viruses in mice, chickens, and pigs.
+          responses against viruses in mice, chickens, pigs, and fish. Yeast vaccines show great promise in protecting animal stocks from disease. 
         </p>
         <StudiesTable />
       </section>
@@ -128,7 +128,7 @@ export default function YeastVaccinesPage() {
           <div>
             <h2>Be part of the first human trials</h2>
             <p>
-              Radvac is running a Phase I trial on the BK & JC Polyomavirus yeast vaccine developed in Chris Buck's lab at NIH. Sign up to express interest in the trial and be informed about future trials.
+              Radvac is running a Phase I trial on the BK & JC Polyomavirus yeast vaccine developed in Chris Buck's lab at NIH. The trial will help prove out the technology and inform future development. Ebola, influenza, and COVID-19 are all candidates for future trials. Sign up to express interest in the Polyomavirus trial and be informed about future trials.
             </p>
           </div>
           <div className={styles.ctaActions}>
