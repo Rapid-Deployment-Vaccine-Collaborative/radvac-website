@@ -2,6 +2,7 @@ export type Project = {
   title: string;
   href: string;
   description: string;
+  previous?: boolean;
 };
 
 export const projects: Project[] = [
@@ -10,6 +11,7 @@ export const projects: Project[] = [
     href: "/vaccine",
     description:
       "Our protocol for a peptide-conjugate intranasal vaccine, optimized across five revisions for breadth and durability against emerging SARS-CoV-2 variants.",
+    previous: true,
   },
   {
     title: "Modernized variolation",
@@ -34,5 +36,6 @@ export const projects: Project[] = [
     href: "/ai-for-antivirals",
     description:
       "Leveraging advances in open source data and AI to repurpose existing drugs and GRAS compounds as antivirals. New techniques for combining several weak antivirals into powerful combinations.",
+    previous: true,
   },
 ];
