@@ -127,19 +127,54 @@ export function CultureIcon(props: IconProps) {
 
 /** A yeast cell full of empty viral shells — the "factory". */
 export function FactoryIcon(props: IconProps) {
-  const shell = (cx: number, cy: number, r: number, key: number) => {
-    const pts = [
+  // Mini faceted icosahedron matching CapsidIcon: outer pointy-top hexagon,
+  // inner flat-top hexagon (rotated 30°), and 12 lines connecting each outer
+  // vertex to its two nearest inner vertices.
+  const facetedShell = (cx: number, cy: number, r: number, key: number) => {
+    const innerR = r * 0.52;
+    const outer: [number, number][] = [
       [cx, cy - r],
-      [cx + r * 0.87, cy - r * 0.5],
-      [cx + r * 0.87, cy + r * 0.5],
+      [cx + r * 0.866, cy - r * 0.5],
+      [cx + r * 0.866, cy + r * 0.5],
       [cx, cy + r],
-      [cx - r * 0.87, cy + r * 0.5],
-      [cx - r * 0.87, cy - r * 0.5],
-    ]
-      .map((p) => p.map((n) => n.toFixed(1)).join(","))
-      .join(" ");
+      [cx - r * 0.866, cy + r * 0.5],
+      [cx - r * 0.866, cy - r * 0.5],
+    ];
+    const inner: [number, number][] = [
+      [cx + innerR, cy],
+      [cx + innerR * 0.5, cy + innerR * 0.866],
+      [cx - innerR * 0.5, cy + innerR * 0.866],
+      [cx - innerR, cy],
+      [cx - innerR * 0.5, cy - innerR * 0.866],
+      [cx + innerR * 0.5, cy - innerR * 0.866],
+    ];
+    const fmt = (pts: [number, number][]) =>
+      pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
     return (
-      <polygon key={key} points={pts} fill={ROSE} fillOpacity={0.14} />
+      <g key={key}>
+        <polygon points={fmt(outer)} fill={ROSE} fillOpacity={0.1} />
+        <polygon points={fmt(inner)} fill={ROSE} fillOpacity={0.18} />
+        {outer.map(([ox, oy], k) => {
+          const i1 = (k + 4) % 6;
+          const i2 = (k + 5) % 6;
+          return (
+            <g key={k}>
+              <line
+                x1={ox.toFixed(1)}
+                y1={oy.toFixed(1)}
+                x2={inner[i1][0].toFixed(1)}
+                y2={inner[i1][1].toFixed(1)}
+              />
+              <line
+                x1={ox.toFixed(1)}
+                y1={oy.toFixed(1)}
+                x2={inner[i2][0].toFixed(1)}
+                y2={inner[i2][1].toFixed(1)}
+              />
+            </g>
+          );
+        })}
+      </g>
     );
   };
   return (
@@ -147,9 +182,9 @@ export function FactoryIcon(props: IconProps) {
       <ellipse cx="58" cy="62" rx="46" ry="42" fill={AMBER} fillOpacity={0.16} />
       {/* small bud */}
       <circle cx="98" cy="30" r="12" fill={AMBER} fillOpacity={0.16} />
-      {shell(44, 52, 11, 1)}
-      {shell(72, 50, 11, 2)}
-      {shell(57, 80, 11, 3)}
+      {facetedShell(44, 52, 12, 1)}
+      {facetedShell(72, 50, 12, 2)}
+      {facetedShell(57, 80, 12, 3)}
     </Svg>
   );
 }

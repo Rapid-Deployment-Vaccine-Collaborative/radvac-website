@@ -18,7 +18,7 @@ export const FLOW_STEPS: FlowStep[] = [
   {
     icon: "capsid",
     num: "01",
-    title: "Identify the antigen",
+    title: "Identify an antigen",
     body: "Choose antigen gene(s) from the pathogen you want to protect against. Capsid/shell protein genes are prime candidates.",
   },
   {

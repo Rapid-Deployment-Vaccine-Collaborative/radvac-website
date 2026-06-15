@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = {
   title: "Yeast Vaccines",
   description:
-    "Genetically-modified yeast turn a tube on your counter into a vaccine factory. Drink it, and the yeast releases intact viral shells in your gut — triggering mucosal immunity. Join the yeast vaccine revolution.",
+    "Genetically-modified yeast turn a tube on your counter into a vaccine factory. Drink it, and the yeast releases intact viral shells in your gut — triggering mucosal immunity. Be part of the yeast vaccine revolution.",
 };
 
 export default function YeastVaccinesPage() {
@@ -25,7 +25,7 @@ export default function YeastVaccinesPage() {
       <header className={styles.aHero}>
         <div className={styles.aHeroInner}>
           <div>
-            <h1 className={styles.aTitle}>Join the Yeast&nbsp;Vaccine Revolution</h1>
+            <h1 className={styles.aTitle}>Be part of the Yeast&nbsp;Vaccine Revolution</h1>
             <p className={styles.aLede}>
               Genetically-modified yeast can turn a tube on your counter
               into a vaccine factory. No lab, no cold chain, no needles required. 
@@ -126,7 +126,7 @@ export default function YeastVaccinesPage() {
       <section className={styles.block}>
         <div className={styles.ctaCard}>
           <div>
-            <h2>Be part of the first human trials</h2>
+            <h2>Participate in RaDVaC&rsquo;s Phase&nbsp;I trials</h2>
             <p>
               Radvac is running a Phase I trial on the BK & JC Polyomavirus yeast vaccine developed in Chris Buck's lab at NIH. The trial will help prove out the technology and inform future development. Ebola, influenza, and COVID-19 are all candidates for future trials. Sign up to express interest in the Polyomavirus trial and be informed about future trials.
             </p>
