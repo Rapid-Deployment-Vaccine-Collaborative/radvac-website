@@ -509,21 +509,22 @@
     margin: 20px 24px 0;
   }
   .aHeroInner {
-    grid-template-columns: 1fr 110px;
+    grid-template-columns: 1fr 92px;
     grid-template-areas:
       "title art"
       "lede  lede";
     padding: 28px 22px 28px;
-    column-gap: 14px;
+    /* column-gap matches card L/R padding so the tube sits with
+       22px on its left (between it and the title column) and 22px on
+       its right (between it and the card edge) — symmetric. */
+    column-gap: 22px;
     row-gap: 0;
     align-items: start;
   }
   .aHeroArt {
     display: block; /* override desktop grid/place-items */
-    justify-self: end;
     width: 92px;
     height: 92px;
-    margin-right: 14px;
     overflow: hidden;
   }
   .aLede {
