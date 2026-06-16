@@ -520,22 +520,24 @@
     margin: 20px 24px 0;
   }
   .aHeroInner {
-    grid-template-columns: 1fr 80px;
+    /* On mobile, stack: tube on top, title and lede below at the full
+       inner width — gives the card a single, consistent 28px inset on
+       every side and removes the side-by-side balancing act. */
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "title art"
-      "lede  lede";
-    /* L/R padding bumped to 28px so the lede has visible breathing room
-       from the card edge, and column-gap matches so the tube has exactly
-       28px of dark blue on both sides. */
-    padding: 28px 28px;
-    column-gap: 28px;
-    row-gap: 0;
+      "art"
+      "title"
+      "lede";
+    padding: 24px 28px 28px;
+    row-gap: 16px;
+    column-gap: 0;
     align-items: start;
   }
   .aHeroArt {
     display: block; /* override desktop grid/place-items */
-    width: 80px;
-    height: 80px;
+    justify-self: end;
+    width: 96px;
+    height: 96px;
     overflow: hidden;
   }
   .aLede {
