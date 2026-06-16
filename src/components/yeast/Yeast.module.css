@@ -82,6 +82,17 @@
   background: var(--blue-light);
   border-radius: 12px;
 }
+/* Factory icon's faceted capsid shells use a thinner stroke than the
+   other wireframe icons, and even thinner on phone widths so the small
+   geometric shapes don't look chunky. */
+.factoryShell {
+  stroke-width: 1.7;
+}
+@media (max-width: 540px) {
+  .factoryShell {
+    stroke-width: 1.2;
+  }
+}
 .stepNum {
   font-family: var(--mono);
   font-size: 11px;

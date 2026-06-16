@@ -8,6 +8,8 @@
 
 import type { CSSProperties, ReactElement, ReactNode } from "react";
 
+import styles from "./Yeast.module.css";
+
 export type WireIconKind =
   | "capsid"
   | "plasmid"
@@ -108,21 +110,20 @@ export function PlasmidIcon(props: IconProps) {
 export function CultureIcon(props: IconProps) {
   return (
     <Svg {...props}>
-      {/* Cell A – two haploid cells joined (sexual reproduction / zygote) */}
+      {/* Cell A – two haploid cells joined (sexual reproduction / zygote).
+          External tangent lines give a smooth peanut outline. */}
       <path
-        d="M 26 60 A 12 12 0 0 1 44 44 C 50 53, 60 66, 68.5 68.7 A 14 14 0 0 1 47.5 87.3 C 40 80, 32 65, 26 60 Z"
+        d="M 26 60 A 12 12 0 0 1 44 44 L 68.5 68.7 A 14 14 0 0 1 47.5 87.3 Z"
         fill={AMBER}
         fillOpacity={0.16}
       />
-      {/* two haploid nuclei pre-karyogamy */}
-      <circle cx="35" cy="52" r="4" />
-      <circle cx="58" cy="78" r="4.5" />
 
-      {/* Cell B – medium mother tilted right, bud at upper-right */}
-      <ellipse cx="83" cy="40" rx="19" ry="14" transform="rotate(18 83 40)" fill={AMBER} fillOpacity={0.16} />
-      <ellipse cx="97" cy="26" rx="10" ry="8" transform="rotate(12 97 26)" fill={AMBER} fillOpacity={0.16} />
-      {/* nucleus B */}
-      <circle cx="83" cy="41" r="4" />
+      {/* Cell B – budding yeast: mother + small bud joined smoothly. */}
+      <path
+        d="M 73.1 30.1 A 14 14 0 0 0 92.9 49.9 L 101.9 30.9 A 7 7 0 0 0 92.1 21.1 Z"
+        fill={AMBER}
+        fillOpacity={0.16}
+      />
 
       {/* Cell C – small solo cell, lower-right */}
       <ellipse cx="91" cy="89" rx="13" ry="10" transform="rotate(22 91 89)" fill={AMBER} fillOpacity={0.16} />
@@ -156,7 +157,7 @@ export function FactoryIcon(props: IconProps) {
     const fmt = (pts: [number, number][]) =>
       pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
     return (
-      <g key={key}>
+      <g key={key} className={styles.factoryShell}>
         <polygon points={fmt(outer)} fill={LIGHT_ROSE} />
         <polygon points={fmt(inner)} fill={ROSE} fillOpacity={0.28} />
         {outer.map(([ox, oy], k) => {
@@ -207,7 +208,8 @@ export function DrinkIcon(props: IconProps) {
     <Svg {...props}>
       {/* antibodies rising */}
       {antibody(28, 30, 9, 1)}
-      {antibody(94, 34, 9, 2)}
+      {antibody(61, 24, 9, 2)}
+      {antibody(94, 34, 9, 3)}
       {/* glass */}
       <polygon points="40,46 82,46 75,108 47,108" fill="none" />
       {/* liquid */}
