@@ -117,7 +117,12 @@ export default function YeastVaccine3D({
     <div
       ref={hostRef}
       aria-hidden
-      style={{ width: size, height: size, maxWidth: "100%" }}
+      style={{
+        width: size,
+        height: size,
+        maxWidth: "100%",
+        maxHeight: "100%",
+      }}
     />
   );
 }
