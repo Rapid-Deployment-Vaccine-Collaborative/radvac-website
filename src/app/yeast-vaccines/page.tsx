@@ -24,16 +24,14 @@ export default function YeastVaccinesPage() {
       {/* ---------- Hero ---------- */}
       <header className={styles.aHero}>
         <div className={styles.aHeroInner}>
-          <div>
-            <h1 className={styles.aTitle}>Be part of the Yeast&nbsp;Vaccine Revolution</h1>
-            <p className={styles.aLede}>
-              Genetically-modified yeast can turn a tube on your counter
-              into a vaccine factory. No lab, no cold chain, no needles required. 
-            </p>
-          </div>
+          <h1 className={styles.aTitle}>Be part of the Yeast&nbsp;Vaccine Revolution</h1>
           <div className={styles.aHeroArt}>
             <YeastVaccine3D kind="tube" size={260} />
           </div>
+          <p className={styles.aLede}>
+            Genetically-modified yeast can turn a tube on your counter
+            into a vaccine factory. No lab, no cold chain, no needles required.
+          </p>
         </div>
       </header>
 

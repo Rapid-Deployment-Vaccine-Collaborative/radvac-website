@@ -42,7 +42,7 @@ export const FLOW_STEPS: FlowStep[] = [
   {
     icon: "drink",
     num: "05",
-    title: "Comsume it",
+    title: "Consume it",
     body: "Yeast survives stomach acid, then travels to M cells in the gut to trigger mucosal (and possibly systemic) antibody production.",
   },
 ];

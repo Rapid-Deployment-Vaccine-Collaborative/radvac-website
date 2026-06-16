@@ -17,6 +17,7 @@ export type WireIconKind =
 
 const WIRE = "#3a8ad8";
 const ROSE = "#e0556a";
+const LIGHT_ROSE = "#fadce0";
 const AMBER = "#e8a93a";
 
 type IconProps = {
@@ -107,11 +108,15 @@ export function PlasmidIcon(props: IconProps) {
 export function CultureIcon(props: IconProps) {
   return (
     <Svg {...props}>
-      {/* Cell A – large mother, tilted, with bud sprouting upper-left */}
-      <ellipse cx="46" cy="76" rx="26" ry="19" transform="rotate(-15 46 76)" fill={AMBER} fillOpacity={0.16} />
-      <ellipse cx="32" cy="50" rx="14" ry="11" transform="rotate(-10 32 50)" fill={AMBER} fillOpacity={0.16} />
-      {/* nucleus A */}
-      <circle cx="47" cy="77" r="5" />
+      {/* Cell A – two haploid cells joined (sexual reproduction / zygote) */}
+      <path
+        d="M 26 60 A 12 12 0 0 1 44 44 C 50 53, 60 66, 68.5 68.7 A 14 14 0 0 1 47.5 87.3 C 40 80, 32 65, 26 60 Z"
+        fill={AMBER}
+        fillOpacity={0.16}
+      />
+      {/* two haploid nuclei pre-karyogamy */}
+      <circle cx="35" cy="52" r="4" />
+      <circle cx="58" cy="78" r="4.5" />
 
       {/* Cell B – medium mother tilted right, bud at upper-right */}
       <ellipse cx="83" cy="40" rx="19" ry="14" transform="rotate(18 83 40)" fill={AMBER} fillOpacity={0.16} />
@@ -152,8 +157,8 @@ export function FactoryIcon(props: IconProps) {
       pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
     return (
       <g key={key}>
-        <polygon points={fmt(outer)} fill={ROSE} fillOpacity={0.1} />
-        <polygon points={fmt(inner)} fill={ROSE} fillOpacity={0.18} />
+        <polygon points={fmt(outer)} fill={LIGHT_ROSE} />
+        <polygon points={fmt(inner)} fill={ROSE} fillOpacity={0.28} />
         {outer.map(([ox, oy], k) => {
           const i1 = (k + 4) % 6;
           const i2 = (k + 5) % 6;

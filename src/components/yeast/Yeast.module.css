@@ -454,12 +454,19 @@
 .aHeroInner {
   display: grid;
   grid-template-columns: 1fr 280px;
+  grid-template-areas:
+    "title art"
+    "lede  art";
   align-items: center;
-  gap: 32px;
+  column-gap: 32px;
+  row-gap: 0;
   padding: 54px 48px 56px;
   max-width: 1240px;
   margin: 0 auto;
 }
+.aHeroInner > .aTitle { grid-area: title; }
+.aHeroInner > .aLede { grid-area: lede; }
+.aHeroInner > .aHeroArt { grid-area: art; }
 .aEyebrow {
   font-family: var(--mono);
   font-size: 12px;
@@ -503,16 +510,23 @@
   }
   .aHeroInner {
     grid-template-columns: 1fr 110px;
+    grid-template-areas:
+      "title art"
+      "lede  lede";
     padding: 28px 22px 28px;
-    gap: 14px;
+    column-gap: 14px;
+    row-gap: 0;
     align-items: start;
   }
   .aHeroArt {
     display: block; /* override desktop grid/place-items */
-    justify-self: end;
+    justify-self: center;
     width: 110px;
     height: 110px;
     overflow: hidden;
+  }
+  .aLede {
+    max-width: none;
   }
 }
 
