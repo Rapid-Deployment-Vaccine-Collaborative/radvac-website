@@ -10,7 +10,7 @@ export function ContactStrip() {
         </h2>
       </div>
       <Link className={styles.btn} href="/contact">
-        Contact RaDVaC →
+        Contact Radvac →
       </Link>
     </section>
   );

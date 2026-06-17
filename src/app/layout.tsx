@@ -21,24 +21,24 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "RaDVaC — Rapid Deployment Vaccine Collaborative",
-    template: "%s | RaDVaC",
+    default: "Radvac — Rapid Deployment Vaccine Collaborative",
+    template: "%s | Radvac",
   },
   description:
-    "RaDVaC is a 501(c)(3) nonprofit developing rapid, open-source medical countermeasures and self-administered nasal vaccines.",
+    "Radvac is a 501(c)(3) nonprofit developing rapid, open-source medical countermeasures and self-administered nasal vaccines.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://radvac.org"
   ),
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "RaDVaC",
+    siteName: "Radvac",
     images: [
       {
         url: "/images/radvac-logo-darkblue-for-social-media-preview.png",
         width: 1200,
         height: 1200,
-        alt: "RaDVaC — Rapid Deployment Vaccine Collaborative",
+        alt: "Radvac — Rapid Deployment Vaccine Collaborative",
       },
     ],
   },

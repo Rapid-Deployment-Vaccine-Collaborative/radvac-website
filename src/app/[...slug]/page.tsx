@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     page = await getPageBySlug(path);
   } catch {
-    return { title: "RaDVaC" };
+    return { title: "Radvac" };
   }
 
   if (!page) {
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: page.seo?.title || page.title,
-    description: page.seo?.metaDesc || `${page.title} — RaDVaC`,
+    description: page.seo?.metaDesc || `${page.title} — Radvac`,
     alternates: page.seo?.canonical ? { canonical: page.seo.canonical } : undefined,
     openGraph: {
       title: page.seo?.opengraphTitle || page.title,
@@ -64,7 +64,7 @@ export default async function DynamicPage({ params }: PageProps) {
   if (fetchError) {
     return (
       <>
-        <PageHeader title="RaDVaC" />
+        <PageHeader title="Radvac" />
         <CmsErrorBanner
           error={fetchError}
           endpoint={process.env.WP_GRAPHQL_URL}

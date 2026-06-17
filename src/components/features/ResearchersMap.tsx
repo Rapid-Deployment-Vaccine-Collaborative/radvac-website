@@ -12,7 +12,7 @@ export function ResearchersMap() {
           style={{ aspectRatio: "16/10", height: "auto", minHeight: "400px" }}
           className="w-full border-0"
           loading="lazy"
-          title="RaDVaC Researchers Map"
+          title="Radvac Researchers Map"
           allowFullScreen
         />
       </div>
@@ -20,7 +20,7 @@ export function ResearchersMap() {
       {/* Description */}
       <p className="text-text-secondary text-center max-w-2xl mx-auto">
         This map shows researchers and collaborators around the world who are
-        participating in RaDVaC&apos;s open-source vaccine development. Want to join?
+        participating in Radvac&apos;s open-source vaccine development. Want to join?
         Contact us to be added to the map.
       </p>
     </div>

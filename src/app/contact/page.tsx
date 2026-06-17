@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: page.seo?.title || page.title,
-    description: page.seo?.metaDesc || `${page.title} — RaDVaC`,
+    description: page.seo?.metaDesc || `${page.title} — Radvac`,
     alternates: page.seo?.canonical ? { canonical: page.seo.canonical } : undefined,
     openGraph: {
       title: page.seo?.opengraphTitle || page.title,

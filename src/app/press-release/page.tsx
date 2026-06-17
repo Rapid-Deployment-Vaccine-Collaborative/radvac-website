@@ -8,11 +8,11 @@ import { CmsErrorBanner } from "@/components/CmsErrorBanner";
 import type { WpPost } from "@/lib/wordpress/types";
 
 export const metadata: Metadata = {
-  title: "Updates — RaDVaC",
-  description: "News, press releases, and updates from RaDVaC.",
+  title: "Updates — Radvac",
+  description: "News, press releases, and updates from Radvac.",
   openGraph: {
-    title: "Updates — RaDVaC",
-    description: "News, press releases, and updates from RaDVaC.",
+    title: "Updates — Radvac",
+    description: "News, press releases, and updates from Radvac.",
     url: "/press-release",
     type: "website",
   },

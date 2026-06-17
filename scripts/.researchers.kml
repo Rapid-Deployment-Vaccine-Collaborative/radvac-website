@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>RaDVaC Researchers</name>
+    <name>Radvac Researchers</name>
     <description>Drop a pin, and add contact information so that others in your area can get in touch to pool resources and work together.</description>
     <Style id="icon-1899-0288D1-normal">
       <IconStyle>
@@ -426,7 +426,7 @@
         </ExtendedData>
       </Placemark>
       <Placemark>
-        <name>RaDVaCSouthFlorida</name>
+        <name>RadvacSouthFlorida</name>
         <address>Boca Raton FL USA</address>
         <description><![CDATA[Contact email: radvac@infinitefaculty.org<br>City: Boca Raton<br>State or Province: FL<br>Country: USA<br>Science degree / education?: No<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: I am able to travel with all of the lab equipment needed to make the vaccine (aside from an electrical outlet and running water).]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
@@ -554,7 +554,7 @@
         </ExtendedData>
       </Placemark>
       <Placemark>
-        <name>RaDVaC HQ</name>
+        <name>Radvac HQ</name>
         <address>Boston MA USA</address>
         <description><![CDATA[Contact email: info@radvac.org<br>City: Boston<br>State or Province: MA<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: ]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
@@ -588,7 +588,7 @@
       <Placemark>
         <name>Alex Hoekstra</name>
         <address>Cambridge MA United States</address>
-        <description><![CDATA[Contact email: alexh@radvac.org<br>City: Cambridge<br>State or Province: MA<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: RaDVaC co-founder]]></description>
+        <description><![CDATA[Contact email: alexh@radvac.org<br>City: Cambridge<br>State or Province: MA<br>Country: United States<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: Radvac co-founder]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
         <ExtendedData>
           <Data name="Contact email">
@@ -613,14 +613,14 @@
             <value>Yes</value>
           </Data>
           <Data name="Other info">
-            <value>RaDVaC co-founder</value>
+            <value>Radvac co-founder</value>
           </Data>
         </ExtendedData>
       </Placemark>
       <Placemark>
         <name>Preston</name>
         <address>Waltham MA USA</address>
-        <description><![CDATA[Contact email: pwestep@radvac.org<br>City: Waltham<br>State or Province: MA<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: RaDVaC Chief Scientist]]></description>
+        <description><![CDATA[Contact email: pwestep@radvac.org<br>City: Waltham<br>State or Province: MA<br>Country: USA<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: Yes<br>Other info: Radvac Chief Scientist]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
         <ExtendedData>
           <Data name="Contact email">
@@ -645,7 +645,7 @@
             <value>Yes</value>
           </Data>
           <Data name="Other info">
-            <value>RaDVaC Chief Scientist</value>
+            <value>Radvac Chief Scientist</value>
           </Data>
         </ExtendedData>
       </Placemark>
@@ -1516,7 +1516,7 @@
       <Placemark>
         <name>siddharthlatest</name>
         <address>Bhavnagar Gujarat India</address>
-        <description><![CDATA[Contact email: siddharthlatest@gmail.com<br>City: Bhavnagar<br>State or Province: Gujarat<br>Country: India<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: I'm currently going through the RaDVaC whitepaper to understand the value of this exercise v/s commercial options. Also interested in contributing capital/time if someone were interested in designing this.]]></description>
+        <description><![CDATA[Contact email: siddharthlatest@gmail.com<br>City: Bhavnagar<br>State or Province: Gujarat<br>Country: India<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: I'm currently going through the Radvac whitepaper to understand the value of this exercise v/s commercial options. Also interested in contributing capital/time if someone were interested in designing this.]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
         <ExtendedData>
           <Data name="Contact email">
@@ -1541,7 +1541,7 @@
             <value>No</value>
           </Data>
           <Data name="Other info">
-            <value><![CDATA[I'm currently going through the RaDVaC whitepaper to understand the value of this exercise v/s commercial options. Also interested in contributing capital/time if someone were interested in designing this.]]></value>
+            <value><![CDATA[I'm currently going through the Radvac whitepaper to understand the value of this exercise v/s commercial options. Also interested in contributing capital/time if someone were interested in designing this.]]></value>
           </Data>
         </ExtendedData>
       </Placemark>
@@ -1995,7 +1995,7 @@
       <Placemark>
         <name>Roger G.</name>
         <address>Bedford Massachusetts United States</address>
-        <description><![CDATA[Contact email: e7m8@protonmail.com<br>City: Bedford<br>State or Province: Massachusetts<br>Country: United States<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: I can't really contribute to R&D, but I may be able to help advertise RaDVaC or make other contributions.]]></description>
+        <description><![CDATA[Contact email: e7m8@protonmail.com<br>City: Bedford<br>State or Province: Massachusetts<br>Country: United States<br>Science degree / education?: No<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: I can't really contribute to R&D, but I may be able to help advertise Radvac or make other contributions.]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
         <ExtendedData>
           <Data name="Contact email">
@@ -2020,7 +2020,7 @@
             <value>No</value>
           </Data>
           <Data name="Other info">
-            <value><![CDATA[I can't really contribute to R&D, but I may be able to help advertise RaDVaC or make other contributions.]]></value>
+            <value><![CDATA[I can't really contribute to R&D, but I may be able to help advertise Radvac or make other contributions.]]></value>
           </Data>
         </ExtendedData>
       </Placemark>
@@ -2260,7 +2260,7 @@ I would like to interview you or your staff on my podcast.</value>
       <Placemark>
         <name>Daniel Mietchen</name>
         <address>Jena Thuringia Germany</address>
-        <description><![CDATA[Contact email: daniel.mietchen@ibmt.fraunhofer.de<br>City: Jena<br>State or Province: Thuringia<br>Country: Germany<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: My background is in biophysics, with little overlap to vaccine development.<br><br>I have a strong interest and broad experience in data sharing in public health emergencies [1] as well as in open science more broadly [2] and in covering science and medicine-related topics via the Wikimedia ecosystem [3].<br><br>I would thus like to assist RaDVaC from those angles.<br><br>A good way to reach me is via https://twitter.com/EvoMRI .<br><br>Some pointers to relevant activities I was involved in:<br>[1]<br>- Open drug discovery for the Zika virus. https://doi.org/10.12688/f1000research.8013.1<br>- Progress in promoting data sharing in public health emergencies. https://dx.doi.org/10.2471/BLT.17.192096<br>- Fostering global data sharing. https://wellcomeopenresearch.org/articles/5-267/v1<br>[2]<br>- The transformative nature of transparency in research funding. https://doi.org/10.1371/journal.pbio.1002027<br>- Publishing the research process. https://doi.org/10.3897/rio.1.e7547<br>- Open science in practice. https://doi.org/10.3897/rio.7.e68595<br>[3]<br>- Wikipedia as a gateway to biomedical research. https://doi.org/10.1371/journal.pone.0190046<br>- Representing COVID-19 information in collaborative knowledge graphs: the case of Wikidata. http://doi.org/10.5281/zenodo.4549834<br>- Developing a scalable framework for partnerships between health agencies and the Wikimedia ecosystem.  https://doi.org/10.3897/arphapreprints.e68129]]></description>
+        <description><![CDATA[Contact email: daniel.mietchen@ibmt.fraunhofer.de<br>City: Jena<br>State or Province: Thuringia<br>Country: Germany<br>Science degree / education?: Yes<br>Basic lab skills?: Yes<br>Lab space?: No<br>Other info: My background is in biophysics, with little overlap to vaccine development.<br><br>I have a strong interest and broad experience in data sharing in public health emergencies [1] as well as in open science more broadly [2] and in covering science and medicine-related topics via the Wikimedia ecosystem [3].<br><br>I would thus like to assist Radvac from those angles.<br><br>A good way to reach me is via https://twitter.com/EvoMRI .<br><br>Some pointers to relevant activities I was involved in:<br>[1]<br>- Open drug discovery for the Zika virus. https://doi.org/10.12688/f1000research.8013.1<br>- Progress in promoting data sharing in public health emergencies. https://dx.doi.org/10.2471/BLT.17.192096<br>- Fostering global data sharing. https://wellcomeopenresearch.org/articles/5-267/v1<br>[2]<br>- The transformative nature of transparency in research funding. https://doi.org/10.1371/journal.pbio.1002027<br>- Publishing the research process. https://doi.org/10.3897/rio.1.e7547<br>- Open science in practice. https://doi.org/10.3897/rio.7.e68595<br>[3]<br>- Wikipedia as a gateway to biomedical research. https://doi.org/10.1371/journal.pone.0190046<br>- Representing COVID-19 information in collaborative knowledge graphs: the case of Wikidata. http://doi.org/10.5281/zenodo.4549834<br>- Developing a scalable framework for partnerships between health agencies and the Wikimedia ecosystem.  https://doi.org/10.3897/arphapreprints.e68129]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
         <ExtendedData>
           <Data name="Contact email">
@@ -2289,7 +2289,7 @@ I would like to interview you or your staff on my podcast.</value>
 
 I have a strong interest and broad experience in data sharing in public health emergencies [1] as well as in open science more broadly [2] and in covering science and medicine-related topics via the Wikimedia ecosystem [3].
 
-I would thus like to assist RaDVaC from those angles.
+I would thus like to assist Radvac from those angles.
 
 A good way to reach me is via https://twitter.com/EvoMRI .
 
@@ -2664,7 +2664,7 @@ Some pointers to relevant activities I was involved in:
       <Placemark>
         <name>Jarkko</name>
         <address>Helsinki Finland</address>
-        <description><![CDATA[Contact email: 2017malmi@gmail.com<br>City: Helsinki<br>State or Province: <br>Country: Finland<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: Contact me in Finnish or English. My mother tongue is Finnish. Facebook Messenger: https://www.facebook.com/yarkkoo<br>Telegram: +358400555689<br>Preferably NOT by email, as I don't read emails that often.<br><br>I would like to get vaccinated myself. I have already received commercial covid-19 vaccines injections and boosters in Finland in one other country. I would like to get vaccinated with the nasal vaccine, because:<br>* The latest version 12 is optimized for Omicron and Delta variants.<br>* Nasal vaccine might prevents mild covid-19 cases better than injections.<br><br>I know how to get tested for covid-19 antibodies in Finland after covid-19 injection vaccines (for example Synlab 11077 blood test), but I don't know yet which lab test would be best to test efficacy of nasal covid-19 vaccines.<br><br>Booster schedule, Gen12:<br>* The pre-Gen 10 vaccine has proven to be most effective if used at least 4 times. 6 people who have taken RaDVaC vaccines and subsequently became infected have taken 3 or fewer doses, while many more who have taken 4 or more doses haven’t reported an infection. Beginning with Gen 10, fewer doses might suffice.<br>* Ideally, doses are spaced by 1 week, or more. Given the seriousness of the pandemic, shorter intervals might be used. Dozens of RaDVaC testers have self-administered 4+ doses of progressive generations of vaccine, spaced by 1+ week each.<br>* Testing for immune response is ideal.<br>Some have reported e.g. pronounced Nasal Congestion, that increase with later booster doses. This is a positive qualitative sign of immune response.<br><br>...<br>One other thing. The indoor gyms are now closed in Helsinki, because of covid-19. If you know where could I do some weight training and treadmill running (juoksumatto in Finnish), let me know! I can wear my FFP2 or FFP3 mask so nobody will get infected.]]></description>
+        <description><![CDATA[Contact email: 2017malmi@gmail.com<br>City: Helsinki<br>State or Province: <br>Country: Finland<br>Science degree / education?: Yes<br>Basic lab skills?: No<br>Lab space?: No<br>Other info: Contact me in Finnish or English. My mother tongue is Finnish. Facebook Messenger: https://www.facebook.com/yarkkoo<br>Telegram: +358400555689<br>Preferably NOT by email, as I don't read emails that often.<br><br>I would like to get vaccinated myself. I have already received commercial covid-19 vaccines injections and boosters in Finland in one other country. I would like to get vaccinated with the nasal vaccine, because:<br>* The latest version 12 is optimized for Omicron and Delta variants.<br>* Nasal vaccine might prevents mild covid-19 cases better than injections.<br><br>I know how to get tested for covid-19 antibodies in Finland after covid-19 injection vaccines (for example Synlab 11077 blood test), but I don't know yet which lab test would be best to test efficacy of nasal covid-19 vaccines.<br><br>Booster schedule, Gen12:<br>* The pre-Gen 10 vaccine has proven to be most effective if used at least 4 times. 6 people who have taken Radvac vaccines and subsequently became infected have taken 3 or fewer doses, while many more who have taken 4 or more doses haven’t reported an infection. Beginning with Gen 10, fewer doses might suffice.<br>* Ideally, doses are spaced by 1 week, or more. Given the seriousness of the pandemic, shorter intervals might be used. Dozens of Radvac testers have self-administered 4+ doses of progressive generations of vaccine, spaced by 1+ week each.<br>* Testing for immune response is ideal.<br>Some have reported e.g. pronounced Nasal Congestion, that increase with later booster doses. This is a positive qualitative sign of immune response.<br><br>...<br>One other thing. The indoor gyms are now closed in Helsinki, because of covid-19. If you know where could I do some weight training and treadmill running (juoksumatto in Finnish), let me know! I can wear my FFP2 or FFP3 mask so nobody will get infected.]]></description>
         <styleUrl>#icon-1899-0288D1</styleUrl>
         <ExtendedData>
           <Data name="Contact email">
@@ -2700,8 +2700,8 @@ I would like to get vaccinated myself. I have already received commercial covid-
 I know how to get tested for covid-19 antibodies in Finland after covid-19 injection vaccines (for example Synlab 11077 blood test), but I don't know yet which lab test would be best to test efficacy of nasal covid-19 vaccines.
 
 Booster schedule, Gen12:
-* The pre-Gen 10 vaccine has proven to be most effective if used at least 4 times. 6 people who have taken RaDVaC vaccines and subsequently became infected have taken 3 or fewer doses, while many more who have taken 4 or more doses haven’t reported an infection. Beginning with Gen 10, fewer doses might suffice.
-* Ideally, doses are spaced by 1 week, or more. Given the seriousness of the pandemic, shorter intervals might be used. Dozens of RaDVaC testers have self-administered 4+ doses of progressive generations of vaccine, spaced by 1+ week each.
+* The pre-Gen 10 vaccine has proven to be most effective if used at least 4 times. 6 people who have taken Radvac vaccines and subsequently became infected have taken 3 or fewer doses, while many more who have taken 4 or more doses haven’t reported an infection. Beginning with Gen 10, fewer doses might suffice.
+* Ideally, doses are spaced by 1 week, or more. Given the seriousness of the pandemic, shorter intervals might be used. Dozens of Radvac testers have self-administered 4+ doses of progressive generations of vaccine, spaced by 1+ week each.
 * Testing for immune response is ideal.
 Some have reported e.g. pronounced Nasal Congestion, that increase with later booster doses. This is a positive qualitative sign of immune response.
 

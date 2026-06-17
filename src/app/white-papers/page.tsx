@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: page?.seo?.title || page?.title || "White Papers",
     description:
       page?.seo?.metaDesc ||
-      "RaDVaC vaccine white papers and protocol documents.",
+      "Radvac vaccine white papers and protocol documents.",
     alternates: page?.seo?.canonical
       ? { canonical: page.seo.canonical }
       : undefined,

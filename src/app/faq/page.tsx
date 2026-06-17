@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const fallback = {
     title: "FAQ",
     description:
-      "Frequently asked questions about RaDVaC: what we are, how the vaccines work, why we self-administer, and how to get in touch.",
+      "Frequently asked questions about Radvac: what we are, how the vaccines work, why we self-administer, and how to get in touch.",
   };
   try {
     const page = await getPageBySlug("faq");

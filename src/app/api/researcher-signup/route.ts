@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     // const { Resend } = await import('resend');
     // const resend = new Resend(process.env.RESEND_API_KEY);
     // await resend.emails.send({
-    //   from: 'RaDVaC Website <noreply@radvac.org>',
+    //   from: 'Radvac Website <noreply@radvac.org>',
     //   to: ['info@radvac.org'],
     //   replyTo: data.email,
     //   subject: `[Researchers Map] New signup: ${data.identifier}`,

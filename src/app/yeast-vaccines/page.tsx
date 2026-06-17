@@ -24,7 +24,7 @@ export default function YeastVaccinesPage() {
       {/* ---------- Hero ---------- */}
       <header className={styles.aHero}>
         <div className={styles.aHeroInner}>
-          <h1 className={styles.aTitle}>Be part of the Yeast&nbsp;Vaccine Revolution</h1>
+          <h1 className={styles.aTitle}>Be Part of the Yeast&nbsp;Vaccine Revolution</h1>
           <div className={styles.aHeroArt}>
             <YeastVaccine3D kind="tube" size={260} />
           </div>
@@ -124,7 +124,7 @@ export default function YeastVaccinesPage() {
       <section className={styles.block}>
         <div className={styles.ctaCard}>
           <div>
-            <h2>Participate in RaDVaC&rsquo;s Phase&nbsp;I trials</h2>
+            <h2>Participate in Radvac&rsquo;s Phase&nbsp;I trials</h2>
             <p>
               Radvac is running a Phase I trial on the BK & JC Polyomavirus yeast vaccine developed in Chris Buck's lab at NIH. The trial will help prove out the technology and inform future development. Ebola, influenza, and COVID-19 are all candidates for future trials. Sign up to express interest in the Polyomavirus trial and be informed about future trials.
             </p>

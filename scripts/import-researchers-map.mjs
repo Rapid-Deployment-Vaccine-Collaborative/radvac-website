@@ -1,4 +1,4 @@
-// One-off importer: pulls the RaDVaC Researchers Map KML from Google My Maps,
+// One-off importer: pulls the Radvac Researchers Map KML from Google My Maps,
 // geocodes each placemark's address via OpenStreetMap Nominatim, and writes
 // src/data/researchers.ts. Re-run if the upstream Google map is updated.
 //
@@ -17,7 +17,7 @@ const KML_URL =
 const OUT_PATH = path.resolve("src/data/researchers.ts");
 const CACHE_PATH = path.resolve("scripts/.geocode-cache.json");
 const KML_CACHE = path.resolve("scripts/.researchers.kml");
-const UA = "RaDVaC-website-importer/1.0 (info@radvac.org)";
+const UA = "Radvac-website-importer/1.0 (info@radvac.org)";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 

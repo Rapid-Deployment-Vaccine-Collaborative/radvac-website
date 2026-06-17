@@ -68,7 +68,7 @@ const xml = `<?xml version="1.0" encoding="UTF-8" ?>
 \txmlns:wp="http://wordpress.org/export/1.2/">
 
 <channel>
-\t<title>RaDVaC FAQ import</title>
+\t<title>Radvac FAQ import</title>
 \t<link>https://radvac.org</link>
 \t<description>FAQ page (slug: faq) with ACF-backed sections + items.</description>
 \t<pubDate>${pubDate}</pubDate>

@@ -29,7 +29,7 @@
             "name": "label",
             "aria-label": "",
             "type": "text",
-            "instructions": "Section heading shown in the sidebar (e.g. \"About RaDVaC\").",
+            "instructions": "Section heading shown in the sidebar (e.g. \"About Radvac\").",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": { "width": "", "class": "", "id": "" },

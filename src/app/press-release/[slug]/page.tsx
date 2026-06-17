@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     post = await getPostBySlug(slug);
   } catch {
-    return { title: "Update — RaDVaC" };
+    return { title: "Update — Radvac" };
   }
 
   if (!post) {
@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     post.seo?.opengraphImage?.sourceUrl ?? post.featuredImage?.node.sourceUrl;
 
   return {
-    title: post.seo?.title || `${post.title} — RaDVaC`,
-    description: post.seo?.metaDesc || `${post.title} — RaDVaC`,
+    title: post.seo?.title || `${post.title} — Radvac`,
+    description: post.seo?.metaDesc || `${post.title} — Radvac`,
     alternates: post.seo?.canonical ? { canonical: post.seo.canonical } : undefined,
     openGraph: {
       title: post.seo?.opengraphTitle || post.title,

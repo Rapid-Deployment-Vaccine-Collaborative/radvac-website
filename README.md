@@ -1,4 +1,4 @@
-# RaDVaC website
+# Radvac website
 
 Public site for [radvac.org](https://radvac.org). Next.js frontend with WordPress for headless content mangement on backend.
 

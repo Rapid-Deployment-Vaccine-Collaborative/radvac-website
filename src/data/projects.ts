@@ -29,7 +29,7 @@ export const projects: Project[] = [
     title: "FRIL lectin broad-spectrum antiviral",
     href: "/projects/fril-lectin",
     description:
-      "RaDVaC is pioneering a way to cheaply manufacture FRIL lectin from the lablab bean. FRIL is a potent broad-spectrum antiviral that can be delivered as a nasal spray or in a chewing gum formulation.",
+      "Radvac is pioneering a way to cheaply manufacture FRIL lectin from the lablab bean. FRIL is a potent broad-spectrum antiviral that can be delivered as a nasal spray or in a chewing gum formulation.",
   },
   {
     title: "AI for rapid drug repurposing and antiviral combinations design",

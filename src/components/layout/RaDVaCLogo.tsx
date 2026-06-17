@@ -1,11 +1,11 @@
-export function RaDVaCLogo({ className }: { className?: string }) {
+export function RadvacLogo({ className }: { className?: string }) {
   return (
     <svg
       className={className}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="-140 -140 2545 1044"
       role="img"
-      aria-label="RaDVaC"
+      aria-label="Radvac"
     >
       <defs>
         <radialGradient

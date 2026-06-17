@@ -26,7 +26,7 @@ export default function ResearchersPage() {
           <p>
             By filling out the form below, you can add your own information to
             the map so others can find you. Updates take a couple of days to
-            appear. RaDVaC hosts this map but does not know all listed
+            appear. Radvac hosts this map but does not know all listed
             researchers personally.
           </p>
           <p>

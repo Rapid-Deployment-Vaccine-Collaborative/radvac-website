@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
-import { RaDVaCLogo } from "./RaDVaCLogo";
+import { RadvacLogo } from "./RadvacLogo";
 
 const navItems = [
   { label: "FAQ", href: "/faq" },
@@ -72,8 +72,8 @@ export function Header() {
       >
         <div>
           <h1 className={styles.logo}>
-            <Link href="/" aria-label="RaDVaC home">
-              <RaDVaCLogo />
+            <Link href="/" aria-label="Radvac home">
+              <RadvacLogo />
             </Link>
           </h1>
         </div>

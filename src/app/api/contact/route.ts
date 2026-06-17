@@ -74,7 +74,7 @@ export async function POST(request: Request) {
 
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
-      from: "RaDVaC Website <noreply@radvac.org>",
+      from: "Radvac Website <noreply@radvac.org>",
       to: ["info@radvac.org"],
       replyTo: data.email,
       subject: `[radvac.org contact form] ${data.subject}`,

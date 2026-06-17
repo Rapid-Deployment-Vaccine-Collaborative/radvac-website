@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: RaDVaC Revalidate
+ * Plugin Name: Radvac Revalidate
  * Description: Notifies the Next.js frontend (Vercel) when WordPress content changes, so pages refresh out of the ISR cache immediately.
  * Version: 0.1.0
- * Author: RaDVaC
+ * Author: Radvac
  * Requires PHP: 7.4
  */
 
