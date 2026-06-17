@@ -520,25 +520,26 @@
     margin: 20px 24px 0;
   }
   .aHeroInner {
-    /* On mobile, stack: tube on top, title and lede below at the full
-       inner width — gives the card a single, consistent 28px inset on
-       every side and removes the side-by-side balancing act. */
-    grid-template-columns: 1fr;
+    /* Title beside a small tube on row 1, lede full-width on row 2.
+       Title font is shrunk so the tube fits with breathing room on both
+       sides; lede keeps the 28px card border. */
+    grid-template-columns: 1fr 72px;
     grid-template-areas:
-      "art"
-      "title"
-      "lede";
-    padding: 24px 28px 28px;
-    row-gap: 16px;
-    column-gap: 0;
-    align-items: start;
+      "title art"
+      "lede  lede";
+    padding: 28px;
+    column-gap: 22px;
+    row-gap: 14px;
+    align-items: center;
   }
   .aHeroArt {
     display: block; /* override desktop grid/place-items */
-    justify-self: end;
-    width: 96px;
-    height: 96px;
+    width: 72px;
+    height: 72px;
     overflow: hidden;
+  }
+  .aTitle {
+    font-size: clamp(22px, 6vw, 30px);
   }
   .aLede {
     max-width: none;
