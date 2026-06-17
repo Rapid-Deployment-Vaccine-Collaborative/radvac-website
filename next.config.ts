@@ -2,6 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["10.0.0.16"],
+  // sitemap.ts scans src/app at request time to auto-discover static routes. The
+  // serverless function only bundles traced deps, and a dynamic readdirSync isn't
+  // traced, so explicitly include the route segment files (this materializes their
+  // parent dirs in the bundle so readdirSync sees them in production).
+  outputFileTracingIncludes: {
+    "/sitemap.xml": ["./src/app/**/page.tsx"],
+  },
   images: {
     remotePatterns: [
       {
