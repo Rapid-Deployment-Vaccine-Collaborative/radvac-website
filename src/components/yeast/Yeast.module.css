@@ -465,19 +465,12 @@
 .aHeroInner {
   display: grid;
   grid-template-columns: 1fr 280px;
-  grid-template-areas:
-    "title art"
-    "lede  art";
   align-items: center;
-  column-gap: 32px;
-  row-gap: 0;
+  gap: 32px;
   padding: 54px 48px 56px;
   max-width: 1240px;
   margin: 0 auto;
 }
-.aHeroInner > .aTitle { grid-area: title; }
-.aHeroInner > .aLede { grid-area: lede; }
-.aHeroInner > .aHeroArt { grid-area: art; }
 .aEyebrow {
   font-family: var(--mono);
   font-size: 12px;
@@ -520,29 +513,17 @@
     margin: 20px 24px 0;
   }
   .aHeroInner {
-    /* Title beside a small tube on row 1, lede full-width on row 2.
-       Title font is shrunk so the tube fits with breathing room on both
-       sides; lede keeps the 28px card border. */
-    grid-template-columns: 1fr 72px;
-    grid-template-areas:
-      "title art"
-      "lede  lede";
-    padding: 28px;
-    column-gap: 22px;
-    row-gap: 14px;
-    align-items: center;
+    grid-template-columns: 1fr 110px;
+    padding: 28px 22px 28px;
+    gap: 14px;
+    align-items: start;
   }
   .aHeroArt {
     display: block; /* override desktop grid/place-items */
-    width: 72px;
-    height: 72px;
+    justify-self: end;
+    width: 110px;
+    height: 110px;
     overflow: hidden;
-  }
-  .aTitle {
-    font-size: clamp(28px, 10vw, 38px);
-  }
-  .aLede {
-    max-width: none;
   }
 }
 
