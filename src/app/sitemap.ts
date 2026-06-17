@@ -14,6 +14,7 @@ const HARDCODED_STATIC_PATHS = [
   "researchers-map",
   "contact",
   "ai-for-antivirals",
+  "yeast-vaccines",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
