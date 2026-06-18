@@ -131,11 +131,8 @@ export function CultureIcon(props: IconProps) {
   );
 }
 
-/** A yeast cell full of empty viral shells — the "factory". */
+/** A yeast cell full of viral shells — single smooth organic outline with membrane bleb. */
 export function FactoryIcon(props: IconProps) {
-  // Mini faceted icosahedron matching CapsidIcon: outer pointy-top hexagon,
-  // inner flat-top hexagon (rotated 30°), and 12 lines connecting each outer
-  // vertex to its two nearest inner vertices.
   const facetedShell = (cx: number, cy: number, r: number, key: number) => {
     const innerR = r * 0.52;
     const outer: [number, number][] = [
@@ -165,32 +162,26 @@ export function FactoryIcon(props: IconProps) {
           const i2 = (k + 5) % 6;
           return (
             <g key={k}>
-              <line
-                x1={ox.toFixed(1)}
-                y1={oy.toFixed(1)}
-                x2={inner[i1][0].toFixed(1)}
-                y2={inner[i1][1].toFixed(1)}
-              />
-              <line
-                x1={ox.toFixed(1)}
-                y1={oy.toFixed(1)}
-                x2={inner[i2][0].toFixed(1)}
-                y2={inner[i2][1].toFixed(1)}
-              />
+              <line x1={ox.toFixed(1)} y1={oy.toFixed(1)} x2={inner[i1][0].toFixed(1)} y2={inner[i1][1].toFixed(1)} />
+              <line x1={ox.toFixed(1)} y1={oy.toFixed(1)} x2={inner[i2][0].toFixed(1)} y2={inner[i2][1].toFixed(1)} />
             </g>
           );
         })}
       </g>
     );
   };
+
   return (
     <Svg {...props}>
-      <ellipse cx="58" cy="62" rx="46" ry="42" fill={AMBER} fillOpacity={0.16} />
-      {/* small bud */}
-      <circle cx="98" cy="30" r="12" fill={AMBER} fillOpacity={0.16} />
-      {facetedShell(44, 52, 12, 1)}
-      {facetedShell(72, 50, 12, 2)}
-      {facetedShell(57, 80, 12, 3)}
+      {/* Single smooth closed path: main cell body + membrane bleb on upper-right */}
+      <path
+        d="M 58,14 C 78,11 94,17 100,34 C 108,47 108,57 100,67 C 92,81 78,97 58,106 C 38,114 18,102 8,84 C 2,64 8,38 22,26 C 36,14 50,12 58,14 Z"
+        fill={AMBER}
+        fillOpacity={0.16}
+      />
+      {facetedShell(38, 48, 14, 1)}
+      {facetedShell(68, 46, 14, 2)}
+      {facetedShell(52, 78, 14, 3)}
     </Svg>
   );
 }
@@ -220,12 +211,6 @@ export function DrinkIcon(props: IconProps) {
         stroke="none"
       />
       <path d="M42,64 C50,60 60,68 70,63 C75,61 79,62 80.5,64" />
-      {/* a released shell in the liquid */}
-      <polygon
-        points="61,84 69,80 69,88 61,92 53,88 53,80"
-        fill={ROSE}
-        fillOpacity={0.16}
-      />
     </Svg>
   );
 }
