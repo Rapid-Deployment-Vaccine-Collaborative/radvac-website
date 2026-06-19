@@ -16,7 +16,7 @@ const GRAPHIC_BY_HREF: Record<string, ProjectGraphicKind> = {
 // Project cards whose card link should point somewhere other than the
 // project's own href, with the arrow label to use.
 const LINK_OVERRIDE: Record<string, { href: string; label: string }> = {
-  "/projects/h5n1": { href: "/yeast-vaccines", label: "Read more →" },
+  "/projects/h5n1": { href: "/bfiat", label: "Read more →" },
   "/projects/influenza": {
     href: "https://prestonestep.substack.com/p/modernizing-variolation",
     label: "Learn more →",

@@ -27,7 +27,7 @@ export function StudiesTable({ tone = "light" }: { tone?: "light" | "warm" }) {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Virus</th>
+            <th>Source of antigen</th>
             <th>Tested in</th>
             <th>Yeast species</th>
             <th>Format</th>
@@ -38,7 +38,7 @@ export function StudiesTable({ tone = "light" }: { tone?: "light" | "warm" }) {
         <tbody>
           {STUDIES.map((s, i) => (
             <tr key={`${s.virus}-${s.cite}-${i}`}>
-              <td data-label="Virus" className={styles.virusCell}>
+              <td data-label="Source of antigen" className={styles.virusCell}>
                 {s.virus}
               </td>
               <td data-label="Tested in">

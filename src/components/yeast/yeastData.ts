@@ -18,8 +18,8 @@ export const FLOW_STEPS: FlowStep[] = [
   {
     icon: "capsid",
     num: "01",
-    title: "Identify an antigen",
-    body: "Choose antigen gene(s) from the pathogen you want to protect against. Capsid/shell protein genes are prime candidates.",
+    title: "Identify a protein",
+    body: "Choose gene(s) for the proteins you want to produce.",
   },
   {
     icon: "plasmid",
@@ -31,19 +31,19 @@ export const FLOW_STEPS: FlowStep[] = [
     icon: "culture",
     num: "03",
     title: "Culture the yeast",
-    body: "Grow the engineered yeast. At this stage the yeast is a vaccine factory, not a vaccine.",
+    body: "Grow the engineered yeast.",
   },
   {
     icon: "factory",
     num: "04",
     title: "Switch on production",
-    body: "Maltose activates the promoter and the yeast fill with vaccine antigen (or display antigens on their surface).",
+    body: "Maltose activates the promoter and the yeast fill with protein (or display proteins on their surface).",
   },
   {
     icon: "drink",
     num: "05",
     title: "Consume it",
-    body: "Yeast survives stomach acid, then travels to M cells in the gut to trigger mucosal (and possibly systemic) antibody production.",
+    body: "Yeast survives stomach acid, then delivers the manufactored proteins to the gut. M cells in the gut may take up particular proteins, triggering antibody responses.",
   },
 ];
 

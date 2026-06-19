@@ -24,20 +24,19 @@ export default function YeastVaccinesPage() {
       {/* ---------- Hero ---------- */}
       <header className={styles.aHero}>
         <div className={styles.aHeroInner}>
-          <h1 className={styles.aTitle}>The Yeast&nbsp;Vaccine Revolution</h1>
+          <h1 className={styles.aTitle}>Biofactories in a&nbsp;tube</h1>
           <div className={styles.aHeroArt}>
             <YeastVaccine3D kind="tube" size={260} />
           </div>
           <p className={styles.aLede}>
-            Genetically-modified yeast can turn a tube on your counter
-            into a vaccine factory. No lab, no cold chain, no needles required.
+            Imagine switching on a biologics factory at home by adding yeast to a tube. No lab required.
           </p>
         </div>
       </header>
 
       {/* ---------- How it works ---------- */}
       <section className={styles.block} id="how">
-        <h2 className={styles.h2}>How yeast vaccines work</h2>
+        <h2 className={styles.h2}>How yeast-based biofactories work</h2>
         <div className={styles.flow}>
           {FLOW_STEPS.map((step, i) => (
             <Fragment key={step.num}>
@@ -63,22 +62,20 @@ export default function YeastVaccinesPage() {
       <section className={styles.block}>
         <h2 className={styles.h2}>Proven in animals</h2>
         <p className={`${styles.lede} ${styles.ledeFull}`}>
-          Across more than 20 published studies, oral yeast vaccines have
-          raised both systemic (IgG) and mucosal (secretory IgA) antibody
-          responses against viruses in mice, chickens, pigs, and fish. Yeast vaccines show promise for protecting animal stocks from disease. 
+          Across more than 20 published studies, yeast expressing antigen proteins fed orally have induced antibody responses in mice, chickens, pigs, and fish.
         </p>
         <StudiesTable />
       </section>
 
       {/* ---------- First Human Data ---------- */}
       <section className={styles.block}>
-        <h2 className={styles.h2}>First Human Data</h2>
+        <h2 className={styles.h2}>First human data</h2>
         <HumanDataFigure />
       </section>
 
       {/* ---------- Why yeast ---------- */}
       <section className={styles.block}>
-        <h2 className={styles.h2}>Potential Benefits</h2>
+        <h2 className={styles.h2}>Potential benefits</h2>
         <div className={styles.benefits}>
           {BENEFITS.map((b) => (
             <div className={styles.benefit} key={b.title}>
@@ -97,11 +94,6 @@ export default function YeastVaccinesPage() {
       <section className={styles.block}>
         <h2 className={styles.h2}>Read more</h2>
         <ul style={{ marginTop: "18px", paddingLeft: "1.4em", lineHeight: 1.9, fontSize: "16px", color: "var(--ink-soft)", listStyleType: "disc" }}>
-          <li>
-            <a href="https://zenodo.org/records/17968622" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
-              <strong>"Vaccine Beer: A Personal Healthcare Report"</strong>
-            </a>{" "}— Christopher Buck and Andrew Buck
-          </li>
           <li>
             <a href="https://zenodo.org/records/17969224" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
               <strong>"An Edible Polyomavirus Vaccine"</strong>

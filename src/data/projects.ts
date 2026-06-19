@@ -7,10 +7,10 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Vaccine factories in a tube",
+    title: "Biofactories in a tube",
     href: "/projects/h5n1",
     description:
-      "Protocols for using genetically-modified yeast to generate vaccine factories in a tube. Vaccines can be delivered orally, nasally, or both.",
+      "Genetically-modified yeast can be used to produce and deliver proteins, some of which may help maintain the body's natural defenses.",
   },
   {
     title: "Modernized variolation",
