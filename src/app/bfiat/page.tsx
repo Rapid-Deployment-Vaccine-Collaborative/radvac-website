@@ -27,7 +27,7 @@ export default function BFIATPage() {
           <div className={styles.aHeroText}>
             <h1 className={styles.aTitle}>Biofactories in a&nbsp;tube</h1>
             <p className={styles.aLede}>
-              Imagine switching on a biologics factory at home by adding yeast to a tube. No lab required.
+              Imagine switching on a protein factory at home by adding yeast to a tube. No lab required.
             </p>
           </div>
           <div className={styles.aHeroArt}>
