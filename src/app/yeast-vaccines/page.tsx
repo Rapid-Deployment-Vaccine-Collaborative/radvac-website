@@ -24,7 +24,7 @@ export default function YeastVaccinesPage() {
       {/* ---------- Hero ---------- */}
       <header className={styles.aHero}>
         <div className={styles.aHeroInner}>
-          <h1 className={styles.aTitle}>Be Part of the Yeast&nbsp;Vaccine Revolution</h1>
+          <h1 className={styles.aTitle}>The Yeast&nbsp;Vaccine Revolution</h1>
           <div className={styles.aHeroArt}>
             <YeastVaccine3D kind="tube" size={260} />
           </div>
@@ -65,7 +65,7 @@ export default function YeastVaccinesPage() {
         <p className={`${styles.lede} ${styles.ledeFull}`}>
           Across more than 20 published studies, oral yeast vaccines have
           raised both systemic (IgG) and mucosal (secretory IgA) antibody
-          responses against viruses in mice, chickens, pigs, and fish. Yeast vaccines show great promise in protecting animal stocks from disease. 
+          responses against viruses in mice, chickens, pigs, and fish. Yeast vaccines show promise for protecting animal stocks from disease. 
         </p>
         <StudiesTable />
       </section>
@@ -78,7 +78,7 @@ export default function YeastVaccinesPage() {
 
       {/* ---------- Why yeast ---------- */}
       <section className={styles.block}>
-        <h2 className={styles.h2}>Benefits</h2>
+        <h2 className={styles.h2}>Potential Benefits</h2>
         <div className={styles.benefits}>
           {BENEFITS.map((b) => (
             <div className={styles.benefit} key={b.title}>
@@ -120,7 +120,8 @@ export default function YeastVaccinesPage() {
         </ul>
       </section>
 
-      {/* ---------- CTA ---------- */}
+      {/* ---------- CTA (hidden) ---------- */}
+      {false && (
       <section className={styles.block}>
         <div className={styles.ctaCard}>
           <div>
@@ -141,6 +142,7 @@ export default function YeastVaccinesPage() {
           </div>
         </div>
       </section>
+      )}
     </>
   );
 }
