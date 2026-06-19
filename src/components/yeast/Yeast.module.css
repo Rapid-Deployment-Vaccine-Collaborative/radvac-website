@@ -1,5 +1,5 @@
 /* ============================================================= *
- * Shared styles for the /yeast-vaccines prototype pages.
+ * Shared styles for the /bfiat prototype pages.
  * Tokens (--ink, --blue, --rule, --mono…) come from globals.css.
  * ============================================================= */
 
@@ -49,7 +49,7 @@
 }
 
 /* ============================================================= *
- * HORIZONTAL FLOW  (prototype A — "How yeast vaccines work")
+ * HORIZONTAL FLOW
  * ============================================================= */
 .flow {
   display: flex;

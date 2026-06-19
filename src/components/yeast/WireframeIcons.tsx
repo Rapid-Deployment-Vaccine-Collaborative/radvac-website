@@ -1,4 +1,4 @@
-// Flat-SVG wireframe icons for the yeast-vaccine pages.
+// Flat-SVG wireframe icons for the bfiat related pages.
 //
 // These echo the blue wireframe aesthetic of the site's three.js project
 // graphics (src/components/sections/swissCheese/objects.ts, WIRE_COLOR

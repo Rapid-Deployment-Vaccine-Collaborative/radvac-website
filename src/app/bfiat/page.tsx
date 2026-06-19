@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import type { Metadata } from "next";
 import styles from "@/components/yeast/Yeast.module.css";
 import { WireIcon } from "@/components/yeast/WireframeIcons";
-import YeastVaccine3D from "@/components/yeast/YeastVaccine3D";
+import YeastBFIAT3D from "@/components/yeast/YeastBFIAT3D";
 import { StudiesTable } from "@/components/yeast/StudiesTable";
 import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
 import { HumanDataFigure } from "@/components/yeast/HumanDataFigure";
@@ -13,12 +13,12 @@ import {
 } from "@/components/yeast/yeastData";
 
 export const metadata: Metadata = {
-  title: "Yeast Vaccines",
+  title: "Biofactories in a tube",
   description:
-    "Genetically-modified yeast turn a tube on your counter into a vaccine factory. Drink it, and the yeast releases intact viral shells in your gut — triggering mucosal immunity. Be part of the yeast vaccine revolution.",
+    "Genetically-modified yeast can be used to produce and deliver proteins, some of which may help maintain the body's natural defenses. No lab, no cold chain, no needles required.",
 };
 
-export default function YeastVaccinesPage() {
+export default function BFIATPage() {
   return (
     <>
       {/* ---------- Hero ---------- */}
@@ -26,7 +26,7 @@ export default function YeastVaccinesPage() {
         <div className={styles.aHeroInner}>
           <h1 className={styles.aTitle}>Biofactories in a&nbsp;tube</h1>
           <div className={styles.aHeroArt}>
-            <YeastVaccine3D kind="tube" size={260} />
+            <YeastBFIAT3D kind="tube" size={260} />
           </div>
           <p className={styles.aLede}>
             Imagine switching on a biologics factory at home by adding yeast to a tube. No lab required.
@@ -119,7 +119,7 @@ export default function YeastVaccinesPage() {
           <div>
             <h2>Participate in Radvac&rsquo;s Phase&nbsp;I trials</h2>
             <p>
-              Radvac is running a Phase I trial on the BK & JC Polyomavirus yeast vaccine developed in Chris Buck's lab at NIH. The trial will help prove out the technology and inform future development. Ebola, influenza, and COVID-19 are all candidates for future trials. Sign up to express interest in the Polyomavirus trial and be informed about future trials.
+              Radvac is running a Phase I trial on a BFIAT that is designed to manufacture  BK & JC Polyomavirus shell protein. Sign up to express interest in the Polyomavirus trial and be informed about future trials.
             </p>
           </div>
           <div className={styles.ctaActions}>

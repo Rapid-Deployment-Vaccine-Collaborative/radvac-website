@@ -1,6 +1,6 @@
 "use client";
 
-// A size-flexible variant of ProjectCardGraphic for the yeast-vaccine hero.
+// A size-flexible variant of ProjectCardGraphic for the hero.
 // Reuses the same wireframe builders so the brand's 3D test tube ("vaccine
 // factories in a tube") can appear at hero scale. Falls back to a static SVG
 // when WebGL is unavailable (e.g. hwaccel disabled).
@@ -13,7 +13,7 @@ import {
   type Built,
 } from "@/components/sections/swissCheese/objects";
 
-export type Vaccine3DKind = "tube" | "nasal";
+export type BFIAT3DKind = "tube" | "nasal";
 
 type Framed = Built & {
   cameraDistance: number;
@@ -22,7 +22,7 @@ type Framed = Built & {
   autoSpinY: number;
 };
 
-function build(kind: Vaccine3DKind, scene: THREE.Scene): Framed {
+function build(kind: BFIAT3DKind, scene: THREE.Scene): Framed {
   if (kind === "nasal") {
     const n = buildNasalSpray(0x9fd0f5);
     scene.add(n.group);
@@ -101,11 +101,11 @@ function NasalSVG({ size }: { size: number }) {
   );
 }
 
-export default function YeastVaccine3D({
+export default function YeastBFIAT3D({
   kind = "tube",
   size = 220,
 }: {
-  kind?: Vaccine3DKind;
+  kind?: BFIAT3DKind;
   size?: number;
 }) {
   const hostRef = useRef<HTMLDivElement | null>(null);

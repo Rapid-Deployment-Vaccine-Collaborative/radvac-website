@@ -1,4 +1,4 @@
-// Content for the /yeast-vaccines prototype pages.
+// Content for the /bfiat prototype pages.
 //
 // NOTE: This is hard-coded draft content for two prototype pages and is kept
 // here (not in src/data/) on purpose — src/data/ holds legacy content slated
@@ -13,7 +13,6 @@ export type FlowStep = {
   body: string;
 };
 
-// Adapted from "How yeast vaccines work" (yeast talk, slide 3).
 export const FLOW_STEPS: FlowStep[] = [
   {
     icon: "capsid",

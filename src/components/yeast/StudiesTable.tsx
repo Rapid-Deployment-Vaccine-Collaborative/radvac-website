@@ -1,6 +1,4 @@
-// Simplified "Major virus studies in animal models" table, shared by both
-// yeast-vaccine prototypes. Adapted from the oral-vaccine deck (slide 4) /
-// Austriaco 2023, Table 1.
+// Simplified "Major virus studies in animal models" table
 
 import styles from "./Yeast.module.css";
 import { MODELS, STUDIES, type ModelKey } from "./yeastData";
