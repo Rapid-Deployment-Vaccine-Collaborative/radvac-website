@@ -24,13 +24,15 @@ export default function BFIATPage() {
       {/* ---------- Hero ---------- */}
       <header className={styles.aHero}>
         <div className={styles.aHeroInner}>
-          <h1 className={styles.aTitle}>Biofactories in a&nbsp;tube</h1>
+          <div className={styles.aHeroText}>
+            <h1 className={styles.aTitle}>Biofactories in a&nbsp;tube</h1>
+            <p className={styles.aLede}>
+              Imagine switching on a biologics factory at home by adding yeast to a tube. No lab required.
+            </p>
+          </div>
           <div className={styles.aHeroArt}>
             <YeastBFIAT3D kind="tube" size={260} />
           </div>
-          <p className={styles.aLede}>
-            Imagine switching on a biologics factory at home by adding yeast to a tube. No lab required.
-          </p>
         </div>
       </header>
 
