@@ -47,7 +47,7 @@ function TubeSVG({ size }: { size: number }) {
       height={size}
       viewBox="0 0 80 160"
       aria-hidden="true"
-      style={{ display: "block" }}
+      style={{ display: "block", maxWidth: "100%", height: "auto" }}
       fill="none"
       stroke={WIRE}
       strokeWidth={2}
@@ -83,7 +83,7 @@ function NasalSVG({ size }: { size: number }) {
       height={size}
       viewBox="0 0 80 160"
       aria-hidden="true"
-      style={{ display: "block" }}
+      style={{ display: "block", maxWidth: "100%", height: "auto" }}
       fill="none"
       stroke={WIRE}
       strokeWidth={2}
@@ -209,10 +209,8 @@ export default function YeastBFIAT3D({
       ref={hostRef}
       aria-hidden
       style={{
-        width: size,
-        height: size,
-        maxWidth: "100%",
-        maxHeight: "100%",
+        width: "100%",
+        height: "100%",
       }}
     />
   );

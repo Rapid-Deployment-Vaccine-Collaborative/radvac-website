@@ -94,7 +94,7 @@ export default function BFIATPage() {
 
       {/* ---------- Read more ---------- */}
       <section className={styles.block}>
-        <h2 className={styles.h2}>Read more</h2>
+        <h2 className={styles.h2}>Related external articles</h2>
         <ul style={{ marginTop: "18px", paddingLeft: "1.4em", lineHeight: 1.9, fontSize: "16px", color: "var(--ink-soft)", listStyleType: "disc" }}>
           <li>
             <a href="https://zenodo.org/records/17969224" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>

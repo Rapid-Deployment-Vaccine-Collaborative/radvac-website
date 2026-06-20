@@ -49,27 +49,27 @@ export const FLOW_STEPS: FlowStep[] = [
 // Adapted from "Summary of major benefits" (yeast talk, slide 9).
 export const BENEFITS: { title: string; body: string }[] = [
   {
-    title: "Easy, cheap production",
+    title: "Easy, cheap to make",
     body: "Grown in a tube from commercially available yeast — no fermenters, clean rooms, or specialist equipment.",
   },
   {
-    title: "Oral or nasal delivery",
+    title: "Oral or nasal delivery (no needles/injections)",
     body: "Swallowed or sprayed — no needles, no trained injector required.",
   },
   {
-    title: "Can be made shelf stable",
+    title: "Can be dried and be made shelf stable",
     body: "No refrigeration needed, so it ships and stores anywhere in the world.",
   },
   {
-    title: "No cold chain",
+    title: "Refrigeration not required during shipment",
     body: "No refrigeration needed, so it ships and stores anywhere in the world.",
   },
   {
-    title: "Mucosal immunity",
+    title: "Can potentially trigger mucosal antibody production",
     body: "Raises secretory IgA at mucosal surfaces, and possibly systemic IgG antibodies.",
   },
   {
-    title: "Generally Recognized As Safe",
+    title: "Generally recognized as safe",
     body: "GMO yeast is GRAS and already sold for human consumption in the US — many products use it legally today.",
   },
 ];
