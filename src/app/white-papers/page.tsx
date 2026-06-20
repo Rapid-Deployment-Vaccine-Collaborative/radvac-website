@@ -77,12 +77,14 @@ export default async function WhitePapersPage() {
 
       <PageHeader title={page.title} />
 
-      <section className="pt-16 px-6">
-        <div className="max-w-[800px] mx-auto">
-          <div
-            className="prose prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+      <section className="pt-16 px-6 md:px-14">
+        <div className="bg-white rounded-2xl shadow-sm py-12 px-6 sm:px-12 md:px-20">
+          <div className="max-w-[760px] mx-auto">
+            <div
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{ __html: content }}
+            />
+          </div>
         </div>
       </section>
     </>
