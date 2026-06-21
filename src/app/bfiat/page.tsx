@@ -120,7 +120,7 @@ export default function BFIATPage() {
           <div>
             <h2>Participate in Radvac&rsquo;s Phase&nbsp;I trials</h2>
             <p>
-              Radvac will soon be co-oordinating a Phase I trial to study the immune system effects of genetically-modified yeast that manufactures shell proteins from BK & JC Polyomavirus. Submit your email to express interest in being a participant in this groundbreaking trial and to be informed about future trials.
+              Radvac will soon be coordinating a Phase I trial to study the safety, tolerability, and immune system effects of genetically-modified yeast that manufactures shell proteins from BK & JC Polyomavirus. Submit your email to express interest in being a participant in this groundbreaking trial and to be informed about future trials.
             </p>
           </div>
           <div className={styles.ctaActions}>
