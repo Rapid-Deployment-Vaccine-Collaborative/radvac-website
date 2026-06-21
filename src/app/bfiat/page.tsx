@@ -114,14 +114,13 @@ export default function BFIATPage() {
         </ul>
       </section>
 
-      {/* ---------- CTA (hidden) ---------- */}
-      {false && (
+      {/* ---------- CTA ---------- */}
       <section className={styles.block}>
         <div className={styles.ctaCard}>
           <div>
             <h2>Participate in Radvac&rsquo;s Phase&nbsp;I trials</h2>
             <p>
-              Radvac is running a Phase I trial on a BFIAT that is designed to manufacture  BK & JC Polyomavirus shell protein. Sign up to express interest in the Polyomavirus trial and be informed about future trials.
+              Radvac will soon be co-oordinating a Phase I trial to study the immune system effects of genetically-modified yeast that manufactures shell proteins from BK & JC Polyomavirus. Submit your email to express interest in being a participant in this groundbreaking trial and to be informed about future trials.
             </p>
           </div>
           <div className={styles.ctaActions}>
@@ -136,7 +135,6 @@ export default function BFIATPage() {
           </div>
         </div>
       </section>
-      )}
     </>
   );
 }
