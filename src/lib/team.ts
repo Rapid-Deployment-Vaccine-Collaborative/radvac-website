@@ -55,6 +55,7 @@ export const team: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/brian-manning-delaney/",
     x: "https://x.com/BrianMDelaney",
     image: "/images/brian-narrow.png",
+    pageImage: "/images/brian-photo.png",
     wpUri: "team/brian-delaney",
   },
   {
