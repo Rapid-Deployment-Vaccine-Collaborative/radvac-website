@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import styles from "./SpreadGlobe.module.css";
 
 const SpreadGlobeInner = dynamic(() => import("./SpreadGlobeInner"), {
   ssr: false,
@@ -42,6 +41,19 @@ function useTypedText(target: string, startMs: number, intervalMs: number) {
   }, [target, startMs, intervalMs]);
   return target.slice(0, count);
 }
+
+const captionBase: React.CSSProperties = {
+  position: "absolute",
+  fontFamily:
+    "var(--font-jetbrains), ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace",
+  fontSize: "clamp(15px, 2.5vw, 32px)",
+  fontWeight: 500,
+  letterSpacing: "0.02em",
+  color: "var(--ink, #1a1a1a)",
+  pointerEvents: "none",
+  maxWidth: "48%",
+  lineHeight: 1.25,
+};
 
 function VideoFallback() {
   return (
@@ -109,8 +121,17 @@ export default function SpreadGlobe() {
         }}
         onTopoError={() => setFallback(true)}
       />
-      <div className={`${styles.caption} ${styles.top}`}>{top}</div>
-      <div className={`${styles.caption} ${styles.bottom}`}>{bottom}</div>
+      <div style={{ ...captionBase, top: "2%", left: "7%" }}>{top}</div>
+      <div
+        style={{
+          ...captionBase,
+          bottom: "0%",
+          right: "5%",
+          textAlign: "right",
+        }}
+      >
+        {bottom}
+      </div>
     </div>
   );
 }

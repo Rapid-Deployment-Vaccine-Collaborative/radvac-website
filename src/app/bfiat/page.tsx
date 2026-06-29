@@ -118,9 +118,9 @@ export default function BFIATPage() {
       <section className={styles.block}>
         <div className={styles.ctaCard}>
           <div>
-            <h2>Participate in Radvac&rsquo;s Phase&nbsp;I trials</h2>
+            <h2>Participate in Radvac&rsquo;s research</h2>
             <p>
-              Radvac will soon be coordinating a Phase I trial to study  genetically-modified yeast that manufactures shell proteins from BK & JC Polyomavirus. Submit your email to express interest in being a participant in this groundbreaking trial and to be informed about future trials.
+              Radvac is planning a study on genetically-modified yeast that manufactures shell proteins from BK & JC Polyomavirus. Submit your email to express interest in being a participant in this upcoming study and to be informed about future studies.
             </p>
           </div>
           <div className={styles.ctaActions}>
