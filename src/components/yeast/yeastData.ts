@@ -42,7 +42,7 @@ export const FLOW_STEPS: FlowStep[] = [
     icon: "drink",
     num: "05",
     title: "Consume it",
-    body: "Yeast survives stomach acid, then delivers the manufactored proteins to the gut. M cells in the gut may take up particular proteins, triggering antibody responses.",
+    body: "Yeast survives stomach acid, then delivers the manufactored proteins to the gut. M cells in the gut may take up particular proteins, potentially helping maintain the body's natural defenses.",
   },
 ];
 
@@ -65,7 +65,7 @@ export const BENEFITS: { title: string; body: string }[] = [
     body: "No refrigeration needed, so it ships and stores anywhere in the world.",
   },
   {
-    title: "Can potentially trigger mucosal antibody production",
+    title: "Can potentially boost the immune system's mucosal defenses",
     body: "Raises secretory IgA at mucosal surfaces, and possibly systemic IgG antibodies.",
   },
   {

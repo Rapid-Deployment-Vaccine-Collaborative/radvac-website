@@ -36,6 +36,18 @@ export function Header() {
       return `rgb(${r},${g},${b})`;
     };
 
+    // iOS/iPadOS render `background-attachment: fixed` as `scroll`, so the
+    // header panel's gradient can't be mapped to the viewport via CSS the way
+    // the body gradient is. Only on those platforms do we emulate the fixed
+    // mapping in JS by recoloring the panel to match the body gradient at the
+    // current scroll position. Everywhere else (desktop, incl. narrow windows,
+    // and modern Android) `fixed` is honored, so the CSS default gradient lines
+    // up by itself — recoloring there would fight the fixed mapping and create
+    // a seam at the header/page boundary.
+    const noFixedBg =
+      /iP(ad|hone|od)/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
     let compactNow = false;
     const onScroll = () => {
       const y = window.scrollY;
@@ -44,12 +56,16 @@ export function Header() {
       setCompact(compactNow);
 
       const isMobile = window.matchMedia("(max-width: 980px)").matches;
-      if (isMobile) {
+      const root = document.documentElement;
+      if (isMobile && noFixedBg) {
         const headerH = compactNow ? 82 : 170;
         const bodyH = document.body.offsetHeight || 1;
-        const root = document.documentElement;
         root.style.setProperty("--hdr-grad-top", sample(y / bodyH));
         root.style.setProperty("--hdr-grad-bot", sample((y + headerH) / bodyH));
+      } else {
+        // fixed backgrounds work here — let the default gradient match the body
+        root.style.removeProperty("--hdr-grad-top");
+        root.style.removeProperty("--hdr-grad-bot");
       }
     };
     onScroll();

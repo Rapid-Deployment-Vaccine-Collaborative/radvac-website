@@ -92,8 +92,8 @@ export default function BFIATPage() {
         </div>
       </section>
 
-      {/* ---------- Read more ---------- */}
-      <section className={styles.block}>
+      {/* ---------- Read more (hidden for now) ---------- */}
+      {/* <section className={styles.block}>
         <h2 className={styles.h2}>Related external articles</h2>
         <ul style={{ marginTop: "18px", paddingLeft: "1.4em", lineHeight: 1.9, fontSize: "16px", color: "var(--ink-soft)", listStyleType: "disc" }}>
           <li>
@@ -112,7 +112,7 @@ export default function BFIATPage() {
             </a>{" "}— Chris Buck
           </li>
         </ul>
-      </section>
+      </section> */}
 
       {/* ---------- CTA ---------- */}
       <section className={styles.block}>

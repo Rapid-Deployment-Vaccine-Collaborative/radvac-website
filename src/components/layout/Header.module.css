@@ -93,6 +93,11 @@
       var(--hdr-grad-top, #a8c4e7) 0%,
       var(--hdr-grad-bot, #f4f8fd) 100%
     );
+    /* the `background` shorthand above resets attachment to `scroll`;
+       restore `fixed` so this panel's gradient maps to the viewport and
+       aligns with the body gradient — otherwise a seam appears at the
+       header/page boundary in narrow viewports */
+    background-attachment: fixed;
   }
   .bgCompact { height: 64px; }
   .hamburger { display: inline-flex; }
