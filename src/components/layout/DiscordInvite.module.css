@@ -1,0 +1,75 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: var(--bg, #fff);
+  color: var(--ink);
+  border: 1px solid var(--rule, rgba(0, 0, 0, 0.1));
+  border-radius: 16px;
+  padding: 28px 24px 24px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border: none;
+  background: none;
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+.closeBtn:hover {
+  opacity: 1;
+}
+
+.title {
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+.subtitle {
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.75;
+  margin: 0 0 18px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.widget {
+  display: flex;
+  justify-content: center;
+  min-height: 65px;
+}
+
+.status,
+.error {
+  font-size: 13px;
+  margin: 12px 0 0;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.error {
+  color: #dc2626;
+}

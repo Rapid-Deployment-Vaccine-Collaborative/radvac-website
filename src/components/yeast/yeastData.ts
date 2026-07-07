@@ -123,5 +123,3 @@ export const STUDIES: Study[] = [
   { virus: "Porcine epidemic diarrhea", model: "mixed", yeast: "P. pastoris", format: "live · subunit", response: "IgG · IgA", cite: "Wang 2016", url: "https://doi.org/10.1089/vim.2016.0067" },
   { virus: "Porcine circovirus 2", model: "pigs", yeast: "S. cerevisiae", format: "killed · surface display", response: "IgG · IgA", cite: "Patterson 2015", url: "https://doi.org/10.1016/j.vaccine.2015.10.003" },
 ];
-
-export const DISCORD_URL = "https://discord.gg/5PGYCfmBUe";

@@ -8,7 +8,6 @@ import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
 import { HumanDataFigure } from "@/components/yeast/HumanDataFigure";
 import {
   BENEFITS,
-  DISCORD_URL,
   FLOW_STEPS,
 } from "@/components/yeast/yeastData";
 
