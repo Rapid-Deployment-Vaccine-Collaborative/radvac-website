@@ -12,11 +12,48 @@ interface ResearcherSignup {
   otherInfo?: string;
   securityQuestion: string;
   acceptance: boolean;
+  wantsDiscord?: boolean;
+  website?: string;
+}
+
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const ipHits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const hits = (ipHits.get(ip) ?? []).filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS
+  );
+  if (hits.length >= RATE_LIMIT_MAX) {
+    ipHits.set(ip, hits);
+    return true;
+  }
+  hits.push(now);
+  ipHits.set(ip, hits);
+  return false;
 }
 
 export async function POST(request: Request) {
   try {
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+      request.headers.get("x-real-ip") ||
+      "unknown";
+
+    if (rateLimited(ip)) {
+      return NextResponse.json(
+        { error: "Too many submissions from your network. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const data: ResearcherSignup = await request.json();
+
+    // Honeypot — silently accept and drop bot submissions
+    if (data.website && data.website.trim() !== "") {
+      return NextResponse.json({ success: true });
+    }
 
     const required: (keyof ResearcherSignup)[] = [
       "identifier",
@@ -50,36 +87,49 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Integrate with email service (Resend, SendGrid, etc.) and/or persist
-    // for an admin to add to src/data/researchers.ts.
-    console.log("Researcher signup:", {
-      ...data,
-      otherInfo: data.otherInfo?.substring(0, 200),
-      timestamp: new Date().toISOString(),
+    const wpGraphqlUrl = process.env.WP_GRAPHQL_URL;
+    const secret = process.env.RADVAC_SIGNUP_SECRET;
+    if (!wpGraphqlUrl || !secret) {
+      console.error("WP_GRAPHQL_URL or RADVAC_SIGNUP_SECRET is not set");
+      return NextResponse.json(
+        { error: "Signup service is not configured" },
+        { status: 500 }
+      );
+    }
+
+    const wpBase = wpGraphqlUrl.replace(/\/graphql\/?$/, "");
+    const res = await fetch(`${wpBase}/wp-json/radvac/v1/researcher-signup`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-Radvac-Signup-Secret": secret,
+      },
+      body: JSON.stringify({
+        identifier: data.identifier,
+        email: data.email,
+        city: data.city,
+        state: data.state,
+        country: data.country,
+        scienceDegree: data.scienceDegree || "",
+        labSkills: data.labSkills || "",
+        labSpace: data.labSpace || "",
+        otherInfo: data.otherInfo || "",
+        securityQuestion: data.securityQuestion,
+        wantsDiscord: Boolean(data.wantsDiscord),
+      }),
     });
 
-    // Example Resend integration (uncomment when ready):
-    // const { Resend } = await import('resend');
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    // await resend.emails.send({
-    //   from: 'Radvac Website <noreply@radvac.org>',
-    //   to: ['info@radvac.org'],
-    //   replyTo: data.email,
-    //   subject: `[Researchers Map] New signup: ${data.identifier}`,
-    //   text: [
-    //     `Identifier: ${data.identifier}`,
-    //     `Email: ${data.email}`,
-    //     `Location: ${data.city}, ${data.state}, ${data.country}`,
-    //     `Science degree: ${data.scienceDegree || '-'}`,
-    //     `Lab skills:    ${data.labSkills || '-'}`,
-    //     `Lab space:     ${data.labSpace || '-'}`,
-    //     `Other info: ${data.otherInfo || '-'}`,
-    //     `Security answer: ${data.securityQuestion}`,
-    //   ].join('\n'),
-    // });
+    if (!res.ok) {
+      console.error("WP signup endpoint failed:", res.status, await res.text());
+      return NextResponse.json(
+        { error: "Failed to save submission" },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (err) {
+    console.error("Researcher signup error:", err);
     return NextResponse.json(
       { error: "Failed to process submission" },
       { status: 500 }

@@ -17,6 +17,8 @@ interface FormState {
   otherInfo: string;
   securityQuestion: string;
   acceptance: boolean;
+  wantsDiscord: boolean;
+  website: string;
 }
 
 const initial: FormState = {
@@ -31,6 +33,8 @@ const initial: FormState = {
   otherInfo: "",
   securityQuestion: "",
   acceptance: false,
+  wantsDiscord: false,
+  website: "",
 };
 
 function YesNo({
@@ -224,6 +228,28 @@ export default function ResearcherSignupForm() {
           onChange={(e) => update("securityQuestion", e.target.value)}
         />
       </div>
+
+      {/* Honeypot — hidden from humans, bots tend to fill it */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px" }}>
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={data.website}
+          onChange={(e) => update("website", e.target.value)}
+        />
+      </div>
+
+      <label className={styles.accept}>
+        <input
+          type="checkbox"
+          checked={data.wantsDiscord}
+          onChange={(e) => update("wantsDiscord", e.target.checked)}
+        />
+        <span>I would like to receive a link to the RaDVaC Discord server.</span>
+      </label>
 
       <label className={styles.accept}>
         <input

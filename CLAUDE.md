@@ -11,7 +11,7 @@ Public site for radvac.org. **Next.js 15 (App Router) + React 19 + TS + Tailwind
 
 ## Things to know
 
-- **Read-only.** This codebase only reads from WP. Do not add mutations or admin-style operations.
+- **Read-only (one exception).** This codebase only reads from WP — do not add mutations or admin-style operations. The single sanctioned write path is the Researchers Map signup form: `/api/researcher-signup` ([src/app/api/researcher-signup/route.ts](src/app/api/researcher-signup/route.ts)) forwards submissions to a shared-secret REST endpoint provided by the [wordpress/plugins/radvac-signups/](wordpress/plugins/radvac-signups/) plugin, which stores them as private `researcher_signup` posts (visible only in wp-admin). Requires `RADVAC_SIGNUP_SECRET` in env.
 - **Hardcoded content is legacy.** [src/data/faq.ts](src/data/faq.ts), [src/data/papers.ts](src/data/papers.ts), [src/data/projects.ts](src/data/projects.ts) and homepage sections in [src/app/page.tsx](src/app/page.tsx) are slated for migration to WP. Don't add new entries to `src/data/` — add a WP query instead.
 - **Revalidation:** the WP plugin at [wordpress/plugins/radvac-revalidate/](wordpress/plugins/radvac-revalidate/) POSTs to `/api/revalidate` ([src/app/api/revalidate/route.ts](src/app/api/revalidate/route.ts)) on `save_post`. Layout-level data refreshes on every change; page-level by slug.
 - **Draft preview** uses WP **Application Passwords** (not JWT). `WP_AUTH_TOKEN` holds `base64("user:app-password")` and is sent as `Authorization: Basic <token>`.

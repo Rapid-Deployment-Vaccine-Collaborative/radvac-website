@@ -20,6 +20,7 @@ export function FallbackBlock({ block }: Props) {
   // If we have inner blocks, try to render those
   if (block.innerBlocks && block.innerBlocks.length > 0) {
     // Lazy import to avoid circular dependency at module level
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { BlockRenderer } = require("./BlockRenderer");
     return <BlockRenderer blocks={block.innerBlocks} />;
   }
