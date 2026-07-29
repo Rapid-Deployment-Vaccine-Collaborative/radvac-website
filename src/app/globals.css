@@ -148,6 +148,27 @@ a { color: inherit; }
   --tw-prose-td-borders: var(--color-border);
   max-width: 800px;
 }
+
+/* WordPress content (prose-lg): Tailwind Typography's defaults don't scale down,
+   so headings run 48px/30px and body stays 18px on phones. Tighten both. */
+.prose-lg :is(h1, h2, h3, h4) {
+  line-height: 1.22;
+}
+.prose-lg h1 { font-size: 2em; }
+.prose-lg h2 { font-size: 1.5em; }
+.prose-lg h3 { font-size: 1.25em; }
+.prose-lg h4 { font-size: 1.1em; }
+
+@media (max-width: 639px) {
+  .prose-lg {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .prose-lg h1 { font-size: 1.7em; }
+  .prose-lg h2 { font-size: 1.4em; }
+  .prose-lg h3 { font-size: 1.2em; }
+  .prose-lg h4 { font-size: 1.05em; }
+}
 @media print {
   header, footer, nav { display: none !important; }
   .no-print { display: none !important; }
