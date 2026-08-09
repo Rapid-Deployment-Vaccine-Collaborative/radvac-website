@@ -5,6 +5,11 @@ import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ConsentPopup } from "@/components/ConsentPopup";
 import { CmsErrorBanner } from "@/components/CmsErrorBanner";
+import {
+  cmsUnavailableMetadata,
+  notFoundMetadata,
+  wpContentMetadata,
+} from "@/lib/seo";
 import type { WpPage } from "@/lib/wordpress/types";
 
 export const dynamic = "force-dynamic";
@@ -14,27 +19,18 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     page = await getPageBySlug("white-papers");
   } catch {
-    // CMS unreachable; fall through to defaults
+    return cmsUnavailableMetadata("White Papers");
   }
-  const ogImage = page?.seo?.opengraphImage?.sourceUrl;
 
-  return {
-    title: page?.seo?.title || page?.title || "White Papers",
-    description:
-      page?.seo?.metaDesc ||
-      "Radvac vaccine white papers and protocol documents.",
-    alternates: page?.seo?.canonical
-      ? { canonical: page.seo.canonical }
-      : undefined,
-    openGraph: {
-      title: page?.seo?.opengraphTitle || page?.title || "White Papers",
-      description:
-        page?.seo?.opengraphDescription || page?.seo?.metaDesc || "",
-      url: "/white-papers",
-      type: "website",
-      images: ogImage ? [ogImage] : undefined,
-    },
-  };
+  if (!page) {
+    return notFoundMetadata("White Papers");
+  }
+
+  return wpContentMetadata(page, {
+    path: "/white-papers",
+    fallbackTitle: "White Papers",
+    fallbackDescription: "Radvac vaccine white papers and protocol documents.",
+  });
 }
 
 export default async function WhitePapersPage() {

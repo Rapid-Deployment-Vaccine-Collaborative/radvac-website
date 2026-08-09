@@ -1,4 +1,5 @@
 import SpreadGlobe from "./SpreadGlobe";
+import { HeroTaglines } from "./HeroTaglines";
 import styles from "./Hero.module.css";
 
 const FALLBACK_VIDEO_SRC = "/wp-content/uploads/2026/05/science-faster.webm";
@@ -10,7 +11,7 @@ export function Hero() {
         className={styles.figure}
         aria-label="Animated globe showing a pathogen spreading worldwide, then countermeasures deploying"
       >
-        <SpreadGlobe />
+        <SpreadGlobe captions={<HeroTaglines />} />
         <noscript>
           <video
             autoPlay

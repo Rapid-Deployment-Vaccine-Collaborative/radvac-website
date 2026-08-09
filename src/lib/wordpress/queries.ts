@@ -20,6 +20,8 @@ const SEO_FRAGMENT = process.env.WP_GRAPHQL_SEO_ENABLED === "true"
       title
       metaDesc
       canonical
+      metaRobotsNoindex
+      metaRobotsNofollow
       opengraphTitle
       opengraphDescription
       opengraphImage { sourceUrl }
@@ -110,6 +112,64 @@ export async function getAllPageSlugs(): Promise<string[]> {
     { revalidate: 3600 }
   );
   return data.pages.nodes.map((p) => p.uri.replace(/^\/|\/$/g, ""));
+}
+
+// ===== Sitemap Queries =====
+
+// Minimal fields for sitemap generation — avoids pulling rendered content
+// for every page/post on each sitemap request.
+export interface SitemapContentEntry {
+  uri?: string;
+  slug?: string;
+  modified: string;
+  seo?: { metaRobotsNoindex?: string };
+}
+
+const SITEMAP_SEO_FRAGMENT =
+  process.env.WP_GRAPHQL_SEO_ENABLED === "true"
+    ? "seo { metaRobotsNoindex }"
+    : "";
+
+export async function getSitemapPageEntries(): Promise<SitemapContentEntry[]> {
+  const query = `
+    query GetSitemapPages {
+      pages(first: 100, where: { status: PUBLISH }) {
+        nodes {
+          uri
+          modified
+          ${SITEMAP_SEO_FRAGMENT}
+        }
+      }
+    }
+  `;
+
+  const data = await fetchGraphQL<{ pages: { nodes: SitemapContentEntry[] } }>(
+    query,
+    undefined,
+    { revalidate: 3600 }
+  );
+  return data.pages.nodes;
+}
+
+export async function getSitemapPostEntries(): Promise<SitemapContentEntry[]> {
+  const query = `
+    query GetSitemapPosts {
+      posts(first: 200, where: { status: PUBLISH }) {
+        nodes {
+          slug
+          modified
+          ${SITEMAP_SEO_FRAGMENT}
+        }
+      }
+    }
+  `;
+
+  const data = await fetchGraphQL<{ posts: { nodes: SitemapContentEntry[] } }>(
+    query,
+    undefined,
+    { revalidate: 3600 }
+  );
+  return data.posts.nodes;
 }
 
 // ===== Post Queries =====

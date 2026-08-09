@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Projects } from "@/components/sections/Projects";
 import SwissCheeseScene from "@/components/sections/SwissCheeseSceneInner";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Projects",
   description:
     "Radvac's open-source projects: nasal SARS-CoV-2 peptide vaccine, modernized variolation, biofactories in a tube, FRIL lectin broad-spectrum antiviral, and AI for antivirals.",
-};
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   return (

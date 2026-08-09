@@ -6,17 +6,13 @@ import { sanitizeWpHtml } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { CmsErrorBanner } from "@/components/CmsErrorBanner";
 import type { WpPost } from "@/lib/wordpress/types";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Updates — Radvac",
+export const metadata: Metadata = buildMetadata({
+  title: "Updates",
   description: "News, press releases, and updates from Radvac.",
-  openGraph: {
-    title: "Updates — Radvac",
-    description: "News, press releases, and updates from Radvac.",
-    url: "/press-release",
-    type: "website",
-  },
-};
+  path: "/press-release",
+});
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", {

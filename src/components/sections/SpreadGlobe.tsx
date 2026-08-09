@@ -10,51 +10,6 @@ const SpreadGlobeInner = dynamic(() => import("./SpreadGlobeInner"), {
 const FALLBACK_VIDEO_SRC = "/wp-content/uploads/2026/05/science-faster.webm";
 const FIRST_FRAME_TIMEOUT_MS = 3500;
 
-const TOP_LEFT = "Pathogens move fast.";
-const BOTTOM_RIGHT = "Science can move faster.";
-const TOP_START_MS = 500;
-const BOTTOM_START_MS = 3500;
-const TYPE_INTERVAL_MS = 45;
-
-function useTypedText(target: string, startMs: number, intervalMs: number) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    let cancelled = false;
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    timers.push(
-      setTimeout(() => {
-        if (cancelled) return;
-        let i = 0;
-        const step = () => {
-          if (cancelled) return;
-          i++;
-          setCount(i);
-          if (i < target.length) timers.push(setTimeout(step, intervalMs));
-        };
-        timers.push(setTimeout(step, intervalMs));
-      }, startMs),
-    );
-    return () => {
-      cancelled = true;
-      timers.forEach(clearTimeout);
-    };
-  }, [target, startMs, intervalMs]);
-  return target.slice(0, count);
-}
-
-const captionBase: React.CSSProperties = {
-  position: "absolute",
-  fontFamily:
-    "var(--font-jetbrains), ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace",
-  fontSize: "clamp(15px, 2.5vw, 32px)",
-  fontWeight: 500,
-  letterSpacing: "0.02em",
-  color: "var(--ink, #1a1a1a)",
-  pointerEvents: "none",
-  maxWidth: "48%",
-  lineHeight: 1.25,
-};
-
 function VideoFallback() {
   return (
     <video
@@ -90,11 +45,14 @@ function globeIsSupported() {
   }
 }
 
-export default function SpreadGlobe() {
+export default function SpreadGlobe({
+  captions,
+}: {
+  /** Server-rendered overlay (the hero taglines h1) — see HeroTaglines. */
+  captions?: React.ReactNode;
+}) {
   const [fallback, setFallback] = useState(false);
   const firstFrame = useRef(false);
-  const top = useTypedText(TOP_LEFT, TOP_START_MS, TYPE_INTERVAL_MS);
-  const bottom = useTypedText(BOTTOM_RIGHT, BOTTOM_START_MS, TYPE_INTERVAL_MS);
 
   useEffect(() => {
     if (!globeIsSupported()) {
@@ -121,17 +79,7 @@ export default function SpreadGlobe() {
         }}
         onTopoError={() => setFallback(true)}
       />
-      <div style={{ ...captionBase, top: "2%", left: "7%" }}>{top}</div>
-      <div
-        style={{
-          ...captionBase,
-          bottom: "0%",
-          right: "5%",
-          textAlign: "right",
-        }}
-      >
-        {bottom}
-      </div>
+      {captions}
     </div>
   );
 }

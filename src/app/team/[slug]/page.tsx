@@ -11,7 +11,9 @@ import {
 import { getPageBySlug } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
 import { getMemberBySlug } from "@/lib/team";
+import { SITE_URL, buildMetadata, notFoundMetadata } from "@/lib/seo";
 import { CmsErrorBanner } from "@/components/CmsErrorBanner";
+import { JsonLd } from "@/components/JsonLd";
 import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
@@ -25,11 +27,18 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const member = getMemberBySlug(slug);
-  if (!member) return { title: "Not Found" };
-  return {
+  if (!member) return notFoundMetadata("Not Found");
+  const firstBioSentence = member.bio.split(/(?<=\.)\s/)[0] ?? "";
+  const portrait = member.pageImage || member.image;
+  return buildMetadata({
     title: member.name,
-    description: member.role,
-  };
+    description: `${member.role} at Radvac. ${firstBioSentence}`.trim(),
+    path: `/team/${member.slug}`,
+    ogType: "profile",
+    ogImage: portrait
+      ? { url: portrait, width: 400, height: 534, alt: member.name }
+      : undefined,
+  });
 }
 
 export default async function TeamMemberPage({ params }: PageProps) {
@@ -49,9 +58,22 @@ export default async function TeamMemberPage({ params }: PageProps) {
     }
   }
 
+  const portrait = member.pageImage || member.image;
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: member.name,
+    jobTitle: member.role,
+    url: `${SITE_URL}/team/${member.slug}`,
+    ...(portrait ? { image: `${SITE_URL}${portrait}` } : {}),
+    sameAs: [member.linkedin, member.x].filter(Boolean),
+    worksFor: { "@id": `${SITE_URL}/#organization` },
+  };
+
   return (
     <>
       <ScrollToTop />
+      <JsonLd data={personJsonLd} />
       <PageHeader title={member.name} />
       <section className="section">
         <div />

@@ -18,9 +18,9 @@ export async function Mission() {
 
   return (
     <section className="section" id="mission">
-      <div className="sec-num">
+      <h2 className="sec-num">
         <strong>Mission</strong>
-      </div>
+      </h2>
       {fetchError || !html ? (
         <div className={styles.mission}>
           <CmsErrorBanner

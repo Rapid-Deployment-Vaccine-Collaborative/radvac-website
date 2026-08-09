@@ -11,6 +11,36 @@
   margin: 0;
 }
 
+.taglines {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.caption {
+  position: absolute;
+  font-family: var(--font-jetbrains), ui-monospace, "JetBrains Mono", Menlo,
+    Consolas, monospace;
+  font-size: clamp(15px, 2.5vw, 32px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink, #1a1a1a);
+  pointer-events: none;
+  max-width: 48%;
+  line-height: 1.25;
+}
+
+.captionTop {
+  top: 2%;
+  left: 7%;
+}
+
+.captionBottom {
+  bottom: 0%;
+  right: 5%;
+  text-align: right;
+}
+
 @media (max-width: 980px) {
   .hero {
     padding: 26px 24px 16px;

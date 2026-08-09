@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "AI for Antivirals",
   description:
     "Leveraging AI and open-source data to repurpose existing drugs and design powerful antiviral combinations.",
-};
+  path: "/ai-for-antivirals",
+});
 
 export default function AiForAntiviralsPage() {
   return (

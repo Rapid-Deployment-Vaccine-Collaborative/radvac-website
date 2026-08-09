@@ -6,23 +6,40 @@ import { ContactStrip } from "@/components/faq/ContactStrip";
 import { CmsErrorBanner } from "@/components/CmsErrorBanner";
 import { getPageBySlug } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
+import {
+  buildMetadata,
+  cmsUnavailableMetadata,
+  wpContentMetadata,
+} from "@/lib/seo";
 import { parseWpsmAccordion } from "@/lib/wordpress/parseWpsmAccordion";
+import { JsonLd } from "@/components/JsonLd";
+
+/** Plain-text extraction for JSON-LD payloads (not a sanitizer). */
+function stripTags(html: string): string {
+  return html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const FAQ_FALLBACK = {
+  title: "FAQ",
+  description:
+    "Frequently asked questions about Radvac: what we are, how the vaccines work, why we self-administer, and how to get in touch.",
+  path: "/faq",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
-  const fallback = {
-    title: "FAQ",
-    description:
-      "Frequently asked questions about Radvac: what we are, how the vaccines work, why we self-administer, and how to get in touch.",
-  };
   try {
     const page = await getPageBySlug("faq");
-    if (!page) return fallback;
-    return {
-      title: page.seo?.title || page.title || fallback.title,
-      description: page.seo?.metaDesc || fallback.description,
-    };
+    if (!page) return buildMetadata(FAQ_FALLBACK);
+    return wpContentMetadata(page, {
+      path: "/faq",
+      fallbackTitle: FAQ_FALLBACK.title,
+      fallbackDescription: FAQ_FALLBACK.description,
+    });
   } catch {
-    return fallback;
+    return cmsUnavailableMetadata(FAQ_FALLBACK.title);
   }
 }
 
@@ -47,8 +64,27 @@ export default async function FaqPage() {
     fetchError = err instanceof Error ? err.message : String(err);
   }
 
+  const faqJsonLd =
+    sections.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: sections.flatMap((section) =>
+            section.items.map((item) => ({
+              "@type": "Question",
+              name: stripTags(item.question),
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: stripTags(item.answer),
+              },
+            }))
+          ),
+        }
+      : null;
+
   return (
     <>
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
       <PageHeader title="Frequently asked questions" />
       {fetchError || sections.length === 0 ? (
         <CmsErrorBanner

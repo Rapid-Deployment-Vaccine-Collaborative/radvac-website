@@ -11,9 +11,9 @@ import styles from "./Team.module.css";
 export function Team() {
   return (
     <section className="section" id="team">
-      <div className="sec-num">
+      <h2 className="sec-num">
         <strong>Team</strong>
-      </div>
+      </h2>
       <div>
         <div className={styles.team}>
           {team.map((m) => (

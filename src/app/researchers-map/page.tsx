@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import ResearchersGlobe from "@/components/sections/ResearchersGlobe";
 import ResearcherSignupForm from "@/components/sections/ResearcherSignupForm";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Researchers Map",
-};
+  description:
+    "An interactive world map of researchers interested in collaborating on vaccine-related work. Find collaborators near you or add yourself to the map.",
+  path: "/researchers-map",
+});
 
 export default function ResearchersPage() {
   return (
@@ -34,7 +38,7 @@ export default function ResearchersPage() {
             non-personal identifier and a non-personal email address.
           </p>
 
-          <h3 style={{ marginTop: 32 }}>Add yourself to the map</h3>
+          <h2 style={{ marginTop: 32 }}>Add yourself to the map</h2>
           <ResearcherSignupForm />
         </div>
       </section>

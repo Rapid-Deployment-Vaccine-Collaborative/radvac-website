@@ -30,11 +30,11 @@ export function rewriteWordPressUrls(html: string): string {
 
   // Backward-compat: legacy content may still hardcode the bare apex.
   result = result.replace(
-    /https?:\/\/radvac\.org\/wp-content\/uploads\//g,
+    /https?:\/\/(?:www\.)?radvac\.org\/wp-content\/uploads\//g,
     "/wp-content/uploads/"
   );
   result = result.replace(
-    /https?:\/\/radvac\.org\/(?!wp-content\/uploads\/)/g,
+    /https?:\/\/(?:www\.)?radvac\.org\/(?!wp-content\/uploads\/)/g,
     "/"
   );
 
@@ -42,13 +42,22 @@ export function rewriteWordPressUrls(html: string): string {
 }
 
 /**
+ * WP body content sometimes carries its own <h1>s, but every page's h1 is the
+ * route-level PageHeader — demote embedded h1s to h2 so each page has exactly
+ * one h1.
+ */
+function demoteWpH1s(html: string): string {
+  return html.replace(/<(\/?)h1(\s|>)/gi, "<$1h2$2");
+}
+
+/**
  * Process WordPress-sourced HTML before rendering via dangerouslySetInnerHTML.
- * Currently this only rewrites WP-host URLs to apex-relative paths — no HTML
- * sanitization is applied. Trust boundary: anyone with WP admin access can
- * inject arbitrary HTML/JS into the public site. Keep admin accounts locked
- * down (strong passwords + 2FA).
+ * Currently this rewrites WP-host URLs to apex-relative paths and demotes
+ * embedded <h1>s — no HTML sanitization is applied. Trust boundary: anyone
+ * with WP admin access can inject arbitrary HTML/JS into the public site.
+ * Keep admin accounts locked down (strong passwords + 2FA).
  */
 export function sanitizeWpHtml(html: string | null | undefined): string {
   if (!html) return "";
-  return rewriteWordPressUrls(html);
+  return demoteWpH1s(rewriteWordPressUrls(html));
 }

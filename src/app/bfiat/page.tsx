@@ -10,12 +10,14 @@ import {
   BENEFITS,
   FLOW_STEPS,
 } from "@/components/yeast/yeastData";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Biofactories in a tube",
   description:
     "Genetically-modified yeast can be used to produce and deliver proteins, some of which may help maintain the body's natural defenses. No lab, no cold chain, no needles required.",
-};
+  path: "/bfiat",
+});
 
 export default function BFIATPage() {
   return (
@@ -60,7 +62,7 @@ export default function BFIATPage() {
       </section>
 
       {/* ---------- Proven in animals ---------- */}
-      <section className={styles.block}>
+      <section className={styles.block} id="proven-in-animals">
         <h2 className={styles.h2}>Proven in animals</h2>
         <p className={`${styles.lede} ${styles.ledeFull}`}>
           Across more than 20 published studies, yeast expressing antigen proteins fed orally have induced antibody responses in mice, chickens, pigs, and fish.

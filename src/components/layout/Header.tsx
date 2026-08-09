@@ -10,7 +10,7 @@ const navItems = [
   { label: "FAQ", href: "/faq" },
   { label: "Projects", href: "/projects" },
   { label: "Publications", href: "/publications" },
-  { label: "Updates", href: "/press-release/" },
+  { label: "Updates", href: "/press-release" },
   { label: "Network", href: "/researchers-map" },
   { label: "Contact", href: "/contact" },
 ];
@@ -87,11 +87,11 @@ export function Header() {
         className={`${styles.mast} ${compact ? styles.mastCompact : ""}`}
       >
         <div>
-          <h1 className={styles.logo}>
+          <div className={styles.logo}>
             <Link href="/" aria-label="Radvac home">
               <RadvacLogo />
             </Link>
-          </h1>
+          </div>
         </div>
         <button
           type="button"

@@ -1,11 +1,17 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { MetadataRoute } from "next";
-import { getAllPages, getAllPosts } from "@/lib/wordpress/queries";
+import {
+  getSitemapPageEntries,
+  getSitemapPostEntries,
+  type SitemapContentEntry,
+} from "@/lib/wordpress/queries";
 import { team } from "@/lib/team";
-import type { WpPage, WpPost } from "@/lib/wordpress/types";
 
 export const dynamic = "force-dynamic";
+
+// WP pages that exist as content fragments or scratch pages, not destinations.
+const WP_PAGE_EXCLUDE = new Set(["use-and-consent-popup"]);
 
 // Discover top-level hardcoded Next.js routes by scanning src/app for directories
 // that contain a page.tsx. This way a new static page is picked up automatically
@@ -34,19 +40,27 @@ function getStaticRouteSlugs(): string[] {
   }
 }
 
+function normalizeUri(uri: string): string {
+  return uri.replace(/^\/+|\/+$/g, "");
+}
+
+function isNoindexed(entry: SitemapContentEntry): boolean {
+  return entry.seo?.metaRobotsNoindex === "noindex";
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://radvac.org";
 
-  let pages: WpPage[] = [];
-  let posts: WpPost[] = [];
+  let pages: SitemapContentEntry[] = [];
+  let posts: SitemapContentEntry[] = [];
 
   try {
-    pages = await getAllPages();
+    pages = await getSitemapPageEntries();
   } catch {
     // CMS unreachable — degrade gracefully
   }
   try {
-    posts = await getAllPosts(200);
+    posts = await getSitemapPostEntries();
   } catch {
     // CMS unreachable — degrade gracefully
   }
@@ -59,8 +73,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // "" is the home route (src/app/page.tsx, not a subdirectory) so add it explicitly.
   const staticPaths = ["", ...getStaticRouteSlugs()];
-
-  const teamSlugs = new Set(team.map((m) => m.slug));
   const hardcodedSet = new Set(staticPaths);
 
   const staticRoutes: MetadataRoute.Sitemap = staticPaths.map((p) => ({
@@ -78,25 +90,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const wpPageRoutes: MetadataRoute.Sitemap = pages
+    .map((p) => ({ ...p, path: normalizeUri(p.uri ?? "") }))
     .filter(
       (p) =>
-        p.slug !== "home" &&
-        !hardcodedSet.has(p.slug) &&
-        !teamSlugs.has(p.slug)
+        p.path !== "" && // home is covered by the hardcoded root route
+        !hardcodedSet.has(p.path) &&
+        // Team bios are canonicalized to the hardcoded /team/[slug] routes.
+        !p.path.startsWith("team/") &&
+        !WP_PAGE_EXCLUDE.has(p.path) &&
+        !isNoindexed(p)
     )
     .map((p) => ({
-      url: `${siteUrl}/${p.slug}`,
+      url: `${siteUrl}/${p.path}`,
       lastModified: new Date(p.modified),
       changeFrequency: "weekly",
       priority: 0.7,
     }));
 
-  const postRoutes: MetadataRoute.Sitemap = posts.map((p) => ({
-    url: `${siteUrl}/press-release/${p.slug}`,
-    lastModified: new Date(p.modified),
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
+  const postRoutes: MetadataRoute.Sitemap = posts
+    .filter((p) => p.slug && !isNoindexed(p))
+    .map((p) => ({
+      url: `${siteUrl}/press-release/${p.slug}`,
+      lastModified: new Date(p.modified),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
 
   return [...staticRoutes, ...teamRoutes, ...wpPageRoutes, ...postRoutes];
 }

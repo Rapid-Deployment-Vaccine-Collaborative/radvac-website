@@ -6,8 +6,15 @@ import {
   getCommentsForPost,
 } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
+import {
+  cmsUnavailableMetadata,
+  notFoundMetadata,
+  wpContentMetadata,
+} from "@/lib/seo";
+import { SITE_URL } from "@/lib/seo";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { CmsErrorBanner } from "@/components/CmsErrorBanner";
+import { JsonLd } from "@/components/JsonLd";
 import { CommentForm } from "./CommentForm";
 import type { WpPost, WpComment } from "@/lib/wordpress/types";
 
@@ -21,35 +28,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     post = await getPostBySlug(slug);
   } catch {
-    return { title: "Update — Radvac" };
+    return cmsUnavailableMetadata("Update");
   }
 
   if (!post) {
-    return { title: "Post Not Found" };
+    return notFoundMetadata("Post Not Found");
   }
 
-  const ogImage =
-    post.seo?.opengraphImage?.sourceUrl ?? post.featuredImage?.node.sourceUrl;
-
-  return {
-    title: post.seo?.title || `${post.title} — Radvac`,
-    description: post.seo?.metaDesc || `${post.title} — Radvac`,
-    alternates: post.seo?.canonical ? { canonical: post.seo.canonical } : undefined,
-    openGraph: {
-      title: post.seo?.opengraphTitle || post.title,
-      description: post.seo?.opengraphDescription || post.seo?.metaDesc || "",
-      url: `/press-release/${post.slug}`,
-      type: "article",
-      images: ogImage ? [ogImage] : undefined,
+  return wpContentMetadata(post, {
+    path: `/press-release/${post.slug}`,
+    ogType: "article",
+    article: {
+      publishedTime: post.date,
+      modifiedTime: post.modified,
+      authors: post.author?.node?.name ? [post.author.node.name] : undefined,
     },
-    twitter: {
-      card: "summary_large_image",
-      title: post.seo?.twitterTitle || post.seo?.title || post.title,
-      description:
-        post.seo?.twitterDescription || post.seo?.metaDesc || undefined,
-      images: ogImage ? [ogImage] : undefined,
-    },
-  };
+  });
 }
 
 function formatDate(iso: string): string {
@@ -98,8 +92,25 @@ export default async function PostPage({ params }: PageProps) {
 
   const content = sanitizeWpHtml(post.content);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title.replace(/<[^>]+>/g, ""),
+    url: `${SITE_URL}/press-release/${post.slug}`,
+    datePublished: post.date,
+    dateModified: post.modified,
+    ...(post.featuredImage?.node.sourceUrl
+      ? { image: [post.featuredImage.node.sourceUrl] }
+      : {}),
+    ...(post.author?.node?.name
+      ? { author: { "@type": "Person", name: post.author.node.name } }
+      : {}),
+    publisher: { "@id": `${SITE_URL}/#organization` },
+  };
+
   return (
     <>
+      <JsonLd data={articleJsonLd} />
       <PageHeader title={post.title} />
 
       <section className="pt-16 px-6 md:px-14">

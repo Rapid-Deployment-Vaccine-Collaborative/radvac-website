@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -48,6 +50,34 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
+  name: "Radvac",
+  alternateName: "Rapid Deployment Vaccine Collaborative",
+  url: SITE_URL,
+  logo: `${SITE_URL}/images/radvac-logo-darkblue-for-social-media-preview.png`,
+  nonprofitStatus: "Nonprofit501c3",
+  email: "info@radvac.org",
+  sameAs: [
+    "https://www.facebook.com/radvacproject",
+    "https://x.com/radvacproject",
+    "https://www.instagram.com/radvacproject",
+    "https://bsky.app/profile/radvacproject.bsky.social",
+    "https://www.youtube.com/channel/UCYZeqhoSbe5cD1aJgtfX3-Q",
+    "https://substack.com/@radvac",
+  ],
+};
+
+const webSiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Radvac",
+  url: SITE_URL,
+  publisher: { "@id": `${SITE_URL}/#organization` },
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -56,6 +86,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body>
+        <JsonLd data={organizationJsonLd} />
+        <JsonLd data={webSiteJsonLd} />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-md"

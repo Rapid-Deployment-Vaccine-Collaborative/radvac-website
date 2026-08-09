@@ -6,6 +6,11 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { ContactForm } from "@/components/features/ContactForm";
 import { ContactNewsletterSignup } from "@/components/features/ContactNewsletterSignup";
 import { CmsErrorBanner } from "@/components/CmsErrorBanner";
+import {
+  cmsUnavailableMetadata,
+  notFoundMetadata,
+  wpContentMetadata,
+} from "@/lib/seo";
 import type { WpPage } from "@/lib/wordpress/types";
 
 function stripCf7(html: string): string {
@@ -24,34 +29,18 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     page = await getPageBySlug("contact");
   } catch {
-    // CMS unreachable; fall through to defaults
+    return cmsUnavailableMetadata("Contact");
   }
 
   if (!page) {
-    return { title: "Contact" };
+    return notFoundMetadata("Contact");
   }
 
-  const ogImage = page.seo?.opengraphImage?.sourceUrl;
-
-  return {
-    title: page.seo?.title || page.title,
-    description: page.seo?.metaDesc || `${page.title} — Radvac`,
-    alternates: page.seo?.canonical ? { canonical: page.seo.canonical } : undefined,
-    openGraph: {
-      title: page.seo?.opengraphTitle || page.title,
-      description: page.seo?.opengraphDescription || page.seo?.metaDesc || "",
-      url: "/contact",
-      type: "website",
-      images: ogImage ? [ogImage] : undefined,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: page.seo?.twitterTitle || page.seo?.title || page.title,
-      description:
-        page.seo?.twitterDescription || page.seo?.metaDesc || undefined,
-      images: ogImage ? [ogImage] : undefined,
-    },
-  };
+  return wpContentMetadata(page, {
+    path: "/contact",
+    fallbackDescription:
+      "Contact Radvac: send us a message or subscribe for occasional updates.",
+  });
 }
 
 export default async function ContactPage() {

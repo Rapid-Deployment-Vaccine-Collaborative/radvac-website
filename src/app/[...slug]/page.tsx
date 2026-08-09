@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPageBySlug } from "@/lib/wordpress/queries";
 import { sanitizeWpHtml } from "@/lib/utils";
+import {
+  cmsUnavailableMetadata,
+  notFoundMetadata,
+  wpContentMetadata,
+} from "@/lib/seo";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { CmsErrorBanner } from "@/components/CmsErrorBanner";
 import type { WpPage } from "@/lib/wordpress/types";
@@ -19,34 +24,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     page = await getPageBySlug(path);
   } catch {
-    return { title: "Radvac" };
+    return cmsUnavailableMetadata("Radvac");
   }
 
   if (!page) {
-    return { title: "Page Not Found" };
+    return notFoundMetadata("Page Not Found");
   }
 
-  const ogImage = page.seo?.opengraphImage?.sourceUrl;
-
-  return {
-    title: page.seo?.title || page.title,
-    description: page.seo?.metaDesc || `${page.title} — Radvac`,
-    alternates: page.seo?.canonical ? { canonical: page.seo.canonical } : undefined,
-    openGraph: {
-      title: page.seo?.opengraphTitle || page.title,
-      description: page.seo?.opengraphDescription || page.seo?.metaDesc || "",
-      url: `/${path}`,
-      type: "website",
-      images: ogImage ? [ogImage] : undefined,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: page.seo?.twitterTitle || page.seo?.title || page.title,
-      description:
-        page.seo?.twitterDescription || page.seo?.metaDesc || undefined,
-      images: ogImage ? [ogImage] : undefined,
-    },
-  };
+  return wpContentMetadata(page, { path: `/${path}` });
 }
 
 export default async function DynamicPage({ params }: PageProps) {

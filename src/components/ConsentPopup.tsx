@@ -10,19 +10,20 @@ type Props = {
 };
 
 export function ConsentPopup({ title, html }: Props) {
-  const [agreed, setAgreed] = useState(false);
+  // null = not yet mounted. The dialog only renders client-side after the
+  // stored consent is read: crawlers and the initial HTML never contain the
+  // full-screen overlay (intrusive-interstitial risk), and visitors who
+  // already agreed never see a flash of the dialog.
+  const [agreed, setAgreed] = useState<boolean | null>(null);
   const [scrolledToEnd, setScrolledToEnd] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const stored =
-      typeof window !== "undefined" &&
-      window.sessionStorage.getItem(STORAGE_KEY) === "true";
-    setAgreed(stored);
+    setAgreed(window.sessionStorage.getItem(STORAGE_KEY) === "true");
   }, []);
 
   useEffect(() => {
-    if (agreed) {
+    if (agreed !== false) {
       document.body.style.overflow = "";
       return;
     }
@@ -45,7 +46,7 @@ export function ConsentPopup({ title, html }: Props) {
     setAgreed(true);
   };
 
-  if (agreed) return null;
+  if (agreed !== false) return null;
 
   return (
     <div

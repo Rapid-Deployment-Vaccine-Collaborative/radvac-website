@@ -52,6 +52,10 @@ export interface WpSeo {
   title: string;
   metaDesc: string;
   canonical?: string;
+  /** Yoast robots setting: "index" | "noindex". */
+  metaRobotsNoindex?: string;
+  /** Yoast robots setting: "follow" | "nofollow". */
+  metaRobotsNofollow?: string;
   opengraphTitle?: string;
   opengraphDescription?: string;
   opengraphImage?: {

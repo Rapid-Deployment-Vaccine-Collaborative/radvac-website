@@ -76,9 +76,9 @@ export function Projects() {
   const previous = projects.filter((p) => p.previous);
   return (
     <section className="section" id="projects">
-      <div className="sec-num">
+      <h2 className="sec-num">
         <strong>Current projects</strong>
-      </div>
+      </h2>
       <div>
         <div className={styles.projects}>
           {current.map((project) => (
@@ -88,9 +88,9 @@ export function Projects() {
       </div>
       {previous.length > 0 && (
         <>
-          <div className="sec-num">
+          <h2 className="sec-num">
             <strong>Previous projects</strong>
-          </div>
+          </h2>
           <div>
             <div className={styles.projects}>
               {previous.map((project) => (
