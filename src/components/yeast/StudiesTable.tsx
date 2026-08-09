@@ -3,18 +3,8 @@
 import styles from "./Yeast.module.css";
 import { MODELS, STUDIES, type ModelKey } from "./yeastData";
 
-function ModelDot({ model }: { model: ModelKey }) {
-  const m = MODELS[model];
-  return (
-    <span className={styles.model}>
-      <span
-        className={styles.dot}
-        style={{ background: m.color }}
-        aria-hidden="true"
-      />
-      {m.label}
-    </span>
-  );
+function ModelLabel({ model }: { model: ModelKey }) {
+  return <span className={styles.model}>{MODELS[model].label}</span>;
 }
 
 export function StudiesTable({ tone = "light" }: { tone?: "light" | "warm" }) {
@@ -25,31 +15,61 @@ export function StudiesTable({ tone = "light" }: { tone?: "light" | "warm" }) {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Source of antigen</th>
+            <th>Pathogen</th>
             <th>Tested in</th>
-            <th>Yeast species</th>
-            <th>Format</th>
-            <th>Immune response</th>
+            <th>
+              Yeast
+              <br />
+              species
+            </th>
+            <th>Preparation</th>
+            <th>Antigen</th>
+            <th>
+              Antigen
+              <br />
+              location
+            </th>
+            <th>
+              Immune
+              <br />
+              response / effects measured
+            </th>
             <th className={styles.citeCol}>Study</th>
           </tr>
         </thead>
         <tbody>
           {STUDIES.map((s, i) => (
-            <tr key={`${s.virus}-${s.cite}-${i}`}>
-              <td data-label="Source of antigen" className={styles.virusCell}>
-                {s.virus}
+            <tr key={`${s.pathogen}-${s.cite}-${i}`}>
+              <td data-label="Pathogen" className={styles.virusCell}>
+                {s.pathogen}
               </td>
               <td data-label="Tested in">
-                <ModelDot model={s.model} />
+                <ModelLabel model={s.model} />
               </td>
               <td data-label="Yeast species">
                 <em>{s.yeast}</em>
               </td>
-              <td data-label="Format" className={styles.muted}>
-                {s.format}
+              <td data-label="Preparation" className={styles.muted}>
+                {s.prep}
               </td>
-              <td data-label="Immune response" className={styles.response}>
-                {s.response}
+              <td data-label="Antigen">
+                <abbr
+                  className={`${styles.tipped} ${styles.antigen}`}
+                  title={s.antigen.full}
+                >
+                  {s.antigen.abbr}
+                </abbr>
+              </td>
+              <td data-label="Antigen location" className={styles.muted}>
+                {s.location}
+              </td>
+              <td data-label="Immune response / effects measured">
+                <abbr
+                  className={`${styles.tipped} ${styles.response}`}
+                  title={s.response.detail}
+                >
+                  {s.response.short}
+                </abbr>
               </td>
               <td data-label="Study" className={`${styles.muted} ${styles.citeCol}`}>
                 <a
@@ -60,6 +80,9 @@ export function StudiesTable({ tone = "light" }: { tone?: "light" | "warm" }) {
                 >
                   {s.cite}
                 </a>
+                {s.preprint && (
+                  <span className={styles.preprintMark}>(preprint)</span>
+                )}
               </td>
             </tr>
           ))}
