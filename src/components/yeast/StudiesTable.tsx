@@ -1,6 +1,7 @@
 // Simplified "Major virus studies in animal models" table
 
 import styles from "./Yeast.module.css";
+import { Tipped } from "./Tipped";
 import { MODELS, STUDIES, type ModelKey } from "./yeastData";
 
 function ModelLabel({ model }: { model: ModelKey }) {
@@ -53,23 +54,21 @@ export function StudiesTable({ tone = "light" }: { tone?: "light" | "warm" }) {
                 {s.prep}
               </td>
               <td data-label="Antigen">
-                <abbr
+                <Tipped
                   className={`${styles.tipped} ${styles.antigen}`}
-                  title={s.antigen.full}
-                >
-                  {s.antigen.abbr}
-                </abbr>
+                  detail={s.antigen.full}
+                  label={s.antigen.abbr}
+                />
               </td>
               <td data-label="Antigen location" className={styles.muted}>
                 {s.location}
               </td>
               <td data-label="Immune response / effects measured">
-                <abbr
+                <Tipped
                   className={`${styles.tipped} ${styles.response}`}
-                  title={s.response.detail}
-                >
-                  {s.response.short}
-                </abbr>
+                  detail={s.response.detail}
+                  label={s.response.short}
+                />
               </td>
               <td data-label="Study" className={`${styles.muted} ${styles.citeCol}`}>
                 <a

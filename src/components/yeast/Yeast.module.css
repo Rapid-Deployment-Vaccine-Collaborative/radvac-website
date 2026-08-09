@@ -286,6 +286,37 @@
   border-bottom: 1px dotted var(--ink-soft);
   cursor: help;
 }
+/* Touch fallback for the tooltips above: tapping the trigger opens the full
+   text below it, since there is no hover on these devices. Only rendered when
+   the pointer cannot hover, so it never affects mouse users. */
+.tipWrap {
+  display: block;
+}
+.tipWrap [role="button"] {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.tipWrap [role="button"]:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.tipBubble {
+  display: block;
+  margin-top: 8px;
+  padding: 9px 11px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: normal;
+  white-space: normal;
+  text-align: left;
+  text-transform: none;
+}
 .citeCol {
   white-space: nowrap;
 }
@@ -410,6 +441,14 @@
   }
   .table td:last-child {
     border-bottom: none;
+  }
+  /* An open tooltip claims its own full-width line in the card, so the detail
+     text isn't squeezed into the narrow value column beside the label. */
+  .table td {
+    flex-wrap: wrap;
+  }
+  .tipWrap.tipOpen {
+    flex: 1 1 100%;
   }
   .table td::before {
     content: attr(data-label);
