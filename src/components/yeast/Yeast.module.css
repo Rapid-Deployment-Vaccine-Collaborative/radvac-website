@@ -38,6 +38,12 @@
    edge aligns with the hero card's outer edge */
 .block {
   padding: 56px 56px 0;
+  /* Landing offset for #hash links, so the section heading clears the site
+     header instead of the jump dropping you into the section body. Covers two
+     things at once: the 105px compact header band, and the 106px that all
+     content below shifts up by when the sticky mast collapses from 202px to
+     96px on first scroll. */
+  scroll-margin-top: 180px;
 }
 .block:last-child {
   padding-bottom: 8px;
@@ -45,6 +51,8 @@
 @media (max-width: 980px) {
   .block {
     padding: 40px 24px 0;
+    /* 64px band + 82px of mast collapse (144px → 62px) */
+    scroll-margin-top: 126px;
   }
 }
 
