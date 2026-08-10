@@ -443,8 +443,10 @@
     border-bottom: none;
   }
   /* An open tooltip claims its own full-width line in the card, so the detail
-     text isn't squeezed into the narrow value column beside the label. */
-  .table td {
+     text isn't squeezed into the narrow value column beside the label. Scoped
+     to the open cell: allowing every cell to wrap would drop long-labelled
+     values onto their own line, where `space-between` left-aligns them. */
+  .table td:has(.tipOpen) {
     flex-wrap: wrap;
   }
   .tipWrap.tipOpen {
