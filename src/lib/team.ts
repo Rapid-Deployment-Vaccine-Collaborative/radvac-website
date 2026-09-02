@@ -62,7 +62,7 @@ export const team: TeamMember[] = [
     slug: "dan-elton",
     name: "Dan Elton, Ph.D.",
     role: "Scientist & Content Writer",
-    bio: "Dan Elton, PhD is a scientist and content writer at Radvac working on AI projects.",
+    bio: "Dan Elton, PhD helps with AI-related work at Radvac and is an evangelist for Radvac initiatives.",
     linkedin: "https://www.linkedin.com/in/danielelton",
     x: "https://x.com/moreisdifferent",
     image: "/images/dan-narrow.png",

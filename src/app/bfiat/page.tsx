@@ -93,9 +93,8 @@ export default function BFIATPage() {
         </div>
       </section>
 
-      {/* ---------- Read more (hidden for now) ---------- */}
-      {/* <section className={styles.block}>
-        <h2 className={styles.h2}>Related external articles</h2>
+      <section className={styles.block}>
+        <h2 className={styles.h2}>External articles (not necessarily endorsed by Radvac)</h2>
         <ul style={{ marginTop: "18px", paddingLeft: "1.4em", lineHeight: 1.9, fontSize: "16px", color: "var(--ink-soft)", listStyleType: "disc" }}>
           <li>
             <a href="https://zenodo.org/records/17969224" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
@@ -113,15 +112,15 @@ export default function BFIATPage() {
             </a>{" "}— Chris Buck
           </li>
         </ul>
-      </section> */}
+      </section> 
 
       {/* ---------- CTA ---------- */}
       <section className={styles.block}>
         <div className={styles.ctaCard}>
           <div>
-            <h2>Participate in Radvac&rsquo;s research</h2>
+            <h2>Submit an expression of interest</h2>
             <p>
-              Radvac is planning a study on genetically-modified yeast that manufactures shell proteins from BK & JC Polyomavirus. Submit your email to express interest in being a participant in this upcoming study and to be informed about future studies.
+              Radvac is researching yeast strains that express proteins from BK & JC Polyomavirus and an Ebola. Submit your email to express interest in learning more about Radvac's self-experimentation work: 
             </p>
           </div>
           <div className={styles.ctaActions}>
