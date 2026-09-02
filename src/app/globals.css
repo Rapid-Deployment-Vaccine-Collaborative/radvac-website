@@ -151,6 +151,25 @@ a { color: inherit; }
   max-width: 800px;
 }
 
+/* The unlayered `a { color: inherit }` reset above outranks Tailwind
+   Typography's layered link color, so WP-authored links render as plain body
+   text. Restate them here, matching the FAQ/Mission link treatment. */
+.prose a:not(.btn) {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.prose a:not(.btn):hover {
+  color: var(--blue-deep);
+}
+/* Links that wrap an image or render as a button keep their own styling. */
+.prose a:has(> img),
+.prose .wp-block-button a {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* WordPress content (prose-lg): Tailwind Typography's defaults don't scale down,
    so headings run 48px/30px and body stays 18px on phones. Tighten both. */
 .prose-lg :is(h1, h2, h3, h4) {
