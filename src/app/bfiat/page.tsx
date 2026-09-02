@@ -4,7 +4,6 @@ import styles from "@/components/yeast/Yeast.module.css";
 import { WireIcon } from "@/components/yeast/WireframeIcons";
 import YeastBFIAT3D from "@/components/yeast/YeastBFIAT3D";
 import { StudiesTable } from "@/components/yeast/StudiesTable";
-import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
 import { HumanDataFigure } from "@/components/yeast/HumanDataFigure";
 import {
   BENEFITS,
@@ -98,17 +97,17 @@ export default function BFIATPage() {
         <ul style={{ marginTop: "18px", paddingLeft: "1.4em", lineHeight: 1.9, fontSize: "16px", color: "var(--ink-soft)", listStyleType: "disc" }}>
           <li>
             <a href="https://zenodo.org/records/17969224" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
-              <strong>"An Edible Polyomavirus Vaccine"</strong>
+              <strong>&ldquo;An Edible Polyomavirus Vaccine&rdquo;</strong>
             </a>{" "}— Buck et al.
           </li>
           <li>
             <a href="https://moreisdifferent.blog/p/yeast-based-vaccines-are-a-big-deal" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
-              <strong>"Why yeast-based vaccines could be huge for biosecurity"</strong>
+              <strong>&ldquo;Why yeast-based vaccines could be huge for biosecurity&rdquo;</strong>
             </a>{" "}— Dan Elton
           </li>
           <li>
             <a href="https://cbuck.substack.com/p/vac-beer-is-a-lawful-consumer-product?utm_campaign=post-expanded-share&utm_medium=web&triedRedirect=true" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
-              <strong>"Vac-Yeast Is a Food"</strong>
+              <strong>&ldquo;Vac-Yeast Is a Food&rdquo;</strong>
             </a>{" "}— Chris Buck
           </li>
         </ul>
@@ -120,7 +119,7 @@ export default function BFIATPage() {
           <div>
             <h2>Submit an expression of interest</h2>
             <p>
-              Radvac is researching yeast strains that express proteins from BK & JC Polyomavirus and an Ebola. Submit your email to express interest in learning more about Radvac's self-experimentation work: 
+              Radvac is researching yeast strains that express proteins from BK & JC Polyomavirus and an Ebola. Submit your email to express interest in learning more about Radvac&apos;s self-experimentation work:
             </p>
           </div>
           <div className={styles.ctaActions}>

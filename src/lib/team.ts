@@ -66,6 +66,7 @@ export const team: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/danielelton",
     x: "https://x.com/moreisdifferent",
     image: "/images/dan-narrow.png",
+    pageImage: "/images/dan-photo.png",
     wpUri: "team/dan-elton",
   },
 ];
