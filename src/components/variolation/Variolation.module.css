@@ -1,0 +1,196 @@
+/* ============================================================= *
+ * Styles specific to /modernized-variolation.
+ * The page reuses the shared scaffolding in yeast/Yeast.module.css
+ * (.block, .h2, .lede, .flow, .step, .table, .ctaCard…); only the
+ * pieces that page doesn't already have live here.
+ * Tokens (--ink, --blue, --rule, --mono…) come from globals.css.
+ * ============================================================= */
+
+/* ---- the formal MV definition, called out as a quote-ish card ---- */
+.defCard {
+  margin-top: 30px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--blue);
+  border-radius: 0 12px 12px 0;
+  padding: 26px 30px 28px;
+}
+.defLabel {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 10px;
+}
+.defBody {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.defSource {
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  opacity: 0.85;
+}
+
+/* ---- status / safety note ---- */
+.noteCard {
+  margin-top: 28px;
+  background: #fffdf6;
+  border: 1px solid #e7dcc2;
+  border-left: 4px solid var(--amber, #c99a2e);
+  border-radius: 0 12px 12px 0;
+  padding: 24px 28px 26px;
+}
+.noteCard h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.noteCard p {
+  margin: 0 0 10px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.noteCard p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- prose paragraphs for the narrative sections ---- */
+.prose {
+  max-width: 760px;
+}
+.prose p {
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--ink-soft);
+  margin: 16px 0 0;
+}
+.prose p:first-child {
+  margin-top: 18px;
+}
+.prose a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+/* ---- numbered/labelled detail cards (modern tools, routes, needs) ---- */
+.cards {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.card {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 20px 22px 22px;
+}
+.card h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 16.5px;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+@media (max-width: 760px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- comparison table: 3 wide columns, so a narrower min-width than
+       the 8-column studies table the shared .table rule is sized for ---- */
+.compareTable {
+  min-width: 680px;
+}
+.compareTable tbody td:first-child {
+  font-weight: 600;
+  color: var(--ink);
+  width: 20%;
+}
+.compareTable tbody td {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.colMv {
+  background: rgba(233, 239, 249, 0.5);
+}
+.compareTable tbody tr:hover .colMv {
+  background: var(--blue-light);
+}
+@media (max-width: 760px) {
+  .compareTable {
+    min-width: 0;
+  }
+  .colMv {
+    background: transparent;
+  }
+}
+
+/* ---- reading list ---- */
+.readList {
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  max-width: 780px;
+}
+.readList li {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 16px 20px 18px;
+}
+.readList a {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--blue);
+  text-decoration: none;
+}
+.readList a:hover {
+  text-decoration: underline;
+}
+.readMeta {
+  display: block;
+  margin-top: 5px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.heroArt {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 220px;
+  height: 220px;
+}
+
+@media (max-width: 650px) {
+  .heroInner {
+    flex-direction: column;
+  }
+
+  .heroArt {
+    align-self: center;
+  }
+}

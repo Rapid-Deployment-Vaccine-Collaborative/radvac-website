@@ -163,8 +163,10 @@ function Fallback({ kind }: { kind: ProjectGraphicKind }) {
 
 export default function ProjectCardGraphic({
   kind,
+  size = 140,
 }: {
   kind: ProjectGraphicKind;
+  size?: number;
 }) {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const [noWebGL, setNoWebGL] = useState(false);
@@ -267,7 +269,7 @@ export default function ProjectCardGraphic({
     <div
       ref={hostRef}
       aria-hidden
-      style={{ width: 140, height: 140, flex: "0 0 140px" }}
+      style={{ width: size, height: size, flex: `0 0 ${size}px` }}
     />
   );
 }
