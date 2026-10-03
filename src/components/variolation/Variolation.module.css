@@ -158,17 +158,24 @@
   background: #fff;
   border: 1px solid var(--rule);
   border-radius: 10px;
-  padding: 16px 20px 18px;
+  overflow: hidden;
 }
 .readList a {
+  display: block;
   font-family: var(--display);
   font-weight: 600;
   font-size: 16px;
   color: var(--blue);
   text-decoration: none;
 }
-.readList a:hover {
+.readCardLink {
+  padding: 16px 20px 18px;
+}
+.readCardLink:hover .readTitle {
   text-decoration: underline;
+}
+.readTitle {
+  display: block;
 }
 .readMeta {
   display: block;

@@ -114,29 +114,57 @@ export default function ModernizedVariolationPage() {
       </section>
       */}
 
-      {/* ---------- Read more ---------- */}
-      <section className={yeast.block} id="read">
-        <h2 className={yeast.h2}>Read more</h2>
+      {/* ---------- White paper ---------- */}
+      <section className={yeast.block} id="white-paper">
+        <h2 className={yeast.h2}>Read the white paper</h2>
         <ul className={styles.readList}>
           <li>
-            <a href={SUBSTACK_PART_1} target="_blank" rel="noopener noreferrer">
-              Modernizing Variolation
+            <a
+              className={styles.readCardLink}
+              href="https://radvac.org/white-papers"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className={styles.readTitle}>Modernized Variolation</span>
+              <span className={styles.readMeta}>
+                Preston W. Estep, Chris Buck, and the Radvac Team.
+              </span>
             </a>
-            <span className={styles.readMeta}>
-              by Preston Estep
-            </span>
+          </li>
+        </ul>
+      </section>
+
+      {/* ---------- Read more ---------- */}
+      <section className={yeast.block} id="read">
+        <h2 className={yeast.h2}>Further reading</h2>
+        <ul className={styles.readList}>
+          <li>
+            <a
+              className={styles.readCardLink}
+              href={SUBSTACK_PART_1}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className={styles.readTitle}>Modernizing Variolation</span>
+              <span className={styles.readMeta}>
+                by Preston Estep
+              </span>
+            </a>
           </li>
           <li>
             <a
+              className={styles.readCardLink}
               href="https://substack.com/home/post/p-218366368"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Modernizing Variolation, Part 2
+              <span className={styles.readTitle}>
+                Modernizing Variolation, Part 2
+              </span>
+              <span className={styles.readMeta}>
+                by Preston Estep
+              </span>
             </a>
-            <span className={styles.readMeta}>
-              by Preston Estep
-            </span>
           </li>
         </ul>
       </section>
