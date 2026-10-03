@@ -20,9 +20,8 @@ export const metadata: Metadata = {
     title: "Modernized variolation",
     description:
       "Variolation — deliberate exposure to a weakened pathogen — was the forerunner of vaccination. Radvac is researching whether modern inactivation, tropism knowledge and adjuvants can rebuild it as a countermeasure deployable in days rather than years.",
-    path: "/modernized-variolation-draft",
+    path: "/modernized-variolation",
   }),
-  robots: { index: false, follow: false },
 };
 
 export default function ModernizedVariolationPage() {
@@ -33,6 +32,14 @@ export default function ModernizedVariolationPage() {
         <div className={`${yeast.aHeroInner} ${styles.heroInner}`}>
           <div className={yeast.aHeroText}>
             <h1 className={yeast.aTitle}>Modernized variolation</h1>
+            <p className={styles.heroDefinition}>
+              Modernized Variolation (MV) is a form of variolation that
+              involves some combination of pathogen inactivation (partial or
+              complete), pathogen attenuation, and enhancement of
+              immunogenicity by the use of one or more adjuvants. The optimal
+              combination of these variables is informed by modern science and
+              current evidence.
+            </p>
           </div>
           <div className={styles.heroArt}>
             <ProjectCardGraphic kind="h2o2" size={220} />
@@ -80,7 +87,6 @@ export default function ModernizedVariolationPage() {
             </div>
           ))}
         </div>
-
       </section>
 
       {/* ---------- Routes ---------- */}

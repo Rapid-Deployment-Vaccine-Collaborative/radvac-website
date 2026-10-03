@@ -1,4 +1,4 @@
-// Content for the /modernized-variolation-draft page.
+// Content for the /modernized-variolation page.
 //
 // Condensed from the Radvac "Modernized Variolation" white paper (Estep, Buck
 // and the Radvac team, v1.2) and the accompanying Substack series. This page
