@@ -33,25 +33,25 @@ export const MV_STEPS: MvStep[] = [
     icon: "collect",
     num: "01",
     title: "Collect",
-    body: "A sample is taken from a known, trusted donor who is confirmed to be ill. For a respiratory virus that usually means nasal mucus, which carries the highest pathogen concentration in the first few days of symptoms.",
+    body: "A sample is taken from a donor who is confirmed to be ill. For a respiratory virus that usually means nasal mucus, which carries a high pathogen concentration in the first few days of symptoms.",
   },
   {
     icon: "treat",
     num: "02",
     title: "Inactivate or attenuate",
-    body: "After any dilution or filtering the sample needs, the pathogen is rendered unable to replicate — or slowed so that it replicates poorly. Radvac's current focus is hydrogen peroxide, which disables pathogens while partly preserving the antigen structures the immune system needs to see.",
+    body: "The pathogen is rendered unable to replicate — or slowed so that it replicates poorly. Radvac's current focus is hydrogen peroxide, which disables pathogens while partly preserving the antigen structures the immune system needs to see.",
   },
   {
     icon: "administer",
     num: "03",
     title: "Administer",
-    body: "The treated sample is self-administered by a route chosen to stimulate immunity — ideally one outside the pathogen's normal tissue range, with an adjuvant to amplify the response.",
+    body: "The treated sample is self-administered by a route chosen to stimulate immunity — ideally one outside the pathogen's normal tissue range. Adjuvicants like neomycin are used to amplify the immune response.",
   },
   {
     icon: "immunity",
     num: "04",
-    title: "Respond",
-    body: "The goal is a response resembling natural infection without the illness: mucosal antibodies at the point of entry plus systemic immunity. Whether MV reliably achieves this is the open question the research has to answer.",
+    title: "Measure response",
+    body: "The goal is to stimulate an immune response resembling natural infection without the illness: mucosal antibodies at the point of entry plus systemic immunity. ",
   },
 ];
 
@@ -117,18 +117,18 @@ export type Advantage = {
 export const ADVANTAGES: Advantage[] = [
   {
     category: "Speed of deployment",
-    mv: "Can be deployed immediately at the site of an outbreak",
-    vaccines: "Regulatory, R&D, production and distribution delays",
+    mv: "Can be deployed immediately at the site of an outbreak.",
+    vaccines: "Take years to be developed, manufactured, tested, approved by regulatory bodies, and widely deployed.",
   },
   {
     category: "Match to current variants",
     mv: "Uses the pathogen actually circulating, so it is inherently matched to that variant",
-    vaccines: "Typically targets past variants; may be less effective against newly emerging strains",
+    vaccines: "Typically target older variants that existed during the start of the vaccine development process",
   },
   {
     category: "Regulatory requirements",
     mv: "Self-administration does not require regulatory approval",
-    vaccines: "Requires regulatory approval, slowing availability",
+    vaccines: "Requires regulatory approval, an expensive, multi-year process",
   },
   {
     category: "Cost",
@@ -137,12 +137,12 @@ export const ADVANTAGES: Advantage[] = [
   },
   {
     category: "Safety",
-    mv: "Unvalidated; depends entirely on the inactivation step working as intended",
-    vaccines: "Generally very safe, with trial data behind each platform",
+    mv: "Can be made very safe using accessible inactivation tech",
+    vaccines: "Generally very safe",
   },
   {
     category: "Similarity to natural infection",
-    mv: "Mimics natural infection, minus the illness; potentially broader immunity",
+    mv: "Mimics natural infection, minus the illness; broader immunity",
     vaccines: "Often induces narrower responses; depends on platform",
   },
   {
@@ -151,10 +151,9 @@ export const ADVANTAGES: Advantage[] = [
     vaccines: "Licensed vaccines (e.g. mRNA) induce weak mucosal immunity",
   },
   {
-    category: "Platform diversity",
-    mv: "Adaptable to different pathogens and delivery methods",
-    vaccines: "Limited diversity; often dominated by a few technologies",
-  },
+    category: "Public acceptance/hesitancy",
+    mv: "May be more acceptable to individuals skeptical of conventional vaccines",
+    vaccines: "Hesitancy exists due to distrust, past public health missteps, misinformation, and perceived risks."},
 ];
 
 /* ------------------------------------------------------------------ *
