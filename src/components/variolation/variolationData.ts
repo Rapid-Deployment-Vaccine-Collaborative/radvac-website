@@ -45,7 +45,7 @@ export const MV_STEPS: MvStep[] = [
     icon: "administer",
     num: "03",
     title: "Administer",
-    body: "The treated sample is self-administered by a route chosen to stimulate immunity. Adjuvicants like neomycin are used to amplify the immune response.",
+    body: "The treated sample is self-administered by a route chosen to stimulate immunity. Adjuvants like neomycin are used to amplify the immune response.",
   },
   {
     icon: "monitor",
@@ -112,7 +112,7 @@ export const ROUTES: Route[] = [
   },
   {
     title: "Oral cavity",
-    body: "Vaccine-loaded dental floss, which targets the gingival sulcus. This approach was recently shown to drive both mucosal and systemic immunisation in animal models.",
+    body: "Dental floss with an H2O2 inactivated sample, which targets the gingival sulcus. A similar approach was recently shown to drive both mucosal and systemic immunisation in animal models.",
     link: {
       text: "recently shown",
       href: "https://pubmed.ncbi.nlm.nih.gov/40696115/",
@@ -120,7 +120,7 @@ export const ROUTES: Route[] = [
   },
   {
     title: "Enteric capsule",
-    body: "A capsule that protects its contents from stomach acid and releases them in the gut. Yeast is a potential adjuvicant, in line with other Radvac work.",
+    body: "A capsule that protects its contents from stomach acid and releases them in the gut. Yeast is a potential adjuvant, in line with other Radvac work.",
     link: { text: "in line with other Radvac work", href: "/bfiat" },
   },
 ];
