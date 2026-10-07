@@ -11,6 +11,7 @@ export type MvIconKind =
   | "collect"
   | "treat"
   | "administer"
+  | "monitor"
   | "immunity";
 
 const WIRE = "#3a8ad8";
@@ -121,6 +122,28 @@ export function AdministerIcon(props: IconProps) {
   );
 }
 
+/**
+ * Clock face with a logged interval on the dial — outcomes and side effects
+ * tracked over the weeks after administration.
+ */
+export function MonitorIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle cx="60" cy="62" r="40" fill={WIRE} fillOpacity={0.07} />
+      <circle cx="60" cy="62" r="40" />
+      {/* hands */}
+      <line x1="60" y1="62" x2="60" y2="38" strokeWidth={2.8} />
+      <line x1="60" y1="62" x2="79" y2="72" stroke={AMBER} strokeWidth={2.8} />
+      <circle cx="60" cy="62" r="3" fill={ROSE} stroke="none" />
+      {/* hour ticks at 12, 3, 6, 9 */}
+      <line x1="60" y1="26" x2="60" y2="32" />
+      <line x1="96" y1="62" x2="90" y2="62" />
+      <line x1="60" y1="98" x2="60" y2="92" />
+      <line x1="24" y1="62" x2="30" y2="62" />
+    </Svg>
+  );
+}
+
 /** Shield holding antibodies — mucosal plus systemic protection. */
 export function ImmunityIcon(props: IconProps) {
   const antibody = (x: number, y: number, s: number, key: number) => (
@@ -148,6 +171,7 @@ const ICONS: Record<MvIconKind, (p: IconProps) => ReactElement> = {
   collect: CollectIcon,
   treat: TreatIcon,
   administer: AdministerIcon,
+  monitor: MonitorIcon,
   immunity: ImmunityIcon,
 };
 

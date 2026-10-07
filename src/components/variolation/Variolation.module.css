@@ -110,6 +110,36 @@
   line-height: 1.6;
   color: var(--ink-soft);
 }
+/* Procedure diagram — wide panel strip, so it runs nearer full width than the
+   narrower yeast `.figure` charts. */
+.diagramFigure {
+  margin: 28px 0 0;
+  padding: 0;
+  width: 72%;
+}
+.diagramImg {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+.diagramCaption {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* Inline citation links in a card blurb. */
+.card p a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.card p a:hover {
+  color: var(--blue-deep);
+}
 @media (max-width: 760px) {
   .cards {
     grid-template-columns: 1fr;

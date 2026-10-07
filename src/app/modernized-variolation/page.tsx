@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import yeast from "@/components/yeast/Yeast.module.css";
 import styles from "@/components/variolation/Variolation.module.css";
@@ -8,8 +9,10 @@ import ProjectCardGraphic from "@/components/sections/ProjectCardGraphic";
 import { AdvantagesTable } from "@/components/variolation/AdvantagesTable";
 import {
   MV_STEPS,
+  ROUTES,
   SUBSTACK_PART_1,
 } from "@/components/variolation/variolationData";
+import type { Route } from "@/components/variolation/variolationData";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -20,6 +23,31 @@ export const metadata: Metadata = {
     path: "/modernized-variolation",
   }),
 };
+
+/**
+ * Route blurb, with the citation phrase turned into an external link when the
+ * entry carries one. Falls back to plain text if `link.text` is not found in
+ * the body, so a reworded blurb degrades rather than breaking.
+ */
+function RouteBody({ route }: { route: Route }) {
+  const at = route.link ? route.body.indexOf(route.link.text) : -1;
+  if (!route.link || at === -1) return <p>{route.body}</p>;
+  const { href, text } = route.link;
+  const internal = href.startsWith("/");
+  return (
+    <p>
+      {route.body.slice(0, at)}
+      {internal ? (
+        <Link href={href}>{text}</Link>
+      ) : (
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      )}
+      {route.body.slice(at + text.length)}
+    </p>
+  );
+}
 
 export default function ModernizedVariolationPage() {
   return (
@@ -83,19 +111,22 @@ export default function ModernizedVariolationPage() {
           ))}
         </div>
       </section>
+      */}
 
+      {/* ---------- Routes ---------- */}
       <section className={yeast.block} id="routes">
         <h2 className={yeast.h2}>Routes under investigation</h2>
         <div className={styles.cards}>
           {ROUTES.map((r) => (
             <div className={styles.card} key={r.title}>
               <h3>{r.title}</h3>
-              <p>{r.body}</p>
+              <RouteBody route={r} />
             </div>
           ))}
         </div>
       </section>
 
+      {/*
       <section className={yeast.block} id="needed">
         <h2 className={yeast.h2}>What the approach still needs</h2>
         <p className={`${yeast.lede} ${yeast.ledeFull}`}>
@@ -113,6 +144,25 @@ export default function ModernizedVariolationPage() {
         </div>
       </section>
       */}
+
+      {/* ---------- Illustration ---------- */}
+      <section className={yeast.block} id="illustration">
+        <h2 className={yeast.h2}>Illustration</h2>
+        <figure className={styles.diagramFigure}>
+          <Image
+            src="/images/modernized-variolation-procedure-diagram.webp"
+            alt="Six-panel diagram of an intranasal modernized variolation procedure: nasal mucus is collected from an ill donor into a tube, hydrogen peroxide is added, the tube is mixed, the treated inoculum is drawn up, then administered into the nose of a recipient, with a cutaway showing it reaching the nasal mucosa."
+            width={1600}
+            height={763}
+            className={styles.diagramImg}
+            sizes="(max-width: 820px) 96vw, 900px"
+            /* Pre-sized 1600px WebP (~100KB), so runtime optimization buys
+               nothing — and `next dev`'s optimizer currently crashes the
+               server on this machine for any /_next/image request. */
+            unoptimized
+          />
+        </figure>
+      </section>
 
       {/* ---------- White paper ---------- */}
       <section className={yeast.block} id="white-paper">

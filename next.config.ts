@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
     "/sitemap.xml": ["./src/app/**/page.tsx"],
   },
   images: {
+    // `next dev`'s image optimizer hard-crashes the dev server (silent exit,
+    // no log) on every /_next/image request on this machine — any image, even
+    // after clearing .next/cache/images. Serving originals in dev keeps the
+    // server alive; production on Vercel still optimizes normally.
+    unoptimized: process.env.NODE_ENV === "development",
     remotePatterns: [
       {
         protocol: "https",

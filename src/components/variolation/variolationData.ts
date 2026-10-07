@@ -18,7 +18,7 @@ export const SUBSTACK_PART_1 =
   "https://prestonestep.substack.com/p/modernizing-variolation";
 
 /* ------------------------------------------------------------------ *
- * The four procedural steps (white paper, "Technologies and procedures")
+ * The five procedural steps (white paper, "Technologies and procedures")
  * ------------------------------------------------------------------ */
 
 export type MvStep = {
@@ -48,10 +48,16 @@ export const MV_STEPS: MvStep[] = [
     body: "The treated sample is self-administered by a route chosen to stimulate immunity — ideally one outside the pathogen's normal tissue range. Adjuvicants like neomycin are used to amplify the immune response.",
   },
   {
-    icon: "immunity",
+    icon: "monitor",
     num: "04",
+    title: "Monitor",
+    body: "Outcomes and any side effects are recorded for several weeks.",
+  },
+  {
+    icon: "immunity",
+    num: "05",
     title: "Measure response",
-    body: "The goal is to stimulate an immune response resembling natural infection without the illness: mucosal antibodies at the point of entry plus systemic immunity. ",
+    body: "The goal is to stimulate an immune response resembling natural infection without the illness: mucosal antibodies at the point of entry plus systemic immunity. This can be verified by sequencing the DNA of the pathogen and then blood testing for appropriate antibodies.",
   },
 ];
 
@@ -85,22 +91,37 @@ export const MV_DEFINITION =
  * Routes of administration under investigation
  * ------------------------------------------------------------------ */
 
-export const ROUTES: { title: string; body: string }[] = [
+export type Route = {
+  title: string;
+  body: string;
+  /**
+   * Optional citation. `text` must appear verbatim in `body`; the page renders
+   * that phrase as an external link to `href`.
+   */
+  link?: { text: string; href: string };
+};
+
+export const ROUTES: Route[] = [
   {
     title: "Intranasal",
-    body: "Spray, nebuliser or insufflation. Over 90% of respiratory pathogens enter through the nasal mucosa and respiratory tract, so this is the entry point Radvac blocks first.",
+    body: "Via spray, nebuliser, or insufflation. Over 90% of respiratory pathogens enter through the nasal mucosa and respiratory tract, so this is the route that Radvac  self-experimenters are studying first. ",
   },
   {
     title: "Transdermal",
-    body: "A microneedle roller or array carries the inoculum past the stratum corneum into the dermis — the modern equivalent of the dermal route that made smallpox variolation survivable. Rollers with sterilisable titanium needles cost under US$20.",
+    body: "A microneedle roller or array carries the inoculum past the stratum corneum into the dermis. This is the modern equivalent of the dermal route that became standard for smallpox variolation. Rollers with sterilisable titanium needles can be purchased for under $20.",
   },
   {
     title: "Oral cavity",
-    body: "Vaccine-loaded dental floss, which targets the gingival sulcus; an approach recently shown to drive both mucosal and systemic immunisation in animal models.",
+    body: "Vaccine-loaded dental floss, which targets the gingival sulcus. This approach was recently shown to drive both mucosal and systemic immunisation in animal models.",
+    link: {
+      text: "recently shown",
+      href: "https://pubmed.ncbi.nlm.nih.gov/40696115/",
+    },
   },
   {
     title: "Enteric capsule",
-    body: "A capsule that protects its contents from stomach acid and releases them in the gut — the same delivery problem Radvac's yeast biofactory work addresses.",
+    body: "A capsule that protects its contents from stomach acid and releases them in the gut. Yeast is a potential adjuvicant, in line with other Radvac work.",
+    link: { text: "in line with other Radvac work", href: "/bfiat" },
   },
 ];
 
