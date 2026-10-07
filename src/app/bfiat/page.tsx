@@ -119,7 +119,7 @@ export default function BFIATPage() {
           <div>
             <h2>Submit an expression of interest</h2>
             <p>
-              Radvac is researching yeast strains that express proteins from BK & JC Polyomavirus and an Ebola. Submit your email to express interest in learning more about Radvac&apos;s self-experimentation work:
+              Radvac is researching yeast strains that express proteins from BK & JC Polyomavirus and Ebola. Submit your email to express interest in learning more about Radvac&apos;s self-experimentation work:
             </p>
           </div>
           <div className={styles.ctaActions}>
