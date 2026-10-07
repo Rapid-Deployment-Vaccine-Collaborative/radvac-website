@@ -45,7 +45,7 @@ export const MV_STEPS: MvStep[] = [
     icon: "administer",
     num: "03",
     title: "Administer",
-    body: "The treated sample is self-administered by a route chosen to stimulate immunity — ideally one outside the pathogen's normal tissue range. Adjuvicants like neomycin are used to amplify the immune response.",
+    body: "The treated sample is self-administered by a route chosen to stimulate immunity. Adjuvicants like neomycin are used to amplify the immune response.",
   },
   {
     icon: "monitor",
