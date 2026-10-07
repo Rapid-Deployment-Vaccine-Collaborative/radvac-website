@@ -68,12 +68,6 @@ export default function ModernizedVariolationPage() {
         </div>
       </header>
 
-      {/* ---------- MV vs vaccines ---------- */}
-      <section className={yeast.block} id="vs-vaccines">
-        <h2 className={yeast.h2}>Modernized variolation vs conventional vaccines</h2>
-        <AdvantagesTable />
-      </section>
-
       {/* ---------- How it works ---------- */}
       <section className={yeast.block} id="how">
         <h2 className={yeast.h2}>How modernized variolation self-experiments are structured</h2>
@@ -96,6 +90,12 @@ export default function ModernizedVariolationPage() {
             </Fragment>
           ))}
         </div>
+      </section>
+
+      {/* ---------- MV vs vaccines ---------- */}
+      <section className={yeast.block} id="vs-vaccines">
+        <h2 className={yeast.h2}>Modernized variolation vs conventional vaccines</h2>
+        <AdvantagesTable />
       </section>
 
       {/*
