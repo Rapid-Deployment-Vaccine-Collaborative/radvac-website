@@ -2,7 +2,7 @@
 //
 // Condensed from the Radvac "Modernized Variolation" white paper (Estep, Buck
 // and the Radvac team, v1.2) and the accompanying Substack series. This page
-// deliberately summarises the *rationale* only — the operational protocols,
+// deliberately summarizes the *rationale* only — the operational protocols,
 // their risks and their open questions stay in the white paper, which carries
 // the full context and caveats. Don't inline step-by-step procedure detail
 // here.
@@ -57,7 +57,7 @@ export const MV_STEPS: MvStep[] = [
     icon: "immunity",
     num: "05",
     title: "Measure response",
-    body: "The goal is to stimulate an immune response resembling natural infection without the illness: mucosal antibodies at the point of entry plus systemic immunity. This can be verified by sequencing the DNA of the pathogen and then blood testing for appropriate antibodies.",
+    body: "The goal is to stimulate an immune response resembling natural infection without the illness: mucosal antibodies at the point of entry plus systemic immunity. This can be verified by sequencing the pathogen's genome and then blood testing for appropriate antibodies.",
   },
 ];
 
@@ -68,11 +68,11 @@ export const MV_STEPS: MvStep[] = [
 export const MODERN_TOOLS: { title: string; body: string }[] = [
   {
     title: "Validated inactivation",
-    body: "Inactivation means a pathogen can no longer replicate. Vaccine research has established physical methods (heat, UV-C near 260 nm) and chemical ones (oxidising agents, crosslinkers such as formaldehyde and β-propiolactone). Radvac tested and built UV prototypes, then concluded that 3% hydrogen peroxide — cheap, ubiquitous, and gentler on antigen structure than crosslinkers — is the better option.",
+    body: "Inactivation means a pathogen can no longer replicate. Vaccine research has established physical methods (heat, UV-C near 260 nm) and chemical ones (oxidizing agents, crosslinkers such as formaldehyde and β-propiolactone). Radvac tested and built UV prototypes, then concluded that 3% hydrogen peroxide — cheap, ubiquitous, and gentler on antigen structure than crosslinkers — is the better option.",
   },
   {
     title: "Attenuation and partial inactivation",
-    body: "An attenuated pathogen still replicates, but slowly and badly, which can elicit a far stronger response than a fully inactivated one. Milder peroxide treatment oxidises guanosine in a viral genome to 8-OHG; ribosomes stall on it, slowing replication without halting it outright. For DNA viruses, cellular repair enzymes reverse some of that damage, so the dose-response differs.",
+    body: "An attenuated pathogen still replicates, but slowly and badly, which can elicit a far stronger response than a fully inactivated one. Milder peroxide treatment oxidizes guanosine in a viral genome to 8-OHG; ribosomes stall on it, slowing replication without halting it outright. For DNA viruses, cellular repair enzymes reverse some of that damage, so the dose-response differs.",
   },
   {
     title: "Extratropic attenuation",
@@ -104,15 +104,15 @@ export type Route = {
 export const ROUTES: Route[] = [
   {
     title: "Intranasal",
-    body: "Via spray, nebuliser, or insufflation. Over 90% of respiratory pathogens enter through the nasal mucosa and respiratory tract, so this is the route that Radvac  self-experimenters are studying first. ",
+    body: "Via spray, nebulizer, or insufflation. Over 90% of respiratory pathogens enter through the nasal mucosa and respiratory tract, so this is the route that Radvac  self-experimenters are studying first. ",
   },
   {
     title: "Transdermal",
-    body: "A microneedle roller or array carries the inoculum past the stratum corneum into the dermis. This is the modern equivalent of the dermal route that became standard for smallpox variolation. Rollers with sterilisable titanium needles can be purchased for under $20.",
+    body: "A microneedle roller or array carries the inoculum past the stratum corneum into the dermis. This is the modern equivalent of the dermal route that became standard for smallpox variolation. Rollers with sterilizable titanium needles can be purchased for under $20.",
   },
   {
     title: "Oral cavity",
-    body: "Dental floss with an H2O2 inactivated sample, which targets the gingival sulcus. A similar approach was recently shown to drive both mucosal and systemic immunisation in animal models.",
+    body: "Dental floss with an H₂O₂-inactivated sample, which targets the gingival sulcus. A similar approach was recently shown to drive both mucosal and systemic immunization in animal models.",
     link: {
       text: "recently shown",
       href: "https://pubmed.ncbi.nlm.nih.gov/40696115/",
@@ -144,12 +144,12 @@ export const ADVANTAGES: Advantage[] = [
   {
     category: "Match to current variants",
     mv: "Uses the pathogen actually circulating, so it is inherently matched to that variant",
-    vaccines: "Typically target older variants that existed during the start of the vaccine development process",
+    vaccines: "Typically target older variants that existed at the start of the vaccine development process",
   },
   {
     category: "Regulatory requirements",
     mv: "Self-administration does not require regulatory approval",
-    vaccines: "Requires regulatory approval, an expensive, multi-year process",
+    vaccines: "Require regulatory approval, an expensive, multi-year process",
   },
   {
     category: "Cost",
@@ -158,7 +158,7 @@ export const ADVANTAGES: Advantage[] = [
   },
   {
     category: "Safety",
-    mv: "Can be made very safe using accessible inactivation tech",
+    mv: "Can be made very safe using accessible inactivation technology.",
     vaccines: "Generally very safe",
   },
   {
@@ -200,6 +200,6 @@ export const NEEDS: { title: string; body: string }[] = [
   },
   {
     title: "Correlates of protection",
-    body: "IgG and IgA measurements, neutralising antibody titres, and T-cell characterisation by ELISpot. Most of these require identifying the pathogen first, which means point-of-care tests or sequencing.",
+    body: "IgG and IgA measurements, neutralizing antibody titres, and T-cell characterization by ELISpot. Most of these require identifying the pathogen first, which means point-of-care tests or sequencing.",
   },
 ];
