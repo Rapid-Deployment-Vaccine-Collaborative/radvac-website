@@ -7,6 +7,8 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+# Created inside the project if distDir is ever set to an absolute path —
+# Next strips the leading "/". See the dev-environment notes in CLAUDE.md.
 /home/dan/.cache
 # testing
 /coverage
@@ -50,8 +52,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# WordPress export (too large for git)
-*.xml
+# WordPress exports (the 2026-01-27 dump is ~181 MB). Scoped to the export
+# filenames at the repo root on purpose: a bare `*.xml` also swallowed
+# wordpress/import/*.xml and would silently ignore public/sitemap.xml.
+/radvac.WordPress.*.xml
 
 # Built plugin bundles (source lives in wordpress/plugins/*/)
 /wordpress/plugins/*.zip
@@ -62,7 +66,11 @@ next-env.d.ts
 # Large local media not meant for git
 *.mp4
 *.mov
-.env.local
 
 # Reference material (not part of build; Tailwind v4 auto-scans untracked files)
 /example_site/
+
+# Stray 4.7MB source video at the repo root: never served (Next only serves
+# public/), and the code points at the WordPress-hosted copy under
+# /wp-content/uploads/. Kept locally, out of git.
+/science-faster.webm
