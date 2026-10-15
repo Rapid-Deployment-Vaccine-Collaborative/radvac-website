@@ -45,7 +45,7 @@ export const MV_STEPS: MvStep[] = [
     icon: "administer",
     num: "03",
     title: "Administer",
-    body: "The treated sample is self-administered by a route chosen to stimulate immunity. Adjuvants like neomycin are used to amplify the immune response.",
+    body: "The treated sample is self-administered by a route chosen to stimulate immunity. Adjuvants like Neomycin, Polymyxin B, and β-glucans are used to amplify the immune response.",
   },
   {
     icon: "monitor",
@@ -112,7 +112,7 @@ export const ROUTES: Route[] = [
   },
   {
     title: "Oral cavity",
-    body: "Dental floss with an H₂O₂-inactivated sample, which targets the gingival sulcus. A similar approach was recently shown to drive both mucosal and systemic immunization in animal models.",
+    body: "An H₂O₂-inactivated sample is placed around the gums and then flossed in place targetting the gingival sulcus. A similar approach was recently shown to drive both mucosal and systemic immunization in animal models.",
     link: {
       text: "recently shown",
       href: "https://pubmed.ncbi.nlm.nih.gov/40696115/",
