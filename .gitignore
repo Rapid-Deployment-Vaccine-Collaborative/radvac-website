@@ -28,6 +28,9 @@ Thumbs.db
 # editors / IDEs
 .vscode/
 .idea/
+# Claude Code: machine-local settings, the dev-server launch config, and any
+# scratch output agents drop here. Keep the directory itself out of git.
+.claude/
 *.swp
 *.swo
 *~
