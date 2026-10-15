@@ -20,6 +20,12 @@ export type FrilStep = {
   num: string;
   title: string;
   body: string;
+  /**
+   * Optional citation. `text` must appear verbatim in `body`; the page turns
+   * that phrase into a link and falls back to plain text if it doesn't match,
+   * so a reworded blurb degrades rather than breaking.
+   */
+  link?: { text: string; href: string };
 };
 
 export const PIPELINE: FrilStep[] = [
@@ -32,8 +38,9 @@ export const PIPELINE: FrilStep[] = [
   {
     icon: "purify",
     num: "02",
-    title: "Purify in two steps",
-    body: "Published protocols are multi-step and poorly suited to distributed manufacturing. Radvac has developed a simplified two-step process using inexpensive equipment and readily available inputs.",
+    title: "Capture on mannose beads",
+    body: "FRIL is mannose/glucose-specific, so it can be pulled straight out of a crude bean extract on a mannose-affinity resin and released with free sugar — a route published as far back as Colucci et al. 1999. Radvac is adapting it to inexpensive equipment and locally available inputs.",
+    link: { text: "Colucci et al. 1999", href: "https://doi.org/10.1073/pnas.96.2.646" },
   },
   {
     icon: "formulate",
@@ -148,13 +155,23 @@ export const STUDIES: Study[] = [
  * What Radvac is actually doing
  * ------------------------------------------------------------------ */
 
-export type Workstream = { num: string; title: string; body: string };
+export type Workstream = {
+  num: string;
+  title: string;
+  body: string;
+  /** Optional citation; same verbatim-match contract as FrilStep.link. */
+  link?: { text: string; href: string };
+};
 
 export const WORKSTREAMS: Workstream[] = [
   {
     num: "01",
     title: "Scalable purification",
-    body: "The near-term bottleneck. We are optimizing and validating a simplified two-step process, measuring yield, purity, lot-to-lot consistency, antiviral activity and stability under realistic storage conditions.",
+    body: "The chemistry is settled: mannose-affinity capture, eluted with 200 mM methyl-α-D-mannoside and polished by ion exchange, is published (Liu et al. 2026). The bottleneck is cost and equipment. We are adapting that route to inexpensive, widely available inputs and validating yield, purity, lot-to-lot consistency, antiviral activity and stability under realistic storage conditions.",
+    link: {
+      text: "Liu et al. 2026",
+      href: "https://doi.org/10.1038/s41467-026-70188-7",
+    },
   },
   {
     num: "02",

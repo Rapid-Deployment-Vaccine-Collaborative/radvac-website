@@ -27,6 +27,31 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+/**
+ * Body text with its citation phrase turned into an external link. Falls back
+ * to plain text when `link.text` is not found verbatim, so reworded copy
+ * degrades rather than breaking. Mirrors RouteBody on /modernized-variolation.
+ */
+function LinkedBody({
+  body,
+  link,
+}: {
+  body: string;
+  link?: { text: string; href: string };
+}) {
+  const at = link ? body.indexOf(link.text) : -1;
+  if (!link || at === -1) return <>{body}</>;
+  return (
+    <>
+      {body.slice(0, at)}
+      <a href={link.href} target="_blank" rel="noopener noreferrer">
+        {link.text}
+      </a>
+      {body.slice(at + link.text.length)}
+    </>
+  );
+}
+
 export default function FrilDraftPage() {
   return (
     <>
@@ -156,7 +181,9 @@ export default function FrilDraftPage() {
                 </div>
                 <span className={yeast.stepNum}>{step.num}</span>
                 <h3 className={yeast.stepTitle}>{step.title}</h3>
-                <p className={yeast.stepBody}>{step.body}</p>
+                <p className={`${yeast.stepBody} ${styles.stepBody}`}>
+                  <LinkedBody body={step.body} link={step.link} />
+                </p>
               </div>
               {i < PIPELINE.length - 1 && (
                 <div className={yeast.arrow} aria-hidden="true">
@@ -166,6 +193,24 @@ export default function FrilDraftPage() {
             </Fragment>
           ))}
         </div>
+        <p className={styles.pipelineNote}>
+          Purifying FRIL on mannose while calling it a complex-glycan binder
+          sounds contradictory, and isn&apos;t: the two specificities sit at
+          different levels. FRIL is mannose/glucose-specific at the single-sugar
+          level, which is what makes it stick to a mannose resin and come off
+          again in free mannoside. It prefers complex-type N-glycans at the
+          level of whole glycan structures, which is what makes it antiviral.
+          The second property is the one that separates it from concanavalin A,
+          and{" "}
+          <a
+            href="https://doi.org/10.1038/s41467-026-70188-7"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Liu et al. 2026
+          </a>{" "}
+          traces it to a handful of residues on binding-site loop B.
+        </p>
       </section>
 
       {/* ---------- Workstreams ---------- */}
@@ -176,7 +221,9 @@ export default function FrilDraftPage() {
             <div className={styles.workCard} key={w.num}>
               <span className={styles.workNum}>{w.num}</span>
               <h3>{w.title}</h3>
-              <p>{w.body}</p>
+              <p>
+                <LinkedBody body={w.body} link={w.link} />
+              </p>
             </div>
           ))}
         </div>

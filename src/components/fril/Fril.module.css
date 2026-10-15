@@ -264,6 +264,30 @@
   line-height: 1.6;
   color: var(--ink-soft);
 }
+/* Note under the pipeline flow, reconciling the two sugar specificities. */
+.pipelineNote {
+  margin: 22px 0 0;
+  max-width: 820px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+/* Inline citations in the workstream cards, the pipeline step cards and the
+   note below them. */
+.workCard p a,
+.stepBody a,
+.pipelineNote a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.workCard p a:hover,
+.stepBody a:hover,
+.pipelineNote a:hover {
+  color: var(--blue-deep);
+}
 @media (max-width: 760px) {
   .workCards {
     grid-template-columns: 1fr;
