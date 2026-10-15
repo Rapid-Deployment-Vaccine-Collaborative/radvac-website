@@ -10,6 +10,9 @@ import { team } from "@/lib/team";
 
 export const dynamic = "force-dynamic";
 
+// Drafts are accessible by direct link but omitted from the sitemap.
+const STATIC_PAGE_EXCLUDE = new Set(["fril-draft"]);
+
 // WP pages that exist as content fragments or scratch pages, not destinations.
 const WP_PAGE_EXCLUDE = new Set(["use-and-consent-popup"]);
 
@@ -75,12 +78,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPaths = ["", ...getStaticRouteSlugs()];
   const hardcodedSet = new Set(staticPaths);
 
-  const staticRoutes: MetadataRoute.Sitemap = staticPaths.map((p) => ({
-    url: p ? `${siteUrl}/${p}` : siteUrl,
-    lastModified: latestModified,
-    changeFrequency: "weekly",
-    priority: p === "" ? 1 : 0.8,
-  }));
+  const staticRoutes: MetadataRoute.Sitemap = staticPaths
+    .filter((p) => !STATIC_PAGE_EXCLUDE.has(p))
+    .map((p) => ({
+      url: p ? `${siteUrl}/${p}` : siteUrl,
+      lastModified: latestModified,
+      changeFrequency: "weekly" as const,
+      priority: p === "" ? 1 : 0.8,
+    }));
 
   const teamRoutes: MetadataRoute.Sitemap = team.map((m) => ({
     url: `${siteUrl}/team/${m.slug}`,

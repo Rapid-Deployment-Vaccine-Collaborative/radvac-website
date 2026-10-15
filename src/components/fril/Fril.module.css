@@ -1,0 +1,321 @@
+/* ============================================================= *
+ * Styles specific to /fril-draft.
+ * The page reuses the shared scaffolding in yeast/Yeast.module.css
+ * (.block, .h2, .lede, .flow, .step, .table, .ctaCard…) and the card
+ * grid from variolation/Variolation.module.css; only the pieces
+ * neither of those has live here.
+ * Tokens (--ink, --blue, --rule, --mono…) come from globals.css.
+ * ============================================================= */
+
+/* ---- animated aggregation figure ---- */
+.sceneWrap {
+  margin-top: 28px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 10px 10px 18px;
+}
+.canvasHost {
+  position: relative;
+  width: 100%;
+  height: min(70vh, 580px);
+  min-height: 380px;
+  border-radius: 10px;
+  background:
+    radial-gradient(70% 70% at 50% 35%, rgba(159, 208, 245, 0.16), transparent 72%),
+    var(--blue-light);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.canvasHost[data-ready="1"] {
+  opacity: 1;
+}
+.canvasHost canvas {
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+.canvasHost canvas:active {
+  cursor: grabbing;
+}
+
+/* ---- phase stepper + transport ---- */
+.sceneUi {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 0 4px;
+}
+.steps {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  min-width: 0;
+}
+.stepDot {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  padding: 9px 11px 11px;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.stepDot:hover {
+  border-color: var(--blue);
+}
+.stepDotOn {
+  border-top-color: var(--blue);
+  background: var(--blue-light);
+}
+.stepDotNum {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--blue);
+  font-weight: 600;
+}
+.stepDotLabel {
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.stepDotOn .stepDotLabel {
+  color: var(--ink);
+  font-weight: 600;
+}
+.playBtn {
+  flex: 0 0 auto;
+  width: 44px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--blue);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.playBtn:hover {
+  border-color: var(--blue);
+  background: var(--blue-light);
+}
+
+.sceneCaption {
+  margin: 14px 4px 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.sceneCaption strong {
+  color: var(--ink);
+}
+
+/* ---- colour key ---- */
+.sceneLegend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin: 12px 4px 0;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.swatchVirion,
+.swatchGlycan,
+.swatchFril,
+.swatchSite {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: -10px;
+}
+.swatchVirion {
+  background: #dc2f3a;
+}
+.swatchGlycan {
+  background: #58c97a;
+}
+.swatchFril {
+  background: #2b6fd4;
+}
+.swatchSite {
+  background: #e8c83a;
+}
+
+/* ---- no-WebGL fallback ---- */
+.fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+}
+.fallbackSvg {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+}
+.fallbackNote {
+  margin: 0;
+  max-width: 520px;
+  text-align: center;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 760px) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* The stepper is two rows here, so a stretched transport button would be a
+     tall empty column beside it. */
+  .playBtn {
+    align-self: center;
+    height: 40px;
+  }
+  .canvasHost {
+    height: 46vh;
+    min-height: 300px;
+  }
+}
+
+/* ---- structure credit line under the figure ---- */
+.figNote {
+  margin: 14px 4px 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  opacity: 0.9;
+}
+.figNote a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+/* ---- hero art slot ---- */
+.heroArt {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 230px;
+  height: 230px;
+}
+@media (max-width: 650px) {
+  .heroInner {
+    flex-direction: column;
+  }
+  .heroArt {
+    align-self: center;
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* ---- "what we're building" numbered cards ---- */
+.workCards {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.workCard {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 22px 22px;
+}
+.workNum {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  color: var(--blue);
+  font-weight: 600;
+}
+.workCard h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 16.5px;
+  letter-spacing: -0.01em;
+  margin: 6px 0 8px;
+  color: var(--ink);
+}
+.workCard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+@media (max-width: 760px) {
+  .workCards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- evidence table sizing (6 columns of prose) ---- */
+.studyTable {
+  min-width: 760px;
+}
+.studyTable tbody td {
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.studyTable tbody td:first-child {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.studyWhat {
+  width: 34%;
+}
+@media (max-width: 760px) {
+  .studyTable {
+    min-width: 600px;
+  }
+}
+
+/* ---- status note ---- */
+.noteCard {
+  margin-top: 28px;
+  background: #fffdf6;
+  border: 1px solid #e7dcc2;
+  border-left: 4px solid var(--amber, #c99a2e);
+  border-radius: 0 12px 12px 0;
+  padding: 24px 28px 26px;
+  max-width: 820px;
+}
+.noteCard h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.noteCard p {
+  margin: 0 0 10px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.noteCard p:last-child {
+  margin-bottom: 0;
+}
