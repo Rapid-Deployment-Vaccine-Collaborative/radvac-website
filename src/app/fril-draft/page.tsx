@@ -99,8 +99,9 @@ export default function FrilDraftPage() {
             PDB {STRUCTURE.priorId}
           </a>
           ). The virions are schematic. Sizes are not to scale: a FRIL tetramer
-          is about 8&nbsp;nm across against a roughly 100&nbsp;nm virion, so it
-          is drawn several times larger here to stay legible.
+          is about 9&nbsp;nm across against a roughly 100&nbsp;nm virion, so it
+          is drawn several times larger here to stay legible — the next section
+          shows the same encounter at true relative size.
         </p>
       </section>
 
@@ -240,12 +241,20 @@ export default function FrilDraftPage() {
         <p className={styles.pipelineNote}>
           Purifying FRIL on mannose while calling it a complex-glycan binder
           sounds contradictory, and isn&apos;t: the two specificities sit at
-          different levels. FRIL is mannose/glucose-specific at the single-sugar
-          level, which is what makes it stick to a mannose resin and come off
-          again in free mannoside. It prefers complex-type N-glycans at the
-          level of whole glycan structures, which is what makes it antiviral.
-          The second property is the one that separates it from concanavalin A,
-          and{" "}
+          different levels. At the single-sugar level it is mannose/glucose-specific
+          —{" "}
+          <a
+            href="https://doi.org/10.1093/glycob/9.2.173"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Mo et al. 1999
+          </a>{" "}
+          found the site best accommodates a terminal
+          &alpha;-D-mannosyl unit — which is what makes it stick to a mannose
+          resin and come off again in free mannoside. At the level of whole
+          glycan structures it prefers complex-type N-glycans, which is what
+          makes it antiviral and what separates it from concanavalin A;{" "}
           <a
             href="https://doi.org/10.1038/s41467-026-70188-7"
             target="_blank"
@@ -253,7 +262,17 @@ export default function FrilDraftPage() {
           >
             Liu et al. 2026
           </a>{" "}
-          traces it to a handful of residues on binding-site loop B.
+          traces that to a handful of residues on binding-site loop B.
+        </p>
+        <p className={styles.pipelineNote}>
+          The two papers disagree about the mechanism, which is worth saying
+          plainly. Liu et al. attribute the complex-glycan preference to an
+          extended binding site; Mo et al. concluded from hemagglutination-inhibition
+          and precipitation assays that the lectin has no extended combining
+          site at all. The 2026 work has solved structures of FRIL bound to the
+          glycans in question and the 1999 work had none, so we follow it here
+          — but the older characterisation is the one most of the intervening
+          literature was written on top of.
         </p>
       </section>
 
