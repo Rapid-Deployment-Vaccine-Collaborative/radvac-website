@@ -216,6 +216,21 @@ export default function ModernizedVariolationPage() {
               </span>
             </a>
           </li>
+          <li>
+            <a
+              className={styles.readCardLink}
+              href="https://prestonestep.substack.com/p/modernizing-variolation-part-3"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className={styles.readTitle}>
+                Modernizing Variolation, Part 3
+              </span>
+              <span className={styles.readMeta}>
+                by Preston Estep
+              </span>
+            </a>
+          </li>
         </ul>
       </section>
 
