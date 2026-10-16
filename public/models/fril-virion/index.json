@@ -1,0 +1,20 @@
+{
+ "viruses": [
+  {
+   "id": "influenza_a",
+   "label": "Influenza A",
+   "scene": "scene_influenza_a.json",
+   "has_trajectory": true,
+   "spikes": 400,
+   "diameter_nm": 110.0
+  },
+  {
+   "id": "sars_cov_2",
+   "label": "SARS-CoV-2",
+   "scene": "scene_sars_cov_2.json",
+   "has_trajectory": true,
+   "spikes": 26,
+   "diameter_nm": 91.0
+  }
+ ]
+}

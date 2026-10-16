@@ -109,10 +109,11 @@ export default function FrilDraftPage() {
         <h2 className={yeast.h2}>The same thing, at actual size</h2>
         <p className={`${yeast.lede} ${yeast.ledeFull}`}>
           The diagram above exaggerates FRIL to keep it legible. This one does
-          not. Nine influenza particles at 110&nbsp;nm, each carrying 350
-          hemagglutinin trimers and 50 neuraminidase tetramers built from
-          glycosylated crystal structures, with FRIL at its true 9&nbsp;nm —
-          moving on a Brownian-dynamics trajectory rather than a scripted one.
+          not: nine virus particles at their real diameters, spikes built from
+          glycosylated crystal structures and placed at measured density, and
+          FRIL at its true 9&nbsp;nm — moving on a Brownian-dynamics trajectory
+          rather than a scripted one. Switch between the two viruses to see
+          why spike density matters so much to a cross-linking lectin.
         </p>
         <FrilVirionScene />
         <p className={styles.figNote}>

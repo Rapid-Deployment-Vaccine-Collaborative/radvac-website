@@ -43,6 +43,15 @@ const COMPONENT_COLOR: Record<ComponentName, number> = {
 
 type Placement = { t: string; r: number[]; p: number[] };
 
+type VirusEntry = {
+  id: string;
+  label: string;
+  scene: string;
+  has_trajectory: boolean;
+  spikes: number;
+  diameter_nm: number;
+};
+
 type SceneManifest = {
   virion: string;
   units: string;
@@ -84,10 +93,10 @@ type Loaded = {
   loadDetail: () => Promise<{ meshes: MeshSet; fril: THREE.BufferGeometry }>;
 };
 
-async function loadAll(signal: AbortSignal): Promise<Loaded> {
-  const manifest: SceneManifest = await fetch(`${BASE}/scene.json`, { signal }).then(
+async function loadAll(signal: AbortSignal, sceneFile: string): Promise<Loaded> {
+  const manifest: SceneManifest = await fetch(`${BASE}/${sceneFile}`, { signal }).then(
     (r) => {
-      if (!r.ok) throw new Error(`scene.json: HTTP ${r.status}`);
+      if (!r.ok) throw new Error(`${sceneFile}: HTTP ${r.status}`);
       return r.json();
     },
   );
@@ -121,7 +130,7 @@ async function loadAll(signal: AbortSignal): Promise<Loaded> {
     frilMeshes.get("protein") ?? [...frilMeshes.values()][0];
 
   const traj = manifest.trajectory;
-  if (!traj) throw new Error("scene.json has no trajectory");
+  if (!traj) throw new Error(`${sceneFile} has no trajectory yet`);
   const buf = async (name: string) => {
     const r = await fetch(`${BASE}/${name}`, { signal });
     if (!r.ok) throw new Error(`${name}: HTTP ${r.status}`);
@@ -171,6 +180,9 @@ export default function FrilVirionScene() {
   const restartRef = useRef<(() => void) | null>(null);
   const restart = useCallback(() => restartRef.current?.(), []);
 
+  const [viruses, setViruses] = useState<VirusEntry[]>([]);
+  const [virus, setVirus] = useState<string>("influenza_a");
+
   const [zoomLevel, setZoomLevel] = useState(1);
   const [speed, setSpeed] = useState(1);
   const speedRef = useRef(1);
@@ -187,9 +199,25 @@ export default function FrilVirionScene() {
     zoomRef.current?.(cur * factor);
   }, []);
 
+  // Which viruses are available is data, not hardcoded: the pipeline writes
+  // index.json and a scene per virus.
+  useEffect(() => {
+    const ac = new AbortController();
+    fetch(`${BASE}/index.json`, { signal: ac.signal })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.viruses) setViruses(d.viruses.filter((v: VirusEntry) => v.has_trajectory));
+      })
+      .catch(() => undefined);
+    return () => ac.abort();
+  }, []);
+
   useEffect(() => {
     const host = hostRef.current;
     if (!host || typeof window === "undefined") return;
+    setReady(false);
+    setFailed(null);
+    setStats(null);
 
     const probe = document.createElement("canvas");
     if (!probe.getContext("webgl2") && !probe.getContext("webgl")) {
@@ -201,7 +229,10 @@ export default function FrilVirionScene() {
     let disposed = false;
     let teardown: (() => void) | null = null;
 
-    loadAll(abort.signal)
+    const entry = viruses.find((v) => v.id === virus);
+    const sceneFile = entry?.scene ?? `scene_${virus}.json`;
+
+    loadAll(abort.signal, sceneFile)
       .then((data) => {
         if (disposed) return;
         teardown = start(data, host);
@@ -580,7 +611,9 @@ export default function FrilVirionScene() {
       abort.abort();
       teardown?.();
     };
-  }, []);
+    // Rebuilt from scratch when the virus changes: different envelope,
+    // different spike count, different trajectory.
+  }, [virus, viruses]);
 
   if (failed) {
     return (
@@ -594,8 +627,40 @@ export default function FrilVirionScene() {
     );
   }
 
+  const active = viruses.find((v) => v.id === virus);
+
   return (
     <div className={styles.sceneWrap}>
+      {viruses.length > 1 && (
+        <div className={styles.virusTabs} role="tablist" aria-label="Virus">
+          {viruses.map((v) => (
+            <button
+              key={v.id}
+              type="button"
+              role="tab"
+              aria-selected={v.id === virus}
+              className={
+                v.id === virus
+                  ? `${styles.virusTab} ${styles.virusTabOn}`
+                  : styles.virusTab
+              }
+              onClick={() => setVirus(v.id)}
+            >
+              <span className={styles.virusTabName}>{v.label}</span>
+              <span className={styles.virusTabMeta}>
+                {v.diameter_nm} nm · {v.spikes} spikes
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+      {active && (
+        <p className={styles.virusNote}>
+          {active.id === "sars_cov_2"
+            ? "SARS-CoV-2 carries roughly 26 spikes on a 91 nm envelope — against influenza's 400 on 110 nm. With the glycan targets that much further apart, a 9 nm tetramer has a far harder time bridging two particles, and the simulation shows it."
+            : "Influenza is densely studded: ~400 spikes at about 9 nm spacing, so a contact patch between two particles nearly always presents glycans to both ends of a tetramer."}
+        </p>
+      )}
       <div
         ref={hostRef}
         className={`${styles.canvasHost} ${styles.canvasHostDark}`}

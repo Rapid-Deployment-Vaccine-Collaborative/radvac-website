@@ -7641,10 +7641,10 @@
   "frames": 250,
   "n_virions": 9,
   "n_fril": 60,
-  "virions_bin": "virions.bin",
-  "fril_bin": "fril.bin",
-  "bonds_bin": "bonds.bin",
-  "stride_in_frames": 4,
+  "virions_bin": "influenza_a_virions.bin",
+  "fril_bin": "influenza_a_fril.bin",
+  "bonds_bin": "influenza_a_bonds.bin",
+  "stride_in_frames": 2,
   "layout": "float32 [frame][particle][x,y,z,qw,qx,qy,qz]",
   "bonds_layout": "int16 [frame][fril][end] = virion index or -1",
   "final": {
@@ -7658,5 +7658,6 @@
    "D_trans_fril_nm2_us": 52.45,
    "box_nm": 420.0
   }
- }
+ },
+ "label": "Influenza A"
 }
