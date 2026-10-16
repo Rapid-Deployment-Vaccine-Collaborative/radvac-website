@@ -521,7 +521,7 @@
   }
  ],
  "trajectory": {
-  "frames": 13,
+  "frames": 188,
   "n_virions": 9,
   "n_fril": 113,
   "virions_bin": "sars_cov_2_virions.bin",
@@ -531,12 +531,12 @@
   "layout": "float32 [frame][particle][x,y,z,qw,qx,qy,qz]",
   "bonds_layout": "int16 [frame][fril][end] = virion index or -1",
   "final": {
-   "bound_ends": 14,
-   "crosslinks": 0,
-   "largest_cluster": 1,
-   "n_clusters": 9,
+   "bound_ends": 111,
+   "crosslinks": 13,
+   "largest_cluster": 3,
+   "n_clusters": 4,
    "fril_uM": 1.338,
-   "t_total_us": 65.0,
+   "t_total_us": 940.0,
    "D_trans_virion_nm2_us": 4.564,
    "D_trans_fril_nm2_us": 52.45,
    "box_nm": 520.0

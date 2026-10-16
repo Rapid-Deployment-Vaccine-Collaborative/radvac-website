@@ -1,6 +1,14 @@
 {
  "viruses": [
   {
+   "id": "hsv_1",
+   "label": "HSV-1",
+   "scene": "scene_hsv_1.json",
+   "has_trajectory": true,
+   "spikes": 650,
+   "diameter_nm": 186.0
+  },
+  {
    "id": "influenza_a",
    "label": "Influenza A",
    "scene": "scene_influenza_a.json",

@@ -32,6 +32,17 @@ const COL_MEMBRANE = 0x5a6b80;
 const COL_FRIL_FREE = 0x5eb8ff;
 const COL_FRIL_BOUND = 0x4ecf8f;
 
+// One line per virus on why its architecture matters to a cross-linking
+// lectin. Each is backed by the published figure the model is built from.
+const VIRUS_NOTE: Record<string, string> = {
+  influenza_a:
+    "Densely studded: ~400 spikes at about 9 nm spacing, so a contact patch between two particles nearly always presents glycans to both ends of a tetramer. This is the virus the aggregation evidence comes from — Liu et al. saw clumps by electron microscopy and a particle-size shift by light scattering.",
+  sars_cov_2:
+    "Roughly 26 spikes on a 91 nm envelope, against influenza's 400 on 110 nm. With the glycan targets that much further apart, a 9 nm tetramer has a far harder time bridging two particles — and notably, the published SARS-CoV-2 result is neutralisation in cell culture rather than aggregation.",
+  hsv_1:
+    "A much larger particle, ~186 nm, carrying several hundred glycoprotein B spikes. Daniell et al. report bean-lectin gum trapping 75–94% of HSV-1 and HSV-2 specifically through virus self-aggregation, so this is the mechanism shown here, on the biggest of the three.",
+};
+
 const COMPONENTS = ["protein", "glycan_complex", "glycan_mannose"] as const;
 type ComponentName = (typeof COMPONENTS)[number];
 
@@ -656,9 +667,7 @@ export default function FrilVirionScene() {
       )}
       {active && (
         <p className={styles.virusNote}>
-          {active.id === "sars_cov_2"
-            ? "SARS-CoV-2 carries roughly 26 spikes on a 91 nm envelope — against influenza's 400 on 110 nm. With the glycan targets that much further apart, a 9 nm tetramer has a far harder time bridging two particles, and the simulation shows it."
-            : "Influenza is densely studded: ~400 spikes at about 9 nm spacing, so a contact patch between two particles nearly always presents glycans to both ends of a tetramer."}
+          {VIRUS_NOTE[active.id] ?? active.label}
         </p>
       )}
       <div
@@ -747,7 +756,7 @@ export default function FrilVirionScene() {
         </button>
       </div>
       <p className={styles.sceneLegend}>
-        <span className={styles.swatchVirion} /> HA / NA
+        <span className={styles.swatchVirion} /> spike protein
         <span className={styles.swatchGlycan2} /> complex N-glycan
         <span className={styles.swatchMannose} /> oligomannose
         <span className={styles.swatchFrilFree} /> FRIL

@@ -109,10 +109,10 @@ export default function FrilDraftPage() {
         <h2 className={yeast.h2}>The same thing, at actual size</h2>
         <p className={`${yeast.lede} ${yeast.ledeFull}`}>
           The diagram above exaggerates FRIL to keep it legible. This one does
-          not: nine virus particles at their real diameters, spikes built from
+          not: virus particles at their real diameters, spikes built from
           glycosylated crystal structures and placed at measured density, and
           FRIL at its true 9&nbsp;nm — moving on a Brownian-dynamics trajectory
-          rather than a scripted one. Switch between the two viruses to see
+          rather than a scripted one. Switch between the three viruses to see
           why spike density matters so much to a cross-linking lectin.
         </p>
         <FrilVirionScene />
@@ -121,12 +121,20 @@ export default function FrilDraftPage() {
           <a href="https://www.rcsb.org/structure/3LZG" target="_blank" rel="noopener noreferrer">
             3LZG
           </a>{" "}
-          (H1 HA) and{" "}
+          and{" "}
           <a href="https://www.rcsb.org/structure/4B7Q" target="_blank" rel="noopener noreferrer">
             4B7Q
           </a>{" "}
-          (N1 NA), carrying complete N-glycans grafted onto every sequon;
-          FRIL is{" "}
+          (influenza HA and NA),{" "}
+          <a href="https://www.rcsb.org/structure/6VXX" target="_blank" rel="noopener noreferrer">
+            6VXX
+          </a>{" "}
+          (SARS-CoV-2 spike) and{" "}
+          <a href="https://www.rcsb.org/structure/2GUM" target="_blank" rel="noopener noreferrer">
+            2GUM
+          </a>{" "}
+          (HSV-1 glycoprotein B), each carrying complete N-glycans grafted onto
+          every sequon; FRIL is{" "}
           <a href={STRUCTURE.pdbHref} target="_blank" rel="noopener noreferrer">
             {STRUCTURE.pdbId}
           </a>

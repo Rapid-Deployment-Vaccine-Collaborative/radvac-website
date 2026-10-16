@@ -7638,9 +7638,9 @@
   }
  ],
  "trajectory": {
-  "frames": 250,
+  "frames": 38,
   "n_virions": 9,
-  "n_fril": 60,
+  "n_fril": 174,
   "virions_bin": "influenza_a_virions.bin",
   "fril_bin": "influenza_a_fril.bin",
   "bonds_bin": "influenza_a_bonds.bin",
@@ -7648,15 +7648,15 @@
   "layout": "float32 [frame][particle][x,y,z,qw,qx,qy,qz]",
   "bonds_layout": "int16 [frame][fril][end] = virion index or -1",
   "final": {
-   "bound_ends": 93,
-   "crosslinks": 33,
-   "largest_cluster": 9,
-   "n_clusters": 1,
+   "bound_ends": 60,
+   "crosslinks": 1,
+   "largest_cluster": 2,
+   "n_clusters": 8,
    "fril_uM": 1.338,
-   "t_total_us": 900.0,
-   "D_trans_virion_nm2_us": 3.699,
+   "t_total_us": 91.2,
+   "D_trans_virion_nm2_us": 3.675,
    "D_trans_fril_nm2_us": 52.45,
-   "box_nm": 420.0
+   "box_nm": 600.0
   }
  },
  "label": "Influenza A"
