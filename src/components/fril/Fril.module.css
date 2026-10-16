@@ -343,3 +343,98 @@
 .noteCard p:last-child {
   margin-bottom: 0;
 }
+
+/* ============================================================= *
+ * Accurate (life-size) virion figure — FrilVirionScene.
+ * Darker surround than the schematic figure: these are rendered
+ * molecular surfaces on a dark field, matching the video.
+ * ============================================================= */
+.canvasHostDark {
+  background: #081018;
+}
+
+.readout {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  font-family: var(--mono);
+  min-width: 0;
+  overflow: hidden;
+}
+.readoutValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.readoutLabel {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+.swatchGlycan2,
+.swatchMannose,
+.swatchFrilFree,
+.swatchFrilBound {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: -10px;
+}
+.swatchGlycan2 {
+  background: #f0c45a;
+}
+.swatchMannose {
+  background: #4ecf8f;
+}
+.swatchFrilFree {
+  background: #5eb8ff;
+}
+.swatchFrilBound {
+  background: #4ecf8f;
+  outline: 1px solid #0b7a45;
+}
+
+/* ---- zoom control for the life-size figure ---- */
+.zoomGroup {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+.zoomLabel {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 62px;
+  padding: 0 6px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.detailTag {
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.playBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

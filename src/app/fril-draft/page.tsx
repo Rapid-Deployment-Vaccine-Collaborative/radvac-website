@@ -5,6 +5,7 @@ import yeast from "@/components/yeast/Yeast.module.css";
 import styles from "@/components/fril/Fril.module.css";
 import { FrilIcon } from "@/components/fril/FrilIcons";
 import FrilAggregationScene from "@/components/fril/FrilAggregationScene";
+import FrilVirionScene from "@/components/fril/FrilVirionScene";
 import ProjectCardGraphic from "@/components/sections/ProjectCardGraphic";
 import {
   ADVANTAGES,
@@ -100,6 +101,40 @@ export default function FrilDraftPage() {
           ). The virions are schematic. Sizes are not to scale: a FRIL tetramer
           is about 8&nbsp;nm across against a roughly 100&nbsp;nm virion, so it
           is drawn several times larger here to stay legible.
+        </p>
+      </section>
+
+      {/* ---------- The same event, to scale ---------- */}
+      <section className={yeast.block} id="to-scale">
+        <h2 className={yeast.h2}>The same thing, at actual size</h2>
+        <p className={`${yeast.lede} ${yeast.ledeFull}`}>
+          The diagram above exaggerates FRIL to keep it legible. This one does
+          not. Nine influenza particles at 110&nbsp;nm, each carrying 350
+          hemagglutinin trimers and 50 neuraminidase tetramers built from
+          glycosylated crystal structures, with FRIL at its true 9&nbsp;nm —
+          moving on a Brownian-dynamics trajectory rather than a scripted one.
+        </p>
+        <FrilVirionScene />
+        <p className={styles.figNote}>
+          Spikes are decimated molecular surfaces from PDB{" "}
+          <a href="https://www.rcsb.org/structure/3LZG" target="_blank" rel="noopener noreferrer">
+            3LZG
+          </a>{" "}
+          (H1 HA) and{" "}
+          <a href="https://www.rcsb.org/structure/4B7Q" target="_blank" rel="noopener noreferrer">
+            4B7Q
+          </a>{" "}
+          (N1 NA), carrying complete N-glycans grafted onto every sequon;
+          FRIL is{" "}
+          <a href={STRUCTURE.pdbHref} target="_blank" rel="noopener noreferrer">
+            {STRUCTURE.pdbId}
+          </a>
+          . Particle and tetramer motion comes from rigid-body Brownian
+          dynamics with Stokes-Einstein diffusion at 298&nbsp;K and FRIL at the
+          experimental 150&nbsp;µg/mL. The glycan shields are modelled, not
+          observed — deposited structures resolve only a sugar or two per site.
+          Virion concentration is raised well above a real preparation so that
+          encounters happen inside a simulable volume.
         </p>
       </section>
 
