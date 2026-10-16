@@ -172,6 +172,13 @@ export default function FrilVirionScene() {
   const restart = useCallback(() => restartRef.current?.(), []);
 
   const [zoomLevel, setZoomLevel] = useState(1);
+  const [speed, setSpeed] = useState(1);
+  const speedRef = useRef(1);
+  const changeSpeed = useCallback((next: number) => {
+    const clamped = Math.min(4, Math.max(0.25, next));
+    speedRef.current = clamped;
+    setSpeed(clamped);
+  }, []);
   const [detail, setDetail] = useState<"standard" | "loading" | "high">("standard");
   const zoomRef = useRef<((z: number) => void) | null>(null);
   const getZoomRef = useRef<(() => number) | null>(null);
@@ -517,13 +524,15 @@ export default function FrilVirionScene() {
       let raf = 0;
       let last = performance.now();
       let shown = -1;
-      const FPS = 28;
+      // Trajectory frames per second at 1x. The whole run is 900 us of
+      // simulated time, so this is a playback rate, not a physical one.
+      const BASE_FPS = 28;
 
       const tick = (now: number) => {
         const dt = Math.min(0.05, (now - last) / 1000);
         last = now;
         if (playingRef.current) {
-          cursor += dt * FPS;
+          cursor += dt * BASE_FPS * speedRef.current;
           if (cursor >= frames) cursor = 0;
         }
         const { frame, xlinks } = applyFrame(cursor);
@@ -630,6 +639,30 @@ export default function FrilVirionScene() {
           ) : (
             <span className={styles.readoutLabel}>loading model…</span>
           )}
+        </div>
+        <div className={styles.zoomGroup}>
+          <button
+            type="button"
+            className={styles.playBtn}
+            onClick={() => changeSpeed(speed / 2)}
+            disabled={speed <= 0.25}
+            aria-label="Slow down"
+          >
+            ◁◁
+          </button>
+          <span className={styles.zoomLabel}>
+            {speed < 1 ? `${speed}×` : `${speed}×`}
+            <em className={styles.detailTag}>speed</em>
+          </span>
+          <button
+            type="button"
+            className={styles.playBtn}
+            onClick={() => changeSpeed(speed * 2)}
+            disabled={speed >= 4}
+            aria-label="Speed up"
+          >
+            ▷▷
+          </button>
         </div>
         <button
           type="button"
