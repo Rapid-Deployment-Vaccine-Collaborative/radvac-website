@@ -12,8 +12,8 @@ export function HumanDataFigure() {
         <div className={styles.figureImgPlaceholder} aria-label="Chart loading — image not yet available" />
       ) : (
         <Image
-          src="/images/bkv-human-data.png"
-          alt="Chart showing BK Polyomavirus (BKV) serum antibody levels before and after drinking yeast expressing BKV-IV VLPs"
+          src="/images/bkv-neutralizing-titer-human.png"
+          alt="Chart showing BK Polyomavirus (BKV) serum neutralizing antibody titers (EC50) against virus subtypes I, II and IV before and after drinking yeast expressing BKV-IV VLPs"
           width={680}
           height={472}
           className={styles.figureImg}
@@ -21,8 +21,9 @@ export function HumanDataFigure() {
         />
       )}
       <figcaption className={styles.figcaption}>
-        BK-Polyomavirus (BKV) serum antibody levels before and after drinking
-        yeast expressing BKV-IV VLPs.{" "}
+        BK-Polyomavirus (BKV) serum neutralizing antibody titers against virus
+        subtypes I, II and IV, before and after drinking yeast expressing
+        BKV-IV VLPs. The beer mugs on the x-axis mark the three doses.{" "}
         <a
           href="https://zenodo.org/records/17969224"
           target="_blank"
