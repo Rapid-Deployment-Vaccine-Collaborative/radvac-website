@@ -18,7 +18,7 @@ interface FormState {
   securityQuestion: string;
   acceptance: boolean;
   wantsDiscord: boolean;
-  website: string;
+  hp_extra: string;
 }
 
 const initial: FormState = {
@@ -34,8 +34,48 @@ const initial: FormState = {
   securityQuestion: "",
   acceptance: false,
   wantsDiscord: false,
-  website: "",
+  hp_extra: "",
 };
+
+const REQUIRED: [keyof FormState, string][] = [
+  ["identifier", "an identifier"],
+  ["email", "your email address"],
+  ["city", "your city"],
+  ["state", "your state or province"],
+  ["country", "your country"],
+  ["securityQuestion", "the security question"],
+];
+
+function validate(d: FormState): string | null {
+  for (const [key, label] of REQUIRED) {
+    if (String(d[key]).trim() === "") return `Please fill in ${label}.`;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email.trim())) {
+    return "Please enter a valid email address.";
+  }
+  if (!d.acceptance) {
+    return "Please tick the box confirming your information will be public.";
+  }
+  return null;
+}
+
+/** Pre-filled email so a signup is never lost if the backend is down. */
+function mailtoFallback(d: FormState): string {
+  const body = [
+    `Identifier: ${d.identifier}`,
+    `Email: ${d.email}`,
+    `Location: ${d.city}, ${d.state}, ${d.country}`,
+    `Science degree: ${d.scienceDegree || "-"}`,
+    `Lab skills: ${d.labSkills || "-"}`,
+    `Lab space/materials: ${d.labSpace || "-"}`,
+    `Other info: ${d.otherInfo || "-"}`,
+    `Security answer: ${d.securityQuestion}`,
+    `Wants Discord invite: ${d.wantsDiscord ? "Yes" : "No"}`,
+  ].join("\n");
+  return `mailto:info@radvac.org?subject=${encodeURIComponent(
+    "Researchers Map signup"
+  )}&body=${encodeURIComponent(body)}`;
+}
 
 function YesNo({
   name,
@@ -74,6 +114,7 @@ export default function ResearcherSignupForm() {
   const [data, setData] = useState<FormState>(initial);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showFallback, setShowFallback] = useState(false);
   const [done, setDone] = useState(false);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
@@ -83,6 +124,12 @@ export default function ResearcherSignupForm() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    setShowFallback(false);
+    const invalid = validate(data);
+    if (invalid) {
+      setError(invalid);
+      return;
+    }
     setSubmitting(true);
     try {
       const res = await fetch("/api/researcher-signup", {
@@ -93,11 +140,13 @@ export default function ResearcherSignupForm() {
       const body = await res.json().catch(() => ({}));
       if (!res.ok) {
         setError(body.error || "Submission failed.");
+        setShowFallback(res.status >= 500 || Boolean(body.fallback));
       } else {
         setDone(true);
       }
     } catch {
       setError("Network error. Please try again.");
+      setShowFallback(true);
     } finally {
       setSubmitting(false);
     }
@@ -229,16 +278,18 @@ export default function ResearcherSignupForm() {
         />
       </div>
 
-      {/* Honeypot — hidden from humans, bots tend to fill it */}
-      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px" }}>
-        <label htmlFor="website">Website</label>
+      {/* Honeypot — hidden from humans, bots tend to fill it. Deliberately
+          given a name browser autofill won't recognise (it used to be
+          "website", which autofill could fill and silently drop real signups). */}
+      <div aria-hidden="true" style={{ display: "none" }}>
+        <label htmlFor="hp_extra">Leave this empty</label>
         <input
-          id="website"
-          name="website"
+          id="hp_extra"
+          name="hp_extra"
           tabIndex={-1}
-          autoComplete="off"
-          value={data.website}
-          onChange={(e) => update("website", e.target.value)}
+          autoComplete="new-password"
+          value={data.hp_extra}
+          onChange={(e) => update("hp_extra", e.target.value)}
         />
       </div>
 
@@ -265,7 +316,19 @@ export default function ResearcherSignupForm() {
         </span>
       </label>
 
-      {error ? <div className={styles.error}>{error}</div> : null}
+      {error ? (
+        <div className={styles.error} role="alert">
+          {error}
+          {showFallback ? (
+            <>
+              {" "}
+              <a href={mailtoFallback(data)}>
+                Click here to send your details by email instead.
+              </a>
+            </>
+          ) : null}
+        </div>
+      ) : null}
 
       <button className={styles.submit} type="submit" disabled={submitting}>
         {submitting ? "Submitting…" : "Submit"}

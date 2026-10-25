@@ -52,6 +52,37 @@ zip -r radvac-revalidate.zip radvac-revalidate/
 In WP admin: **Plugins → Add New → Upload Plugin** → choose
 `radvac-revalidate.zip` → Install Now → Activate.
 
+## 3b. Install the signups plugin (Researchers Map form)
+
+The "Add yourself to the map" form on `/researchers-map` posts to
+`/api/researcher-signup`, which (a) emails each submission to
+info@radvac.org via Resend and (b) stores it as a private
+**Researcher Signup** post via the
+[plugins/radvac-signups/](plugins/radvac-signups/) plugin. A submission
+counts as received if either side succeeds.
+
+1. Generate a secret: `openssl rand -hex 32`
+2. EasyWP dashboard → **File Manager** → open `wp-config.php` and add,
+   above the `/* That's all, stop editing! */` line:
+
+   ```php
+   define( 'RADVAC_SIGNUP_SECRET', '<the secret>' );
+   ```
+
+   (The secret lives only in `wp-config.php`; no need to edit the plugin.)
+3. Build the zip and upload it like the revalidate plugin:
+
+   ```sh
+   cd wordpress/plugins
+   zip -r radvac-signups.zip radvac-signups/
+   ```
+
+4. Save the same secret as `RADVAC_SIGNUP_SECRET` in Vercel (step 7).
+5. Check: `curl https://radvac-297e5f.ingress-alpha.ewp.live/wp-json/radvac/v1/health`
+   should return `{"ok":true,"secretConfigured":true}`.
+
+Submissions appear in WP admin under **Researcher Signups**.
+
 ## 4. Application Passwords (for draft preview)
 
 Skip this section if you don't need draft preview at launch.
@@ -107,6 +138,8 @@ NEXT_PUBLIC_SITE_URL=https://radvac.org
 REVALIDATE_SECRET=<same string used in radvac-revalidate.php>
 PREVIEW_SECRET=<random, used by /api/draft>
 WP_AUTH_TOKEN=<base64 from step 4, only if using drafts>
+RADVAC_SIGNUP_SECRET=<same string defined in wp-config.php, step 3b>
+RESEND_API_KEY=<from resend.com; radvac.org must be a verified domain>
 ```
 
 ## 8. DNS summary

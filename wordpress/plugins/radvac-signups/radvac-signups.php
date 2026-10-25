@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Radvac Signups
  * Description: Stores Researchers Map signup form submissions from the Next.js frontend as private "Researcher Signup" entries, via a shared-secret REST endpoint.
- * Version: 0.1.0
+ * Version: 0.2.0
  * Author: Radvac
  * Requires PHP: 7.4
  */
@@ -12,8 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Shared secret. MUST match RADVAC_SIGNUP_SECRET in Vercel env vars.
-// Replace before activating in production.
-const RADVAC_SIGNUP_SECRET = 'replace-me-before-activating';
+// Define it in wp-config.php (above the "That's all, stop editing!" line):
+//
+//   define( 'RADVAC_SIGNUP_SECRET', '<output of: openssl rand -hex 32>' );
+//
+// If it is missing or shorter than 32 chars, every signup request is rejected.
+function radvac_signup_secret(): string {
+    return defined( 'RADVAC_SIGNUP_SECRET' ) ? (string) constant( 'RADVAC_SIGNUP_SECRET' ) : '';
+}
 
 add_action( 'init', function () {
     register_post_type( 'researcher_signup', [
@@ -40,9 +46,23 @@ add_action( 'rest_api_init', function () {
         'methods'             => 'POST',
         'callback'            => 'radvac_handle_researcher_signup',
         'permission_callback' => function ( WP_REST_Request $request ) {
-            $secret = (string) $request->get_header( 'x-radvac-signup-secret' );
-            return $secret !== '' && hash_equals( RADVAC_SIGNUP_SECRET, $secret );
+            $expected = radvac_signup_secret();
+            $given    = (string) $request->get_header( 'x-radvac-signup-secret' );
+            return strlen( $expected ) >= 32 && $given !== '' && hash_equals( $expected, $given );
         },
+    ] );
+
+    // Public, data-free health check so we can confirm the plugin is active
+    // and the secret is configured (without revealing it).
+    register_rest_route( 'radvac/v1', '/health', [
+        'methods'             => 'GET',
+        'callback'            => function () {
+            return rest_ensure_response( [
+                'ok'                => true,
+                'secretConfigured'  => strlen( radvac_signup_secret() ) >= 32,
+            ] );
+        },
+        'permission_callback' => '__return_true',
     ] );
 } );
 
