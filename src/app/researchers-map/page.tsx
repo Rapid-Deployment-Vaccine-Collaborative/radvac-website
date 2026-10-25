@@ -3,6 +3,8 @@ import ResearchersGlobe from "@/components/sections/ResearchersGlobe";
 import ResearcherSignupForm from "@/components/sections/ResearcherSignupForm";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { buildMetadata } from "@/lib/seo";
+import { researchers as baselineResearchers, type Researcher } from "@/data/researchers";
+import { getApprovedResearchers } from "@/lib/wordpress/researchers";
 
 export const metadata: Metadata = buildMetadata({
   title: "Researchers Map",
@@ -11,13 +13,33 @@ export const metadata: Metadata = buildMetadata({
   path: "/researchers-map",
 });
 
-export default function ResearchersPage() {
+export default async function ResearchersPage() {
+  const wpApproved = await getApprovedResearchers();
+
+  // Merge WordPress approved researchers with baseline researchers.
+  // WordPress approved entries take precedence if there are duplicates by id or email.
+  const seenIds = new Set<string>();
+  const seenEmails = new Set<string>();
+  const merged: Researcher[] = [];
+
+  for (const r of wpApproved) {
+    if (r.id) seenIds.add(r.id);
+    if (r.email) seenEmails.add(r.email.toLowerCase());
+    merged.push(r);
+  }
+
+  for (const r of baselineResearchers) {
+    if (seenIds.has(r.id)) continue;
+    if (r.email && seenEmails.has(r.email.toLowerCase())) continue;
+    merged.push(r);
+  }
+
   return (
     <>
       <PageHeader title="Researchers Map" />
       <section className="section" style={{ paddingTop: 32 }}>
         <div style={{ gridColumn: "1 / -1" }}>
-          <ResearchersGlobe />
+          <ResearchersGlobe initialResearchers={merged} />
         </div>
         <div />
         <div>

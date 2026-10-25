@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Globe, { type GlobeMethods } from "react-globe.gl";
 import { MeshPhongMaterial } from "three";
-import { researchers, type Researcher } from "@/data/researchers";
+import { researchers as defaultResearchers, type Researcher } from "@/data/researchers";
 import styles from "./ResearchersGlobe.module.css";
 
 type PolygonFeature = {
@@ -24,7 +24,12 @@ function locationLine(r: Researcher) {
   return [r.city, r.state, r.country].filter(Boolean).join(", ");
 }
 
-export default function ResearchersGlobeInner() {
+export default function ResearchersGlobeInner({
+  initialResearchers,
+}: {
+  initialResearchers?: Researcher[];
+} = {}) {
+  const researchers = initialResearchers ?? defaultResearchers;
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const globeRef = useRef<GlobeMethods | undefined>(undefined);
   const [size, setSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 });

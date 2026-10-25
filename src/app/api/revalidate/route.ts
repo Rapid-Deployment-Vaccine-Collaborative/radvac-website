@@ -35,6 +35,9 @@ export async function POST(request: Request) {
       const singlePath = `/press-release/${data.slug}`;
       revalidatePath(singlePath);
       revalidated.push(singlePath);
+    } else if (postType === "researcher_signup") {
+      revalidatePath("/researchers-map");
+      revalidated.push("/researchers-map");
     } else {
       console.log(
         `[revalidate] received unknown postType="${postType}" slug="${data.slug}" — no path-level revalidation`

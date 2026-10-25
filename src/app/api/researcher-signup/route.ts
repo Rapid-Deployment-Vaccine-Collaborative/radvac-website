@@ -32,6 +32,8 @@ type SignupPayload = {
   otherInfo: string;
   securityQuestion: string;
   wantsDiscord: boolean;
+  lat?: number;
+  lng?: number;
 };
 
 const NOTIFY_TO = "info@radvac.org";
@@ -70,6 +72,31 @@ function yn(v: unknown): string {
   return v === "Yes" || v === "No" ? v : "";
 }
 
+async function geocode(
+  city: string,
+  state: string,
+  country: string
+): Promise<{ lat: number; lng: number } | null> {
+  const query = [city, state, country].filter(Boolean).join(", ");
+  const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(
+    query
+  )}`;
+  try {
+    const res = await fetch(url, {
+      headers: { "User-Agent": "Radvac-website/1.0 (info@radvac.org)" },
+      signal: AbortSignal.timeout(4000),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!Array.isArray(data) || !data.length) return null;
+    const lat = parseFloat(data[0].lat);
+    const lng = parseFloat(data[0].lon);
+    return isFinite(lat) && isFinite(lng) ? { lat, lng } : null;
+  } catch {
+    return null;
+  }
+}
+
 async function saveToWordPress(payload: SignupPayload): Promise<void> {
   const wpGraphqlUrl = process.env.WP_GRAPHQL_URL;
   const secret = process.env.RADVAC_SIGNUP_SECRET;
@@ -100,12 +127,17 @@ async function notifyByEmail(payload: SignupPayload): Promise<void> {
     throw new Error("RESEND_API_KEY is not set");
   }
   const dash = (v: string) => (v ? v : "-");
+  const coords =
+    payload.lat !== undefined && payload.lng !== undefined
+      ? `${payload.lat}, ${payload.lng}`
+      : "Not yet geocoded";
   const text = [
     "New Researchers Map signup from radvac.org",
     "",
     `Identifier: ${payload.identifier}`,
     `Email: ${payload.email}`,
     `Location: ${payload.city}, ${payload.state}, ${payload.country}`,
+    `Coordinates: ${coords}`,
     `Science degree: ${dash(payload.scienceDegree)}`,
     `Lab skills: ${dash(payload.labSkills)}`,
     `Lab space/materials: ${dash(payload.labSpace)}`,
@@ -194,18 +226,27 @@ export async function POST(request: Request) {
       );
     }
 
+    const cleanCity = String(data.city).trim();
+    const cleanState = String(data.state).trim();
+    const cleanCountry = String(data.country).trim();
+
+    // Geocode coordinates asynchronously via Nominatim so they can be saved in WP
+    const geo = await geocode(cleanCity, cleanState, cleanCountry);
+
     const payload: SignupPayload = {
       identifier: String(data.identifier).trim(),
       email: String(data.email).trim(),
-      city: String(data.city).trim(),
-      state: String(data.state).trim(),
-      country: String(data.country).trim(),
+      city: cleanCity,
+      state: cleanState,
+      country: cleanCountry,
       scienceDegree: yn(data.scienceDegree),
       labSkills: yn(data.labSkills),
       labSpace: yn(data.labSpace),
       otherInfo: String(data.otherInfo ?? "").trim(),
       securityQuestion: String(data.securityQuestion).trim(),
       wantsDiscord: Boolean(data.wantsDiscord),
+      lat: geo?.lat,
+      lng: geo?.lng,
     };
 
     // Store in WP and email the team in parallel. Succeed if either works so

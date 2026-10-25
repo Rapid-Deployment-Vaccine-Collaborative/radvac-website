@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { researchers, type Researcher } from "@/data/researchers";
+import { researchers as defaultResearchers, type Researcher } from "@/data/researchers";
 import styles from "./ResearchersMap.module.css";
 
 // Leaflet's default icon URLs are broken under bundlers — point them at the CDN.
@@ -23,7 +23,12 @@ function locationLine(r: Researcher) {
   return [r.city, r.state, r.country].filter(Boolean).join(", ");
 }
 
-export default function ResearchersMapInner() {
+export default function ResearchersMapInner({
+  initialResearchers,
+}: {
+  initialResearchers?: Researcher[];
+} = {}) {
+  const researchers = initialResearchers ?? defaultResearchers;
   useEffect(() => {
     fixDefaultIcon();
   }, []);

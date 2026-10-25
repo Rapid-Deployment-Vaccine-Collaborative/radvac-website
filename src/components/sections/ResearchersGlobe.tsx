@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import React, { useEffect, useState, type ReactNode } from "react";
+import type { Researcher } from "@/data/researchers";
 
 const GlobeInner = dynamic(() => import("./ResearchersGlobeInner"), {
   ssr: false,
@@ -66,7 +67,11 @@ class GlobeErrorBoundary extends React.Component<
   }
 }
 
-export default function ResearchersGlobe() {
+export default function ResearchersGlobe({
+  initialResearchers,
+}: {
+  initialResearchers?: Researcher[];
+} = {}) {
   // "loading" is the SSR / pre-detection state. Once we mount client-side we
   // probe for WebGL and pick a renderer. WebGL fails silently when hardware
   // acceleration is disabled in the browser — we fall back to the 2D map.
@@ -80,11 +85,11 @@ export default function ResearchersGlobe() {
     return <Placeholder>Loading…</Placeholder>;
   }
   if (mode === "map") {
-    return <MapInner />;
+    return <MapInner initialResearchers={initialResearchers} />;
   }
   return (
-    <GlobeErrorBoundary fallback={<MapInner />}>
-      <GlobeInner />
+    <GlobeErrorBoundary fallback={<MapInner initialResearchers={initialResearchers} />}>
+      <GlobeInner initialResearchers={initialResearchers} />
     </GlobeErrorBoundary>
   );
 }
