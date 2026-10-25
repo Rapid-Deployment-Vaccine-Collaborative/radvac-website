@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Radvac Signups
  * Description: Stores Researchers Map signup form submissions from the Next.js frontend, geocodes coordinates, provides an approval workflow in WP Admin, and exposes approved researchers via a public endpoint.
- * Version: 0.3.0
+ * Version: 0.3.1
  * Author: Radvac
  * Requires PHP: 7.4
  */
@@ -194,6 +194,71 @@ function radvac_handle_researcher_signup( WP_REST_Request $request ) {
 }
 
 /**
+ * For signups created prior to v0.3.0, parses the post content
+ * to populate the structured post meta and auto-geocodes coordinates.
+ */
+function radvac_ensure_post_meta( $post_id ) {
+    $email = get_post_meta( $post_id, '_radvac_email', true );
+    if ( $email !== '' ) {
+        return; // Already populated
+    }
+
+    $post = get_post( $post_id );
+    if ( ! $post || empty( $post->post_content ) ) {
+        return;
+    }
+
+    $content = $post->post_content;
+    if ( preg_match( '/^Identifier:\s*(.+)$/m', $content, $m ) ) {
+        update_post_meta( $post_id, '_radvac_identifier', sanitize_text_field( trim( $m[1] ) ) );
+    }
+    if ( preg_match( '/^Email:\s*(.+)$/m', $content, $m ) ) {
+        update_post_meta( $post_id, '_radvac_email', sanitize_email( trim( $m[1] ) ) );
+    }
+    if ( preg_match( '/^Location:\s*(.+)$/m', $content, $m ) ) {
+        $loc_parts = array_map( 'trim', explode( ',', $m[1] ) );
+        $city = ''; $state = ''; $country = '';
+        if ( count( $loc_parts ) >= 3 ) {
+            $city    = $loc_parts[0];
+            $state   = $loc_parts[1];
+            $country = implode( ', ', array_slice( $loc_parts, 2 ) );
+        } elseif ( count( $loc_parts ) === 2 ) {
+            $city    = $loc_parts[0];
+            $country = $loc_parts[1];
+        } else {
+            $country = $m[1];
+        }
+        update_post_meta( $post_id, '_radvac_city', $city );
+        update_post_meta( $post_id, '_radvac_state', $state );
+        update_post_meta( $post_id, '_radvac_country', $country );
+
+        $geo = radvac_geocode( $city, $state, $country );
+        if ( $geo ) {
+            update_post_meta( $post_id, '_radvac_lat', $geo['lat'] );
+            update_post_meta( $post_id, '_radvac_lng', $geo['lng'] );
+        }
+    }
+    if ( preg_match( '/^Science degree:\s*(.+)$/m', $content, $m ) ) {
+        update_post_meta( $post_id, '_radvac_science', sanitize_text_field( trim( $m[1] ) ) );
+    }
+    if ( preg_match( '/^Lab skills:\s*(.+)$/m', $content, $m ) ) {
+        update_post_meta( $post_id, '_radvac_skills', sanitize_text_field( trim( $m[1] ) ) );
+    }
+    if ( preg_match( '/^Lab space\/materials:\s*(.+)$/m', $content, $m ) ) {
+        update_post_meta( $post_id, '_radvac_space', sanitize_text_field( trim( $m[1] ) ) );
+    }
+    if ( preg_match( '/^Other info:\s*(.+)$/m', $content, $m ) ) {
+        update_post_meta( $post_id, '_radvac_other', sanitize_textarea_field( trim( $m[1] ) ) );
+    }
+    if ( preg_match( '/^Security answer.*?:\s*(.+)$/m', $content, $m ) ) {
+        update_post_meta( $post_id, '_radvac_security', sanitize_text_field( trim( $m[1] ) ) );
+    }
+    if ( preg_match( '/^Wants Discord invite:\s*(.+)$/m', $content, $m ) ) {
+        update_post_meta( $post_id, '_radvac_discord', sanitize_text_field( trim( $m[1] ) ) );
+    }
+}
+
+/**
  * Public REST endpoint handler: returns only PUBLISHED (approved) researchers.
  * Never exposes the security question answer or private submission details.
  */
@@ -208,10 +273,11 @@ function radvac_get_approved_researchers() {
 
     $researchers = [];
     foreach ( $posts as $p ) {
+        radvac_ensure_post_meta( $p->ID );
         $lat = get_post_meta( $p->ID, '_radvac_lat', true );
         $lng = get_post_meta( $p->ID, '_radvac_lng', true );
 
-        // If coordinates were not saved in post meta, try fallback to content parse
+        // If coordinates were not saved in post meta, skip
         if ( ! is_numeric( $lat ) || ! is_numeric( $lng ) ) {
             continue;
         }
@@ -226,14 +292,18 @@ function radvac_get_approved_researchers() {
         $skills  = get_post_meta( $p->ID, '_radvac_skills', true );
         $space   = get_post_meta( $p->ID, '_radvac_space', true );
         $notes   = get_post_meta( $p->ID, '_radvac_other', true );
+        $email   = get_post_meta( $p->ID, '_radvac_email', true );
+        $city    = get_post_meta( $p->ID, '_radvac_city', true );
+        $state   = get_post_meta( $p->ID, '_radvac_state', true );
+        $country = get_post_meta( $p->ID, '_radvac_country', true );
 
         $researchers[] = [
             'id'            => 'wp-' . $p->ID,
             'name'          => $ident,
-            'email'         => (string) get_post_meta( $p->ID, '_radvac_email', true ) ?: undefined,
-            'city'          => (string) get_post_meta( $p->ID, '_radvac_city', true ) ?: undefined,
-            'state'         => (string) get_post_meta( $p->ID, '_radvac_state', true ) ?: undefined,
-            'country'       => (string) get_post_meta( $p->ID, '_radvac_country', true ) ?: undefined,
+            'email'         => $email ? (string) $email : null,
+            'city'          => $city ? (string) $city : null,
+            'state'         => $state ? (string) $state : null,
+            'country'       => $country ? (string) $country : null,
             'scienceDegree' => $science === 'Yes' ? true : ( $science === 'No' ? false : null ),
             'labSkills'     => $skills === 'Yes' ? true : ( $skills === 'No' ? false : null ),
             'labSpace'      => $space === 'Yes' ? true : ( $space === 'No' ? false : null ),
@@ -266,6 +336,7 @@ add_filter( 'manage_researcher_signup_posts_columns', function ( $cols ) {
 
 // Populate the custom columns
 add_action( 'manage_researcher_signup_posts_custom_column', function ( $column, $post_id ) {
+    radvac_ensure_post_meta( $post_id );
     if ( $column === 'location' ) {
         $city    = get_post_meta( $post_id, '_radvac_city', true );
         $state   = get_post_meta( $post_id, '_radvac_state', true );
@@ -303,6 +374,7 @@ add_action( 'add_meta_boxes', function () {
 } );
 
 function radvac_render_researcher_meta_box( $post ) {
+    radvac_ensure_post_meta( $post->ID );
     wp_nonce_field( 'radvac_save_meta', 'radvac_meta_nonce' );
 
     $ident    = get_post_meta( $post->ID, '_radvac_identifier', true );
