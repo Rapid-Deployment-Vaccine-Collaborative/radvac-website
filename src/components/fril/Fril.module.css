@@ -15,6 +15,22 @@
   border-radius: 14px;
   padding: 10px 10px 18px;
 }
+.canvasFrame {
+  position: relative;
+}
+.scaleBadge {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 1;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--ink);
+  font-size: 15px;
+  font-style: italic;
+  pointer-events: none;
+}
 .canvasHost {
   position: relative;
   width: 100%;

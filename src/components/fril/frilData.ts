@@ -12,7 +12,7 @@
 import type { FrilIconKind } from "./FrilIcons";
 
 /* ------------------------------------------------------------------ *
- * The project pipeline, as a five-step flow
+ * The project pipeline, as a four-step flow
  * ------------------------------------------------------------------ */
 
 export type FrilStep = {
@@ -32,33 +32,27 @@ export const PIPELINE: FrilStep[] = [
   {
     icon: "bean",
     num: "01",
-    title: "Start from a food crop",
-    body: "Hyacinth beans (Lablab purpureus) are unusually rich in FRIL — around 2.5% of seed weight — and are already widely cultivated across Africa and Asia. The input is a bean, not a bioreactor.",
+    title: "Start with lablab beans",
+    body: "Hyacinth beans (Lablab purpureus) are unusually rich in FRIL — around 2.5% of seed weight — and are already widely cultivated across Africa and Asia.",
   },
   {
     icon: "purify",
     num: "02",
     title: "Capture on mannose beads",
-    body: "FRIL is mannose/glucose-specific, so it can be pulled straight out of a crude bean extract on a mannose-affinity resin and released with free sugar — a route published as far back as Colucci et al. 1999. Radvac is adapting it to inexpensive equipment and locally available inputs.",
-    link: { text: "Colucci et al. 1999", href: "https://doi.org/10.1073/pnas.96.2.646" },
+    body: "FRIL is mannose/glucose-specific, so it can be pulled straight out of a crude bean extract on a mannose-affinity resin and released with free sugar.",
+    link: { text: "it can be pulled", href: "https://doi.org/10.1073/pnas.96.2.646" },
   },
   {
     icon: "formulate",
     num: "03",
     title: "Formulate for the nose",
-    body: "An intranasal, time-release spray puts FRIL where respiratory viruses land. Work covers dose-ranging, excipients, spray-device compatibility, a sterility strategy and shelf life.",
+    body: "An intranasal spray puts FRIL where respiratory viruses are most likely to enter the body.",
   },
   {
     icon: "assay",
     num: "04",
     title: "Measure potency and safety",
-    body: "Yield, purity, lot-to-lot consistency and activity against representative respiratory viruses or pseudoviruses, plus nasal epithelial tolerability and inflammatory-marker testing.",
-  },
-  {
-    icon: "study",
-    num: "05",
-    title: "Observe in people",
-    body: "If preclinical and formulation milestones are met: a structured, consented observational self-administration study within the Radvac community, reporting tolerability, adherence and local irritation.",
+    body: "Planned work includes shelf life testing and studies on nasal epithelial tolerability.",
   },
 ];
 
@@ -147,7 +141,7 @@ export const STUDIES: Study[] = [
     journal: "Nature Communications",
     href: "https://doi.org/10.1038/s41467-026-70188-7",
     system: "Structure",
-    what: "Structure-guided engineering identified loop B residues as the determinant of FRIL's preference for complex-type over high-mannose N-glycans — the trait that separates it from lectins like concanavalin A. This is the work the structure on this page comes from.",
+    what: "Structure-guided engineering identified loop B residues as the determinant of FRIL's preference for complex-type over high-mannose N-glycans — the trait that separates it from lectins like concanavalin A.",
   },
 ];
 

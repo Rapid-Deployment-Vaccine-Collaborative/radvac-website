@@ -790,13 +790,16 @@ export default function FrilAggregationScene() {
   const active = PHASES[phase];
   return (
     <div className={styles.sceneWrap}>
-      <div
-        ref={hostRef}
-        className={styles.canvasHost}
-        data-ready={ready ? "1" : "0"}
-        role="img"
-        aria-label="Animated 3D figure: FRIL tetramers binding the glycans on virus particles and cross-linking them into an aggregate"
-      />
+      <div className={styles.canvasFrame}>
+        <div
+          ref={hostRef}
+          className={styles.canvasHost}
+          data-ready={ready ? "1" : "0"}
+          role="img"
+          aria-label="Animated 3D figure: FRIL tetramers binding the glycans on virus particles and cross-linking them into an aggregate"
+        />
+        <span className={styles.scaleBadge}>(not to scale!)</span>
+      </div>
       <div className={styles.sceneUi}>
         <div className={styles.steps}>
           {PHASES.map((p, i) => (

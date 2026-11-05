@@ -21,6 +21,7 @@ const LINK_OVERRIDE: Record<string, { href: string; label: string }> = {
     label: "Read more →",
   },
   "/projects/h5n1": { href: "/bfiat", label: "Read more →" },
+  "/projects/fril-lectin": { href: "/fril", label: "Read more →" },
 };
 
 function ProjectCard({ project }: { project: Project }) {
