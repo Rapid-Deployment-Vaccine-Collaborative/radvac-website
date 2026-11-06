@@ -142,8 +142,7 @@ export default function FrilPage() {
           <div>
             <h2>Help us with this work</h2>
             <p>
-              Feedback, criticism, suggestions, and personal reports are all
-              welcome.
+              Feedback, criticism, and suggestions are all welcome.
             </p>
           </div>
           <div className={yeast.ctaActions}>
